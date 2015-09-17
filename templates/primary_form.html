@@ -52,6 +52,12 @@
                 </div>
             </div>
             <div class="form-group">
+                {{ form.vignette.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.vignette(class='form-control', placeholder='Text Contained in the Image') }}
+                </div>
+            </div>
+            <div class="form-group">
                 {{ form.person.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
                     {{ form.person(class='form-control',placeholder='Family name, given name') }}
