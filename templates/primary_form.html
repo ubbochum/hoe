@@ -1,0 +1,225 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+    {{ super() }}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'header.html' %}
+        {% include 'navbar.html' %}
+        <div class="row">
+            <div class="col-sm-offset-2">
+            <form class="form form-horizontal" method="post" role="form" action="/new/{{ form.id }}">
+                {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.type.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.type(class='form-control') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.genre.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.genre(class='form-control') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.title.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.title(class='form-control',placeholder='The title of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.incipit.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.incipit(class='form-control',placeholder='Begins with...') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.explicit.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.explicit(class='form-control',placeholder='Ends with...') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.frontispiece.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.frontispiece(class='form-control', placeholder='Text Contained in the Image') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.person.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.person(class='form-control',placeholder='Family name, given name') }}
+                </div>
+                <div class="clearfix"></div>
+                {{ form.role.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.role(class='form-control',placeholder='YYYY-MM-DD') }}
+                </div>
+                <div class="clearfix"></div>
+                {{ form.person_uri.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.person_uri(class='form-control',placeholder='Authority URI for the Person') }}
+                </div>
+                <div class="col-sm-3">
+                    <span class="dbpedia"><small>&nbsp;<a target="_blank" href="http://dbpedia.org/fct/">DBPedia</a>&nbsp;|&nbsp;<a target="_blank" href="http://viaf.org">VIAF</a></small></span>
+                </div>
+                <div class="clearfix"></div>
+                {{ form.birth_date.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-2">
+                    {{ form.birth_date(class='form-control',placeholder='YYYY-MM-DD') }}
+                </div>
+                {{ form.death_date.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-2">
+                    {{ form.death_date(class='form-control',placeholder='YYYY-MM-DD') }}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.issued.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-2">
+                    {{ form.issued(class='form-control',placeholder='YYYY-MM-DD') }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2"><div class="checkbox">
+                    <label class="checkbox-inline">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ form.circa(type='checkbox') }} {{ form.circa.label }}
+                    </label>
+                </div></div>
+            </div>
+            <div class="form-group">
+                {{ form.language.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-2">
+                    {{ form.language(class='form-control',placeholder='Language of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.number_of_pages.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-2">
+                    {{ form.number_of_pages(class='form-control',placeholder='Number of pages') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.keyword.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.keyword(class='form-control',placeholder='Words that describe the resource') }}
+                </div>
+                <div class="clearfix"></div>
+                {{ form.keyword_uri.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.keyword_uri(class='form-control',placeholder='Authority URI for the Keyword') }}
+                </div>
+                <div class="col-sm-3">
+                    <span class="dbpedia"><small>&nbsp;<a target="_blank" href="http://dbpedia.org/fct/">DBPedia</a></small></span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.description.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.description(class='form-control',placeholder='What the work is about') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.library.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.library(class='form-control',placeholder='The library holding the work') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.library_place.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.library_place(class='form-control',placeholder='The place where the library is situated') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.call_number.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.call_number(class='form-control',placeholder='The string indicating the location of the work in the library') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.url.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.url(class='form-control') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.accessed.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.accessed(class='form-control') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.provenance.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.provenance(class='form-control',placeholder='Chronology of Ownership') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.origin_place.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.origin_place(class='form-control',placeholder='Where the Content was Conceived') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.note.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.note(class='form-control',placeholder='Further information...') }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6 pull-right">
+                    <button type="reset" class="btn btn-danger">Clear</button>
+                    <button type="submit" class="btn btn-primary submit">Submit</button>
+                </div>
+            </div>
+            </form></div>
+            {#<div class="btn-group col-sm-offset-3">
+                <a type="button" class="btn btn-default" href="/new/{{ form.id }}/edition"><i class="fa fa-plus"></i> Add an edition</a>
+                <a type="button" class="btn btn-default" href="/new/{{ form.id }}/translation"><i class="fa fa-plus"></i> Add a translation</a>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-plus"></i> Add secondary literature <i class="fa fa-caret-down"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="/new/{{ form.id }}/article">Article</a></li>
+                      <li><a href="/new/{{ form.id }}/monograph">Monograph</a></li>
+                        <li><a href="/new/{{ form.id }}/contribution">Contribution in Collection</a></li>
+                        <li><a href="/new/{{ form.id }}/conference">Conference Paper</a></li>
+                    </ul>
+                  </div>
+            </div>#}
+        </div>
+        {% include 'footer.html' %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $(document).on('click', '.add-element', function (event) {
+            event.preventDefault();
+            var next = $(this).closest('.form-group').clone().insertAfter($(this).closest('.form-group'));
+            //next.attr('class', 'form-group');
+            next.find('input').val('');
+            $(this).remove();
+        })
+        /*$(document).on('click', '.submit', function(event){
+         event.preventDefault();
+         console.info(JSON.stringify($(this).closest('form').serializeArray()));
+         })*/
+    </script>
+{% endblock %}

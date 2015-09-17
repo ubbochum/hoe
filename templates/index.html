@@ -1,0 +1,21 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+    {{ super() }}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'header.html' %}
+        {% include 'navbar.html' %}
+        <div class="row">
+            <div class="col-sm-offset-1 col-sm-10"><p>The envisaged database aims at establishing the first comprehensive bibliography of early modern historiography in Ottoman Europe, thereby providing a lasting support for historical research. In the framework of a culture mainly shaped by religious writing, the polyglot historiography of the region represented an important section of secular writing and for this reason has constantly been drawn upon as a primary source for the study of social and cultural history as well as for the intellectual entanglement among the cultural spheres within Ottoman Europe and their intercommunication with the Mediterranean and Central European regions.</p>
+            <p>For the first time, the project will comprise the entire body of historiographic texts written in all the languages of Ottoman Europe between 1500 and 1800 and merge the data into one integral bibliography. Thus, the advanced bibliographic indexing of the scattered and hardly available texts will allow for searching the material irrespective of language and genre, for highlighting the inter-textual entanglements and interdependencies, and for indicating the currently available printed or online editions respectively. Access to the database will be provided via the website of the Centre for Mediterranean Studies at the Ruhr-Universität Bochum which has a special focus on the circulation of cultural knowledge and closely cooperates with the Chair of Ottoman and Turkish History at the Ruhr-Universität Bochum.</p>
+            <p>Thus, early modern South Eastern European and Mediterranean studies will be provided with a durable and easily updatable key instrument for their particular research interests, which, in the long run, could even be transformed into a research portal linking libraries, research institutions and individual researchers across national borders. The planned “Bibliographical Database Historiography in Ottoman Europe (15th–18th centuries)” is not only supposed to have a signaling effect upon a research landscape that is still highly disjointed, but rather understands itself as an essential step towards a comparative research that conceives of Ottoman Europe as a space shared by a variety of cultures, languages, and religions.</p></div>
+        </div>
+        {% include 'footer.html' %}
+    </div>
+{% endblock %}

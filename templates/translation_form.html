@@ -1,0 +1,132 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="form-group">
+                {{ form.title.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.title(class='form-control',placeholder='The title of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.tr_title.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.tr_title(class='form-control',placeholder='The translated title of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.incipit.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.incipit(class='form-control',placeholder='Begins with...') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.explicit.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.explicit(class='form-control',placeholder='Ends with...') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.creator.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.creator(class='form-control',placeholder='Family name, given name') }}
+                    <a href="#" class="btn btn-xs add-element"><i class="fa fa-plus"></i> Add
+                        another</a>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.year.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-2">
+                    {{ form.year(class='form-control',placeholder='Year the work was published') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.language.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-2">
+                    {{ form.language(class='form-control',placeholder='Language of the workprimary_form.html') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.keyword.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.keyword(class='form-control') }} <a href="#"
+                                                                class="btn btn-xs add-element"><i
+                        class="fa fa-plus"></i> Add another</a>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.description.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.description(class='form-control') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.library.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.library(class='form-control',placeholder='The library holding the work') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.tr_library.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.tr_library(class='form-control',placeholder='Translated name of the library') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.lib_place.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.lib_place(class='form-control',placeholder='The place where the library is situated') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.jtitle.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.jtitle(class='form-control',placeholder='The title of the journal') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.volume.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.volume(class='form-control') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.issue.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.issue(class='form-control') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.spage.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.spage(class='form-control') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.epage.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.epage(class='form-control') }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6 pull-right">
+                    <button type="reset" class="btn btn-danger">Clear</button>
+                    <button type="submit" class="btn btn-primary submit">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="btn-group">
+                <a class="btn btn-default" href="/manuscript/{{ form.manuscript_id }}/edition"><i class="fa fa-plus"></i> Add an edition</a>
+                <a class="btn btn-default" href="/manuscript/{{ form.manuscript_id }}/translation"><i class="fa fa-plus"></i> Add a translation</a>
+                <a class="btn btn-default" href="/manuscript/{{ form.manuscript_id }}/secondary_literature"><i class="fa fa-plus"></i> Add secondary literature</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

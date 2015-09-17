@@ -1,0 +1,40 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+    {{ super() }}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'header.html' %}
+        {% include 'navbar.html' %}
+        <div class="row">
+            <div class="col-sm-offset-2">
+                <form action="/login/check" method="post" class="form-horizontal">
+                    {{ form.csrf_token }}
+                    <div class="form-group">
+                        {{ form.username.label(class='col-sm-2 control-label') }}
+                        <div class="col-sm-6">
+                            {{ form.username(class='form-control',placeholder='Your RZ Login Name') }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(class='col-sm-2 control-label') }}
+                        <div class="col-sm-6">
+                            {{ form.password(class='form-control',placeholder='Your RZ Password') }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-6 pull-right">
+                            <button type="reset" class="btn btn-danger">Clear</button>
+                            <button type="submit" class="btn btn-primary submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+body, .tabs-left > li.active > a {color: #003560;}
+body, .tabs-left > li > a {background-color: #f1f1f1;}
+header h1, a, footer hr {color: #8dae10;}
+.container {border-left: solid gray 1px; border-right: solid gray 1px;}
+.container h1 {margin-top: 72px;}
+img {max-width: 1024px;}
+.caption {font-variant: small-caps; color: white; opacity: 0.4; background-color: black; padding: 12px; max-width: 512px; margin-bottom: 36px; margin-top: 18px; border-radius: 10px;}
+header {
+    min-height: 1.5em;
+    margin: -14px;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 41%, #f6f6f6 70%, #ededed 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(41%,#ffffff), color-stop(70%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 41%,#f6f6f6 70%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 41%,#f6f6f6 70%,#ededed 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 41%,#f6f6f6 70%,#ededed 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 41%,#f6f6f6 70%,#ededed 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+    padding-bottom: 2em;
+}
+header p {
+    min-height: 1.5em;
+}
+header h1, header h2 {
+    margin-left: 14px;
+    vertical-align: text-top;
+    text-transform: uppercase;
+}
+header h1 {
+    font-size: 1.5em;
+}
+header h2 {
+    font-size: 1em;
+}
+.header-nav {padding-right: 14px;}
+.header-nav a {text-transform: uppercase; color: #5c5c5c; font-size: 0.689em;}
+main {padding-top: 2.5em;}
+footer {margin: 36px -14px 0px -14px; background-color: white;}
+footer hr {border-top: #8dae10 solid 1px;}
+footer p {margin-left: 14px;}
+#rub-wortmarke {min-height: 16px; margin-top: 56px; margin-left: 14px;}
+#rub-label {max-height: 136px; margin-right: -50px;}
+nav#header {min-height: 0px;}
+.navbar-right {vertical-align: middle;}
+.navbar-nav {vertical-align: bottom; margin-left:108px;}
+.tabs-left > li {margin-right: -2.2em;}
+.container .row {background-color: white; padding-top: 36px;}
+.dbpedia {text-transform: uppercase; margin-left: -24px;}
+.record {margin: 14px 0 14px 0;}
+.record_count {font-size: 28px;}
+nav {margin-left: -15px !important; margin-right: -15px !important;}
+.navbar-inverse {background-color: #8dae10; color: white; border-color: #8dae10;}
+.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:hover {color: white; text-decoration: none;}
+.navbar-right {padding-right: 28px;}
