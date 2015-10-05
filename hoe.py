@@ -89,7 +89,14 @@ class WorkForm(Form):
     person = StringField('Person')
     person_uri = StringField('URI')
     corporation = StringField('Corporation')
-    language = StringField('Language')
+    language = SelectField('Language', choices=[
+        ('ger', 'German'),
+        ('eng', 'English'),
+        ('fre', 'French'),
+        ('rus', 'Russian'),
+        ('gre', 'Greek'),
+        ('lat', 'Latin'),
+        ('ita', 'Italian'),
     issued = DateField('Publication Date')
     accessed = DateField('Last Seen')
     circa = BooleanField('Estimated')
