@@ -99,7 +99,7 @@ class WorkForm(Form):
 
     type = SelectField('Type', validators=[DataRequired()], choices=[
         ("article-journal", 'Journal Article'),
-        ("article-newspaper", 'Newspaper Aricle'),
+        ("article-newspaper", 'Newspaper Article'),
         ("book", 'Book'),
         ("chapter", 'Chapter'),
         ("entry-encyclopedia", 'Entry in Encyclopedia'),
