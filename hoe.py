@@ -181,7 +181,11 @@ class ArticleForm(PrintedWorkForm):
     page_last = StringField('Last Page')
     role = SelectField('Role', choices=[
         ('aut', 'Author'),
-        ('edt', 'Editor')
+        ('edt', 'Editor'),
+        ('trl', 'Translator'),
+        ('hnr', 'Honoree'),
+        ('ive', 'Interviewee'),
+        ('ivr', 'Interviewer'),
     ])
 
 class CollectionForm(PrintedWorkForm):
