@@ -71,6 +71,12 @@
                 </div>
             </div>
             <div class="form-group">
+                {{ form.number_of_pages.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-2">
+                    {{ form.number_of_pages(class='form-control',placeholder='Number of pages') }}
+                </div>
+            </div>    
+            <div class="form-group">
                 {{ form.keyword.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
                     {{ form.keyword(class='form-control',placeholder='Words that describe the resource') }}
