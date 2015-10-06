@@ -86,6 +86,7 @@ class WorkForm(Form):
     url = StringField('URL', validators=[URL()])
     DOI = StringField('DOI') # TODO: Own validator?
     title = StringField('Title', validators=[DataRequired()])
+    subtitle = StringField('Subtitle')
     person = StringField('Person')
     person_uri = StringField('URI')
     corporation = StringField('Corporation')
@@ -97,6 +98,7 @@ class WorkForm(Form):
         ('gre', 'Greek'),
         ('lat', 'Latin'),
         ('ita', 'Italian'),
+        ])
     issued = DateField('Publication Date')
     accessed = DateField('Last Seen')
     circa = BooleanField('Estimated')
@@ -194,6 +196,7 @@ class ArticleForm(PrintedWorkForm):
         ('ive', 'Interviewee'),
         ('ivr', 'Interviewer'),
     ])
+    number_of_pages = StringField('Extent')
 
 class CollectionForm(PrintedWorkForm):
     collection_title = StringField('Collection Title', validators=[DataRequired()])
