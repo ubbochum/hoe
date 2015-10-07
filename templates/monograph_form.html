@@ -2,12 +2,19 @@
 
 {% block styles %}
     {{ super() }}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
 {% endblock %}
 
 {% block content %}
     <div class="container">
+        {% include 'header.html' %}
+        {% include 'navbar.html' %}
         <div class="row">
+            <div class="col-sm-offset-2">
+            <form class="form form-horizontal" method="post" role="form" action="/new/{{ form.id }}">
+                {{ form.csrf_token }}
             <div class="form-group">
                 {{ form.title.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
@@ -15,103 +22,165 @@
                 </div>
             </div>
             <div class="form-group">
-                {{ form.tr_title.label(class='col-sm-2 control-label') }}
+                {{ form.subtitle.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.tr_title(class='form-control',placeholder='The translated title of the work') }}
+                    {{ form.subtitle(class='form-control',placeholder='The subtitle of the work') }}
                 </div>
             </div>
             <div class="form-group">
-                {{ form.incipit.label(class='col-sm-2 control-label') }}
+                {{ form.person.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.incipit(class='form-control',placeholder='Begins with...') }}
+                    {{ form.person(class='form-control',placeholder='Family name, given name') }}
+                </div>
+                <div class="clearfix"></div>
+                {{ form.role.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.role(class='form-control') }}
+                </div>
+                <div class="clearfix"></div>
+                {{ form.person_uri.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.person_uri(class='form-control',placeholder='Authority URI for the person') }}
+                </div>
+                <div class="col-sm-3">
+                    <span class="dbpedia"><small>&nbsp;<a target="_blank" href="http://dbpedia.org/fct/">DBPedia</a>&nbsp;|&nbsp;<a target="_blank" href="http://viaf.org">VIAF</a></small></span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
                 </div>
             </div>
             <div class="form-group">
-                {{ form.explicit.label(class='col-sm-2 control-label') }}
+                {{ form.corporation.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.explicit(class='form-control',placeholder='Ends with...') }}
+                    {{ form.corporation(class='form-control',placeholder='The corporation associated with the work') }}
                 </div>
             </div>
             <div class="form-group">
-                {{ form.creator.label(class='col-sm-2 control-label') }}
-                <div class="col-sm-6">
-                    {{ form.creator(class='form-control',placeholder='Family name, given name') }}
-                    <a href="#" class="btn btn-xs add-element"><i class="fa fa-plus"></i> Add
-                        another</a>
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form.year.label(class='col-sm-2 control-label') }}
+                {{ form.issued.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-2">
-                    {{ form.year(class='form-control',placeholder='Year the work was published') }}
+                    {{ form.issued(class='form-control',placeholder='YYYY-MM-DD') }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2"><div class="checkbox">
+                    <label class="checkbox-inline">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ form.circa(type='checkbox') }} {{ form.circa.label }}
+                    </label>
+                </div></div>
+            </div>
+            <div class="form-group">
+                {{ form.publisher.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.publisher(class='form-control',placeholder='The publisher of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.publisher_place.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.publisher_place(class='form-control',placeholder='The place of publication') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.number_of_volumes.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.number_of_volumes(class='form-control',placeholder='The number of volumes, e.g. 2') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.edition.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.edition(class='form-control',placeholder='The edition of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.series.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.series(class='form-control',placeholder='The series the work was published in') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.volume_in_series.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.volume_in_series(class='form-control',placeholder='The volume in the series, e.g. 180') }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.language.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-2">
-                    {{ form.language(class='form-control',placeholder='Language of the workprimary_form.html') }}
+                    {{ form.language(class='form-control',placeholder='Language of the work') }}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.number_of_pages.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-2">
+                    {{ form.number_of_pages(class='form-control',placeholder='Number of pages') }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.keyword.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.keyword(class='form-control') }} <a href="#"
-                                                                class="btn btn-xs add-element"><i
-                        class="fa fa-plus"></i> Add another</a>
+                    {{ form.keyword(class='form-control',placeholder='Words that describe the resource') }}
+                </div>
+                <div class="clearfix"></div>
+                {{ form.keyword_uri.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.keyword_uri(class='form-control',placeholder='Authority URI for the Keyword') }}
+                </div>
+                <div class="col-sm-3">
+                    <span class="dbpedia"><small>&nbsp;<a target="_blank" href="http://dbpedia.org/fct/">DBPedia</a></small></span>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
                 </div>
             </div>
             <div class="form-group">
                 {{ form.description.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.description(class='form-control') }}
+                    {{ form.description(class='form-control',placeholder='What the work is about') }}
                 </div>
             </div>
             <div class="form-group">
-                {{ form.library.label(class='col-sm-2 control-label') }}
+                {{ form.isbn.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.library(class='form-control',placeholder='The library holding the work') }}
+                    {{ form.isbn(class='form-control',placeholder='Enter the ISBN (10 or 13-digit number)') }}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
                 </div>
             </div>
             <div class="form-group">
-                {{ form.tr_library.label(class='col-sm-2 control-label') }}
+                {{ form.url.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.tr_library(class='form-control',placeholder='Translated name of the library') }}
+                    {{ form.url(class='form-control', placeholder='Enter the full path to the document') }}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
                 </div>
             </div>
             <div class="form-group">
-                {{ form.lib_place.label(class='col-sm-2 control-label') }}
+                {{ form.DOI.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.lib_place(class='form-control',placeholder='The place where the library is situated') }}
+                    {{ form.DOI(class='form-control',placeholder='A Digital Object Identifier, e.g. 10.1105/tpc.12.7.1041') }}
                 </div>
             </div>
             <div class="form-group">
-                {{ form.jtitle.label(class='col-sm-2 control-label') }}
+                {{ form.accessed.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.jtitle(class='form-control',placeholder='The title of the journal') }}
+                    {{ form.accessed(class='form-control', placeholder='YYYY-MM-DD') }}
                 </div>
             </div>
             <div class="form-group">
-                {{ form.volume.label(class='col-sm-2 control-label') }}
+                {{ form.note.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.volume(class='form-control') }}
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form.issue.label(class='col-sm-2 control-label') }}
-                <div class="col-sm-6">
-                    {{ form.issue(class='form-control') }}
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form.spage.label(class='col-sm-2 control-label') }}
-                <div class="col-sm-6">
-                    {{ form.spage(class='form-control') }}
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form.epage.label(class='col-sm-2 control-label') }}
-                <div class="col-sm-6">
-                    {{ form.epage(class='form-control') }}
+                    {{ form.note(class='form-control',placeholder='Further information...') }}
                 </div>
             </div>
             <div class="form-group">
@@ -120,13 +189,40 @@
                     <button type="submit" class="btn btn-primary submit">Submit</button>
                 </div>
             </div>
+            </form></div>
+            {#<div class="btn-group col-sm-offset-3">
+                <a type="button" class="btn btn-default" href="/new/{{ form.id }}/edition"><i class="fa fa-plus"></i> Add an edition</a>
+                <a type="button" class="btn btn-default" href="/new/{{ form.id }}/translation"><i class="fa fa-plus"></i> Add a translation</a>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fa fa-plus"></i> Add secondary literature <i class="fa fa-caret-down"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="/new/{{ form.id }}/article">Article</a></li>
+                      <li><a href="/new/{{ form.id }}/monograph">Monograph</a></li>
+                        <li><a href="/new/{{ form.id }}/contribution">Contribution in Collection</a></li>
+                        <li><a href="/new/{{ form.id }}/conference">Conference Paper</a></li>
+                    </ul>
+                  </div>
+            </div>#}
         </div>
-        <div class="row">
-            <div class="btn-group">
-                <a class="btn btn-default" href="/manuscript/{{ form.manuscript_id }}/edition"><i class="fa fa-plus"></i> Add an edition</a>
-                <a class="btn btn-default" href="/manuscript/{{ form.manuscript_id }}/translation"><i class="fa fa-plus"></i> Add a translation</a>
-                <a class="btn btn-default" href="/manuscript/{{ form.manuscript_id }}/secondary_literature"><i class="fa fa-plus"></i> Add secondary literature</a>
-            </div>
-        </div>
+        {% include 'footer.html' %}
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $(document).on('click', '.add-element', function (event) {
+            event.preventDefault();
+            var next = $(this).closest('.form-group').clone().insertAfter($(this).closest('.form-group'));
+            //next.attr('class', 'form-group');
+            next.find('input').val('');
+            $(this).remove();
+        })
+        /*$(document).on('click', '.submit', function(event){
+         event.preventDefault();
+         console.info(JSON.stringify($(this).closest('form').serializeArray()));
+         })*/
+    </script>
 {% endblock %}

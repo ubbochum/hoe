@@ -130,7 +130,7 @@ class WorkForm(Form):
         ("treaty", 'Treaty'),
         ('print', 'Print')
     ])
-
+    number_of_pages = StringField('Extent')
     genre = SelectField('Genre', choices=[
         ('legend', 'Legend'),
         ('chronicle', 'Chronicle'),
@@ -153,6 +153,14 @@ class WorkForm(Form):
 class PrintedWorkForm(WorkForm):
     publisher = StringField('Publisher')
     publisher_place = StringField('Place')
+    role = SelectField('Role', choices=[
+        ('aut', 'Author'),
+        ('edt', 'Editor'),
+        ('trl', 'Translator'),
+        ('hnr', 'Honoree'),
+        ('ive', 'Interviewee'),
+        ('ivr', 'Interviewer'),
+    ])
 
 class ManuscriptForm(WorkForm):
     incipit = TextAreaField('Incipit')
@@ -171,7 +179,7 @@ class ManuscriptForm(WorkForm):
         ('pat', 'Patron'),
         ('scr', 'Scribe'),
     ])
-    number_of_pages = StringField('Extent')
+
     number_of_lines = StringField('Number of Lines')
     library = StringField('Library')
     library_place = StringField('Library Place')
@@ -201,15 +209,14 @@ class ArticleForm(PrintedWorkForm):
     number = StringField('Issue')
     page_first = StringField('First Page')
     page_last = StringField('Last Page')
-    role = SelectField('Role', choices=[
-        ('aut', 'Author'),
-        ('edt', 'Editor'),
-        ('trl', 'Translator'),
-        ('hnr', 'Honoree'),
-        ('ive', 'Interviewee'),
-        ('ivr', 'Interviewer'),
-    ])
     number_of_pages = StringField('Extent')
+
+class MonographForm(PrintedWorkForm):
+    isbn = StringField('ISBN')
+    number_of_volumes = StringField('Number of volumes')
+    edition = StringField('Edition')
+    series = StringField('Series')
+    volume_in_series = StringField('Volume in the series')
 
 class CollectionForm(PrintedWorkForm):
     collection_title = StringField('Collection Title', validators=[DataRequired()])
@@ -334,6 +341,19 @@ def article(primary_id=None, record_id=None):
         form.process()
         return render_template('article_form.html', form=form, header='New Record')
 
+@app.route('/new/<primary_id>/book/<record_id>', methods=('POST',))
+@app.route('/new/<primary_id>/book', methods=('GET',))
+def book(primary_id=None, record_id=None):
+    form = MonographForm()
+    if record_id:
+        pass
+    else:
+        form.id = str(uuid.uuid4())
+        form.accessed.data = datetime.today().strftime('%Y-%m-%d')
+        form.role.default = 'aut'
+        form.process()
+        return render_template('monograph_form.html', form=form, header='New Record')
+
 @app.route('/new/<record_id>', methods=('GET', 'POST'))
 @app.route('/new', methods=('GET', 'POST'))
 def new(record_id=None):
@@ -416,3 +436,12 @@ def del_record(record_id=None):
 
 if __name__ == '__main__':
     app.run()
+
+# role = SelectField('Role', choices=[
+#         ('aut', 'Author'),
+#         ('edt', 'Editor'),
+#         ('trl', 'Translator'),
+#         ('hnr', 'Honoree'),
+#         ('ive', 'Interviewee'),
+#         ('ivr', 'Interviewer'),
+#     ])
