@@ -22,6 +22,12 @@
                 </div>
             </div>
             <div class="form-group">
+                {{ form.subtitle.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.subtitle(class='form-control',placeholder='The subtitle of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
                 {{ form.person.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
                     {{ form.person(class='form-control',placeholder='Family name, given name') }}
@@ -29,12 +35,12 @@
                 <div class="clearfix"></div>
                 {{ form.role.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.role(class='form-control',placeholder='YYYY-MM-DD') }}
+                    {{ form.role(class='form-control') }}
                 </div>
                 <div class="clearfix"></div>
                 {{ form.person_uri.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.person_uri(class='form-control',placeholder='Authority URI for the Person') }}
+                    {{ form.person_uri(class='form-control',placeholder='Authority URI for the person') }}
                 </div>
                 <div class="col-sm-3">
                     <span class="dbpedia"><small>&nbsp;<a target="_blank" href="http://dbpedia.org/fct/">DBPedia</a>&nbsp;|&nbsp;<a target="_blank" href="http://viaf.org">VIAF</a></small></span>
@@ -53,17 +59,27 @@
             <div class="form-group">
                 {{ form.language.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-2">
-                    {{ form.language(class='form-control',placeholder='Language of the work') }}
+                    {{ form.language(class='form-control') }}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
                 </div>
             </div>
             <div class="form-group">
                 {{ form.page_first.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-2">
-                    {{ form.page_first(class='form-control',placeholder='YYYY-MM-DD') }}
+                    {{ form.page_first(class='form-control',placeholder='1') }}
                 </div>
                 {{ form.page_last.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-2">
-                    {{ form.page_last(class='form-control',placeholder='YYYY-MM-DD') }}
+                    {{ form.page_last(class='form-control',placeholder='20') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.number_of_pages.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-2">
+                    {{ form.number_of_pages(class='form-control',placeholder='Number of pages') }}
                 </div>
             </div>
             <div class="form-group">
@@ -74,7 +90,7 @@
                 <div class="clearfix"></div>
                 {{ form.keyword_uri.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.keyword_uri(class='form-control',placeholder='Authority URI for the Keyword') }}
+                    {{ form.keyword_uri(class='form-control',placeholder='Authority URI for the keyword') }}
                 </div>
                 <div class="col-sm-3">
                     <span class="dbpedia"><small>&nbsp;<a target="_blank" href="http://dbpedia.org/fct/">DBPedia</a></small></span>
@@ -87,61 +103,61 @@
             <div class="form-group">
                 {{ form.description.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.description(class='form-control',placeholder='An Abstract of the Article') }}
+                    {{ form.description(class='form-control',placeholder='An Abstract of the article') }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.DOI.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.DOI(class='form-control') }}
+                    {{ form.DOI(class='form-control', placeholder="e.g. 10.1371/journal.pbio.0020449") }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.url.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.url(class='form-control') }}
+                    {{ form.url(class='form-control', placeholder="The Internet address of the journal providing the article") }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.accessed.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.accessed(class='form-control') }}
+                    {{ form.accessed(class='form-control', placeholder='YYYY-MM-DD') }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.container_title.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.container_title(class='form-control') }}
+                    {{ form.container_title(class='form-control', placeholder='The title of the journal') }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.volume.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.volume(class='form-control') }}
+                    {{ form.volume(class='form-control', placeholder='The volume of the journal') }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.number.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.number(class='form-control') }}
+                    {{ form.number(class='form-control', placeholder='The issue of the journal') }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.ISSN.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.ISSN(class='form-control') }}
+                    {{ form.ISSN(class='form-control', placeholder='e.g. 1932-6203') }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.ZDBID.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.ZDBID(class='form-control') }}
+                    {{ form.ZDBID(class='form-control', placeholder='e.g. 2267670-3') }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.publisher.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.publisher(class='form-control') }}
+                    {{ form.publisher(class='form-control', placeholder='The publisher of the journal') }}
                 </div>
             </div>
             <div class="form-group">

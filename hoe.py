@@ -86,10 +86,19 @@ class WorkForm(Form):
     url = StringField('URL', validators=[URL()])
     DOI = StringField('DOI') # TODO: Own validator?
     title = StringField('Title', validators=[DataRequired()])
+    subtitle = StringField('Subtitle')
     person = StringField('Person')
     person_uri = StringField('URI')
     corporation = StringField('Corporation')
-    language = StringField('Language')
+    language = SelectField('Language', choices=[
+        ('ger', 'German'),
+        ('eng', 'English'),
+        ('fre', 'French'),
+        ('rus', 'Russian'),
+        ('gre', 'Greek'),
+        ('lat', 'Latin'),
+        ('ita', 'Italian'),
+        ])
     issued = DateField('Publication Date')
     accessed = DateField('Last Seen')
     circa = BooleanField('Estimated')
@@ -99,7 +108,7 @@ class WorkForm(Form):
 
     type = SelectField('Type', validators=[DataRequired()], choices=[
         ("article-journal", 'Journal Article'),
-        ("article-newspaper", 'Newspaper Aricle'),
+        ("article-newspaper", 'Newspaper Article'),
         ("book", 'Book'),
         ("chapter", 'Chapter'),
         ("entry-encyclopedia", 'Entry in Encyclopedia'),
@@ -181,8 +190,13 @@ class ArticleForm(PrintedWorkForm):
     page_last = StringField('Last Page')
     role = SelectField('Role', choices=[
         ('aut', 'Author'),
-        ('edt', 'Editor')
+        ('edt', 'Editor'),
+        ('trl', 'Translator'),
+        ('hnr', 'Honoree'),
+        ('ive', 'Interviewee'),
+        ('ivr', 'Interviewer'),
     ])
+    number_of_pages = StringField('Extent')
 
 class CollectionForm(PrintedWorkForm):
     collection_title = StringField('Collection Title', validators=[DataRequired()])
