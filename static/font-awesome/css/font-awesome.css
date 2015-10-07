@@ -205,7 +205,13 @@
 .fa-sign-in:before {
   content: ""; }
 
+.fa-upload:before {
+  content: ""; }
+
 .fa-caret-down:before {
   content: ""; }
+
+.fa-trash:before {
+  content: ""; }
 
 /*# sourceMappingURL=font-awesome.css.map */
