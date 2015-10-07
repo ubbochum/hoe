@@ -1,13 +1,13 @@
 <nav role="navigation" class="navbar navbar-inverse">
     <ul class="nav navbar-nav">
-        <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+        <li{% if header == 'Project Description' %} class="active"{% endif %}><a href="/"><i class="fa fa-home"></i> Home</a></li>
         <li class="divider"></li>
-        <li><a href="/records"><i class="fa fa-list"></i> Dashboard</a></li>
+        <li{% if header == 'Dashboard' %} class="active"{% endif %}><a href="/records"><i class="fa fa-list"></i> Dashboard</a></li>
         <li class="divider"></li>
-        <li><a href="/new"><i class="fa fa-plus"></i> New Record</a></li>
+        <li{% if header == 'New Record' %} class="active"{% endif %}><a href="/new"><i class="fa fa-plus"></i> New Record</a></li>
         <li class="divider"></li>
     </ul>
-    <div class="navbar-right">
+    <div class="navbar-right{% if header == query %} search_form_active{% endif %}">
         <form class="navbar-form" role="search" action="/search" method="get">
             <div class="form-group">
                 <div class="input-group">

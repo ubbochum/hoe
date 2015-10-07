@@ -3,10 +3,12 @@ from flask.ext.bootstrap import Bootstrap
 from flask.ext.wtf import Form
 from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user
 from flask_wtf.csrf import CsrfProtect
-from wtforms import StringField, SubmitField, TextAreaField, BooleanField, SelectField, DateField, DateTimeField, PasswordField
+from wtforms import StringField, SubmitField, TextAreaField, BooleanField, SelectField, DateField, DateTimeField, PasswordField, FileField
 from wtforms.validators import DataRequired, UUID, URL
 from datetime import datetime
 from elasticsearch import Elasticsearch
+from elasticsearch_dsl import Search, Q, F
+from werkzeug.datastructures import MultiDict
 import uuid
 import base64
 import requests
@@ -28,6 +30,13 @@ app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 CsrfProtect(app)
 
 es = Elasticsearch()
+
+LICENSES = (
+    ('cc_zero', 'Creative Commons Zero - Public Domain'),
+    ('cc_by', 'Creative Commons Attribution'),
+    ('cc_by_sa', 'Creative Commons Attribution Share Alike'),
+    ('cc_by_nd', 'Creative Commons Attribution No Derivatives')
+)
 
 class UserNotFoundError(Exception):
     pass
@@ -176,8 +185,12 @@ class ManuscriptForm(WorkForm):
     library_place = StringField('Library Place')
     call_number = StringField('Call Number')
     frontispiece = StringField('Frontispiece')
+    frontispiece_img = FileField('Frontispiece Image')
+    frontispiece_img_license = SelectField('License', choices=LICENSES)
     provenance = StringField('Provenance')
     vignette = StringField('Vignette')
+    vignette_img = FileField('Vignette Image')
+    vignette_img_license = SelectField('License', choices=LICENSES)
     origin_place = StringField('Place of Origin')
 
 class PrintForm(ManuscriptForm):
@@ -235,15 +248,89 @@ def records():
 @app.route('/search', methods=('GET',))
 def search():
     q = request.args.get('q')
-    logging.info(q)
-    # TODO...
-    resp = es.search(index='hoe', doc_type='record', q=q)
-    return render_template('resultlist.html', records=resp.get('hits'), header=q)
+    #resp = es.search(index='hoe', doc_type='record', q=q, body=aggs)
+    #logging.info(q)
+
+    s = Search(using=es, index='hoe', doc_type='record')
+    s.aggs.bucket('library_place', 'terms', field='library-place')
+    s.aggs.bucket('type', 'terms', field='type')
+    s.aggs.bucket('genre', 'terms', field='genre')
+    s.aggs.bucket('keywords', 'terms', field='keywords.label')
+    s.aggs.bucket('author', 'terms', field='author.literal')
+    s.query = Q('multi_match', query=q, fields=['_all'])
+    filters = []
+    if 'filter' in request.args:
+        filters = request.args.getlist('filter')
+        logging.info(filters)
+        for filter in filters:
+            cat, val = filter.split(':')
+            cat = cat.replace('_', '-')
+            filter_dict = {}
+            filter_dict.setdefault(cat, val)
+            logging.info(cat)
+            s.filter = F('term', **filter_dict)
+    #if request.args
+    resp = s.execute()
+    #logging.info(resp)
+    #logging.info(resp.aggregations.per_category.buckets)
+    return render_template('resultlist.html', records=resp.to_dict().get('hits'), facets=resp.aggregations.to_dict(), header=q, query=q, filters=filters)
 
 @app.route('/record/<record_id>', methods=('GET',))
+@app.route('/edit/<record_id>', methods=('GET',))
 def record(record_id=None):
     resp = es.get('hoe', record_id, doc_type='record')
-    return render_template('record.html', record=resp.get('_source'), header=resp.get('_source').get('title'))
+    if request.path.startswith('/edit/'):
+        record = resp.get('_source')
+        logging.info(record)
+        # TODO:
+        #issued=record.get('issued').get('date-parts')[0]
+        form = ManuscriptForm()
+        form.id = record.get('id')
+        if record.get('title'):
+            form.title.data = record.get('title')
+        if record.get('incipit'):
+            form.incipit.data = record.get('incipit')
+        if record.get('explicit'):
+            form.incipit.data = record.get('explicit')
+        if record.get('frontispice'):
+            form.frontispiece.data = record.get('frontispice')
+        if record.get('vignette'):
+            form.vignette.data = record.get('vignette')
+        if record.get('type'):
+            form.type.data = record.get('type')
+        # TODO:
+        #if record.get('circa') == 'y':
+            #form.circa = True
+        if record.get('genre'):
+            form.genre.data = record.get('genre')
+        if record.get('language'):
+            form.language.data = record.get('language')
+        if record.get('number-of-pages'):
+            form.number_of_pages.data = record.get('number-of-pages')
+        if record.get('description'):
+            form.description.data = record.get('description')
+        if record.get('library'):
+            form.library.data = record.get('library')
+        if record.get('library-place'):
+            form.library_place.data = record.get('library-place')
+        if record.get('origin_place'):
+            form.origin_place.data = record.get('origin_place')
+        if record.get('call-number'):
+            form.call_number.data = record.get('call-number')
+        if record.get('url'):
+            form.url.data = record.get('url')
+        if record.get('accessed'):
+            form.accessed.data = record.get('accessed')
+        #logging.info(record)
+        # for cat in record:
+        #     tmp = cat
+        #     #logging.error('%s => %s' % (cat.replace('-', '_'), record.get(tmp)))
+        #     setattr(form, cat.replace('-', '_'), record.get(tmp))
+        #form.populate_obj(record)
+        logging.error(form.data)
+        return render_template('primary_form.html', header=resp.get('_source').get('title'), form=form)
+    else:
+        return render_template('record.html', record=resp.get('_source'), header=resp.get('_source').get('title'))
 
 @app.route('/new/<primary_id>/article-journal/<record_id>', methods=('POST',))
 @app.route('/new/<primary_id>/article-journal', methods=('GET',))
@@ -346,6 +433,10 @@ def new(record_id=None):
         form.process()
         return render_template('primary_form.html', form=form, header='New Record')
 
+@app.route('/delete/<record_id>', methods=('GET',))
+def del_record(record_id=None):
+    es.delete('hoe', 'record', record_id)
+    return redirect(url_for('records'))
 
 if __name__ == '__main__':
     app.run()
