@@ -209,18 +209,14 @@ class ArticleForm(PrintedWorkForm):
     number = StringField('Issue')
     page_first = StringField('First Page')
     page_last = StringField('Last Page')
-    role = SelectField('Role', choices=[
-        ('aut', 'Author'),
-        ('edt', 'Editor'),
-        ('trl', 'Translator'),
-        ('hnr', 'Honoree'),
-        ('ive', 'Interviewee'),
-        ('ivr', 'Interviewer'),
-    ])
     number_of_pages = StringField('Extent')
 
 class MonographForm(PrintedWorkForm):
     isbn = StringField('ISBN')
+    number_of_volumes = StringField('Number of volumes')
+    edition = StringField('Edition')
+    series = StringField('Series')
+    volume_in_series = StringField('Volume in the series')
 
 class CollectionForm(PrintedWorkForm):
     collection_title = StringField('Collection Title', validators=[DataRequired()])

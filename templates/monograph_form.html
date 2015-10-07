@@ -22,6 +22,12 @@
                 </div>
             </div>
             <div class="form-group">
+                {{ form.subtitle.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.subtitle(class='form-control',placeholder='The subtitle of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
                 {{ form.person.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
                     {{ form.person(class='form-control',placeholder='Family name, given name') }}
@@ -34,7 +40,7 @@
                 <div class="clearfix"></div>
                 {{ form.person_uri.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.person_uri(class='form-control',placeholder='Authority URI for the Person') }}
+                    {{ form.person_uri(class='form-control',placeholder='Authority URI for the person') }}
                 </div>
                 <div class="col-sm-3">
                     <span class="dbpedia"><small>&nbsp;<a target="_blank" href="http://dbpedia.org/fct/">DBPedia</a>&nbsp;|&nbsp;<a target="_blank" href="http://viaf.org">VIAF</a></small></span>
@@ -42,6 +48,12 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-offset-2">
                     <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.corporation.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.corporation(class='form-control',placeholder='The corporation associated with the work') }}
                 </div>
             </div>
             <div class="form-group">
@@ -58,9 +70,49 @@
                 </div></div>
             </div>
             <div class="form-group">
+                {{ form.publisher.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.publisher(class='form-control',placeholder='The publisher of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.publisher_place.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.publisher_place(class='form-control',placeholder='The place of publication') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.number_of_volumes.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.number_of_volumes(class='form-control',placeholder='The number of volumes, e.g. 2') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.edition.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.edition(class='form-control',placeholder='The edition of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.series.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.series(class='form-control',placeholder='The series the work was published in') }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.volume_in_series.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.volume_in_series(class='form-control',placeholder='The volume in the series, e.g. 180') }}
+                </div>
+            </div>
+            <div class="form-group">
                 {{ form.language.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-2">
                     {{ form.language(class='form-control',placeholder='Language of the work') }}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
                 </div>
             </div>
             <div class="form-group">
@@ -94,15 +146,35 @@
                 </div>
             </div>
             <div class="form-group">
+                {{ form.isbn.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.isbn(class='form-control',placeholder='Enter the ISBN (10 or 13-digit number)') }}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
+                </div>
+            </div>
+            <div class="form-group">
                 {{ form.url.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.url(class='form-control') }}
+                    {{ form.url(class='form-control', placeholder='Enter the full path to the document') }}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-offset-2">
+                    <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.DOI.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.DOI(class='form-control',placeholder='A Digital Object Identifier, e.g. 10.1105/tpc.12.7.1041') }}
                 </div>
             </div>
             <div class="form-group">
                 {{ form.accessed.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.accessed(class='form-control') }}
+                    {{ form.accessed(class='form-control', placeholder='YYYY-MM-DD') }}
                 </div>
             </div>
             <div class="form-group">
