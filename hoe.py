@@ -227,7 +227,7 @@ class MonographForm(PrintedWorkForm):
     isbn = StringField('ISBN')
     number_of_volumes = StringField('Number of volumes')
     edition = StringField('Edition')
-    series = StringField('Series')
+    series_title = StringField('Series')
     volume_in_series = StringField('Volume in the series')
 
 class CollectionForm(PrintedWorkForm):
@@ -365,6 +365,19 @@ def book(primary_id=None, record_id=None):
         form.role.default = 'aut'
         form.process()
         return render_template('monograph_form.html', form=form, header='New Record')
+
+@app.route('/new/<primary_id>/collection/<record_id>', methods=('POST',))
+@app.route('/new/<primary_id>/collection', methods=('GET',))
+def collection(primary_id=None, record_id=None):
+    form = CollectionForm()
+    if record_id:
+        pass
+    else:
+        form.id = str(uuid.uuid4())
+        form.accessed.data = datetime.today().strftime('%Y-%m-%d')
+        form.role.default = 'aut'
+        form.process()
+        return render_template('collection_form.html', form=form, header='New Record')
 
 @app.route('/new/<record_id>', methods=('GET', 'POST'))
 @app.route('/new', methods=('GET', 'POST'))
