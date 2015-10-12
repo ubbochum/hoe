@@ -214,6 +214,9 @@ class PrintForm(ManuscriptForm):
 class TranslationForm(PrintedWorkForm):
     pass
 
+class EditionForm(PrintedWorkForm):
+    pass
+
 class ArticleForm(PrintedWorkForm):
     container_title = StringField('Journal Title', validators=[DataRequired()])
     ISSN = StringField('ISSN')
