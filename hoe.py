@@ -383,6 +383,19 @@ def collection(primary_id=None, record_id=None):
         form.process()
         return render_template('collection_form.html', form=form, header='New Record')
 
+@app.route('/new/<primary_id>/collection/<record_id>', methods=('POST',))
+@app.route('/new/<primary_id>/collection', methods=('GET',))
+def edition(primary_id=None, record_id=None):
+    form = EditionForm()
+    if record_id:
+        pass
+    else:
+        form.id = str(uuid.uuid4())
+        form.accessed.data = datetime.today().strftime('%Y-%m-%d')
+        form.role.default = 'aut'
+        form.process()
+        return render_template('edition_form.html', form=form, header='New Record')
+
 @app.route('/new/<record_id>', methods=('GET', 'POST'))
 @app.route('/new', methods=('GET', 'POST'))
 def new(record_id=None):
