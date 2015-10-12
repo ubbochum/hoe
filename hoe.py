@@ -96,6 +96,7 @@ class WorkForm(Form):
     DOI = StringField('DOI') # TODO: Own validator?
     title = StringField('Title', validators=[DataRequired()])
     subtitle = StringField('Subtitle')
+    translated_title = StringField('Translated title')
     person = StringField('Person')
     person_uri = StringField('URI')
     corporation = StringField('Corporation')

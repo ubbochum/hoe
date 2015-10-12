@@ -28,6 +28,12 @@
                 </div>
             </div>
             <div class="form-group">
+                {{ form.translated_title.label(class='col-sm-2 control-label') }}
+                <div class="col-sm-6">
+                    {{ form.translated_title(class='form-control',placeholder='The translated title of the work') }}
+                </div>
+            </div>
+            <div class="form-group">
                 {{ form.person.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
                     {{ form.person(class='form-control',placeholder='Family name, given name') }}
@@ -96,7 +102,7 @@
             <div class="form-group">
                 {{ form.series_title.label(class='col-sm-2 control-label') }}
                 <div class="col-sm-6">
-                    {{ form.series(class='form-control',placeholder='The series the work was published in') }}
+                    {{ form.series_title(class='form-control',placeholder='The series the work was published in') }}
                 </div>
             </div>
             <div class="form-group">
