@@ -96,18 +96,31 @@ class WorkForm(Form):
     DOI = StringField('DOI') # TODO: Own validator?
     title = StringField('Title', validators=[DataRequired()])
     subtitle = StringField('Subtitle')
+    translated_title = StringField('Translated title')
     person = StringField('Person')
     person_uri = StringField('URI')
     corporation = StringField('Corporation')
     language = SelectField('Language', choices=[
-        ('ger', 'German'),
+        ('alb', 'Albanian'),
+        ('ara', 'Arabic'),
+        ('bos', 'Bosnian'),
+        ('bul', 'Bulgarian'),
+        ('hrv', 'Croatian'),
+        ('dut', 'Dutch'),
         ('eng', 'English'),
         ('fre', 'French'),
-        ('rus', 'Russian'),
+        ('ger', 'German'),
         ('gre', 'Greek'),
-        ('lat', 'Latin'),
         ('ita', 'Italian'),
-        ])
+        ('lat', 'Latin'),
+        ('peo', 'Persian'),
+        ('pol', 'Polish'),
+        ('rum', 'Romanian'),
+        ('rus', 'Russian'),
+        ('srp', 'Serbian'),
+        ('spa', 'Spanish'),
+        ('tur', 'Turkish')
+])
     issued = DateField('Publication Date')
     accessed = DateField('Last Seen')
     circa = BooleanField('Estimated')
@@ -192,14 +205,22 @@ class ManuscriptForm(WorkForm):
     vignette_img = FileField('Vignette Image')
     vignette_img_license = SelectField('License', choices=LICENSES)
     origin_place = StringField('Place of Origin')
+    printing_place = StringField('Place of Printing')
 
 class PrintForm(ManuscriptForm):
-    printers_mark = StringField("Printer's Mark")
+    printers_mark = StringField('Printers Mark')
     printing_place = StringField('Place of Printing')
     printing_patent = StringField('Printing Patent')
 
 class TranslationForm(PrintedWorkForm):
     pass
+
+class EditionForm(PrintedWorkForm):
+    isbn = StringField('ISBN')
+    number_of_volumes = StringField('Number of volumes')
+    edition = StringField('Edition')
+    series_title = StringField('Series')
+    volume_in_series = StringField('Volume in the series')
 
 class ArticleForm(PrintedWorkForm):
     container_title = StringField('Journal Title', validators=[DataRequired()])
@@ -215,14 +236,18 @@ class MonographForm(PrintedWorkForm):
     isbn = StringField('ISBN')
     number_of_volumes = StringField('Number of volumes')
     edition = StringField('Edition')
-    series = StringField('Series')
+    series_title = StringField('Series')
     volume_in_series = StringField('Volume in the series')
 
 class CollectionForm(PrintedWorkForm):
     collection_title = StringField('Collection Title', validators=[DataRequired()])
     series_title = StringField('Series')
+    volume_in_series = StringField('Volume in the series')
+    number_of_volumes = StringField('Number of volumes')
     page_first = StringField('First Page')
     page_last = StringField('Last Page')
+    isbn = StringField('ISBN')
+    edition = StringField('Edition')
 
 class ConferenceForm(CollectionForm):
     date = StringField('Date')
@@ -328,10 +353,18 @@ def record(record_id=None):
     else:
         return render_template('record.html', record=resp.get('_source'), header=resp.get('_source').get('title'))
 
-@app.route('/new/<primary_id>/article-journal/<record_id>', methods=('POST',))
-@app.route('/new/<primary_id>/article-journal', methods=('GET',))
-def article(primary_id=None, record_id=None):
-    form = ArticleForm()
+@app.route('/new/<primary_id>/<pubtype>/<record_id>', methods=('POST',))
+@app.route('/new/<primary_id>/<pubtype>', methods=('GET',))
+def book(primary_id=None, record_id=None, pubtype=None):
+    form = ''
+    if pubtype == 'book':
+        form = MonographForm()
+    elif pubtype == 'collection':
+        form = CollectionForm()
+    elif pubtype == 'edition':
+        form = EditionForm()
+    elif pubtype == 'article-journal':
+        form = ArticleForm()
     if record_id:
         pass
     else:
@@ -339,20 +372,7 @@ def article(primary_id=None, record_id=None):
         form.accessed.data = datetime.today().strftime('%Y-%m-%d')
         form.role.default = 'aut'
         form.process()
-        return render_template('article_form.html', form=form, header='New Record')
-
-@app.route('/new/<primary_id>/book/<record_id>', methods=('POST',))
-@app.route('/new/<primary_id>/book', methods=('GET',))
-def book(primary_id=None, record_id=None):
-    form = MonographForm()
-    if record_id:
-        pass
-    else:
-        form.id = str(uuid.uuid4())
-        form.accessed.data = datetime.today().strftime('%Y-%m-%d')
-        form.role.default = 'aut'
-        form.process()
-        return render_template('monograph_form.html', form=form, header='New Record')
+        return render_template('%s_form.html' % pubtype, form=form, header='New Record')
 
 @app.route('/new/<record_id>', methods=('GET', 'POST'))
 @app.route('/new', methods=('GET', 'POST'))
