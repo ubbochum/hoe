@@ -215,7 +215,11 @@ class TranslationForm(PrintedWorkForm):
     pass
 
 class EditionForm(PrintedWorkForm):
-    pass
+    isbn = StringField('ISBN')
+    number_of_volumes = StringField('Number of volumes')
+    edition = StringField('Edition')
+    series_title = StringField('Series')
+    volume_in_series = StringField('Volume in the series')
 
 class ArticleForm(PrintedWorkForm):
     container_title = StringField('Journal Title', validators=[DataRequired()])
@@ -237,8 +241,12 @@ class MonographForm(PrintedWorkForm):
 class CollectionForm(PrintedWorkForm):
     collection_title = StringField('Collection Title', validators=[DataRequired()])
     series_title = StringField('Series')
+    volume_in_series = StringField('Volume in the series')
+    number_of_volumes = StringField('Number of volumes')
     page_first = StringField('First Page')
     page_last = StringField('Last Page')
+    isbn = StringField('ISBN')
+    edition = StringField('Edition')
 
 class ConferenceForm(CollectionForm):
     date = StringField('Date')
@@ -344,10 +352,18 @@ def record(record_id=None):
     else:
         return render_template('record.html', record=resp.get('_source'), header=resp.get('_source').get('title'))
 
-@app.route('/new/<primary_id>/article-journal/<record_id>', methods=('POST',))
-@app.route('/new/<primary_id>/article-journal', methods=('GET',))
-def article(primary_id=None, record_id=None):
-    form = ArticleForm()
+@app.route('/new/<primary_id>/<pubtype>/<record_id>', methods=('POST',))
+@app.route('/new/<primary_id>/<pubtype>', methods=('GET',))
+def book(primary_id=None, record_id=None, pubtype=None):
+    form = ''
+    if pubtype == 'book':
+        form = MonographForm()
+    elif pubtype == 'collection':
+        form = CollectionForm()
+    elif pubtype == 'edition':
+        form = EditionForm()
+    elif pubtype == 'article-journal':
+        form = ArticleForm()
     if record_id:
         pass
     else:
@@ -355,46 +371,7 @@ def article(primary_id=None, record_id=None):
         form.accessed.data = datetime.today().strftime('%Y-%m-%d')
         form.role.default = 'aut'
         form.process()
-        return render_template('article_form.html', form=form, header='New Record')
-
-@app.route('/new/<primary_id>/book/<record_id>', methods=('POST',))
-@app.route('/new/<primary_id>/book', methods=('GET',))
-def book(primary_id=None, record_id=None):
-    form = MonographForm()
-    if record_id:
-        pass
-    else:
-        form.id = str(uuid.uuid4())
-        form.accessed.data = datetime.today().strftime('%Y-%m-%d')
-        form.role.default = 'aut'
-        form.process()
-        return render_template('monograph_form.html', form=form, header='New Record')
-
-@app.route('/new/<primary_id>/collection/<record_id>', methods=('POST',))
-@app.route('/new/<primary_id>/collection', methods=('GET',))
-def collection(primary_id=None, record_id=None):
-    form = CollectionForm()
-    if record_id:
-        pass
-    else:
-        form.id = str(uuid.uuid4())
-        form.accessed.data = datetime.today().strftime('%Y-%m-%d')
-        form.role.default = 'aut'
-        form.process()
-        return render_template('collection_form.html', form=form, header='New Record')
-
-@app.route('/new/<primary_id>/collection/<record_id>', methods=('POST',))
-@app.route('/new/<primary_id>/collection', methods=('GET',))
-def edition(primary_id=None, record_id=None):
-    form = EditionForm()
-    if record_id:
-        pass
-    else:
-        form.id = str(uuid.uuid4())
-        form.accessed.data = datetime.today().strftime('%Y-%m-%d')
-        form.role.default = 'aut'
-        form.process()
-        return render_template('edition_form.html', form=form, header='New Record')
+        return render_template('%s_form.html' % pubtype, form=form, header='New Record')
 
 @app.route('/new/<record_id>', methods=('GET', 'POST'))
 @app.route('/new', methods=('GET', 'POST'))

@@ -19,23 +19,21 @@
             {% include 'form_components/subtitle.html' %}
             {% include 'form_components/translated_title.html' %}
             {% include 'form_components/person.html' %}
-            {% include 'form_components/corporation.html' %}
             {% include 'form_components/issued.html' %}
-            {% include 'form_components/circa.html' %}
-            {% include 'form_components/publisher.html' %}
-            {% include 'form_components/publisher_place.html' %}
-            {% include 'form_components/number_of_volumes.html' %}
-            {% include 'form_components/edition.html' %}
-            {% include 'form_components/series_title.html' %}
-            {% include 'form_components/volume_in_series.html' %}
             {% include 'form_components/language.html' %}
+            {% include 'form_components/first_to_last_page.html' %}
             {% include 'form_components/number_of_pages.html' %}
             {% include 'form_components/keyword.html' %}
             {% include 'form_components/description.html' %}
-            {% include 'form_components/ISBN.html' %}
-            {% include 'form_components/URL.html' %}
             {% include 'form_components/DOI.html' %}
+            {% include 'form_components/URL.html' %}
             {% include 'form_components/accessed.html' %}
+            {% include 'form_components/container_title.html' %}
+            {% include 'form_components/volume_of_journal.html' %}
+            {% include 'form_components/number_of_journal.html' %}
+            {% include 'form_components/ISSN.html' %}
+            {% include 'form_components/ZDBID.html' %}
+            {% include 'form_components/publisher.html' %}
             {% include 'form_components/note.html' %}
             <div class="form-group">
                 <div class="col-sm-6 pull-right">
@@ -43,22 +41,8 @@
                     <button type="submit" class="btn btn-primary submit">Submit</button>
                 </div>
             </div>
-            </form></div>
-            {#<div class="btn-group col-sm-offset-3">
-                <a type="button" class="btn btn-default" href="/new/{{ form.id }}/edition"><i class="fa fa-plus"></i> Add an edition</a>
-                <a type="button" class="btn btn-default" href="/new/{{ form.id }}/translation"><i class="fa fa-plus"></i> Add a translation</a>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-plus"></i> Add secondary literature <i class="fa fa-caret-down"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="/new/{{ form.id }}/article">Article</a></li>
-                      <li><a href="/new/{{ form.id }}/monograph">Monograph</a></li>
-                        <li><a href="/new/{{ form.id }}/contribution">Contribution in Collection</a></li>
-                        <li><a href="/new/{{ form.id }}/conference">Conference Paper</a></li>
-                    </ul>
-                  </div>
-            </div>#}
+            </form>
+            </div>
         </div>
         {% include 'footer.html' %}
     </div>

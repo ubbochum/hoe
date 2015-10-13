@@ -1,0 +1,24 @@
+<div class="form-group">
+    {{ form.person.label(class='col-sm-2 control-label') }}
+    <div class="col-sm-6">
+        {{ form.person(class='form-control',placeholder='Family name, given name') }}
+    </div>
+    <div class="clearfix"></div>
+    {{ form.role.label(class='col-sm-2 control-label') }}
+    <div class="col-sm-6">
+        {{ form.role(class='form-control') }}
+    </div>
+    <div class="clearfix"></div>
+    {{ form.person_uri.label(class='col-sm-2 control-label') }}
+    <div class="col-sm-6">
+        {{ form.person_uri(class='form-control',placeholder='Authority URI for the person') }}
+    </div>
+    <div class="col-sm-3">
+        <span class="dbpedia"><small>&nbsp;<a target="_blank" href="http://dbpedia.org/fct/">DBPedia</a>&nbsp;|&nbsp;<a
+                target="_blank" href="http://viaf.org">VIAF</a></small></span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-sm-offset-2">
+        <a href="#" class="btn btn-xs add-element">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"></i> Add another</a>
+    </div>
+</div>
