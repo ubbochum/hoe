@@ -205,9 +205,10 @@ class ManuscriptForm(WorkForm):
     vignette_img = FileField('Vignette Image')
     vignette_img_license = SelectField('License', choices=LICENSES)
     origin_place = StringField('Place of Origin')
+    printing_place = StringField('Place of Printing')
 
 class PrintForm(ManuscriptForm):
-    printers_mark = StringField("Printer's Mark")
+    printers_mark = StringField('Printers Mark')
     printing_place = StringField('Place of Printing')
     printing_patent = StringField('Printing Patent')
 
