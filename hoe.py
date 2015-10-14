@@ -226,6 +226,10 @@ class ArticleForm(PrintedWorkForm):
     page_last = StringField('Last Page')
     number_of_pages = StringField('Extent')
 
+class JournalForm(PrintedWorkForm):
+    ISSN = StringField('ISSN')
+    journalAbbreviation = StringField('Journal abbreviation')
+
 class MonographForm(PrintedWorkForm):
     isbn = StringField('ISBN')
     number_of_volumes = StringField('Number of volumes')
@@ -368,6 +372,8 @@ def book(primary_id=None, record_id=None, pubtype=None):
         form = TranslationForm()
     elif pubtype == 'chapter':
         form = ChapterForm()
+    elif pubtype == 'journal':
+        form = JournalForm()
     if record_id:
         pass
     else:
