@@ -129,18 +129,7 @@ class WorkForm(Form):
     description = TextAreaField('Description')
 
     type = SelectField('Type', validators=[DataRequired()], choices=[
-        ("article-journal", 'Journal Article'),
-        ("article-newspaper", 'Newspaper Article'),
-        ("book", 'Book'),
-        ("chapter", 'Chapter'),
-        ("entry-encyclopedia", 'Entry in Encyclopedia'),
         ("manuscript", 'Manuscript'),
-        ("map", 'Map'),
-        ("paper-conference", 'Conference Paper'),
-        ("personal_communication", 'Personal Communication'),
-        ("review-book", 'Book Review'),
-        ("thesis", 'Thesis'),
-        ("treaty", 'Treaty'),
         ('print', 'Print')
     ])
     number_of_pages = StringField('Extent')
@@ -205,15 +194,20 @@ class ManuscriptForm(WorkForm):
     vignette_img = FileField('Vignette Image')
     vignette_img_license = SelectField('License', choices=LICENSES)
     origin_place = StringField('Place of Origin')
-    printing_place = StringField('Place of Printing')
 
 class PrintForm(ManuscriptForm):
     printers_mark = StringField('Printers Mark')
+    printers_mark_img = FileField('Printers Mark Image')
+    printers_mark_img_license = SelectField('License', choices=LICENSES)
     printing_place = StringField('Place of Printing')
     printing_patent = StringField('Printing Patent')
 
 class TranslationForm(PrintedWorkForm):
-    pass
+    isbn = StringField('ISBN')
+    number_of_volumes = StringField('Number of volumes')
+    edition = StringField('Edition')
+    series_title = StringField('Series')
+    volume_in_series = StringField('Volume in the series')
 
 class EditionForm(PrintedWorkForm):
     isbn = StringField('ISBN')
@@ -223,7 +217,7 @@ class EditionForm(PrintedWorkForm):
     volume_in_series = StringField('Volume in the series')
 
 class ArticleForm(PrintedWorkForm):
-    container_title = StringField('Journal Title', validators=[DataRequired()])
+    container_title = StringField('Parent title', validators=[DataRequired()])
     ISSN = StringField('ISSN')
     ZDBID = StringField('ZDB ID')
     volume = StringField('Volume')
@@ -244,8 +238,6 @@ class CollectionForm(PrintedWorkForm):
     series_title = StringField('Series')
     volume_in_series = StringField('Volume in the series')
     number_of_volumes = StringField('Number of volumes')
-    page_first = StringField('First Page')
-    page_last = StringField('Last Page')
     isbn = StringField('ISBN')
     edition = StringField('Edition')
 
@@ -253,6 +245,13 @@ class ConferenceForm(CollectionForm):
     date = StringField('Date')
     event = StringField('Conference')
     place = StringField('Place')
+
+class ChapterForm(CollectionForm):
+    container_title = StringField('Parent title', validators=[DataRequired()])
+    container_subtitle = StringField('Parent subtitle')
+    container_translated_title = StringField('Parent translated title')
+    page_first = StringField('First Page')
+    page_last = StringField('Last Page')
 
 @app.route('/')
 def index():
@@ -305,7 +304,7 @@ def record(record_id=None):
         logging.info(record)
         # TODO:
         #issued=record.get('issued').get('date-parts')[0]
-        form = ManuscriptForm()
+        form = PrintForm()
         form.id = record.get('id')
         if record.get('title'):
             form.title.data = record.get('title')
@@ -365,6 +364,10 @@ def book(primary_id=None, record_id=None, pubtype=None):
         form = EditionForm()
     elif pubtype == 'article-journal':
         form = ArticleForm()
+    elif pubtype == 'translation':
+        form = TranslationForm()
+    elif pubtype == 'chapter':
+        form = ChapterForm()
     if record_id:
         pass
     else:
@@ -377,7 +380,7 @@ def book(primary_id=None, record_id=None, pubtype=None):
 @app.route('/new/<record_id>', methods=('GET', 'POST'))
 @app.route('/new', methods=('GET', 'POST'))
 def new(record_id=None):
-    form = ManuscriptForm()
+    form = PrintForm()
     if record_id:
         multiple_cats = {}
         for cat in form.multiples:

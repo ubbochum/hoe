@@ -15,9 +15,21 @@
             <div class="col-sm-offset-2">
             <form class="form form-horizontal" method="post" role="form" action="/new/{{ form.id }}">
                 {{ form.csrf_token }}
-            {% include 'form_components/title.html' %}
-            {% include 'form_components/subtitle.html' %}
-            {% include 'form_components/translated_title.html' %}
+            <fieldset>
+                {% include 'form_components/person.html' %}
+                {% include 'form_components/title.html' %}
+                {% include 'form_components/subtitle.html' %}
+                {% include 'form_components/translated_title.html' %}
+                {% include 'form_components/first_to_last_page.html' %}
+                {% include 'form_components/number_of_pages.html' %}
+                {% include 'form_components/language.html' %}
+                {% include 'form_components/URL.html' %}
+                {% include 'form_components/DOI.html' %}
+                <hr>
+            </fieldset>
+            {% include 'form_components/container_title.html' %}
+            {% include 'form_components/container_subtitle.html' %}
+            {% include 'form_components/container_translated_title.html' %}
             {% include 'form_components/person.html' %}
             {% include 'form_components/corporation.html' %}
             {% include 'form_components/issued.html' %}
