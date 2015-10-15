@@ -16,58 +16,43 @@
             <form class="form form-horizontal" method="post" role="form" action="/new/{{ form.id }}">
                 {{ form.csrf_token }}
             <fieldset>
-                {% include 'form_components/type.html' %}
-                {% include 'form_components/genre.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
+                {% include 'form_components/person.html' %}
                 {% include 'form_components/title.html' %}
-                {% include 'form_components/incipit.html' %}
-                {% include 'form_components/explicit.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/frontispiece.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/vignette.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/person_birth_death.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/issued.html' %}
-                {% include 'form_components/circa.html' %}
-                {% include 'form_components/language.html' %}
+                {% include 'form_components/subtitle.html' %}
+                {% include 'form_components/translated_title.html' %}
+                {% include 'form_components/first_to_last_page.html' %}
                 {% include 'form_components/number_of_pages.html' %}
-                {% include 'form_components/number_of_lines.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
+                {% include 'form_components/language.html' %}
+                {% include 'form_components/URL.html' %}
+                {% include 'form_components/DOI.html' %}
                 {% include 'form_components/keyword.html' %}
                 {% include 'form_components/description.html' %}
-                {% include 'form_components/origin_place.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/printing_place.html' %}
-                {% include 'form_components/printing_patent.html' %}
-                {% include 'form_components/printers_mark.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/library.html' %}
-                {% include 'form_components/library_place.html' %}
-                {% include 'form_components/call_number.html' %}
-                {% include 'form_components/URL.html' %}
                 {% include 'form_components/accessed.html' %}
-                {% include 'form_components/provenance.html' %}
+                {% include 'form_components/note.html' %}
                 <hr>
             </fieldset>
-                {% include 'form_components/note.html' %}
+            {% include 'form_components/container_title.html' %}
+            {% include 'form_components/container_subtitle.html' %}
+            {% include 'form_components/container_translated_title.html' %}
+            {% include 'form_components/person.html' %}
+            {% include 'form_components/corporation.html' %}
+            {% include 'form_components/issued.html' %}
+            {% include 'form_components/circa.html' %}
+            {% include 'form_components/publisher.html' %}
+            {% include 'form_components/publisher_place.html' %}
+            {% include 'form_components/number_of_volumes.html' %}
+            {% include 'form_components/edition.html' %}
+            {% include 'form_components/series_title.html' %}
+            {% include 'form_components/volume_in_series.html' %}
+            {% include 'form_components/language.html' %}
+            {% include 'form_components/number_of_pages.html' %}
+            {% include 'form_components/keyword.html' %}
+            {% include 'form_components/description.html' %}
+            {% include 'form_components/ISBN.html' %}
+            {% include 'form_components/URL.html' %}
+            {% include 'form_components/DOI.html' %}
+            {% include 'form_components/accessed.html' %}
+            {% include 'form_components/note.html' %}
             <div class="form-group">
                 <div class="col-sm-6 pull-right">
                     <button type="reset" class="btn btn-danger">Clear</button>

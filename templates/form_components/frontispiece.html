@@ -1,0 +1,23 @@
+<div class="form-group">
+    {{ form.frontispiece.label(class='col-sm-2 control-label') }}
+    <div class="col-sm-6">
+        {{ form.frontispiece(class='form-control', placeholder='Text contained in the image') }}
+    </div>
+    {#
+    <div class="clearfix"></div>
+    {{ form.frontispiece_img.label(class='col-sm-2 control-label') }}
+    <div class="col-sm-6">
+        {{ form.frontispiece_img() }}
+    </div>
+    #}
+    <label>
+        <span class="btn btn-info"><i class="fa fa-upload"></i> Choose file</span>
+        <input onchange="parentNode.setAttribute('data-file', this.files[0].name)" type="file">
+    </label>
+
+    <div class="clearfix"></div>
+    {{ form.frontispiece_img_license.label(class='col-sm-2 control-label') }}
+    <div class="col-sm-6">
+        {{ form.frontispiece_img_license(class='form-control',) }}
+    </div>
+</div>
