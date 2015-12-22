@@ -4,21 +4,83 @@
     {{ super() }}
 {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
+    {% if site == 'bochum' %}<link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">{% endif %}
 {% endblock %}
 
 {% block content %}
+    {% include 'confirm_delete_modal.html' %}
     <div class="container">
         {% include 'header.html' %}
         {% include 'navbar.html' %}
         <div class="row">
+            <div class="col-sm-10">
+            <div class="alert alert-info">{{ _('This is just a draft preview for debugging...') }}</div>
             <dl class="dl-horizontal">
-                {% for cat, val in record.items() %}
-                    <dt style="text-transform: uppercase;">{{ cat }}</dt>
-                    <dd>{{ val }}</dd>
+                {% for field in record %}
+                    {% if field.data %}<dt style="text-transform: uppercase;">{{ field.label }}</dt>
+                    <dd>
+                        {% if field.type == 'FieldList' %}&nbsp;
+                            <ul class="list-unstyled">
+                            {% for subfield in field %}
+                                <li>
+                                    <dl class="dl-horizontal" style="margin-left:-120px;">
+                                        {% for cat, val in subfield.data.items() %}
+                                            {% if val %}<dt style="text-transform: uppercase;">{{ cat }}</dt>
+                                            <dd>{{ val }}</dd>{% endif %}
+                                        {% endfor %}
+                                    </dl>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            {{ field.data }}
+                        {% endif %}
+                    </dd>{% endif %}
                 {% endfor %}
             </dl>
+            </div>
+            <div class="col-sm-2">
+                {% if current_user.role == 'admin' or current_user.name == record.owner %}<div class="btn-group" role="group" aria-label="action-group">
+                    <a href="{{ url_for('edit_record', record_id=record.data.id, pubtype=record.data.pubtype) }}" class="btn btn-default"><i class="fa fa-pencil"></i> {{ _('Edit') }}</a>
+                    <a href="#" data-href="{{ url_for('delete_record', record_id=record.data.id) }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> {{ _('Delete') }}</a>
+                    {#<label for="apparent_dup">{{ _('Apparent Duplicate') }}</label>
+                    <input type="checkbox" id="apparent_dup" name="apparent_dup">#}
+                </div>{% endif %}
+            </div>
         </div>
     {% include 'footer.html' %}
     </div>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script>
+        function page_redirect(){
+            setTimeout(function(){
+                            document.location = '/dashboard';
+                        }, 1000);
+        }
+        $('#confirm-delete').on('show.bs.modal', function(event) {
+            $(this).find('.btn-ok').attr('href', $(event.relatedTarget).data('href'));
+        });
+        $(document).on('click', '.btn-ok', function(event){
+            event.preventDefault();
+            //var confirm_btn = $('.btn-ok');
+            //console.log($('.btn-ok').attr('href'));
+            $.get($('.btn-ok').attr('href'), function(data){
+                //console.log(data);
+                if(data.deleted == true){
+                    page_redirect();
+                }
+            });
+            //document.location.reload(true);
+        });
+        /*$(document).on('change', '#apparent_dup', function(event){
+            var dup = false;
+            if($(this).is(':checked')){
+                dup = true;
+            }
+            console.log(dup);
+            $.post('/apparent_duplicate', {'id': '{{ record_id }}', 'apparent_dup': dup});
+        })*/
+    </script>
 {% endblock %}

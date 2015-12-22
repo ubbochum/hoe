@@ -1,0 +1,96 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'drill_down.html' as drill_down %}
+
+{% block styles %}
+    {{ super() }}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+                <div class="modal-body">
+                    <p>You are about to delete one record, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok"><i class="fa fa-trash"></i> Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {% include 'header.html' %}
+        {% include 'navbar.html' %}
+        <div class="row">
+        <div class="col-sm-3">
+            {{ drill_down.facets(facet_data.fperson, 'fperson', heading='Person', target='dashboard') }}
+            {{ drill_down.facets(facet_data.fkeyword, 'fkeyword', heading='Keyword', target='dashboard') }}
+            {{ drill_down.facets(facet_data.issued, 'issued', heading='Issued', target='dashboard') }}
+            {{ drill_down.facets(facet_data.pubtype, 'pubtype', heading='Type', target='dashboard') }}
+            {{ drill_down.facets(facet_data.genre, 'genre', heading='Genre', target='dashboard') }}
+            {{ drill_down.facets(facet_data.language, 'language', heading='Language', target='dashboard') }}
+            {{ drill_down.facets(facet_data.library_place, 'library_place', heading='Library Place', target='dashboard') }}
+        </div>
+        <div class="col-sm-9">
+            {{ pagination.info }}
+            {{ pagination.links }}
+            <table class="table">
+                {% for record in records %}
+                    <tr>
+                        <th scope="row" class="record_count">{{ loop.index }}</th>
+                        <td><a href="{{ url_for('show_record', pubtype=record.pubtype, record_id=record.id) }}">{{ record.title }}</a><br/>
+                        {% for author in record.person %}{{ author }}{% endfor %}, {% if record.circa == 'y' %}ca. {% endif %}{% if record.issued %}{{ record.issued }}{% endif %}</td>
+                        <td class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="action{{ loop.index }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-cog"></i> Action <span class="fa fa-caret-down"></span></button>
+                            <ul class="dropdown-menu" aria-labelledby="action{{ loop.index }}">
+                                <li><a href="{{ url_for('show_record', pubtype=record.pubtype, record_id=record.id) }}"><i class="fa fa-eye"></i> View</a></li>
+                                <li><a href="{{ url_for('edit_record', record_id=record.id, pubtype=record.pubtype) }}"><i class="fa fa-pencil"></i> Edit</a></li>
+                                {% if current_user.role == 'admin' %}<li class="bg-danger"><a href="#" data-href="{{ url_for('delete_record', record_id=record.id) }}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> Delete</a></li>{% endif %}
+                                <li class="divider" role="separator"></li>
+                                <li class="dropdown-header"><i class="fa fa-plus"></i> Add</li>
+                                <li><a href="{{ url_for('new_record', primary_id=record.id, pubtype='article-journal') }}">Journal Article</a></li>
+                                <li><a href="{{ url_for('new_record', primary_id=record.id, pubtype='article-newspaper') }}">Newspaper Article</a></li>
+                                <li><a href="{{ url_for('new_record', primary_id=record.id, pubtype='book') }}">Book</a></li>
+                                <li><a href="{{ url_for('new_record', primary_id=record.id, pubtype='chapter') }}">Chapter</a></li>
+                                <li><a href="{{ url_for('new_record', primary_id=record.id, pubtype='collection') }}">Collection</a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {{ pagination.links }}
+        </div>
+        </div>
+    {% include 'footer.html' %}
+    </div>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script>
+        function page_reload(){
+            setTimeout(function(){
+                            location.reload(true);
+                        }, 1000);
+        }
+        $('#confirm-delete').on('show.bs.modal', function(event) {
+            $(this).find('.btn-ok').attr('href', $(event.relatedTarget).data('href'));
+        });
+        $(document).on('click', '.btn-ok', function(event){
+            event.preventDefault();
+            $.get($('.btn-ok').attr('href'), function(data){
+                if(data.deleted == true){
+                    page_reload();
+                }
+            });
+        });
+    </script>
+{% endblock %}

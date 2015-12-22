@@ -1,11 +1,20 @@
+{% import 'bootstrap/utils.html' as utils %}
 <nav role="navigation" class="navbar navbar-inverse">
     <ul class="nav navbar-nav">
         <li{% if header == 'Project Description' %} class="active"{% endif %}><a href="/"><i class="fa fa-home"></i> Home</a></li>
         <li class="divider"></li>
+        {% if current_user.role == 'admin' %}
         <li{% if header == 'Dashboard' %} class="active"{% endif %}><a href="/records"><i class="fa fa-list"></i> Dashboard</a></li>
         <li class="divider"></li>
-        <li{% if header == 'New Record' %} class="active"{% endif %}><a href="/new"><i class="fa fa-plus"></i> New Record</a></li>
+        <li class="dropdown{% if header == 'New Record' %} active{% endif %}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus"></i> {{ _('New') }}</a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ url_for('new_record', pubtype='manuscript') }}">{{ _('Manuscript') }}</a></li>
+                <li><a href="{{ url_for('new_record', pubtype='print') }}">{{ _('Print') }}</a></li>
+            </ul>
+        </li>
         <li class="divider"></li>
+        {% endif %}
     </ul>
     <div class="navbar-right{% if header == query %} search_form_active{% endif %}">
         <form class="navbar-form" role="search" action="/search" method="get">
@@ -17,7 +26,6 @@
             </div>
             <button type="submit" class="btn btn-default">Go</button>
         </form>
-{#        <ul class="nav navbar-nav"><li>{% if current_user.is_authenticated %}<a href="/logout"><i class="fa fa-sign-out"></i> {{ current_user.name }}</a>{% else %}<a href="/login"><i class="fa fa-sign-in"></i> Login</a>{% endif %}</li></ul>#}
     </div>
-
 </nav>
+{{ utils.flashed_messages(container=false) }}

@@ -13,8 +13,10 @@
             <a href="https://www.rub.de" title="Ruhr-Universität Bochum">
                 <img src="{{ url_for('static', filename='site/img/rub-logo.svg') }}" id="rub-label" alt="RUB-Label"/>
             </a>
+            <br/>
+            {% if current_user.is_authenticated %}<i class="fa fa-user"></i> {{ current_user.name }} <a href="/logout"><i class="fa fa-sign-out"></i></a>{% else %}{% if header != 'Sign In' %}<a href="/login?next={{ request.url_rule.endpoint }}"><i class="fa fa-sign-in"></i> Sign In</a>{% if header != 'User Registration' %} or <a href="{{ url_for('register') }}"><i class="fa fa-user-plus"></i> Sign Up</a>{% endif %}{% endif %}{% endif %}
         </span>
     </p>
-    <h1>Historiography of the Ottoman Empire</h1>
+    <h1><img src="/static/site/img/dromedary.svg" height="48px"> <span style="vertical-align: -45%;">{{ _('Historiography of the Ottoman Empire') }}</span></h1>
     <h2>{{ header }}</h2>
 </header>

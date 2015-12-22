@@ -1,0 +1,109 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'render_form.html' as render_form with context %}
+
+{% block styles %}
+    {{ super() }}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    {% if site == 'bochum' %}<link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'header.html' %}
+        {% include 'navbar.html' %}
+        <div class="row">
+            <div class="col-sm-offset-2">
+            {% if form.errors %}
+                {{ form.errors }}
+            {% endif %}
+            <form class="form form-horizontal" method="post" role="form" action="/{{ action }}/{{ pubtype }}{% if action == 'update' %}/{{ form.id.data }}{% endif %}">
+                {{ form.csrf_token }}
+                <div class="form-group"><div class="col-sm-2 control-label">&nbsp;</div>
+                <div class="col-sm-6">{{ _('Fields marked with <span style="color: orangered;">*</span> are required.') }}</div></div>
+
+                {% for item in form %}
+{#                    {{ item.type }} {{ item.name }}<br/>#}
+                    {% if item.type != 'FieldList' %}
+                        {% if current_user.role != 'admin' %}
+                            {% if not item.name in form.admin_only %}{{ render_form.render_field(item) }}{% endif %}
+                        {% else %}
+                            {% if not item.name in form.user_only %}{{ render_form.render_field(item) }}{% endif %}
+                        {% endif %}
+                    {% else %}
+                        {{ render_form.render_multi_field(item) }}
+                    {% endif %}
+                {% endfor %}
+                {% include 'submit_form.html' %}
+            </form>
+            </div>
+        </div>
+        {% include 'footer.html' %}
+    </div>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script>
+        var cloneCount = 1;
+        $(document).on('click', '.add', function (event) {
+            event.preventDefault();
+            var container = $(this).closest('[id$="_container"]');
+            var fieldnameparts = container.attr('id').split('-');
+            var prefix = fieldnameparts[0];
+            var thenum = parseInt(fieldnameparts[1].replace('_container', '')) + 1;
+            var cpy = container.clone(true);
+            var container_id = cpy.attr('id').replace('-' + (thenum - 1), '-' + thenum);
+            cpy.attr('id', container_id);
+            cpy.find(':input').each(function(){
+                var id = $(this).attr('id').replace('-' + (thenum - 1) + '-', '-' + thenum + '-');
+                $(this).attr('name', id).attr('id', id).val('').removeAttr('checked');
+            });
+            cpy.find('label').each(function(){
+                var id = $(this).attr('for').replace('-' + (thenum - 1) + '-', '-' + thenum + '-');
+                $(this).attr('for', id);
+            });
+            $(this).replaceWith('<a class="btn btn-sm btn-danger remove" href="#"><i class="fa fa-trash"></i> {{_("Remove this")}}</a></div>');
+            container.after(cpy);
+        });
+        $(document).on('click', '.remove', function (event) {
+            $(this).closest('[id*="container"]').remove();
+        });
+        $(document).on('click', '.add-atomic', function(event){
+            event.preventDefault();
+            var container = $(this).closest('[id$="_container"]');
+            var fieldnameparts = container.attr('id').split('-');
+            var thenum = parseInt(fieldnameparts[1].replace('_container', '')) + 1;
+            var cpy = container.clone(true);
+            var container_id = cpy.attr('id').replace('-' + (thenum - 1), '-' + thenum);
+            cpy.attr('id', container_id);
+            cpy.find(':input').each(function(){
+                var id = $(this).attr('id').replace('-' + (thenum - 1), '-' + thenum);
+                $(this).attr('name', id).attr('id', id).val('').removeAttr('checked');
+            });
+            cpy.find('label').each(function(){
+                var id = $(this).attr('for').replace('-' + (thenum - 1), '-' + thenum);
+                $(this).attr('for', id);
+            });
+            $(this).replaceWith('<a class="btn btn-sm btn-danger remove" href="#"><i class="fa fa-trash"></i> {{_("Remove this")}}</a></div>');
+            container.after(cpy);
+        });
+        function dedupe(idtype, thenode){
+            $.getJSON('/dedup/' + idtype + '/' + encodeURIComponent(thenode.val()), function(data){
+                $('#' + idtype + '_dedup_note').remove();
+                if(data.duplicate == true){
+                    thenode.closest('div[id$="_container"]').append('<div id="' + idtype + '_dedup_note" class="col-sm-4"><div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> {{ _("This Title Already Exists!") }} <a href="/search?q=' + idtype + ':' + thenode.val() + '">{{ _("Here") }}</a></div></div>')
+                }
+                else{
+                    thenode.closest('div[id$="_container"]').append('<div id="' + idtype + '_dedup_note" class="col-sm-4"><div class="alert alert-success"><i class="fa fa-check"></i> {{ _("This Title Does Not Exist Yet!") }}</div></div>')
+                }
+            });
+        }
+        $(document).on('change', '#DOI', function(event){
+            dedupe('doi', $(this));
+        });
+        $(document).on('change', '#ISBN', function(event){
+            dedupe('isbn', $(this));
+        });
+    </script>
+    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+{% endblock %}

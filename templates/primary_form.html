@@ -2,7 +2,7 @@
 
 {% block styles %}
     {{ super() }}
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
 {% endblock %}
@@ -13,83 +13,69 @@
         {% include 'navbar.html' %}
         <div class="row">
             <div class="col-sm-offset-2">
-            <form class="form form-horizontal" method="post" role="form" action="/new/{{ form.id }}">
-                {{ form.csrf_token }}
-            <fieldset>
-                {% include 'form_components/type.html' %}
-                {% include 'form_components/genre.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/title.html' %}
-                {% include 'form_components/incipit.html' %}
-                {% include 'form_components/explicit.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/frontispiece.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/vignette.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/person_birth_death.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/issued.html' %}
-                {% include 'form_components/circa.html' %}
-                {% include 'form_components/language.html' %}
-                {% include 'form_components/number_of_pages.html' %}
-                {% include 'form_components/number_of_lines.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/keyword.html' %}
-                {% include 'form_components/description.html' %}
-                {% include 'form_components/origin_place.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/printing_place.html' %}
-                {% include 'form_components/printing_patent.html' %}
-                {% include 'form_components/printers_mark.html' %}
-                <hr>
-            </fieldset>
-            <fieldset>
-                {% include 'form_components/library.html' %}
-                {% include 'form_components/library_place.html' %}
-                {% include 'form_components/call_number.html' %}
-                {% include 'form_components/URL.html' %}
-                {% include 'form_components/accessed.html' %}
-                {% include 'form_components/provenance.html' %}
-                <hr>
-            </fieldset>
-                {% include 'form_components/note.html' %}
-            <div class="form-group">
-                <div class="col-sm-6 pull-right">
-                    <button type="reset" class="btn btn-danger">Clear</button>
-                    <button type="submit" class="btn btn-primary submit">Submit</button>
-                </div>
+                <form class="form form-horizontal" method="post" role="form" action="{{ url_for('new', record_id=form.id) }}">
+                    {{ form.csrf_token }}
+                    <fieldset>
+                        {% include 'form_components/type.html' %}
+                        {% include 'form_components/genre.html' %}
+                        <hr>
+                    </fieldset>
+                    <fieldset>
+                        {% include 'form_components/title.html' %}
+                        {% include 'form_components/incipit.html' %}
+                        {% include 'form_components/explicit.html' %}
+                        <hr>
+                    </fieldset>
+                    <fieldset>
+                        {% include 'form_components/frontispiece.html' %}
+                        <hr>
+                    </fieldset>
+                    <fieldset>
+                        {% include 'form_components/vignette.html' %}
+                        <hr>
+                    </fieldset>
+                    <fieldset>
+                        {% include 'form_components/person_birth_death.html' %}
+                        <hr>
+                    </fieldset>
+                    <fieldset>
+                        {% include 'form_components/issued.html' %}
+                        {% include 'form_components/circa.html' %}
+                        {% include 'form_components/language.html' %}
+                        {% include 'form_components/number_of_pages.html' %}
+                        {% include 'form_components/number_of_lines.html' %}
+                        <hr>
+                    </fieldset>
+                    <fieldset>
+                        {% include 'form_components/keyword.html' %}
+                        {% include 'form_components/description.html' %}
+                        {% include 'form_components/origin_place.html' %}
+                        <hr>
+                    </fieldset>
+                    <fieldset>
+                        {% include 'form_components/printing_place.html' %}
+                        {% include 'form_components/printing_patent.html' %}
+                        {% include 'form_components/printers_mark.html' %}
+                        <hr>
+                    </fieldset>
+                    <fieldset>
+                        {% include 'form_components/library.html' %}
+                        {% include 'form_components/library_place.html' %}
+                        {% include 'form_components/call_number.html' %}
+                        {% include 'form_components/URL.html' %}
+                        {% include 'form_components/accessed.html' %}
+                        {% include 'form_components/provenance.html' %}
+                        <hr>
+                    </fieldset>
+                    {% include 'form_components/note.html' %}
+                    <div class="form-group">
+                        <div class="col-sm-6 pull-right">
+                            <button type="reset" class="btn btn-danger">Clear</button>
+                            <button type="submit" class="btn btn-primary submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            </form></div>
-            {#<div class="btn-group col-sm-offset-3">
-                <a type="button" class="btn btn-default" href="/new/{{ form.id }}/edition"><i class="fa fa-plus"></i> Add an edition</a>
-                <a type="button" class="btn btn-default" href="/new/{{ form.id }}/translation"><i class="fa fa-plus"></i> Add a translation</a>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-plus"></i> Add secondary literature <i class="fa fa-caret-down"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a href="/new/{{ form.id }}/article">Article</a></li>
-                      <li><a href="/new/{{ form.id }}/monograph">Monograph</a></li>
-                        <li><a href="/new/{{ form.id }}/contribution">Contribution in Collection</a></li>
-                        <li><a href="/new/{{ form.id }}/conference">Conference Paper</a></li>
-                    </ul>
-                  </div>
-            </div>#}
         </div>
         {% include 'footer.html' %}
     </div>

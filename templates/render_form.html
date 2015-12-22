@@ -1,0 +1,65 @@
+{% macro render_field(field) %}
+    {% if field.type != 'CSRFTokenField' %}
+        {% include 'single_field.html' %}
+    {% endif %}
+{% endmacro %}
+
+{% macro render_multi_field(multifield) %}
+{% if multifield[0] %}
+    {% if multifield[0].type == 'FormField' %}
+    <div id="{{ multifield[0].name }}_container">
+    <h3 style="margin-top: 36px;">
+        <div class="col-sm-2 control-label">{{ multifield[0].name|capitalize|rem_form_count }}</div>
+        <div class="col-sm-6" style="margin: 4px 0 12px -10px;;"><a class="btn btn-sm btn-default add" href="#"><i class="fa fa-plus"></i> {{_('Add another')}}</a></div>
+    </h3>
+    <div class="col-sm-4">&nbsp;</div>
+    <div class="clearfix"></div>
+    {% for enclosure in multifield %}
+        {% for subfield in enclosure %}
+            {% if subfield.type != 'CSRFTokenField' %}
+                <div class="form-group">
+                {% if current_user.role != 'admin' %}
+                    {% if subfield.name|last_split not in form.admin_only %}
+{#                        <div class="col-sm-2 control-label" id="{{ subfield.name }}">{{ subfield.label }}</div>#}
+                        <div class="col-sm-2 control-label">{{ subfield.label }}</div>
+                        {% if subfield.type != 'BooleanField' %}
+                            <div class="col-sm-6">{{ subfield(class='form-control') }}</div>
+                        {% else %}
+                            <div class="col-sm-6">{{ subfield(class='checkbox') }}</div>
+                        {% endif %}
+                        {% if subfield.description %}<div class="clearfix"></div><div class="col-sm-offset-2"><p class="help-block" style="margin-top: 8px;margin-left:15px;">{{ subfield.description }}</p></div>{% endif %}
+                        <div class="col-sm-4">&nbsp;</div>
+{#                        <div class="clearfix"></div>#}
+                    {% endif %}
+                {% else %}
+                    {% if subfield.name not in form.user_only %}
+{#                        <div class="col-sm-2 control-label" id="{{ subfield.name }}">{{ subfield.label }}</div>#}
+                        <div class="col-sm-2 control-label">{{ subfield.label }}</div>
+                        {% if subfield.type != 'BooleanField' %}
+                            <div class="col-sm-6">{{ subfield(class='form-control') }}</div>
+                        {% else %}
+                            <div class="col-sm-6">{{ subfield(class='checkbox') }}</div>
+                        {% endif %}
+                        {% if subfield.description %}<div class="clearfix"></div><div class="col-sm-offset-2"><p class="help-block" style="margin-top: 8px;margin-left:15px;">{{ subfield.description }}</p></div>{% endif %}
+                        <div class="col-sm-4">&nbsp;</div>
+                    {% endif %}
+                {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        {#<div class="col-sm-offset-2" style="margin-top: 8px;">
+            <span style="margin-left:15px;text-transform:uppercase;"><a class="btn btn-sm btn-default" href="#" data-field="{{ multifield[0].name }}"><i class="fa fa-plus"></i> {{_('Add another')}}</a></span>
+        </div>#}
+    {% endfor %}
+    </div>
+    {% else %}
+        <div class="form-group" id="{{ multifield.entries[0].name }}_container">
+{#            <div class="col-sm-2 control-label" id="{{ multifield.name }}">{{ multifield.label }}</div>#}
+            <div class="col-sm-2 control-label">{{ multifield.entries[0].label }}</div>
+            <div class="col-sm-6">{{ multifield.entries[0](class='form-control') }}</div>
+            <div class="col-sm-4"> <a class="btn btn-sm btn-default add-atomic" href="#"><i class="fa fa-plus"></i> {{_('Add another')}}</a></div>
+            <div class="clearfix"></div>
+        </div>
+    {% endif %}
+    {% endif %}
+{% endmacro %}

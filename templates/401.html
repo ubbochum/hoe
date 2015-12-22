@@ -1,0 +1,23 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+    {{ super() }}
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include 'header.html' %}
+        {% include 'navbar.html' %}
+        <div class="row">
+            <div class="col-sm-offset-1 col-sm-10">
+                <h3>{{ _('Unauthorized') }}</h3>
+                <p class="alert alert-danger">{{ _("The server could not verify that you are authorized to access the URL requested. You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.") }}</p>
+                <p>{{ _('Please') }}<a href="/login?next={{ request.url_rule.endpoint }}"><i class="fa fa-sign-in"></i> {{ _('Sign In') }}</a> {{ _('or') }} <a href="{{ url_for('register') }}"><i class="fa fa-user-plus"></i> {{ _('Sign Up') }}</a></p>
+            </div>
+        </div>
+        {% include 'footer.html' %}
+    </div>
+{% endblock %}

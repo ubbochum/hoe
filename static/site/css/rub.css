@@ -57,3 +57,5 @@ nav {margin-left: -15px !important; margin-right: -15px !important;}
 #facets ul {padding: 0 0 15px 15px;}
 .search_form_active {background-color: #003560; margin-right: 0px; border-color: #003560;}
 label > input[type="file"] {display: none;}
+.required:after {content: ' *'; color: orangered;}
+.dl-horizontal dt {white-space: normal;}

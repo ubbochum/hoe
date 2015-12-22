@@ -1,12 +1,12 @@
 {% extends 'form_components/person.html' %}
 {% block birth_death %}
     <div class="clearfix"></div>
-    {{ form.birth_date.label(class='col-sm-2 control-label') }}
+    {{ person.form.birth_date.label(class='col-sm-2 control-label') }}
     <div class="col-sm-2">
-        {{ form.birth_date(class='form-control',placeholder='YYYY-MM-DD') }}
+        {{ person.form.birth_date(class='form-control',placeholder='YYYY-MM-DD') }}
     </div>
-    {{ form.death_date.label(class='col-sm-2 control-label') }}
+    {{ person.form.death_date.label(class='col-sm-2 control-label') }}
     <div class="col-sm-2">
-        {{ form.death_date(class='form-control',placeholder='YYYY-MM-DD') }}
+        {{ person.form.death_date(class='form-control',placeholder='YYYY-MM-DD') }}
     </div>
 {% endblock %}

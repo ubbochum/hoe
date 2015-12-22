@@ -172,8 +172,17 @@
 .fa-search:before {
   content: ""; }
 
+.fa-envelope-o:before {
+  content: ""; }
+
 .fa-user:before {
   content: ""; }
+
+.fa-check:before {
+  content: ""; }
+
+.fa-search-plus:before {
+  content: ""; }
 
 .fa-cog:before {
   content: ""; }
@@ -183,6 +192,12 @@
 
 .fa-refresh:before {
   content: ""; }
+
+.fa-lock:before {
+  content: ""; }
+
+.fa-barcode:before {
+  content: ""; }
 
 .fa-list:before {
   content: ""; }
@@ -196,8 +211,15 @@
 .fa-plus:before {
   content: ""; }
 
+.fa-minus:before {
+  content: ""; }
+
 .fa-eye:before {
   content: ""; }
+
+.fa-warning:before,
+.fa-exclamation-triangle:before {
+  content: ""; }
 
 .fa-sign-out:before {
   content: ""; }
@@ -208,10 +230,40 @@
 .fa-upload:before {
   content: ""; }
 
+.fa-unlock:before {
+  content: ""; }
+
+.fa-users:before {
+  content: ""; }
+
+.fa-files-o:before {
+  content: ""; }
+
 .fa-caret-down:before {
   content: ""; }
 
+.fa-cloud-download:before {
+  content: ""; }
+
+.fa-cloud-upload:before {
+  content: ""; }
+
+.fa-keyboard-o:before {
+  content: ""; }
+
+.fa-unlock-alt:before {
+  content: ""; }
+
+.fa-university:before {
+  content: ""; }
+
+.fa-newspaper-o:before {
+  content: ""; }
+
 .fa-trash:before {
   content: ""; }
+
+.fa-user-plus:before {
+  content: ""; }
 
 /*# sourceMappingURL=font-awesome.css.map */

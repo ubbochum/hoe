@@ -1,19 +1,11 @@
 {% extends 'bootstrap/base.html' %}
-
-{% macro show_facets(facet, field_name) %}
-    <ul class="list-unstyled">
-    {% for category in facet %}
-        <li><a href="/search?q={{ query }}{% if filters %}&amp;filter={{ filters|join('&amp;filter=') }}{% endif %}&amp;filter={{ field_name }}:{{ category.key }}">{{ category.key }} ({{ category.doc_count }})</a></li>
-    {% endfor %}
-    </ul>
-    <hr>
-{% endmacro %}
+{% import 'drill_down.html' as drill_down with context %}
 
 {% block styles %}
     {{ super() }}
 {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
+    {% if site == 'bochum' %}<link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -21,29 +13,21 @@
         {% include 'header.html' %}
         {% include 'navbar.html' %}
         <div class="row">
-            <div class="col-sm-3" id="facets">
-                <h1>Authors</h1>
-                {{ show_facets(facets.author.buckets, 'author.literal') }}
-                <h1>Keywords</h1>
-                {{ show_facets(facets.keywords.buckets, 'keywords.label') }}
-                <h1>Library Place</h1>
-                {{ show_facets(facets.library_place.buckets, 'library_place') }}
-                <h1>Publication Type</h1>
-                {{ show_facets(facets.type.buckets, 'type') }}
-                <h1>Genre</h1>
-                {{ show_facets(facets.genre.buckets, 'genre') }}
+            <div class="col-sm-4" id="facets">
+                {{ drill_down.facets(facet_data.fperson, 'fperson', heading='Person', target='dashboard') }}
+                {{ drill_down.facets(facet_data.fkeyword, 'fkeyword', heading='Keyword', target='dashboard') }}
+                {{ drill_down.facets(facet_data.issued, 'issued', heading='Issued', target='dashboard') }}
+                {{ drill_down.facets(facet_data.pubtype, 'pubtype', heading='Type', target='dashboard') }}
+                {{ drill_down.facets(facet_data.genre, 'genre', heading='Genre', target='dashboard') }}
+                {{ drill_down.facets(facet_data.language, 'language', heading='Language', target='dashboard') }}
+                {{ drill_down.facets(facet_data.library_place, 'library_place', heading='Library Place', target='dashboard') }}
             </div>
-            <div class="col-sm-8"><ul class="list-unstyled">
-                {% for record in records.hits %}
-                    <li class="record clearfix">
-                        <div class="col-sm-1"><span class="record_count pull-right">{{ loop.index }}</span></div>
-                        <div class="col-sm-11">
-                            <a href="/record/{{ record._source.id }}">{{ record._source.title }}</a><br/>
-                            {% for author in record._source.author %}{{ author.literal }}{% endfor %}, {% if record._source.circa == 'y' %}ca. {% endif %}{{ record._source.issued.values()|list()|first|first }}
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul></div>
+            <div class="col-sm-8">
+                {{ pagination.info }}
+                {{ pagination.links }}
+                {% include 'record_list.html' %}
+                {{ pagination.links }}
+            </div>
         </div>
     {% include 'footer.html' %}
     </div>
