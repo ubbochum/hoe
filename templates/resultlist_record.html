@@ -1,3 +1,2 @@
-{% if not record.locked %}<a href="/retrieve/{{ record.pubtype }}/{{ record.id }}">{{ record.title }}</a>{% else %}{% if record.deskman != current_user.name %}<i class="fa fa-lock"></i> {{ record.title }}{% else %}<a href="/retrieve/{{ record.pubtype }}/{{ record.id }}">{{ record.title }}</a>{% endif %}{% endif %}<br/>
-{% for author in record.person %}{{ author }}{% if not loop.last %}; {% endif %} {% endfor %},
-{% if record.circa == 'y' %}{{ _('ca.') }} {% endif %}{{ record.fdate }}
+<a href="/retrieve/{{ record.pubtype }}/{{ record.id }}">{{ record.title|truncate(80) }}</a><br/>
+{% for author in record.person %}{{ author }}{% if not loop.last %}; {% endif %}{% endfor %}, {{ record.issued }}

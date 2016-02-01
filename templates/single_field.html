@@ -1,4 +1,4 @@
-<div class="form-group" id="{{ field.name }}">
+<div class="form-group" id="{{ field.name }}_container">
     {% if field.flags.required %}
         {{ field.label(class='col-sm-2 control-label required') }}
     {% else %}
@@ -16,6 +16,8 @@
             {{ field(class='form-control',required='required') }}
         {% elif field.type == 'BooleanField' %}
             {{ field(class='checkbox') }}
+        {% elif field.type == 'FileField' %}
+            {{ field }}
         {% else %}
             {{ field(class='form-control') }}
         {% endif %}

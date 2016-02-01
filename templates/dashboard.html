@@ -1,84 +1,77 @@
-{% extends 'bootstrap/base.html' %}
-{% import 'drill_down.html' as drill_down %}
-
-{% block styles %}
+{% extends 'site_base.html' %}
+{% import 'drill_down.html' as drill_down with context %}
+{% block head %}
     {{ super() }}
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
-    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='leaflet/leaflet.css') }}"/>
+    <style>
+        #map { height: 360px; margin-top: -55px;}
+    </style>
 {% endblock %}
-
-{% block content %}
-    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-                </div>
-                <div class="modal-body">
-                    <p>You are about to delete one record, this procedure is irreversible.</p>
-                    <p>Do you want to proceed?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok"><i class="fa fa-trash"></i> Delete</a>
-                </div>
+{% block site_content %}
+    {{ super() }}
+    {% include 'confirm_delete_modal.html' %}
+    {#<p>{% include 'admin_nav.html' %}</p>#}
+        {#<div class="row">
+        <div id="map"></div>
+        </div>#}
+        <div class="row">
+            <div class="col-sm-4">
+                <h4 id="lib_filter">{{ _('Library') }}</h4>
+                <div id="map"></div>
+                {{ drill_down.facets(facet_data.fperson, 'fperson', heading='Person', target='dashboard') }}
+                {{ drill_down.facets(facet_data.fkeyword, 'fkeyword', heading='Keyword', target='dashboard') }}
+                {{ drill_down.facets(facet_data.language, 'language', heading='Language', target='dashboard') }}
+                {{ drill_down.facets(facet_data.issued_primary, 'issued_primary', heading='Primary Publication Century', target='dashboard') }}
+                {{ drill_down.facets(facet_data.issued_secondary, 'issued_secondary', heading='Secondary Publication Year', target='dashboard') }}
+                {{ drill_down.facets(facet_data.pubtype, 'pubtype', heading='Publication Type', target='dashboard') }}
+                {{ drill_down.facets(facet_data.subtype, 'subtype', heading='Publication Subtype', target='dashboard') }}
+                {{ drill_down.facets(facet_data.source_class, 'source_class', heading='Source Class', target='dashboard') }}
+            </div>
+            <div class="col-sm-8">
+                <h4>{{ pagination.info }}</h4>
+                {% include 'remove_filters.html' %}
+                {{ pagination.links }}
+                <table class="table table-bordered">
+                    {#<thead>
+                        <tr>
+                            <td>#</td>
+                            <td>{{ _('Title') }}</td>
+                            #}{#<td>{{ _('Created') }}</td>
+                            <td>{{ _('Changed') }}</td>#}{#
+                            <td>{{ _('Action') }}</td>
+                        </tr>
+                    </thead>#}
+                    {% for record in records %}
+                        <tr>
+                            <th scope="row">{{ loop.index + offset }}</th>
+                            <td>{% include 'resultlist_record.html' %}<br/>
+    {#                        {% for author in record.author %}{{ author.literal }}{% endfor %}, {% if record.circa == 'y' %}ca. {% endif %}{% if record.issued %}{{ record.issued.values()|list()|first|first }}{% endif %}</td>#}
+                            {#<td>{{ (now - record.created|mk_time())|humanize() }}</td>
+                            <td>{{ (now - record.changed|mk_time())|humanize() }}</td>#}
+                            <td class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="action{{ loop.index }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-cog"></i> Action <span class="fa fa-caret-down"></span></button>
+                                <ul class="dropdown-menu" aria-labelledby="action{{ loop.index }}">
+                                    <li><a href="{{ url_for('show_record', pubtype=record.pubtype, record_id=record.id) }}"><i class="fa fa-eye"></i> View</a></li>
+                                    <li><a href="{{ url_for('edit_record', record_id=record.id, pubtype=record.pubtype) }}"><i class="fa fa-pencil"></i> Edit</a></li>
+                                    {% if current_user.role == 'admin' %}<li class="bg-danger"><a href="#" data-href="{{ url_for('delete_record', record_id=record.id) }}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> {{ _('Delete') }}</a></li>{% endif %}
+                                    <li class="divider" role="separator"></li>
+                                    <li class="dropdown-header"><i class="fa fa-plus"></i> {{ _('Add') }}</li>
+                                    <li class="disabled"><a href="{{ url_for('add_file', record_id=record.id) }}" disabled="disabled">{{ _('File') }}</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {{ pagination.links }}
             </div>
         </div>
-    </div>
-    <div class="container">
-        {% include 'header.html' %}
-        {% include 'navbar.html' %}
-        <div class="row">
-        <div class="col-sm-3">
-            {{ drill_down.facets(facet_data.fperson, 'fperson', heading='Person', target='dashboard') }}
-            {{ drill_down.facets(facet_data.fkeyword, 'fkeyword', heading='Keyword', target='dashboard') }}
-            {{ drill_down.facets(facet_data.issued, 'issued', heading='Issued', target='dashboard') }}
-            {{ drill_down.facets(facet_data.pubtype, 'pubtype', heading='Type', target='dashboard') }}
-            {{ drill_down.facets(facet_data.genre, 'genre', heading='Genre', target='dashboard') }}
-            {{ drill_down.facets(facet_data.language, 'language', heading='Language', target='dashboard') }}
-            {{ drill_down.facets(facet_data.library_place, 'library_place', heading='Library Place', target='dashboard') }}
-        </div>
-        <div class="col-sm-9">
-            {{ pagination.info }}
-            {{ pagination.links }}
-            <table class="table">
-                {% for record in records %}
-                    <tr>
-                        <th scope="row" class="record_count">{{ loop.index }}</th>
-                        <td><a href="{{ url_for('show_record', pubtype=record.pubtype, record_id=record.id) }}">{{ record.title }}</a><br/>
-                        {% for author in record.person %}{{ author }}{% endfor %}, {% if record.circa == 'y' %}ca. {% endif %}{% if record.issued %}{{ record.issued }}{% endif %}</td>
-                        <td class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="action{{ loop.index }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-cog"></i> Action <span class="fa fa-caret-down"></span></button>
-                            <ul class="dropdown-menu" aria-labelledby="action{{ loop.index }}">
-                                <li><a href="{{ url_for('show_record', pubtype=record.pubtype, record_id=record.id) }}"><i class="fa fa-eye"></i> View</a></li>
-                                <li><a href="{{ url_for('edit_record', record_id=record.id, pubtype=record.pubtype) }}"><i class="fa fa-pencil"></i> Edit</a></li>
-                                {% if current_user.role == 'admin' %}<li class="bg-danger"><a href="#" data-href="{{ url_for('delete_record', record_id=record.id) }}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> Delete</a></li>{% endif %}
-                                <li class="divider" role="separator"></li>
-                                <li class="dropdown-header"><i class="fa fa-plus"></i> Add</li>
-                                <li><a href="{{ url_for('new_record', primary_id=record.id, pubtype='article-journal') }}">Journal Article</a></li>
-                                <li><a href="{{ url_for('new_record', primary_id=record.id, pubtype='article-newspaper') }}">Newspaper Article</a></li>
-                                <li><a href="{{ url_for('new_record', primary_id=record.id, pubtype='book') }}">Book</a></li>
-                                <li><a href="{{ url_for('new_record', primary_id=record.id, pubtype='chapter') }}">Chapter</a></li>
-                                <li><a href="{{ url_for('new_record', primary_id=record.id, pubtype='collection') }}">Collection</a></li>
-                            </ul>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-            {{ pagination.links }}
-        </div>
-        </div>
-    {% include 'footer.html' %}
-    </div>
 {% endblock %}
 {% block scripts %}
     {{ super() }}
     <script>
         function page_reload(){
             setTimeout(function(){
-                            location.reload(true);
+                        document.location = '/{{ del_redirect }}';
                         }, 1000);
         }
         $('#confirm-delete').on('show.bs.modal', function(event) {
@@ -93,4 +86,20 @@
             });
         });
     </script>
+    <script src="{{ url_for('static', filename='leaflet/leaflet.js') }}"></script>
+    <script>
+        var map = L.map('map').setView([48.7, 20.2], 3);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'ahagenbruch.p072ck6j',
+            accessToken: 'pk.eyJ1IjoiYWhhZ2VuYnJ1Y2giLCJhIjoiY2lqdnY1cHB2MGMxMnc4bTNnczkxNW1kNCJ9.kfslXFi1i7n_xPCXQ5lsHA'
+        }).addTo(map);
+        {% for lib_facet in libraries %}
+            L.marker([{{ lib_facet.library.latitude }}, {{ lib_facet.library.longitude }}]).addTo(map)
+            .bindPopup('<a href="{{ lib_facet.library.uri }}">{{ lib_facet.library.label }}</a>.<br><a href="/search?q={{ query|urlencode }}&amp;filter=flibrary:%22{{ lib_facet.library.label|urlencode }}%22{% if filterquery %}{% for fq in filterquery %}&amp;filter={{ fq }}{% endfor %}{% endif %}{% if mysort %}&amp;sort={{ mysort }}{% endif %}">{{ _("Show all %(count)s records", count=lib_facet.count) }}</a>');
+        {% endfor %}
+    </script>
+    <script src="https://togetherjs.com/togetherjs-min.js"></script>
 {% endblock %}

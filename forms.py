@@ -2,8 +2,10 @@ from flask import Markup
 from flask.ext.babel import gettext, ngettext, lazy_gettext
 from flask.ext.wtf import Form, RecaptchaField
 from wtforms import StringField, SubmitField, TextAreaField, BooleanField, SelectField, FileField, HiddenField, FieldList, FormField, PasswordField
-from wtforms.validators import DataRequired, UUID, URL, Email, Optional
+from wtforms.validators import DataRequired, UUID, URL, Email, Optional, Regexp, ValidationError
 from wtforms.widgets import TextInput
+from re import IGNORECASE
+import pyisbn
 
 LICENSES = (
     ('', 'Select a License'),
@@ -13,64 +15,7 @@ LICENSES = (
     ('cc_by_nd', 'Creative Commons Attribution No Derivatives')
 )
 
-class CustomTextInput(TextInput):
-    '''Enable both placeholder and help text descriptions.'''
-    def __init__(self, **kwargs):
-        self.params = kwargs
-        super(CustomTextInput, self).__init__()
-
-    def __call__(self, field, **kwargs):
-        for param, value in self.params.items():
-            kwargs.setdefault(param, value)
-        return super(CustomTextInput, self).__call__(field, **kwargs)
-
-class PersonForm(Form):
-    name = StringField(gettext('Name'), widget=CustomTextInput(placeholder=gettext('Family name, given name')))
-    role = SelectField('Role', choices=[]) #  Use this as an interface: Roles are dependent on the publication type
-    uri = StringField(gettext('URI'), validators=[URL(), Optional()])
-
-class PrintedWorkPersonForm(PersonForm):
-    role = SelectField(gettext('Role'), choices=[
-        ('', 'Select a Role'),
-        ('aut', gettext('Author')),
-        ('edt', gettext('Editor')),
-        ('trl', gettext('Translator')),
-        ('hnr', gettext('Honoree')),
-        ('ive', gettext('Interviewee')),
-        ('ivr', gettext('Interviewer')),
-    ])
-
-class PrimaryPersonForm(PersonForm):
-    birth_date = StringField(gettext('Birth Date'))
-    death_date = StringField(gettext('Death Date'))
-    role = SelectField(gettext('Role'), choices=[
-        ('', 'Select a Role'),
-        ('ann', gettext('Annotator')),
-        ('aut', gettext('Author')),
-        ('ato', gettext('Autographer')),
-        ('bnd', gettext('Binder')),
-        ('dte', gettext('Dedicatee')),
-        ('dto', gettext('Dedicator')),
-        ('fmo', gettext('Former Owner')),
-        ('ilu', gettext('Illuminator')),
-        ('pat', gettext('Patron')),
-        ('scr', gettext('Scribe')),
-    ])
-
-class KeywordForm(Form):
-    label = StringField(gettext('Keyword'))
-    uri = StringField(gettext('URI'))
-
-class WorkForm(Form):
-    title = StringField(gettext('Title'), validators=[DataRequired()])
-    subtitle = StringField(gettext('Subtitle'))
-    person = FieldList(FormField(PersonForm))
-    corporation = StringField(gettext('Corporation'))
-    issued = StringField(gettext('Publication Date'))
-    accessed = StringField(gettext('Last Seen'))
-    circa = BooleanField(gettext('Estimated'))
-    language = SelectField(gettext('Language'), choices=[
-        ('', 'Select a Language'),
+LANGUAGES = [
         ('alb', gettext('Albanian')),
         ('ara', gettext('Arabic')),
         ('bos', gettext('Bosnian')),
@@ -89,129 +34,672 @@ class WorkForm(Form):
         ('rus', gettext('Russian')),
         ('srp', gettext('Serbian')),
         ('spa', gettext('Spanish')),
-        ('tur', gettext('Turkish'))
+        ('tur', gettext('Turkish')),
+]
+
+def Isbn(form, field):
+    theisbn = pyisbn.Isbn(field.data)
+    if theisbn.validate() == False:
+        raise ValidationError(gettext('Not a valid ISBN!'))
+
+class CustomTextInput(TextInput):
+    '''Enable both placeholder and help text descriptions.'''
+    def __init__(self, **kwargs):
+        self.params = kwargs
+        super(CustomTextInput, self).__init__()
+
+    def __call__(self, field, **kwargs):
+        for param, value in self.params.items():
+            kwargs.setdefault(param, value)
+        return super(CustomTextInput, self).__call__(field, **kwargs)
+
+class URIForm(Form):
+    label = StringField(gettext('Label'), validators=[Optional()])
+    uri = StringField(gettext('URI'), validators=[URL(), Optional()])
+
+class PersonForm(Form):
+    name = StringField(gettext('Name'), widget=CustomTextInput(placeholder=gettext('Family name, given name')))
+    role = SelectField('Role', choices=[]) #  Use this as an interface: Roles are dependent on the publication type
+    uri = StringField(gettext('URI'), validators=[URL(), Optional()])
+    viaf = StringField(gettext('VIAF'), validators=[Optional()], description=Markup(gettext('<a href="http://www.viaf.org" target="_blank">Find in VIAF</a>')))
+    isni = StringField(gettext('ISNI'), validators=[Optional()], description=Markup(gettext('<a href="http://www.isni.org" target="_blank">Find in ISNI</a>')))
+
+    admin_only = ['viaf', 'isni']
+
+class AdvancedPrintPersonForm(PersonForm):
+    role = SelectField(gettext('Role'), choices=[
+        ('', 'Select a Role'),
+        ('aut', gettext('Author')),
+        ('aft', gettext('Author of Afterword')),
+        ('aui', gettext('Author of Introduction')),
+        ('edt', gettext('Editor')),
+        ('trl', gettext('Translator')),
+        ('hnr', gettext('Honoree')),
+        ('ive', gettext('Interviewee')),
+        ('ivr', gettext('Interviewer')),
+        ('spk', gettext('Speaker')),
     ])
-    keyword = FieldList(FormField(KeywordForm))
-    number_of_pages = StringField(gettext('Extent'))
-    genre = SelectField(gettext('Genre'), choices=[
-        ('', 'Select a Genre'),
-        ('legend', gettext('Legend')),
-        ('chronicle', gettext('Chronicle')),
-        ('threnody', gettext('Threnody')),
-        ('hagiography', gettext('Hagiography')),
-        ('church_chronicle', gettext('Church Chronicle')),
-        ('encomium', gettext('Encomium')),
-        ('other', gettext('Other'))
+
+class PrintPersonForm(PersonForm):
+    name_other = StringField(gettext('Name Variant'), widget=CustomTextInput(placeholder=gettext('Name variant for the person')))
+    birth_date = StringField(gettext('Birth Date'))
+    death_date = StringField(gettext('Death Date'))
+    role = SelectField(gettext('Role'), choices=[
+        ('', 'Select a Role'),
+        ('ann', gettext('Annotator')),
+        ('aut', gettext('Author')),
+        ('ato', gettext('Autographer')),
+        ('bnd', gettext('Binder')),
+        ('dte', gettext('Dedicatee')),
+        ('dto', gettext('Dedicator')),
+        ('fmo', gettext('Former Owner')),
+        ('ilu', gettext('Illuminator')),
+        ('pat', gettext('Patron')),
+        ('prt', gettext('Printer')),
     ])
-    url = StringField(gettext('URL'), validators=[URL(), Optional()])
-    DOI = StringField(gettext('DOI'))
-    description = TextAreaField(gettext('Description'))
-    note = TextAreaField(gettext('Notes'))
-    #submit = SubmitField('Submit')
-    id = StringField(gettext('UUID'), validators=[UUID()])
-    created = StringField(gettext('Record Creation Date'))
-    changed = StringField(gettext('Record Change Date'))
-    owner = StringField(gettext('Owner'), validators=[DataRequired()],
-                        widget=CustomTextInput(readonly='readonly', admin_only='admin_only'))
 
-    #multiples = ('person', 'birth_date', 'death_date', 'keyword', 'person_uri', 'keyword_uri', 'role')
-    #date_fields = ('issued', 'accessed', 'birth_date', 'death_date', 'created', 'changed')
+class CodexPersonForm(PrintPersonForm):
+    role = SelectField(gettext('Role'), choices=[
+        ('', 'Select a Role'),
+        ('ann', gettext('Annotator')),
+        ('aut', gettext('Author')),
+        ('ato', gettext('Autographer')),
+        ('bnd', gettext('Binder')),
+        ('dte', gettext('Dedicatee')),
+        ('dto', gettext('Dedicator')),
+        ('fmo', gettext('Former Owner')),
+        ('ilu', gettext('Illuminator')),
+        ('pat', gettext('Patron')),
+        ('scr', gettext('Scribe')),
+    ])
 
+class CorporationForm(Form):
+    name = StringField(gettext('Name'))
+    role = SelectField(gettext('Role'), choices=[
+        ('', 'Select a Role'),
+        ('edt', gettext('Editor')),
+        ('his', gettext('Host institution')),
+    ])
+    gnd = StringField(gettext('GND'), validators=[Optional(), Regexp('(1|10)\d{7}[0-9X]|[47]\d{6}-\d|[1-9]\d{0,7}-[0-9X]|3\d{7}[0-9X]')])
+    viaf = StringField(gettext('VIAF'), validators=[Optional()])
+    isni = StringField(gettext('ISNI'), validators=[Optional()])
 
+    admin_only = ['gnd', 'viaf', 'isni']
 
-class PrintedWorkForm(WorkForm):
+class HasPartForm(Form):
+    has_part = StringField(gettext('Has Part'))
+
+class IsPartOfForm(Form):
+    is_part_of = StringField(gettext('Is Part of'))
+
+class OtherVersionForm(Form):
+    other_version = StringField(gettext('Other Version'))
+
+class ContainerRelationForm(IsPartOfForm):
+    volume = StringField(gettext('Volume'), validators=[Optional()])
+
+class MonographRelationForm(ContainerRelationForm):
+    pass
+
+class TranslatedTitleForm(Form):
+    translated_title = StringField(gettext('Translated Title'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The translated title of the work')))
+    language = SelectField(gettext('Language'), validators=[Optional()], choices=LANGUAGES)
+
+class BasicWorkForm(Form):
+    pubtype = SelectField(gettext('Type'), validators=[Optional()], choices=[
+        ('ArticleJournal', gettext('Article in Journal')),
+        ('Catalogue', gettext('Catalogue')),
+        ('Chapter', gettext('Chapter')),
+        ('Codex', gettext('Codex')),
+        ('Collection', gettext('Collection')),
+        ('Conference', gettext('Conference')),
+        ('Edition', gettext('Edition')),
+        ('InternetDocument', gettext('Internet Document')),
+        ('Journal', gettext('Journal')),
+        ('Lecture', gettext('Lecture')),
+        ('Monograph', gettext('Monograph')),
+        ('Print', gettext('Print')),
+        ('Series', gettext('Series')),
+        ('Translation', gettext('Translation')),
+        ('Other', gettext('Other')),
+    ])
+    title = StringField(gettext('Title'), validators=[DataRequired()], widget=CustomTextInput(placeholder=gettext('The title of the work')))
+    subtitle = StringField(gettext('Subtitle'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The subtitle of the work')))
+    title_supplement = StringField(gettext('Title Supplement'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('Additions to the title of the work')))
+    title_translated = FieldList(FormField(TranslatedTitleForm), min_entries=1)
+    person = FieldList(FormField(PersonForm), min_entries=1)
+    corporation = FieldList(FormField(CorporationForm), min_entries=1)
+    uri = FieldList(StringField(gettext('URL'), validators=[URL(), Optional()]), min_entries=1)
+    language = FieldList(SelectField(gettext('Language'), validators=[Optional()], choices=LANGUAGES), min_entries=1)
+    note = TextAreaField(gettext('Notes'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('Additional information about the work')))
+    accessed = StringField(gettext('Last Seen'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
+    id = StringField(gettext('UUID'), validators=[UUID(), Optional()], widget=CustomTextInput(readonly='readonly', admin_only='admin_only'))
+    created = StringField(gettext('Record Creation Date'), widget=CustomTextInput(readonly='readonly', admin_only='admin_only'))
+    changed = StringField(gettext('Record Change Date'), widget=CustomTextInput(readonly='readonly', admin_only='admin_only'))
+    owner = StringField(gettext('Owner'), validators=[DataRequired()], widget=CustomTextInput(readonly='readonly'))
+    #deskman = StringField(gettext('Deskman'), validators=[Optional()])
+    license = SelectField(gettext('License'), choices=LICENSES)
+    is_part_of = FieldList(FormField(IsPartOfForm), min_entries=1)
+    has_part = FieldList(FormField(HasPartForm), min_entries=1)
+    other_version = FieldList(FormField(OtherVersionForm), min_entries=1)
+    key_publication = BooleanField(gettext('Key Publication'),
+                                   description='A very important title to be included on a special publication list.')
+
+    #admin_only = ['id', 'created', 'changed', 'owner', 'deskman','viaf', 'isni']
+    #user_only = ['role']
+
+class LibraryForm(URIForm):
+    label = StringField(gettext('Library'), validators=[Optional()],
+                          widget=CustomTextInput(placeholder=gettext('The library holding the work')))
+    place = StringField(gettext('Place of the library'), validators=[Optional()],
+                                widget=CustomTextInput(placeholder=gettext('Where the library is situated')))
+    latitude = StringField(gettext('Latitude'))
+    longitude = StringField(gettext('Longitude'))
+    call_number = StringField(gettext('Call Number'), validators=[Optional()], widget=CustomTextInput(
+        placeholder=gettext('The string indicating the location of the work in the library')))
+
+class CatalogueForm(BasicWorkForm):
+    library = FieldList(FormField(LibraryForm), min_entries=1)
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
+                        self.accessed, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.is_part_of],
+             'label': gettext('Part of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.library], 'label':gettext('Library')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class WorkForm(BasicWorkForm):
+    DOI = StringField(gettext('DOI'), validators=[Optional(), Regexp('^10.\d{4}/\d+-\d+X?(\d+)\d+<[\d\w]+:[\d\w]*>\d+.\d+.\w+;\d$', IGNORECASE)])
+    issued = StringField(gettext('Date'), validators=[DataRequired(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
+    circa = BooleanField(gettext('Estimated'))
+    additions = StringField(gettext('Additions'), validators=[Optional()])
+    keyword = FieldList(FormField(URIForm), min_entries=1)
+    keyword_temporal = FieldList(StringField(gettext('Temporal'), validators=[Optional()]), min_entries=1)
+    keyword_geographic = FieldList(StringField(gettext('Geographic'), validators=[Optional()]), min_entries=1)
+    abstract = TextAreaField(gettext('Abstract'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('An abstract of the work')))
+    number_of_pages = StringField(gettext('Extent'), validators=[Optional()])
+
+class BasicPrintForm(WorkForm):
     publisher = StringField(gettext('Publisher'))
     publisher_place = StringField(gettext('Place'))
-    person = FieldList(FormField(PrintedWorkPersonForm))
+    library = FieldList(FormField(LibraryForm), min_entries=1)
 
-class PrimaryForm(WorkForm):
-    person = FieldList(FormField(PrimaryPersonForm))
-    incipit = TextAreaField(gettext('Incipit'))
-    explicit = TextAreaField(gettext('Explicit'))
-    frontispiece = StringField(gettext('Frontispiece'))
-    #frontispiece_img = FileField(gettext('Frontispiece Image'))
-    #frontispiece_img_license = SelectField(gettext('License'), choices=LICENSES)
-    vignette = StringField(gettext('Vignette'))
-    #vignette_img = FileField(gettext('Vignette Image'))
-    #vignette_img_license = SelectField(gettext('License'), choices=LICENSES)
-    number_of_lines = StringField(gettext('Number of Lines'))
-    origin_place = StringField(gettext('Place of Origin'))
-    pubtype = SelectField(gettext('Type'), validators=[DataRequired()], choices=[
-        ("manuscript", gettext('Manuscript')),
-        ('print', gettext('Print'))
+class AdvancedPrintForm(BasicPrintForm):
+    person = FieldList(FormField(AdvancedPrintPersonForm), min_entries=1)
+    edition = StringField('Edition', validators=[Optional()])
+    table_of_contents = StringField('Table of Contents', validators=[URL(), Optional()], widget=CustomTextInput(placeholder=gettext('e.g. http://d-nb.info/1035670232/04')))
+    hbz_id = StringField(gettext('HBZ-ID'), validators=[Optional()])
+
+class ContainerForm(AdvancedPrintForm):
+    number_of_volumes = StringField(gettext('Number of Volumes'), validators=[Optional()])
+    is_part_of = FieldList(FormField(ContainerRelationForm), min_entries=1)
+    subtype = SelectField(gettext('Subtype'), validators=[Optional()], choices=[
+        ('', gettext('Select a Subtype')),
+        ('facsimile', gettext('Facsimile')),
+        ('festschrift', gettext('Festschrift')),
     ])
-    library = StringField(gettext('Library'))
-    library_place = StringField(gettext('Library Place'))
-    call_number = StringField(gettext('Call Number'))
-    provenance = StringField(gettext('Provenance'))
-    printers_mark = StringField(gettext('Printers Mark'))
-    #printers_mark_img = FileField(gettext('Printers Mark Image'))
-    #printers_mark_img_license = SelectField(gettext('License'), choices=LICENSES)
-    printing_place = StringField(gettext('Place of Printing'))
-    printing_patent = StringField(gettext('Printing Patent'))
-
-class TranslationEditionForm(PrintedWorkForm):
-    ISBN = StringField(gettext('ISBN'))
-    number_of_volumes = StringField(gettext('Number of Volumes'))
-    translated_title = StringField(gettext('Translated Title'))
-    edition = StringField(gettext('Edition'))
-    series_title = StringField(gettext('Series'))
-    volume_in_series = StringField(gettext('Volume in the Series'))
-    pubtype = SelectField(gettext('Type'), validators=[DataRequired()], choices=[
-        ("translation", gettext('Translation')),
-        ('edition', gettext('Edition'))
-    ])
-
-class ContainerForm(PrintedWorkForm):
-    container_title = StringField(gettext('Parent Title'), validators=[DataRequired()])
-    container_subtitle = StringField(gettext('Parent Subtitle'))
-    container_translated_title = StringField(gettext('Parent Translated Title'))
-    ISSN = StringField(gettext('ISSN'))
-    ZDBID = StringField(gettext('ZDB ID'))
-    journalAbbreviation = StringField(gettext('Journal Abbreviation'))
-    pubtype = SelectField(gettext('Type'), validators=[DataRequired()], choices=[
-        ('journal', gettext('Journal')),
-        ('collection', gettext('Collection')),
-        ('conference', gettext('Conference'))
-    ])
-
-class ArticleForm(ContainerForm):
-    volume = StringField(gettext('Volume'))
-    number_of_volumes = StringField(gettext('Number of Volumes'))
-    number = StringField(gettext('Issue'))
-    page_first = StringField(gettext('First Page'))
-    page_last = StringField(gettext('Last Page'))
-    number_of_pages = StringField(gettext('Extent'))
-    pubtype = HiddenField('article-journal')
-
-class MonographForm(PrintedWorkForm):
-    ISBN = StringField(gettext('ISBN'))
-    translated_title = StringField(gettext('Translated Title'))
-    number_of_volumes = StringField(gettext('Number of Volumes'))
-    edition = StringField(gettext('Edition'))
-    series_title = StringField(gettext('Series'))
-    volume_in_series = StringField(gettext('Volume in the Series'))
-    pubtype = HiddenField('book')
+    ISBN = FieldList(StringField(gettext('ISBN of the Collection'), validators=[Optional(), Isbn]), min_entries=1)
 
 class CollectionForm(ContainerForm):
-    series_title = StringField(gettext('Series'))
-    volume_in_series = StringField(gettext('Volume in the Series'))
-    number_of_volumes = StringField(gettext('Number of Volumes'))
-    ISBN = StringField(gettext('ISBN'))
-    edition = StringField(gettext('Edition'))
-    pubtype = HiddenField('collection')
-    translated_title = StringField(gettext('Translated Title'))
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
+                       self.issued, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI, self.ISBN, self.hbz_id], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.is_part_of],
+             'label': gettext('Part of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
+            {'group': [self.library], 'label':gettext('Library')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
 
 class ConferenceForm(CollectionForm):
-    date = StringField(gettext('Date'))
-    event = StringField(gettext('Conference'))
-    place = StringField(gettext('Place'))
-    pubtype = HiddenField('conference')
+    event_name = StringField(gettext('Name of the event'), validators=[Optional()])
+    startdate_conference = StringField(gettext('First day of the event'), validators=[Optional(), Regexp('[12]\d{3}-[01]\d-[0123]\d')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
+    enddate_conference = StringField(gettext('Last day of the event'), validators=[Optional(), Regexp('[12]\d{3}-[01]\d-[0123]\d')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
+    place = StringField(gettext('Location of the event'), validators=[Optional()])
 
-class ChapterForm(CollectionForm):
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
+                       self.issued, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI, self.ISBN, self.hbz_id], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.event_name, self.startdate_conference, self.enddate_conference, self.place], 'label': gettext('Event')},
+            {'group': [self.is_part_of],
+             'label': gettext('Part of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword,self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
+            {'group': [self.library], 'label':gettext('Library')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class EditionForm(CollectionForm):
+    pass
+
+class TranslationForm(EditionForm):
+    pass
+
+class MonographForm(AdvancedPrintForm):
+    subtype = SelectField(gettext('Subtype'), validators=[Optional()], choices=[
+        ('', gettext('Select a Subtype')),
+        ('facsimile', gettext('Facsimile')),
+        ('festschrift', gettext('Festschrift')),
+    ])
+    ISBN = FieldList(StringField(gettext('ISBN'), validators=[Optional(), Isbn]), min_entries=1)
+    number_of_volumes = StringField('Number of Volumes', validators=[Optional()])
+    is_part_of = FieldList(FormField(MonographRelationForm), min_entries=1)
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
+                       self.issued, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI, self.ISBN, self.hbz_id], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.is_part_of],
+             'label': gettext('Part of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
+            {'group': [self.library], 'label':gettext('Library')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class PrintForm(BasicPrintForm):
+    genre = SelectField(gettext('Genre'), choices=[
+        ('', 'Select a Genre'),
+        ('apocalypse', gettext('Apocalypse')),
+        ('artifact', gettext('Artifact')),
+        ('chronicle', gettext('Chronicle')),
+        ('church_chronicle', gettext('Church Chronicle')),
+        ('chronograph', gettext('Chronograph')),
+        ('cosmography', gettext('Cosmography')),
+        ('encomium', gettext('Encomium')),
+        ('hagiography', gettext('Hagiography')),
+        ('history', gettext('History')),
+        ('legend', gettext('Legend')),
+        ('letter', gettext('Letter')),
+        ('memoirs', gettext('Memoirs')),
+        ('memorandum', gettext('Memorandum')),
+        ('mirror', gettext('Mirror of princes')),
+        ('panegyric', gettext('Panegyric')),
+        ('parenesis', gettext('Parenesis')),
+        ('poem', gettext('Poem')),
+        ('polemic', gettext('Polemic')),
+        ('prophesy', gettext('Prophesy')),
+        ('proskynetarion', gettext('Proskynetarion')),
+        ('psalter', gettext('Psalter')),
+        ('threnody', gettext('Threnody')),
+        ('verse_chronicle', gettext('Verse Chronicle')),
+        ('vita', gettext('Vita')),
+        ('other', gettext('Other'))
+    ])
+    person = FieldList(FormField(PrintPersonForm), min_entries=1)
+    frontispiece = StringField(gettext('Frontispiece'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The text contained in the frontispiece of the book')))
+    #frontispiece_img = FileField(gettext('Frontispiece Image'))
+    #frontispiece_img_license = SelectField(gettext('License'), choices=LICENSES)
+    incipit = TextAreaField(gettext('Incipit'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The first words of the work')))
+    explicit = TextAreaField(gettext('Explicit'), validators=[Optional()],
+                             widget=CustomTextInput(placeholder=gettext('The last words of the codex')))
+    origin = StringField(gettext('Place of Origin'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The place the work originates in')))
+    vignette = TextAreaField(gettext('Vignette'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext("A description of the book's vignette")))
+    #vignette_img = FileField(gettext('Vignette Image'))
+    #vignette_img_license = SelectField(gettext('License'), choices=LICENSES)
+    printers_mark = StringField(gettext("Printer's Mark"), validators=[Optional()], widget=CustomTextInput(placeholder=gettext("The text contained in the printer's mark")))
+    #printers_mark_img = FileField(gettext('Printers Mark Image'))
+    #printers_mark_img_license = SelectField(gettext('License'), choices=LICENSES)
+    printing_patent = StringField(gettext('Printing Patent'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The right to print a work')))
+    publisher = StringField(gettext('Printer'))
+    provenance = TextAreaField(gettext('Provenance'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('Information on the ownership of the work')))
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.genre, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
+                       self.issued, self.circa, self.accessed, self.number_of_pages, self.origin, self.provenance, self.additions,
+                       self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.is_part_of], 'label': gettext('Part Of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                       ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract, self.incipit, self.explicit, self.vignette, self.frontispiece], 'label': gettext('Content')},
+            {'group': [self.publisher, self.publisher_place, self.printing_patent, self.printers_mark], 'label': gettext('Printer')},
+            {'group': [self.library], 'label':gettext('Library')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class CodexForm(WorkForm):
+    genre = SelectField(gettext('Genre'), choices=[
+        ('', 'Select a Genre'),
+        ('apocalypse', gettext('Apocalypse')),
+        ('artifact', gettext('Artifact')),
+        ('chronicle', gettext('Chronicle')),
+        ('church_chronicle', gettext('Church Chronicle')),
+        ('chronograph', gettext('Chronograph')),
+        ('cosmography', gettext('Cosmography')),
+        ('encomium', gettext('Encomium')),
+        ('hagiography', gettext('Hagiography')),
+        ('history', gettext('History')),
+        ('legend', gettext('Legend')),
+        ('letter', gettext('Letter')),
+        ('memoirs', gettext('Memoirs')),
+        ('memorandum', gettext('Memorandum')),
+        ('mirror', gettext('Mirror of princes')),
+        ('panegyric', gettext('Panegyric')),
+        ('parenesis', gettext('Parenesis')),
+        ('poem', gettext('Poem')),
+        ('polemic', gettext('Polemic')),
+        ('prophesy', gettext('Prophesy')),
+        ('proskynetarion', gettext('Proskynetarion')),
+        ('psalter', gettext('Psalter')),
+        ('threnody', gettext('Threnody')),
+        ('verse_chronicle', gettext('Verse Chronicle')),
+        ('vita', gettext('Vita')),
+        ('other', gettext('Other'))
+    ])
+    person = FieldList(FormField(CodexPersonForm), min_entries=1)
+    incipit = TextAreaField(gettext('Incipit'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The first words of the codex')))
+    explicit = TextAreaField(gettext('Explicit'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The last words of the codex')))
+    vignette = TextAreaField(gettext('Vignette'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext("A description of the work's vignette")))
+    #vignette_img = FileField(gettext('Vignette Image'))
+    #vignette_img_license = SelectField(gettext('License'), choices=LICENSES)
+    number_of_lines = StringField(gettext('Number of Lines'),  validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The number of the lines that the codex consists of')))
+    library = FieldList(FormField(LibraryForm), min_entries=1)
+    origin = StringField(gettext('Place of Origin'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The place the codex originated in')))
+    provenance = TextAreaField(gettext('Provenance'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('Information on the ownership of the codex')))
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.genre, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
+                       self.issued, self.circa, self.accessed, self.number_of_pages, self.number_of_lines, self.origin, self.provenance, self.additions,
+                       self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.is_part_of], 'label': gettext('Part Of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                       ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract, self.incipit, self.explicit, self.vignette], 'label': gettext('Content')},
+            {'group': [self.library], 'label':gettext('Library')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class ChapterRelationForm(IsPartOfForm):
     page_first = StringField(gettext('First Page'))
     page_last = StringField(gettext('Last Page'))
-    number_of_pages = StringField(gettext('Extent'))
+
+class ArticleRelationForm(ChapterRelationForm):
+    volume = StringField(gettext('Volume'))
+    issue = StringField(gettext('Issue'))
+
+class ContributionForm(WorkForm):
+    parent_title = StringField(gettext('Parent Title'), validators=[DataRequired()], widget=CustomTextInput(placeholder=gettext('The Title of the Parent Reference')))
+    parent_subtitle = StringField(gettext('Parent Subtitle'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The Subtitle of the Parent Reference')))
+    subtype = SelectField(gettext('Subtype'), validators=[Optional()], choices=[
+        ('', gettext('Select a Subtype')),
+        ('afterword', gettext('Afterword')),
+        ('facsimile', gettext('Facsimile')),
+        ('festschrift', gettext('Festschrift')),
+        ('introduction', gettext('Introduction')),
+        ('lexicon_article', gettext('Article in Lexicon')),
+        ('review', gettext('Review')),
+    ])
+    person = FieldList(FormField(AdvancedPrintPersonForm), min_entries=1)
+
+    user_only = ['parent_title', 'parent_subtitle']
+
+class ChapterForm(ContributionForm):
+    is_part_of = FieldList(FormField(ChapterRelationForm), min_entries=1)
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement,
+                       self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.parent_title, self.parent_subtitle, self.is_part_of],
+             'label': gettext('Journal')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract], 'label':gettext('Content')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class ArticleJournalForm(ContributionForm):
+    is_part_of = FieldList(FormField(ArticleRelationForm), min_entries=1)
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement,
+                       self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.parent_title, self.parent_subtitle, self.is_part_of],
+             'label': gettext('Journal')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract], 'label':gettext('Content')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class SerialForm(AdvancedPrintForm):
+    ISSN = FieldList(StringField(gettext('ISSN'), widget=CustomTextInput(placeholder=gettext('e.g. 1932-6203'))), min_entries=1)
+    ZDBID = StringField(gettext('ZDB-ID'), widget=CustomTextInput(placeholder=gettext('e.g. 2267670-3')))
+
+class SeriesForm(SerialForm):
+    number_of_volumes = StringField(gettext('Number of Volumes'), validators=[Optional()])
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
+                       self.issued, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.ISSN, self.ZDBID, self.uri, self.DOI], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.is_part_of],
+             'label': gettext('Part of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
+            {'group': [self.library], 'label':gettext('Library')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class JournalForm(SerialForm):
+    journal_abbreviation = FieldList(StringField(gettext('Journal Abbreviation'), widget=CustomTextInput(placeholder=gettext('The Abbreviated Title of the Journal'))), min_entries=1)
+    subtype = SelectField(gettext('Subtype'), validators=[Optional()], choices=[
+        ('', gettext('Select a Subtype')),
+        ('facsimile', gettext('Facsimile')),
+        ('festschrift', gettext('Festschrift')),
+    ])
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.title, self.subtitle, self.journal_abbreviation, self.title_supplement, self.language, self.title_translated,
+                       self.issued, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.ISSN, self.ZDBID, self.uri, self.DOI], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.is_part_of],
+             'label': gettext('Part of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
+            {'group': [self.library], 'label':gettext('Library')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class InternetDocumentForm(WorkForm):
+    subtype = SelectField(gettext('Subtype'), validators=[Optional()], choices=[
+        ('', gettext('Select a Subtype')),
+        ('lexicon_article', gettext('Article in Lexicon')),
+        ('review', gettext('Review')),
+    ])
+    uri = FieldList(StringField(gettext('URL'), validators=[URL(), DataRequired()]), min_entries=1)
+    last_update = StringField(gettext('Last update'), validators=[Optional(), Regexp('[12]\d{3}-[01]\d-[0123]\d')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD'), description=gettext("If you don't know the month and/or day please use 01")))
+    place = StringField(gettext('Place'), validators=[Optional()])
+    number = FieldList(StringField('Number', validators=[Optional()]), min_entries=1)
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
+                       self.issued, self.place, self.number_of_pages, self.number, self.accessed, self.last_update, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.is_part_of],
+             'label': gettext('Part of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract], 'label':gettext('Content')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class LectureForm(WorkForm):
+    lecture_title = StringField(gettext('Lecture Series'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The Title of the Lecture Series')))
+    event_name = StringField(gettext('Name of the event'), validators=[Optional()])
+    startdate_conference = StringField(gettext('First day of the event'), validators=[Optional(), Regexp('[12]\d{3}-[01]\d-[0123]\d')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
+    enddate_conference = StringField(gettext('Last day of the event'), validators=[Optional(), Regexp('[12]\d{3}-[01]\d-[0123]\d')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
+    place = StringField(gettext('Location of the event'), validators=[Optional()])
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated, self.lecture_title,
+                       self.issued, self.place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.event_name, self.startdate_conference, self.enddate_conference, self.place], 'label': gettext('Event')},
+            {'group': [self.is_part_of],
+             'label': gettext('Part of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract], 'label':gettext('Content')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class OtherForm(WorkForm):
+    subtype = SelectField(gettext('Subtype'), validators=[Optional()], choices=[
+        ('', gettext('Select a Subtype')),
+        ('lexicon_article', gettext('Article in Lexicon')),
+        ('festschrift', gettext('Festschrift')),
+        ('review', gettext('Review')),
+    ])
+    place = StringField(gettext('Place'), validators=[Optional()])
+    edition = StringField('Edition', validators=[Optional()])
+    number = FieldList(StringField('Number', validators=[Optional()]), min_entries=1)
+    library = FieldList(FormField(LibraryForm), min_entries=1)
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
+                       self.issued, self.edition, self.place, self.number_of_pages, self.number, self.accessed, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.is_part_of],
+             'label': gettext('Part of')},
+            {'group': [self.has_part], 'label': gettext('Has Part')},
+            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract], 'label':gettext('Content')},
+            {'group': [self.library], 'label':gettext('Library')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
 
 ########################################################################
 class UserForm(Form):

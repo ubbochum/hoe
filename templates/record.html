@@ -1,62 +1,65 @@
-{% extends 'bootstrap/base.html' %}
-
-{% block styles %}
+{% extends 'site_base.html' %}
+{% block modal %}{% include 'confirm_delete_modal.html' %}{% endblock %}
+{% block site_content %}
     {{ super() }}
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
-    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
-    {% if site == 'bochum' %}<link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">{% endif %}
-{% endblock %}
-
-{% block content %}
-    {% include 'confirm_delete_modal.html' %}
-    <div class="container">
-        {% include 'header.html' %}
-        {% include 'navbar.html' %}
-        <div class="row">
-            <div class="col-sm-10">
-            <div class="alert alert-info">{{ _('This is just a draft preview for debugging...') }}</div>
-            <dl class="dl-horizontal">
-                {% for field in record %}
-                    {% if field.data %}<dt style="text-transform: uppercase;">{{ field.label }}</dt>
-                    <dd>
-                        {% if field.type == 'FieldList' %}&nbsp;
-                            <ul class="list-unstyled">
-                            {% for subfield in field %}
-                                <li>
-                                    <dl class="dl-horizontal" style="margin-left:-120px;">
-                                        {% for cat, val in subfield.data.items() %}
-                                            {% if val %}<dt style="text-transform: uppercase;">{{ cat }}</dt>
-                                            <dd>{{ val }}</dd>{% endif %}
-                                        {% endfor %}
-                                    </dl>
-                                </li>
-                            {% endfor %}
-                            </ul>
-                        {% else %}
-                            {{ field.data }}
-                        {% endif %}
-                    </dd>{% endif %}
-                {% endfor %}
-            </dl>
-            </div>
-            <div class="col-sm-2">
-                {% if current_user.role == 'admin' or current_user.name == record.owner %}<div class="btn-group" role="group" aria-label="action-group">
-                    <a href="{{ url_for('edit_record', record_id=record.data.id, pubtype=record.data.pubtype) }}" class="btn btn-default"><i class="fa fa-pencil"></i> {{ _('Edit') }}</a>
-                    <a href="#" data-href="{{ url_for('delete_record', record_id=record.data.id) }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> {{ _('Delete') }}</a>
-                    {#<label for="apparent_dup">{{ _('Apparent Duplicate') }}</label>
-                    <input type="checkbox" id="apparent_dup" name="apparent_dup">#}
-                </div>{% endif %}
-            </div>
+    <div class="row">
+        <div class="col-sm-10">
+        {{ record.data }}
+        <dl class="dl-horizontal">
+            {% if record.data.title_translated %}
+                <dt>
+                    {% trans count=record.data.title_translated|length %}
+                    Translated Title
+                    {% pluralize %}
+                    Translated Titles
+                    {% endtrans %}
+                </dt>
+                <dd>
+                    {% for title in record.data.title_translated %}
+                        {{ title.translated_title }} ({{ title.language }})<br/>
+                    {% endfor %}
+                </dd>
+            {% endif %}
+            {% if record.person %}
+                <dt>
+                    {% trans count=record.data.person|length %}
+                    Person
+                    {% pluralize %}
+                    Persons
+                    {% endtrans %}
+                </dt>
+                <dd>
+                    {% for person in record.data.person %}
+                        {{ person.name }} ({{ person.birth_date }}-{{ person.death_date }}){% if person.viaf %} | <a href="http://viaf.org/{{ person.viaf }}">{{ _('VIAF') }}</a>{% endif %}<br/>
+                    {% endfor %}
+                </dd>
+            {% endif %}
+        </dl>
         </div>
-    {% include 'footer.html' %}
+        <div class="col-sm-2">
+            {% if current_user.role == 'admin' or current_user.name == record.owner %}<div class="btn-group" role="group" aria-label="action-group">
+                <a href="/update/{{ pubtype }}/{{ record_id }}" class="btn btn-default"><i class="fa fa-pencil"></i> {{ _('Edit') }}</a>
+                <a href="#" data-href="{% if pubtype == 'person' %}{{ url_for('delete_person', person_id=record.id.data) }}{% elif pubtype == 'organisation' %}{{ url_for('delete_orga', orga_id=record.id.data) }}{% else %}{{ url_for('delete_record', record_id=record.id) }}{% endif %}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> {{ _('Delete') }}</a>
+                {#<label for="apparent_dup">{{ _('Apparent Duplicate') }}</label>
+                <input type="checkbox" id="apparent_dup" name="apparent_dup">#}
+            </div>{% endif %}
+        </div>
     </div>
 {% endblock %}
 {% block scripts %}
     {{ super() }}
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+{#            "@type": (% if record.data.pubtype == 'Codex" or record.data.pubtype == 'Print' or record.data.pubtype == 'Monograph' or record.data.pubtype == 'Collection' or record.data.pubtype == 'Conference' %}"Book"{% else %}"CreativeWork"{% endif %},#}
+            "@type": "book",
+            "headline": "{{ record.data.title }}",
+        }
+    </script>
     <script>
         function page_redirect(){
             setTimeout(function(){
-                            document.location = '/dashboard';
+                            document.location = '/{{ del_redirect }}';
                         }, 1000);
         }
         $('#confirm-delete').on('show.bs.modal', function(event) {

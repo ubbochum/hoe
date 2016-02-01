@@ -59,3 +59,8 @@ nav {margin-left: -15px !important; margin-right: -15px !important;}
 label > input[type="file"] {display: none;}
 .required:after {content: ' *'; color: orangered;}
 .dl-horizontal dt {white-space: normal;}
+.tab-pane {padding-top: 18px;}
+.tab-container .col-xs-3 {padding-right: 0px;}
+.tab-container .col-xs-9 {padding-left: 0px;}
+.control-label {margin-left: 15px;}
+#lib_filter {margin-bottom: 64px;}

@@ -8,17 +8,19 @@ import pickle
 import simplejson as json
 import wtforms_json
 import secrets
-from flask import Flask, request, render_template, redirect, request, jsonify, flash, url_for, Markup
+from flask import Flask, render_template, redirect, request, jsonify, flash, url_for, Markup
 from flask.ext.babel import Babel
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required, make_secure_token
 from flask.ext.paginate import Pagination
-from flask_debugtoolbar import DebugToolbarExtension
+from flask_humanize import Humanize
+#from flask_debugtoolbar import DebugToolbarExtension
 from flask_wtf.csrf import CsrfProtect
 from flask_redis import Redis
 from urllib import parse
 #from lxml import etree
 from solr_handler import Solr
+from datadiff import diff_dict
 
 #from processors import mods_processor
 from forms import *
@@ -32,8 +34,8 @@ logging.basicConfig (level=logging.INFO,
 app = Flask(__name__)
 app.debug = True
 app.testing = True
-app.secret_key = 'goidheuhfgreo'
-toolbar = DebugToolbarExtension(app)
+app.secret_key = secrets.secret
+#toolbar = DebugToolbarExtension(app)
 
 app.config['REDIS_HOST'] = '/tmp/redis.sock'
 redis_store = Redis(app)
@@ -43,6 +45,7 @@ login_manager.init_app(app)
 login_manager.session_protection = 'strong'
 
 babel = Babel(app)
+humanize_filter = Humanize(app)
 
 bootstrap = Bootstrap(app)
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
@@ -52,6 +55,24 @@ CsrfProtect(app)
 wtforms_json.init()
 
 FORM_COUNT_RE = re.compile('-\d+$')
+
+PUBTYPE2FORM = {
+    'ArticleJournal': ArticleJournalForm,
+    'Monograph': MonographForm,
+    'Print': PrintForm,
+    'Chapter': ChapterForm,
+    'Translation': TranslationForm,
+    'Conference': ConferenceForm,
+    'Collection': CollectionForm,
+    'Other': OtherForm,
+    'Catalogue': CatalogueForm,
+    'Edition': EditionForm,
+    'InternetDocument': InternetDocumentForm,
+    'Journal': JournalForm,
+    'Lecture': LectureForm,
+    'Codex': CodexForm,
+    'Series': SeriesForm,
+}
 
 @app.template_filter('rem_form_count')
 def rem_form_count_filter(mystring):
@@ -77,6 +98,20 @@ def theme(ip):
     #     site = 'dortmund'
     # logging.info(site)
     return site
+
+def _diff_struct(a, b):
+    diffs = ''
+    for line in str(diff_dict(a, b)).split('\n'):
+        if line.startswith('-'):
+            line = line.lstrip('-')
+            try:
+                cat, val = line.split(': ')
+                if val != "''," and cat != "'changed'":
+                    diffs += Markup('<b>%s</b>: %s<br/>' % (cat.strip("'"), val.rstrip(',').strip("'")))
+            except ValueError:
+                pass
+    return diffs
+
 
 @babel.localeselector
 def get_locale():
@@ -113,37 +148,138 @@ def flash_errors(form):
         for error in errors:
             flash('Error in the %s field: %s' % (getattr(form, field).label.text, error), 'error')
 
-def solr_converter(form, action):
-    if action == 'delete':
-        resp = requests.get('http://127.0.0.1:8983/solr/hoe/update?commit=true&stream.body=%3Cdelete%3E%3Cid%3E' + form.data.get('id') + '%3C/id%3E%3C/delete%3E')
-        #logging.info(resp)
-        return True
+SOURCE_CLASS_MAP = {
+    'Codex': 'primary',
+    'Print': 'primary',
+    'Catalogue': 'primary',
+    'Edition': 'primary',
+    'Translation': 'primary',
+    'ArticleJournal': 'secondary',
+    'Chapter': 'secondary',
+    'Monograph': 'secondary',
+    'Conference': 'secondary',
+    'Collection': 'secondary',
+    'Series': 'secondary',
+    'Journal': 'secondary',
+    'InternetDocument': 'secondary',
+    'Lecture': 'secondary',
+    'Other': 'secondary',
+}
+
+def _record2solr(form, action):
     solr_data = {}
     wtf = json.dumps(form.data)
     solr_data.setdefault('wtf_json', wtf)
     for field in form.data:
         #logging.info('%s => %s' % (field, form.data.get(field)))
+        if field == 'id':
+            solr_data.setdefault('id', form.data.get(field))
         if field == 'created':
-            solr_data.setdefault('recordCreationDate', form.data.get(field).replace(' ', 'T') + 'Z')
-        elif field == 'changed':
-            solr_data.setdefault('recordChangeDate', form.data.get(field).replace(' ', 'T') + 'Z')
-        elif field == 'title':
-            solr_data.setdefault('title', form.data.get(field))
-            solr_data.setdefault('exacttitle', form.data.get(field))
-        elif field == 'person':
-            for person in form.data.get(field):
-                solr_data.setdefault('person', person.get('name'))
-                solr_data.setdefault('fperson', person.get('name'))
-        elif field == 'keyword':
+            solr_data.setdefault('created', form.data.get(field).replace(' ', 'T') + 'Z')
+        if field == 'changed':
+            solr_data.setdefault('changed', form.data.get(field).replace(' ', 'T') + 'Z')
+        if field == 'owner':
+            solr_data.setdefault('owner', form.data.get(field))
+        if field == 'pubtype':
+            solr_data.setdefault('pubtype', form.data.get(field))
+            solr_data.setdefault('source_class', SOURCE_CLASS_MAP.get(form.data.get(field)))
+        if field == 'genre' and form.data.get(field):
+            solr_data.setdefault('subtype', form.data.get(field))
+        if field == 'title':
+            solr_data.setdefault('title', form.data.get(field).strip())
+            solr_data.setdefault('exacttitle', form.data.get(field).strip())
+            solr_data.setdefault('sorttitle', form.data.get(field).strip())
+        if field == 'subtitle' and form.data.get(field):
+            solr_data.setdefault('subtitle', form.data.get(field).strip())
+        if field == 'translated_title' and form.data.get(field):
+            solr_data.setdefault('translated_title', form.data.get(field).strip())
+        if field == 'incipit' and form.data.get(field):
+            solr_data.setdefault('incipit', form.data.get(field).strip())
+        if field == 'explicit' and form.data.get(field):
+            solr_data.setdefault('explicit', form.data.get(field).strip())
+        if field == 'vignette' and form.data.get(field):
+            solr_data.setdefault('vignette', form.data.get(field).strip())
+        if field == 'frontispiece' and form.data.get(field):
+            solr_data.setdefault('frontispiece', form.data.get(field).strip())
+        if field == 'provenance' and form.data.get(field):
+            solr_data.setdefault('provenance', form.data.get(field).strip())
+        if field == 'note' and form.data.get(field):
+            solr_data.setdefault('note', form.data.get(field).strip())
+        if field == 'issued':
+            year = form.data.get(field)[0:4].strip()
+            solr_data.setdefault('date', form.data.get(field).strip())
+            if SOURCE_CLASS_MAP.get(form.data.get('pubtype')) == 'primary':
+                if int(year) >= 1400 and int(year) < 1500:
+                    solr_data.setdefault('issued_primary', '1400-1500')
+                elif int(year) >= 1500 and int(year) < 1600:
+                    solr_data.setdefault('issued_primary', '1500-1600')
+                elif int(year) >= 1600 and int(year) < 1700:
+                    solr_data.setdefault('issued_primary', '1600-1700')
+                elif int(year) >= 1700 and int(year) < 1800:
+                    solr_data.setdefault('issued_primary', '1700-1800')
+            else:
+                solr_data.setdefault('issued_secondary', year)
+            if len(form.data.get(field).strip()) == 4:
+                solr_data.setdefault('date_boost', '%s-01-01T00:00:00Z' % form.data.get(field).strip())
+            elif len(form.data.get(field).strip()) == 7:
+                solr_data.setdefault('date_boost', '%s-01T00:00:00Z' % form.data.get(field).strip())
+            else:
+                solr_data.setdefault('date_boost', '%sT00:00:00Z' % form.data.get(field).strip())
+            solr_data.setdefault('issued', year)
+        if field == 'publisher' and form.data.get(field):
+            solr_data.setdefault('publisher', form.data.get(field).strip())
+        if field == 'language' and len(form.data.get(field)) > 0:
+            for lang in form.data.get(field):
+                solr_data.setdefault('language', []).append(lang)
+        if field == 'person' and len(form.data.get(field)) > 0:
+            for idx, person in enumerate(form.data.get(field)):
+                if person.get('name'):
+                    solr_data.setdefault('person', []).append(person.get('name').strip())
+                    solr_data.setdefault('fperson', []).append(person.get('name').strip())
+                    if person.get('gnd'):
+                        solr_data.setdefault('pnd', []).append('%s#%s' % (person.get('gnd').strip(), person.get('name').strip()))
+                    else:
+                        solr_data.setdefault('pnd', []).append(
+                            '%s#person-%s#%s' % (form.data.get('id'), idx, person.get('name').strip()))
+        if field == 'corporation' and len(form.data.get(field)) > 0:
+            for idx, corporation in enumerate(form.data.get(field)):
+                if corporation.get('name'):
+                    solr_data.setdefault('corporation', []).append(corporation.get('name').strip())
+        if field == 'abstract' and form.data.get(field):
+            solr_data.setdefault('description', form.data.get(field).strip())
+        if field == 'container_title' and form.data.get(field):
+            solr_data.setdefault('container_title', form.data.get(field).strip())
+        if field == 'series_title' and form.data.get(field):
+            solr_data.setdefault('series_title', form.data.get(field).strip())
+        if field == 'ISSN' and len(form.data.get(field)) > 0:
+            for issn in form.data.get(field):
+                solr_data.setdefault('issn', []).append(issn.strip())
+                solr_data.setdefault('issn', []).append(issn.strip().replace('-', ''))
+        if field == 'ISBN' and len(form.data.get(field)) > 0:
+            for isbn in form.data.get(field):
+                solr_data.setdefault('isbn', []).append(isbn.strip())
+                solr_data.setdefault('isbn', []).append(isbn.strip().replace('-', ''))
+        if field == 'keyword' and len(form.data.get(field)) > 0:
+            for idx, keyword in enumerate(form.data.get(field)):
+                solr_data.setdefault('keyword', []).append(keyword.get('label').strip())
+                solr_data.setdefault('fkeyword', []).append(keyword.get('label').strip())
+        if field == 'keyword_temporal' or field == 'keyword_geographic':
             for keyword in form.data.get(field):
-                solr_data.setdefault('keyword', keyword.get('label'))
-                solr_data.setdefault('fkeyword', keyword.get('label'))
-        else:
-            if form.data.get(field):
-                solr_data.setdefault(field, form.data.get(field))
+                if keyword:
+                    solr_data.setdefault('keyword', []).append(keyword.strip())
+                    solr_data.setdefault('fkeyword', []).append(keyword.strip())
+        if field == 'key_publication':
+            solr_data.setdefault('key_publication', form.data.get(field))
+        if field == 'library' and len(form.data.get(field)) > 0:
+            for library in form.data.get(field):
+                solr_data.setdefault('library', []).append(json.dumps(library))
+                solr_data.setdefault('flibrary', []).append(library.get('label'))
+        if field == 'origin' and form.data.get(field):
+            solr_data.setdefault('origin_place', form.data.get(field))
 
-    solr = requests.post('http://127.0.0.1:8983/solr/hoe/update/json?commit=true', data=json.dumps([solr_data]),
-                         headers={'Content-type': 'application/json'})
+    logging.info(solr_data)
+    record_solr = Solr(core='hoe', data=[solr_data])
+    record_solr.update()
 
 @app.route('/dashboard')
 @login_required
@@ -154,7 +290,8 @@ def dashboard():
     filterquery = request.values.getlist('filter')
     # Solr(start=(page - 1) * 10, query=query, fquery=filterquery, sort=sorting)
     dashboard_solr = Solr(start=(page - 1) * 10, query=query, sort='created asc',
-                          facet_fields=['pubtype', 'genre', 'language', 'fkeyword', 'issued', 'library_place', 'fperson'],
+                          facet_fields=['pubtype', 'subtype', 'language', 'fkeyword', 'issued_primary', 'issued_secondary',
+                                        'library', 'flibrary', 'fperson', 'source_class'],
                           fquery=filterquery)
     dashboard_solr.request()
 
@@ -171,29 +308,27 @@ def dashboard():
         mystart = 1 + (pagination.page - 1) * pagination.per_page
         # myend = mystart + pagination.per_page - 1
 
+    libraries = []
+    for lib_facet in dashboard_solr.facets.get('library'):
+        for library, count in lib_facet.items():
+            libraries.append({'library': eval(library), 'count': count})
     return render_template('dashboard.html', records=dashboard_solr.results, facet_data=dashboard_solr.facets,
                            header=gettext('Dashboard'), site=theme(request.access_route),
                            offset=mystart - 1, query=query, filterquery=filterquery, pagination=pagination,
-                           now=datetime.datetime.now()
+                           now=datetime.datetime.now(), libraries=libraries, target='dashboard',
                            )
 
 @app.route('/create/<pubtype>', methods=['GET', 'POST'])
 @login_required
 def new_record(pubtype='article-journal', primary_id=''):
-    PUBTYPE_MAP = {
-        'manuscript': PrimaryForm(),
-        'print': PrimaryForm(),
-        'article-journal': ArticleForm(),
-        'book': MonographForm(),
-    }
-    form = PUBTYPE_MAP.get(pubtype)
-    #logging.info(form)
+    form = PUBTYPE2FORM.get(pubtype)()
+
     if form.validate_on_submit():
         if form.errors:
             flash_errors(form)
             return render_template('test_form.html', form=form, header=gettext('New Record'),
                                    site=theme(request.access_route), action='create', pubtype=pubtype)
-        solr_converter(form, action='create')
+        _record2solr(form, action='create')
         return redirect(url_for('dashboard'))
 
 
@@ -202,58 +337,53 @@ def new_record(pubtype='article-journal', primary_id=''):
     form.changed.data = datetime.datetime.now()
     form.owner.data = current_user.id
     form.pubtype.data = pubtype
-    form.keyword.append_entry()
-    form.person.append_entry()
-    form.person.append_entry()
-    #form.corporation.append_entry()
 
-    return render_template('test_form.html', form=form, header=gettext('New Record'), site=theme(request.access_route), pubtype=pubtype, action='create')
+    return render_template('tabbed_form.html', form=form, header=gettext('New Record'), site=theme(request.access_route), pubtype=pubtype, action='create')
 
 @app.route('/retrieve/<pubtype>/<record_id>')
 def show_record(pubtype, record_id=''):
-    show_record_solr = Solr(query='id:%s' % record_id)
+    show_record_solr = Solr(query='id:%s' % record_id, core='hoe')
     show_record_solr.request()
 
     thedata = json.loads(show_record_solr.results[0].get('wtf_json'))
-    form = ''
-    if pubtype == 'manuscript' or pubtype == 'print':
-        form = PrimaryForm.from_json(thedata)
-    elif pubtype == 'book':
-        form = MonographForm.from_json(thedata)
+    form = PUBTYPE2FORM.get(pubtype).from_json(thedata)
 
     return render_template('record.html', record=form, header=form.data.get('title'), site=theme(request.access_route),
-                           action='retrieve', record_id=record_id)
+                           action='retrieve', record_id=record_id, del_redirect='dashboard', pubtype=pubtype)
 
 @app.route('/update/<pubtype>/<record_id>', methods=['GET', 'POST'])
 @login_required
 def edit_record(record_id='', pubtype=''):
-    form = ''
+    edit_record_solr = Solr(core='hoe', query='id:%s' % record_id)
+    edit_record_solr.request()
+
+    thedata = json.loads(edit_record_solr.results[0].get('wtf_json'))
+
     if request.method == 'POST':
-        if pubtype == 'manuscript' or pubtype == 'print':
-            form = PrimaryForm()
-        elif pubtype == 'book':
-            form = MonographForm()
-        if form.validate_on_submit():
-            if form.errors:
-                flash_errors(form)
-                return render_template('test_form.html', form=form,
-                                       header=gettext('Edit: %(title)s', title=form.data.get('title')),
-                                       site=theme(request.access_route), action='update', pubtype=pubtype)
-            solr_converter(form, action='update')
-            return redirect(url_for('dashboard'))
+        form = PUBTYPE2FORM.get(pubtype)()
     elif request.method == 'GET':
-        edit_record_solr = Solr(query='id:%s' % record_id)
-        edit_record_solr.request()
+        form = PUBTYPE2FORM.get(pubtype).from_json(thedata)
 
-        thedata = json.loads(edit_record_solr.results[0].get('wtf_json'))
-        if pubtype == 'manuscript' or pubtype == 'print':
-            form = PrimaryForm.from_json(thedata)
-        elif pubtype == 'book':
-            form = MonographForm.from_json(thedata)
-        form.changed.data = datetime.datetime.now()
+    if thedata.get('pubtype') != pubtype:
+        flash(Markup(gettext(
+            '<p><i class="fa fa-exclamation-triangle fa-3x"></i> <h3>The following data are incompatible with this publication type</h3></p>')) + _diff_struct(
+            thedata, form.data), 'error')
+        form.pubtype.data = pubtype
 
-        return render_template('test_form.html', form=form, header=gettext('Edit: %(title)s', title=form.data.get('title')),
-                           site=theme(request.access_route), action='update', pubtype=pubtype)
+    if form.validate_on_submit():
+        if form.errors:
+            flash_errors(form)
+            return render_template('tabbed_form.html', form=form,
+                                   header=gettext('Edit: %(title)s', title=form.data.get('title')),
+                                   site=theme(request.access_route), action='update', pubtype=pubtype)
+        _record2solr(form, action='update')
+        return redirect(url_for('dashboard'))
+
+    form.changed.data = datetime.datetime.now()
+
+    return render_template('tabbed_form.html', form=form, header=gettext('Edit: %(title)s',
+                                                                         title=form.data.get('title')),
+                           site=theme(request.access_route), action='update', pubtype=pubtype, record_id=record_id)
 
 @app.route('/delete/<record_id>')
 def delete_record(record_id=''):
@@ -431,7 +561,7 @@ def search():
     page = int(request.args.get('page', 1))
     #mypage = page
     query = request.args.get('q', '')#.decode('utf-8')
-    logging.info(query)
+    #logging.info(query)
     if query == '':
         query = '*:*'
 

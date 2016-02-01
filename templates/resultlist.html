@@ -1,34 +1,19 @@
-{% extends 'bootstrap/base.html' %}
+{% extends 'site_base.html' %}
 {% import 'drill_down.html' as drill_down with context %}
-
-{% block styles %}
+{% block site_content %}
     {{ super() }}
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
-    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
-    {% if site == 'bochum' %}<link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">{% endif %}
-{% endblock %}
-
-{% block content %}
-    <div class="container">
-        {% include 'header.html' %}
-        {% include 'navbar.html' %}
-        <div class="row">
-            <div class="col-sm-4" id="facets">
-                {{ drill_down.facets(facet_data.fperson, 'fperson', heading='Person', target='dashboard') }}
-                {{ drill_down.facets(facet_data.fkeyword, 'fkeyword', heading='Keyword', target='dashboard') }}
-                {{ drill_down.facets(facet_data.issued, 'issued', heading='Issued', target='dashboard') }}
-                {{ drill_down.facets(facet_data.pubtype, 'pubtype', heading='Type', target='dashboard') }}
-                {{ drill_down.facets(facet_data.genre, 'genre', heading='Genre', target='dashboard') }}
-                {{ drill_down.facets(facet_data.language, 'language', heading='Language', target='dashboard') }}
-                {{ drill_down.facets(facet_data.library_place, 'library_place', heading='Library Place', target='dashboard') }}
-            </div>
-            <div class="col-sm-8">
-                {{ pagination.info }}
-                {{ pagination.links }}
-                {% include 'record_list.html' %}
-                {{ pagination.links }}
-            </div>
+    <div class="row">
+        <div class="col-sm-4" id="facets">
+            {{ drill_down.facets(facet_data.fperson, 'fperson', heading='Person') }}
+            {{ drill_down.facets(facet_data.fdate, 'fdate', heading='Publication Date') }}
+            {{ drill_down.facets(facet_data.language, 'language', heading='Language') }}
         </div>
-    {% include 'footer.html' %}
+        <div class="col-sm-8">
+            {{ pagination.info }}
+            {% include 'remove_filters.html' %}
+            {{ pagination.links }}
+            {% include 'record_list.html' %}
+            {{ pagination.links }}
+        </div>
     </div>
 {% endblock %}

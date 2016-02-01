@@ -10,28 +10,23 @@
         <li class="dropdown{% if header == 'New Record' %} active{% endif %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus"></i> {{ _('New') }}</a>
             <ul class="dropdown-menu">
-                <li><a href="{{ url_for('new_record', pubtype='Codex') }}">{{ _('Codex') }}</a></li>
+                <li><a href="{{ url_for('new_record', pubtype='Manuscript') }}">{{ _('Manuscript') }}</a></li>
                 <li><a href="{{ url_for('new_record', pubtype='Print') }}">{{ _('Print') }}</a></li>
-                <li class="divider"></li>
                 <li><a href="{{ url_for('new_record', pubtype='Catalogue') }}">{{ _('Catalogue') }}</a></li>
-                <li><a href="{{ url_for('new_record', pubtype='Edition') }}">{{ _('Edition') }}</a></li>
                 <li><a href="{{ url_for('new_record', pubtype='Translation') }}">{{ _('Translation') }}</a></li>
+                <li><a href="{{ url_for('new_record', pubtype='Edition') }}">{{ _('Edition') }}</a></li>
+                <li><a href="{{ url_for('new_record', pubtype='Facsimile') }}">{{ _('Facsimile') }}</a></li>
                 <li class="divider"></li>
                 <li><a href="{{ url_for('new_record', pubtype='ArticleJournal') }}">{{ _('Journal Article') }}</a></li>
-                <li><a href="{{ url_for('new_record', pubtype='Chapter') }}">{{ _('Chapter') }}</a></li>
-                <li class="divider"></li>
                 <li><a href="{{ url_for('new_record', pubtype='Monograph') }}">{{ _('Book') }}</a></li>
+                <li><a href="{{ url_for('new_record', pubtype='Chapter') }}">{{ _('Chapter') }}</a></li>
+                <li><a href="{{ url_for('new_record', pubtype='Lecture') }}">{{ _('Lecture') }}</a></li>
+                <li><a href="{{ url_for('new_record', pubtype='InternetDocument') }}">{{ _('Internet Document') }}</a></li>
+                <li class="divider"></li>
                 <li><a href="{{ url_for('new_record', pubtype='Collection') }}">{{ _('Collection') }}</a></li>
+                <li><a href="{{ url_for('new_record', pubtype='Journal') }}">{{ _('Journal') }}</a></li>
                 <li><a href="{{ url_for('new_record', pubtype='Conference') }}">{{ _('Conference') }}</a></li>
                 <li><a href="{{ url_for('new_record', pubtype='Series') }}">{{ _('Series') }}</a></li>
-                <li><a href="{{ url_for('new_record', pubtype='Journal') }}">{{ _('Journal') }}</a></li>
-                <li><a href="{{ url_for('new_record', pubtype='InternetDocument') }}">{{ _('Internet Document') }}</a></li>
-                <li><a href="{{ url_for('new_record', pubtype='Lecture') }}">{{ _('Lecture') }}</a></li>
-                <li><a href="{{ url_for('new_record', pubtype='Other') }}">{{ _('Other') }}</a></li>
-                <li class="divider"></li>
-
-
-
             </ul>
         </li>
         <li class="divider"></li>

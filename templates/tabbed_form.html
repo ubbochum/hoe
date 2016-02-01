@@ -1,0 +1,152 @@
+{% extends 'site_base.html' %}
+{% import 'render_form.html' as render_form with context %}
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/bootstrap.vertical-tabs.min.css') }}">
+{% endblock %}
+{% block site_content %}
+    {{ super() }}
+    <div class="row" id="{{ record_id }}">
+        <div>
+        {% if form.errors %}
+            {{ form.errors }}
+        {% endif %}
+        <p style="margin-left: 3%;">{{ _('Fields marked with <span style="color: orangered;">*</span> are required.') }}</p>
+        <form id="theform" class="form form-horizontal" method="post" role="form" action="/{{ action }}/{{ pubtype }}{% if action == 'update' %}/{{ form.id.data }}{% endif %}" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <div class="tab-container"><div class="col-xs-3">
+                {% for groups in form.groups() %}
+                    <ul class="nav nav-tabs tabs-left">
+                        {% for group in groups %}
+                            <li{% if loop.first %} class="active"{% endif %}><a href="#{{ group.label|lower|replace(' ', '_') }}" data-toggle="tab">{{ group.label }}</a> </li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+            <div class="col-xs-9">
+            <div class="tab-content">
+            {% for groups in form.groups() %}
+                {% for group in groups %}
+                    <div class="tab-pane{% if loop.first %} active{% endif %}" id="{{ group.label|lower|replace(' ', '_') }}">{% for item in group.group %}
+                        {% if item.type != 'FieldList' %}
+                            {% if item.type == 'FormField' %}
+                            {% include 'form_field.html' %}
+                            {% else %}
+                            {% if current_user.role != 'admin' %}
+                                {% if not item.name in form.admin_only %}{{ render_form.render_field(item) }}{% endif %}
+                            {% else %}
+                                {% if not item.name in form.user_only %}{{ render_form.render_field(item) }}{% endif %}
+                            {% endif %}
+                            {% endif %}
+                        {% else %}
+                            {{ render_form.render_multi_field(item) }}
+                        {% endif %}
+                    {% endfor %}</div>
+                {% endfor %}
+            {% endfor %}
+            </div>
+            </div>
+            {% include 'submit_form.html' %}</div>
+        </form>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    {% if action == 'update' %}
+    <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+    {% endif %}
+    <script>
+        function scrollto(element){
+            $('html, body').animate({scrollTop: $(element).offset().top}, 'slow');
+        }
+        $(document).on('click', '.add', function (event) {
+            event.preventDefault();
+            var container = $(this).closest('[id$="_container"]');
+            var fieldnameparts = container.attr('id').split('-');
+            var thenum = parseInt(fieldnameparts[1].replace('_container', '')) + 1;
+            var cpy = container.clone(true);
+            var container_id = cpy.attr('id').replace('-' + (thenum - 1), '-' + thenum);
+            cpy.attr('id', container_id);
+            cpy.find(':input').each(function(){
+                var id = $(this).attr('id').replace('-' + (thenum - 1) + '-', '-' + thenum + '-');
+                $(this).attr('name', id).attr('id', id).val('').removeAttr('checked');
+            });
+            cpy.find('label').each(function(){
+                var id = $(this).attr('for').replace('-' + (thenum - 1) + '-', '-' + thenum + '-');
+                $(this).attr('for', id);
+            });
+            $(this).replaceWith('<a class="btn btn-sm btn-danger remove" href="#"><i class="fa fa-trash"></i> {{_("Remove this")}}</a></div>');
+            container.after(cpy);
+            //$('#' + container_id).find('.col-sm-6 a').after(' <a class="btn btn-sm btn-danger remove" href="#"><i class="fa fa-trash"></i> {{_("Remove this")}}</a>');
+            scrollto('#' + container_id);
+        });
+        $(document).on('click', '.remove', function (event) {
+            $(this).closest('[id*="container"]').remove();
+        });
+        $(document).on('click', '.add-atomic', function(event){
+            event.preventDefault();
+            var container = $(this).closest('[id$="_container"]');
+            var fieldnameparts = container.attr('id').split('-');
+            var thenum = parseInt(fieldnameparts[1].replace('_container', '')) + 1;
+            var cpy = container.clone(true);
+            var container_id = cpy.attr('id').replace('-' + (thenum - 1), '-' + thenum);
+            cpy.attr('id', container_id);
+            cpy.find(':input').each(function(){
+                var id = $(this).attr('id').replace('-' + (thenum - 1), '-' + thenum);
+                $(this).attr('name', id).attr('id', id).val('').removeAttr('checked');
+            });
+            cpy.find('label').each(function(){
+                var id = $(this).attr('for').replace('-' + (thenum - 1), '-' + thenum);
+                $(this).attr('for', id);
+            });
+            $(this).replaceWith('<a class="btn btn-sm btn-danger remove" href="#"><i class="fa fa-trash"></i> {{_("Remove this")}}</a></div>');
+            container.after(cpy);
+        });
+        function dedupe(idtype, thenode){
+            $.getJSON('/dedup/' + idtype + '/' + encodeURIComponent(thenode.val()), function(data){
+                $('#' + idtype + '_dedup_note').remove();
+                if(data.duplicate == true){
+                    thenode.closest('div[id$="_container"]').append('<div id="' + idtype + '_dedup_note" class="col-sm-4"><div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> {{ _("This Title Already Exists!") }} <a href="/search?q=' + idtype + ':' + thenode.val() + '">{{ _("Here") }}</a></div></div>')
+                }
+                else{
+                    thenode.closest('div[id$="_container"]').append('<div id="' + idtype + '_dedup_note" class="col-sm-4"><div class="alert alert-success"><i class="fa fa-check"></i> {{ _("This Title Does Not Exist Yet!") }}</div></div>')
+                }
+            });
+        }
+        $(document).on('change', '#DOI', function(event){
+            dedupe('doi', $(this));
+        });
+        $(document).on('change', '#ISBN', function(event){
+            dedupe('isbn', $(this));
+        });
+        {#$(document).on('change', '#pubtype', function(event){
+            console.log($(this).val());
+            console.log($('#id').val());
+            $.post('/update/' + $(this).val() + '/' + $('#id').val(), $('#theform').serialize());
+            window.location.href = '/update/' + $(this).val() + '/' + $('#id').val();
+        });#}
+        {% if action == 'create' %}
+            $(document).on('change', '#pubtype', function(event){
+                var pubtype = $(this).val();
+                //$('#pubtype select').val('{{ pubtype }}');
+                $('#pubtype option[value="{{ pubtype }}"]').prop('selected', true);
+                $.post('/create/{{ pubtype }}', $('#theform').serialize(), function(){
+                    window.location.href = '/update/' + pubtype + '/' + $('.row').attr('id');
+                }).fail(function(e){
+                    console.log(e);
+                });
+            });
+        {% elif action == 'update' %}
+            console.log($('.row').attr('id'));
+            var socket = io.connect('https://hb2.ub.rub.de/socketio/hb2');
+            $(document).on('change', '#pubtype', function(event){
+                window.location.href = '/update/' + $(this).val() + '/' + $('.row').attr('id');
+            });
+            $(document).on('submit', '#theform', function(event){
+                socket.emit('unlock', {data: $('.row').attr('id')});
+            });
+        {% endif %}
+    </script>
+    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+{% endblock %}

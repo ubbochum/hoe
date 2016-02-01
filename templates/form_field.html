@@ -1,0 +1,29 @@
+{% for subfield in item %}
+    {% if subfield.type != 'CSRFTokenField' %}
+        <div class="form-group">
+        {% if current_user.role != 'admin' %}
+            {% if subfield.name|last_split not in form.admin_only %}
+                <div class="col-sm-2 control-label">{{ subfield.label|replace('|', ' ') }}</div>
+                {% if subfield.type != 'BooleanField' %}
+                    <div class="col-sm-6">{{ subfield(class='form-control') }}</div>
+                {% else %}
+                    <div class="col-sm-6">{{ subfield(class='checkbox') }}</div>
+                {% endif %}
+                {% if subfield.description %}<div class="clearfix"></div><div class="col-sm-offset-2"><p class="help-block" style="margin-top: 8px;margin-left:15px;">{{ subfield.description }}</p></div>{% endif %}
+                <div class="col-sm-4">&nbsp;</div>
+            {% endif %}
+        {% else %}
+            {% if subfield.name not in form.user_only %}
+                <div class="col-sm-2 control-label">{{ subfield.label|replace('|', ' ') }}</div>
+                {% if subfield.type != 'BooleanField' %}
+                    <div class="col-sm-6">{{ subfield(class='form-control') }}</div>
+                {% else %}
+                    <div class="col-sm-6">{{ subfield(class='checkbox') }}</div>
+                {% endif %}
+                {% if subfield.description %}<div class="clearfix"></div><div class="col-sm-offset-2"><p class="help-block" style="margin-top: 8px;margin-left:15px;">{{ subfield.description }}</p></div>{% endif %}
+                <div class="col-sm-4">&nbsp;</div>
+            {% endif %}
+        {% endif %}
+        </div>
+    {% endif %}
+{% endfor %}

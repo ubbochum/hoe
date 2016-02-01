@@ -1,0 +1,15 @@
+{% macro panel(type='default', header='', body='', footer='') %}
+    <div class="panel panel-{{ type }}">
+    {% if header %}
+        <div class="panel-heading">
+            <div class="panel-title">{{ header|safe }}</div>
+        </div>
+    {% endif %}
+    <div class="panel-body">
+        {{ body|safe }}
+    </div>
+    {% if footer %}
+        <div class="panel-footer">{{ footer|safe }}</div>
+    {% endif %}
+    </div>
+{% endmacro %}
