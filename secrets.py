@@ -19,5 +19,7 @@ orcid_sandbox_client_secret = '5a0eba08-7991-4f68-b6dc-974eb075b765'
 SOLR_HOST = '127.0.0.1'
 SOLR_PORT = '8983'
 SOLR_COLLECTION = 'hoe'
-SOLR_FACETS = ['fperson', 'genre', 'type', 'language', 'issued', 'library_place', 'fkeyword', 'origin_place']
+SOLR_FACETS = ['pubtype', 'subtype', 'language', 'fkeyword', 'issued_primary', 'issued_secondary',
+                                        'library', 'flibrary', 'fperson', 'source_class']
 SOLR_CORE = 'hoe'
+SOLR_EXPORT_FIELD = 'wtf_json'

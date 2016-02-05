@@ -4,6 +4,7 @@ import secrets
 from werkzeug import iri_to_uri
 import simplejson as json
 import logging
+import time
 
 logging.basicConfig (level=logging.INFO,
     format='%(asctime)s %(levelname)-4s %(message)s',
@@ -20,7 +21,7 @@ class Solr(object):
                  spellcheck_count=5, suggest_query='', group='false', group_field='', group_limit=1,
                  group_sort='score desc', group_ngroups='true', coordinates='0,0', json_nl='arrmap',# cursor='',
                  boost_most_recent='false', csv_separator='\t', core=secrets.SOLR_CORE, stats='false', stats_fl=[],
-                 data=''):
+                 data='', del_id='', export_field='', export_dir='/tmp'):
         self.host = host
         self.port = port
         self.application = application
@@ -71,6 +72,9 @@ class Solr(object):
         self.stats = stats
         self.stats_fl = stats_fl
         self.data = data
+        self.del_id = del_id
+        self.export_field = export_field
+        self.export_dir = export_dir
 
     def request(self):
         params = ''
@@ -132,12 +136,14 @@ class Solr(object):
             params += '&fl=%s' % '+'.join(self.fields)
         if self.mlt is True:
             self.facet = 'false'
-            mparams = '%s/%s?q=%s&mlt=true&mlt.fl=%s&mlt.count=10&fl=%s&wt=%s&defType=%s' % (
-                self.application, self.handler, self.query, '+'.join(self.mlt_fields), '+'.join(self.fields),
+            mparams = '%s?q=%s&mlt=true&mlt.fl=%s&mlt.count=10&fl=%s&wt=%s&defType=%s' % (
+                self.handler, self.query, '+'.join(self.mlt_fields), '+'.join(self.fields),
                 self.writer, self.defType)
             # if self.boost_most_recent == 'true':
             #     params += '&boost=recip(ms(NOW/YEAR,year_boost),3.16e-11,1,1)'
             #self.response = eval(urllib.request.urlopen('%s%s' % (url, mparams)).read())
+            logging.info(url)
+            logging.info(mparams)
             self.response = eval(requests.get('%s%s' % (url, mparams)).text)
             for mlt in self.response.get('moreLikeThis'):
                 self.mlt_results = self.response.get('moreLikeThis').get(mlt).get('docs')
@@ -174,7 +180,7 @@ class Solr(object):
 
             self.response = eval(gzipper.read())
         else:
-            logging.error(self.request_url)
+            #logging.error(self.request_url)
             try:
                 #self.response = eval(urllib.request.urlopen(iri_to_uri(self.request_url)).read())
                 self.response = eval(requests.get(iri_to_uri(self.request_url)).text)
@@ -246,9 +252,31 @@ class Solr(object):
         return self._count
 
     def update(self):
-        url = 'http://%s:%s/%s/%s/update/?commit=true' % (self.host, self.port, self.application, self.core)
+        url = 'http://%s:%s/%s/%s/update/?commit=true&versions=true' % (self.host, self.port, self.application, self.core)
         resp = requests.post(url, headers={'Content-type': 'application/json'}, data=json.dumps(self.data))
+        return resp
+
+    def delete(self):
+        url = 'http://%s:%s/%s/%s/update?commit=true' % (self.host, self.port, self.application, self.core)
+        resp = requests.post(url, headers={'Content-type': 'application/json'}, data=json.dumps({'delete': {'id': self.del_id}}))
         return resp.status_code
+
+    def export(self):
+        done = False
+        cm = '*'
+        export_docs = []
+        while not done:
+            resp = requests.get('http://%s:%s/%s/%s/query?q=*:*&sort=id asc&fl=%s&cursorMark=%s' % (self.host, self.port, self.application, self.core, self.export_field, cm)).json()
+            for doc in resp.get('response').get('docs'):
+                export_docs.append(json.loads(doc.get(self.export_field)))
+            if cm == resp.get('nextCursorMark'):
+                done = True
+            cm = resp.get('nextCursorMark')
+
+        with open('%s/%s_%s.json' % (self.export_dir, self.core, int(time.time())), 'w') as dumpfile:
+            json.dump(export_docs, dumpfile, indent=4)
+
+        return '%s/%s_%s.json' % (self.export_dir, self.core, int(time.time()))
 
     def __len__(self):
         return len(self.results)

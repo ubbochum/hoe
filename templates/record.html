@@ -1,12 +1,72 @@
 {% extends 'site_base.html' %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='leaflet/leaflet.css') }}"/>
+{% endblock %}
 {% block modal %}{% include 'confirm_delete_modal.html' %}{% endblock %}
 {% block site_content %}
     {{ super() }}
     <div class="row">
         <div class="col-sm-10">
-        {{ record.data }}
+{#        {{ record.data }}#}
         <dl class="dl-horizontal">
-            {% if record.data.title_translated %}
+            {% if record.data.subtitle %}
+                <dt>
+                    {{ _('Subtitle') }}
+                </dt>
+                <dd>
+                    {{ record.data.subtitle }}
+                </dd>
+            {% endif %}
+            {% if record.data.title_supplement %}
+                <dt>
+                    {{ _('Title Supplement') }}
+                </dt>
+                <dd>
+                    {{ record.data.title_supplement }}
+                </dd>
+            {% endif %}
+            {% if record.data.incipit %}
+                <dt>
+                    {{ _('Incipit') }}
+                </dt>
+                <dd>
+                    {{ record.data.incipit }}
+                </dd>
+            {% endif %}
+            {% if record.data.explicit %}
+                <dt>
+                    {{ _('Explicit') }}
+                </dt>
+                <dd>
+                    {{ record.data.explicit }}
+                </dd>
+            {% endif %}
+            {% if record.data.frontispiece %}
+                <dt>
+                    {{ _('Frontispiece') }}
+                </dt>
+                <dd>
+                    {{ record.data.frontispiece }}
+                </dd>
+            {% endif %}
+            {% if record.data.vignette %}
+                <dt>
+                    {{ _('Vignette') }}
+                </dt>
+                <dd>
+                    {{ record.data.vignette }}
+                </dd>
+            {% endif %}
+            {% if record.data.printers_mark %}
+                <dt>
+                    {{ _("Printer's Mark") }}
+                </dt>
+                <dd>
+                    {{ record.data.printers_mark }}
+                </dd>
+            {% endif %}
+            {% if record.data.title_translated.0.translated_title %}
                 <dt>
                     {% trans count=record.data.title_translated|length %}
                     Translated Title
@@ -16,11 +76,11 @@
                 </dt>
                 <dd>
                     {% for title in record.data.title_translated %}
-                        {{ title.translated_title }} ({{ title.language }})<br/>
+                        {{ title.translated_title }} ({{ lang_map.get(title.language) }})<br/>
                     {% endfor %}
                 </dd>
             {% endif %}
-            {% if record.person %}
+            {% if record.data.person.0.name %}
                 <dt>
                     {% trans count=record.data.person|length %}
                     Person
@@ -30,16 +90,137 @@
                 </dt>
                 <dd>
                     {% for person in record.data.person %}
-                        {{ person.name }} ({{ person.birth_date }}-{{ person.death_date }}){% if person.viaf %} | <a href="http://viaf.org/{{ person.viaf }}">{{ _('VIAF') }}</a>{% endif %}<br/>
+                        {{ person.name }}{% if person.birth_date and person.death_date %} ({{ person.birth_date }}-{{ person.death_date }}){% endif %}{% if person.uri %} | <a href="{{ person.uri }}">{{ _('URL') }}</a>{% endif %}{% if person.viaf %} | <a href="http://viaf.org/{{ person.viaf }}">{{ _('VIAF') }}</a>{% endif %}{% if person.isni %} | <a href="http://isni.org/isni/{{ person.isni|replace(' ', '') }}">{{ _('ISNI') }}</a>{% endif %}<br/>
+                        {% for role in person.role %}
+                            {{ role_map.get(role) }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                        <hr/>
                     {% endfor %}
                 </dd>
             {% endif %}
+            {% if record.data.corporation.0.name %}
+                <dt>
+                    {% trans count=record.data.corporation|length %}
+                    Corporation
+                    {% pluralize %}
+                    Corporations
+                    {% endtrans %}
+                </dt>
+                <dd>
+                    {% for corporation in record.data.corporation %}
+                        {{ corporation.name }}
+                    {% endfor %}
+                </dd>
+            {% endif %}
+            {% if record.data.pubtype %}
+                <dt>
+                    {{ _('Publication Type') }}
+                </dt>
+                <dd>
+                    {{ record.data.pubtype }}{% if record.data.subtype and record.data.subtype != 'None' %} | {{ record.data.subtype|capitalize() }}{% endif %}{% if record.data.genre and record.data.genre != 'None' %} | {{ record.data.genre }}{% endif %}
+                </dd>
+            {% endif %}
+            {% if record.data.issued %}
+                <dt>
+                    {{ _('Issued') }}{% if record.circa == True %}{{ _(' ca.') }}{% endif %}
+                </dt>
+                <dd>
+                    {{ record.data.issued }}
+                </dd>
+            {% endif %}
+            {% if record.data.language.0 %}
+                <dt>
+                    {% trans count=record.data.language|length %}
+                    Language
+                    {% pluralize %}
+                    Languages
+                    {% endtrans %}
+                </dt>
+                <dd>
+                    {% for language in record.data.language %}
+                        {{ lang_map.get(language) }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </dd>
+            {% endif %}
+            {% if record.data.publisher %}
+                <dt>
+                    {{ _('Publisher') }}
+                </dt>
+                <dd>
+                    {{ record.data.publisher }}{% if record.data.publisher_place %}: {{ record.data.publisher_place }}{% endif %}
+                </dd>
+            {% endif %}
+            {% if record.data.origin %}
+                <dt>
+                    {{ _('Place of Origin') }}
+                </dt>
+                <dd>
+                    {{ record.data.origin }}
+                </dd>
+            {% endif %}
+            {% if record.data.keyword.0.label %}
+                <dt>
+                    {% trans count=record.data.keyword|length %}
+                    Keyword
+                    {% pluralize %}
+                    Keywords
+                    {% endtrans %}
+                </dt>
+                <dd>
+                    {% for keyword in record.data.keyword %}
+                        {% if keyword.uri %}<a href="{{ keyword.uri }}">{{ keyword.label }}</a>{% else %}{{ keyword.label }}{% endif %}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </dd>
+            {% endif %}
+            {% if record.data.is_part_of.0.is_part_of %}
+                <dt>{{ _('Is Part Of') }}</dt>
+                <dd>
+                    {% for ipo in record.data.is_part_of %}
+                        <a href="/retrieve/{{ record.data.pubtype }}/{{ ipo.is_part_of }}">{{ ipo.is_part_of }}</a>{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </dd>
+            {% endif %}
+            {% if record.data.other_version.0.other_version %}
+                <dt>{{ _('Other Version') }}</dt>
+                <dd>
+                    {% for ov in record.data.other_version %}
+                        <a href="/retrieve/{{ record.data.pubtype }}/{{ ov.other_version }}">{{ ov.other_version }}</a>{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </dd>
+            {% endif %}
+            {% if record.data.abstract %}
+                <dt>{{ _('Description') }}</dt>
+                <dd>{{ record.data.abstract }}</dd>
+            {% endif %}
+            {% if record.data.library.0.latitude %}
+                <dt>
+                    {% trans count=record.data.library|length %}
+                    Library
+                    {% pluralize %}
+                    Libraries
+                    {% endtrans %}
+                </dt>
+                <dd id="record_map"></dd>
+            {% endif %}
+            {% if mlt %}
+                <dt>{{ _('Similar Records') }}</dt>
+                <dd>
+                    <ul class="list-unstyled">
+                        {% for doc in mlt %}
+                            <li><a href="/retrieve/{{ doc.pubtype }}/{{ doc.id }}">{{ doc.title }}, {{ doc.issued }}</a></li>
+                        {% endfor %}
+
+                    </ul>
+                </dd>
+            {% endif %}
+            <dt>{{ _('Record Information') }}</dt>
+            <dd>{{ _('Created %(created)s by %(owner)s.', created=record.data.created|mk_time|humanize(), owner=record.data.owner) }}{% if record.data.created != record.data.changed %} {{ _('Last changed %(changed)s.', changed=record.data.changed|mk_time|humanize()) }}{% endif %}</dd>
         </dl>
         </div>
         <div class="col-sm-2">
             {% if current_user.role == 'admin' or current_user.name == record.owner %}<div class="btn-group" role="group" aria-label="action-group">
                 <a href="/update/{{ pubtype }}/{{ record_id }}" class="btn btn-default"><i class="fa fa-pencil"></i> {{ _('Edit') }}</a>
-                <a href="#" data-href="{% if pubtype == 'person' %}{{ url_for('delete_person', person_id=record.id.data) }}{% elif pubtype == 'organisation' %}{{ url_for('delete_orga', orga_id=record.id.data) }}{% else %}{{ url_for('delete_record', record_id=record.id) }}{% endif %}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> {{ _('Delete') }}</a>
+                <a href="#" data-href="{{ url_for('delete_record', record_id=record.data.id) }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> {{ _('Delete') }}</a>
                 {#<label for="apparent_dup">{{ _('Apparent Duplicate') }}</label>
                 <input type="checkbox" id="apparent_dup" name="apparent_dup">#}
             </div>{% endif %}
@@ -86,4 +267,23 @@
             $.post('/apparent_duplicate', {'id': '{{ record_id }}', 'apparent_dup': dup});
         })*/
     </script>
+    {% if record.data.library.0.latitude %}
+    <script src="{{ url_for('static', filename='leaflet/leaflet.js') }}"></script>
+    <script>
+        var map = L.map('record_map').setView([48.7, 20.2], 3);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'ahagenbruch.p072ck6j',
+            accessToken: 'pk.eyJ1IjoiYWhhZ2VuYnJ1Y2giLCJhIjoiY2lqdnY1cHB2MGMxMnc4bTNnczkxNW1kNCJ9.kfslXFi1i7n_xPCXQ5lsHA'
+        }).addTo(map);
+        {% for library in record.library %}
+            {% if library.data.latitude and library.data.longitude %}
+            L.marker([{{ library.data.latitude }}, {{ library.data.longitude }}]).addTo(map)
+            .bindPopup('<a href="{{ library.data.uri }}">{{ library.data.label }}</a>.<br><a href="/search?q=flibrary:%22{{ library.data.label|urlencode }}%22">{{ _("Show all records") }}</a>');
+            {% endif %}
+        {% endfor %}
+    </script>
+    {% endif %}
 {% endblock %}

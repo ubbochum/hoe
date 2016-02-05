@@ -148,5 +148,11 @@
             });
         {% endif %}
     </script>
+    <script>
+        $(document).on('drop', 'input', function(event){
+            event.preventDefault();
+            $(this).val(event.originalEvent.dataTransfer.getData('text').split('/').pop());
+        })
+    </script>
     <script src="https://togetherjs.com/togetherjs-min.js"></script>
 {% endblock %}

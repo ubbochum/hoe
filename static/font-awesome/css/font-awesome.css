@@ -181,6 +181,9 @@
 .fa-check:before {
   content: ""; }
 
+.fa-times:before {
+  content: ""; }
+
 .fa-search-plus:before {
   content: ""; }
 
@@ -242,6 +245,9 @@
 .fa-caret-down:before {
   content: ""; }
 
+.fa-clipboard:before {
+  content: ""; }
+
 .fa-cloud-download:before {
   content: ""; }
 
@@ -265,5 +271,8 @@
 
 .fa-user-plus:before {
   content: ""; }
+
+.fa-clone:before {
+  content: ""; }
 
 /*# sourceMappingURL=font-awesome.css.map */

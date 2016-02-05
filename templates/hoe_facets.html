@@ -1,0 +1,11 @@
+{% import 'drill_down.html' as drill_down with context %}
+<h4 id="lib_filter">{{ _('Library') }}</h4>
+<div id="map"></div>
+{{ drill_down.facets(facet_data.fperson, 'fperson', heading='Person', target=target) }}
+{{ drill_down.facets(facet_data.fkeyword, 'fkeyword', heading='Keyword', target=target) }}
+{{ drill_down.facets(facet_data.language, 'language', heading='Language', target=target) }}
+{{ drill_down.facets(facet_data.issued_primary, 'issued_primary', heading='Primary Publication Century', target=target) }}
+{{ drill_down.facets(facet_data.issued_secondary, 'issued_secondary', heading='Secondary Publication Year', target=target) }}
+{{ drill_down.facets(facet_data.pubtype, 'pubtype', heading='Publication Type', target=target) }}
+{{ drill_down.facets(facet_data.subtype, 'subtype', heading='Publication Subtype', target=target) }}
+{{ drill_down.facets(facet_data.source_class, 'source_class', heading='Source Class', target=target) }}

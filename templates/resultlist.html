@@ -1,19 +1,39 @@
 {% extends 'site_base.html' %}
-{% import 'drill_down.html' as drill_down with context %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='leaflet/leaflet.css') }}"/>
+{% endblock %}
 {% block site_content %}
     {{ super() }}
     <div class="row">
         <div class="col-sm-4" id="facets">
-            {{ drill_down.facets(facet_data.fperson, 'fperson', heading='Person') }}
-            {{ drill_down.facets(facet_data.fdate, 'fdate', heading='Publication Date') }}
-            {{ drill_down.facets(facet_data.language, 'language', heading='Language') }}
+            {% include 'remove_filters.html' %}
+            {% include 'hoe_facets.html' %}
         </div>
         <div class="col-sm-8">
             {{ pagination.info }}
-            {% include 'remove_filters.html' %}
+
             {{ pagination.links }}
             {% include 'record_list.html' %}
             {{ pagination.links }}
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='leaflet/leaflet.js') }}"></script>
+    <script>
+        var map = L.map('map').setView([48.7, 20.2], 3);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'ahagenbruch.p072ck6j',
+            accessToken: 'pk.eyJ1IjoiYWhhZ2VuYnJ1Y2giLCJhIjoiY2lqdnY1cHB2MGMxMnc4bTNnczkxNW1kNCJ9.kfslXFi1i7n_xPCXQ5lsHA'
+        }).addTo(map);
+        {% for lib_facet in libraries %}
+            L.marker([{{ lib_facet.library.latitude }}, {{ lib_facet.library.longitude }}]).addTo(map)
+            .bindPopup('<a href="{{ lib_facet.library.uri }}">{{ lib_facet.library.label }}</a>.<br><a href="/search?q={{ query|urlencode }}&amp;filter=flibrary:%22{{ lib_facet.library.label|urlencode }}%22{% if filterquery %}{% for fq in filterquery %}&amp;filter={{ fq }}{% endfor %}{% endif %}{% if mysort %}&amp;sort={{ mysort }}{% endif %}">{{ _("Show all %(count)s records", count=lib_facet.count) }}</a>');
+        {% endfor %}
+    </script>
 {% endblock %}

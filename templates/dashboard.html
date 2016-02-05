@@ -1,11 +1,7 @@
 {% extends 'site_base.html' %}
-{% import 'drill_down.html' as drill_down with context %}
 {% block head %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='leaflet/leaflet.css') }}"/>
-    <style>
-        #map { height: 360px; margin-top: -55px;}
-    </style>
 {% endblock %}
 {% block site_content %}
     {{ super() }}
@@ -16,16 +12,7 @@
         </div>#}
         <div class="row">
             <div class="col-sm-4">
-                <h4 id="lib_filter">{{ _('Library') }}</h4>
-                <div id="map"></div>
-                {{ drill_down.facets(facet_data.fperson, 'fperson', heading='Person', target='dashboard') }}
-                {{ drill_down.facets(facet_data.fkeyword, 'fkeyword', heading='Keyword', target='dashboard') }}
-                {{ drill_down.facets(facet_data.language, 'language', heading='Language', target='dashboard') }}
-                {{ drill_down.facets(facet_data.issued_primary, 'issued_primary', heading='Primary Publication Century', target='dashboard') }}
-                {{ drill_down.facets(facet_data.issued_secondary, 'issued_secondary', heading='Secondary Publication Year', target='dashboard') }}
-                {{ drill_down.facets(facet_data.pubtype, 'pubtype', heading='Publication Type', target='dashboard') }}
-                {{ drill_down.facets(facet_data.subtype, 'subtype', heading='Publication Subtype', target='dashboard') }}
-                {{ drill_down.facets(facet_data.source_class, 'source_class', heading='Source Class', target='dashboard') }}
+                {% include 'hoe_facets.html' %}
             </div>
             <div class="col-sm-8">
                 <h4>{{ pagination.info }}</h4>
@@ -97,8 +84,10 @@
             accessToken: 'pk.eyJ1IjoiYWhhZ2VuYnJ1Y2giLCJhIjoiY2lqdnY1cHB2MGMxMnc4bTNnczkxNW1kNCJ9.kfslXFi1i7n_xPCXQ5lsHA'
         }).addTo(map);
         {% for lib_facet in libraries %}
+            {% if lib_facet.library.latitude and lib_facet.library.longitude %}
             L.marker([{{ lib_facet.library.latitude }}, {{ lib_facet.library.longitude }}]).addTo(map)
-            .bindPopup('<a href="{{ lib_facet.library.uri }}">{{ lib_facet.library.label }}</a>.<br><a href="/search?q={{ query|urlencode }}&amp;filter=flibrary:%22{{ lib_facet.library.label|urlencode }}%22{% if filterquery %}{% for fq in filterquery %}&amp;filter={{ fq }}{% endfor %}{% endif %}{% if mysort %}&amp;sort={{ mysort }}{% endif %}">{{ _("Show all %(count)s records", count=lib_facet.count) }}</a>');
+            .bindPopup('<a href="{{ lib_facet.library.uri }}">{{ lib_facet.library.label }}</a>.<br><a href="/search?q={{ query|urlencode }}&amp;filter=flibrary:%22{{ lib_facet.library.label|urlencode }}%22{% if filterquery %}{% for fq in filterquery %}&amp;filter={{ fq }}{% endfor %}{% endif %}{% if mysort %}&amp;sort={{ mysort }}{% endif %}">{{ _("Show all %(count)s records", count=flibraries.get(lib_facet.library.label)) }}</a>');
+            {% endif %}
         {% endfor %}
     </script>
     <script src="https://togetherjs.com/togetherjs-min.js"></script>

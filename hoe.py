@@ -11,18 +11,14 @@ import secrets
 from flask import Flask, render_template, redirect, request, jsonify, flash, url_for, Markup
 from flask.ext.babel import Babel
 from flask.ext.bootstrap import Bootstrap
-from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required, make_secure_token
+from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required, make_secure_token, AnonymousUserMixin
 from flask.ext.paginate import Pagination
 from flask_humanize import Humanize
-#from flask_debugtoolbar import DebugToolbarExtension
 from flask_wtf.csrf import CsrfProtect
-from flask_redis import Redis
 from urllib import parse
-#from lxml import etree
 from solr_handler import Solr
 from datadiff import diff_dict
 
-#from processors import mods_processor
 from forms import *
 from config import *
 
@@ -35,10 +31,6 @@ app = Flask(__name__)
 app.debug = True
 app.testing = True
 app.secret_key = secrets.secret
-#toolbar = DebugToolbarExtension(app)
-
-app.config['REDIS_HOST'] = '/tmp/redis.sock'
-redis_store = Redis(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -81,7 +73,7 @@ def rem_form_count_filter(mystring):
 
 @app.template_filter('mk_time')
 def mk_time_filter(mytime):
-    return datetime.datetime.strptime(mytime, '%Y-%m-%dT%H:%M:%S.%fZ')
+    return datetime.datetime.strptime(mytime, '%Y-%m-%d %H:%M:%S.%f')
 
 @app.template_filter('last_split')
 def last_split_filter(category):
@@ -230,17 +222,15 @@ def _record2solr(form, action):
             solr_data.setdefault('publisher', form.data.get(field).strip())
         if field == 'language' and len(form.data.get(field)) > 0:
             for lang in form.data.get(field):
-                solr_data.setdefault('language', []).append(lang)
+                if lang != '':
+                    solr_data.setdefault('language', []).append(lang)
         if field == 'person' and len(form.data.get(field)) > 0:
+            FACET_ROLES = {'aut', 'edt', 'trl'}
             for idx, person in enumerate(form.data.get(field)):
                 if person.get('name'):
                     solr_data.setdefault('person', []).append(person.get('name').strip())
-                    solr_data.setdefault('fperson', []).append(person.get('name').strip())
-                    if person.get('gnd'):
-                        solr_data.setdefault('pnd', []).append('%s#%s' % (person.get('gnd').strip(), person.get('name').strip()))
-                    else:
-                        solr_data.setdefault('pnd', []).append(
-                            '%s#person-%s#%s' % (form.data.get('id'), idx, person.get('name').strip()))
+                    if set(person.get('role')) & FACET_ROLES:
+                        solr_data.setdefault('fperson', []).append(person.get('name').strip())
         if field == 'corporation' and len(form.data.get(field)) > 0:
             for idx, corporation in enumerate(form.data.get(field)):
                 if corporation.get('name'):
@@ -261,8 +251,9 @@ def _record2solr(form, action):
                 solr_data.setdefault('isbn', []).append(isbn.strip().replace('-', ''))
         if field == 'keyword' and len(form.data.get(field)) > 0:
             for idx, keyword in enumerate(form.data.get(field)):
-                solr_data.setdefault('keyword', []).append(keyword.get('label').strip())
-                solr_data.setdefault('fkeyword', []).append(keyword.get('label').strip())
+                if keyword.get('label'):
+                    solr_data.setdefault('keyword', []).append(keyword.get('label').strip())
+                    solr_data.setdefault('fkeyword', []).append(keyword.get('label').strip())
         if field == 'keyword_temporal' or field == 'keyword_geographic':
             for keyword in form.data.get(field):
                 if keyword:
@@ -272,8 +263,9 @@ def _record2solr(form, action):
             solr_data.setdefault('key_publication', form.data.get(field))
         if field == 'library' and len(form.data.get(field)) > 0:
             for library in form.data.get(field):
-                solr_data.setdefault('library', []).append(json.dumps(library))
-                solr_data.setdefault('flibrary', []).append(library.get('label'))
+                if library.get('latitude'):
+                    solr_data.setdefault('library', []).append(json.dumps(library))
+                    solr_data.setdefault('flibrary', []).append(library.get('label'))
         if field == 'origin' and form.data.get(field):
             solr_data.setdefault('origin_place', form.data.get(field))
 
@@ -290,8 +282,7 @@ def dashboard():
     filterquery = request.values.getlist('filter')
     # Solr(start=(page - 1) * 10, query=query, fquery=filterquery, sort=sorting)
     dashboard_solr = Solr(start=(page - 1) * 10, query=query, sort='created asc',
-                          facet_fields=['pubtype', 'subtype', 'language', 'fkeyword', 'issued_primary', 'issued_secondary',
-                                        'library', 'flibrary', 'fperson', 'source_class'],
+                          facet_fields=secrets.SOLR_FACETS,
                           fquery=filterquery)
     dashboard_solr.request()
 
@@ -308,14 +299,18 @@ def dashboard():
         mystart = 1 + (pagination.page - 1) * pagination.per_page
         # myend = mystart + pagination.per_page - 1
 
+    flibraries = {}
+    for flib in dashboard_solr.facets.get('flibrary'):
+        flibraries.setdefault(list(flib.keys())[0], list(flib.values())[0])
+    #logging.info(flibraries)
     libraries = []
     for lib_facet in dashboard_solr.facets.get('library'):
-        for library, count in lib_facet.items():
-            libraries.append({'library': eval(library), 'count': count})
+        for library in lib_facet:
+            libraries.append({'library': eval(library)})
     return render_template('dashboard.html', records=dashboard_solr.results, facet_data=dashboard_solr.facets,
                            header=gettext('Dashboard'), site=theme(request.access_route),
                            offset=mystart - 1, query=query, filterquery=filterquery, pagination=pagination,
-                           now=datetime.datetime.now(), libraries=libraries, target='dashboard',
+                           now=datetime.datetime.now(), flibraries=flibraries, libraries=libraries, target='dashboard',
                            )
 
 @app.route('/create/<pubtype>', methods=['GET', 'POST'])
@@ -342,14 +337,42 @@ def new_record(pubtype='article-journal', primary_id=''):
 
 @app.route('/retrieve/<pubtype>/<record_id>')
 def show_record(pubtype, record_id=''):
-    show_record_solr = Solr(query='id:%s' % record_id, core='hoe')
+    ROLE_MAP = {
+        'aut': gettext('Author'),
+        'edt': gettext('Editor'),
+        'his': gettext('Host institution'),
+        'fmo': gettext('Former Owner'),
+    }
+    LANGUAGE_MAP = {
+        'alb': gettext('Albanian'),
+        'ara': gettext('Arabic'),
+        'bos': gettext('Bosnian'),
+        'bul': gettext('Bulgarian'),
+        'hrv': gettext('Croatian'),
+        'dut': gettext('Dutch'),
+        'eng': gettext('English'),
+        'fre': gettext('French'),
+        'ger': gettext('German'),
+        'gre': gettext('Greek'),
+        'ita': gettext('Italian'),
+        'lat': gettext('Latin'),
+        'peo': gettext('Persian'),
+        'pol': gettext('Polish'),
+        'rum': gettext('Romanian'),
+        'rus': gettext('Russian'),
+        'srp': gettext('Serbian'),
+        'spa': gettext('Spanish'),
+        'tur': gettext('Turkish'),
+    }
+    show_record_solr = Solr(query='id:%s' % record_id, core='hoe', mlt=True, mlt_fields=['title', 'description', 'keyword'])
     show_record_solr.request()
 
     thedata = json.loads(show_record_solr.results[0].get('wtf_json'))
     form = PUBTYPE2FORM.get(pubtype).from_json(thedata)
 
     return render_template('record.html', record=form, header=form.data.get('title'), site=theme(request.access_route),
-                           action='retrieve', record_id=record_id, del_redirect='dashboard', pubtype=pubtype)
+                           action='retrieve', record_id=record_id, del_redirect='dashboard', pubtype=pubtype,
+                           role_map=ROLE_MAP, lang_map=LANGUAGE_MAP, mlt=show_record_solr.mlt_results)
 
 @app.route('/update/<pubtype>/<record_id>', methods=['GET', 'POST'])
 @login_required
@@ -385,15 +408,23 @@ def edit_record(record_id='', pubtype=''):
                                                                          title=form.data.get('title')),
                            site=theme(request.access_route), action='update', pubtype=pubtype, record_id=record_id)
 
+@app.route('/make_admin/<user_id>')
+@login_required
+def make_admin(user_id=''):
+    if user_id:
+        ma_solr = Solr(core='hoe_users', data=[{'id': user_id, 'role': {'set': 'admin'}}])
+        ma_solr.update()
+        flash(gettext('%s upgraded to admin!' % user_id), 'success')
+        return redirect(url_for('index'))
+    else:
+        flash(gettext('You did not supply an ID!'), 'danger')
+        return redirect(url_for('index'))
+
 @app.route('/delete/<record_id>')
 def delete_record(record_id=''):
-    class DeleteDummy:
-        data = {'id': record_id}
+    delete_record_solr = Solr(core='hoe', del_id=record_id)
+    delete_record_solr.delete()
 
-    form = DeleteDummy()
-    solr_converter(form, action='delete')
-
-    # return redirect(url_for('dashboard'))
     return jsonify({'deleted': True})
 
 @app.route('/add/file')
@@ -414,10 +445,10 @@ class User(UserMixin):
         self.role = role
         self.email = email
         self.accesstoken = accesstoken
-        if redis_store.exists(id):
-            _user = redis_store.hgetall(id)
-            tmp = json.dumps(_user)
-            _user = json.loads(tmp)
+        user_solr = Solr(core='hoe_users', query='id:%s' % id, facet='false')
+        user_solr.request()
+        if user_solr.count() > 0:
+            _user = user_solr.results[0]
             self.name = _user.get('name')
             self.role = _user.get('role')
             self.email = _user.get('email')
@@ -428,7 +459,9 @@ class User(UserMixin):
 
     @classmethod
     def get_user(self_class, id):
-        return redis_store.hgetall(id)
+        user_solr = Solr(core='hoe_users', query='id:%s' % id)
+        user_solr.request()
+        return user_solr.results[0]
 
     @classmethod
     def get(self_class, id):
@@ -477,17 +510,23 @@ def login():
                                        'passwd': base64.b64encode(request.form.get('password').encode('ascii'))}).json()
         logging.info(authuser)
         if authuser.get('email'):
-            if not redis_store.exists(request.form.get('username')):
+            user_solr = Solr(core='hoe_users', query='id:%s' % authuser.get('id'), facet='false')
+            user_solr.request()
+            if user_solr.count() == 0:
+                tmp = {}
                 accesstoken = make_secure_token(
                     base64.b64encode(request.form.get('username').encode('ascii')) + base64.b64encode(
                         request.form.get('password').encode('ascii')))
-                redis_store.hset(request.form.get('username'), 'name', '%s %s' % (authuser.get('given_name'), authuser.get('last_name')))
-                redis_store.hset(request.form.get('username'), 'email', authuser.get('email'))
-                redis_store.hset(request.form.get('username'), 'role', 'user')
-                redis_store.hset(request.form.get('username'), 'accesstoken', accesstoken)
+                tmp.setdefault('id', request.form.get('username').encode('ascii'))
+                tmp.setdefault('name', '%s %s' % (authuser.get('given_name'), authuser.get('last_name')))
+                tmp.setdefault('email', authuser.get('email'))
+                tmp.setdefault('role', 'user')
+                tmp.setdefault('accesstoken', accesstoken)
                 user.name = '%s %s' % (authuser.get('given_name'), authuser.get('last_name'))
                 user.email = authuser.get('email')
                 user.accesstoken = accesstoken
+                new_user_solr = Solr(core='hoe_users', data=[tmp], facet='false')
+                new_user_solr.update()
             login_user(user)
 
             return redirect(next or url_for('index'))
@@ -513,47 +552,47 @@ def flash_errors(form):
         for error in errors:
             flash('Error in the %s field: %s' % (getattr(form, field).label.text, error), 'error')
 
-@app.route('/edit/user/<loginid>',methods=['GET', 'POST'])
-@app.route('/register', methods=['GET', 'POST'])
-def register(loginid=None):
-    form = UserForm()
-    if form.validate_on_submit():
-        if ORCID_RE.match(form.loginid.data):
-            # TODO: Check with ORCID OAUTH
-            pass
-        else:
-            # TODO: This isn't right yet...
-            if current_user.role != 'admin' and not loginid and form.password.data.encode('ascii') != 'admin':
-                response = requests.post('https://api-test.ub.rub.de/ldap/authenticate/',
-                                         data={'nocheck': 'true',
-                                               'userid': base64.b64encode(form.loginid.data.encode('ascii')),
-                                               'passwd': base64.b64encode(form.password.data.encode('ascii'))})
-                if str(response.status_code).startswith('4') or str(response.status_code).startswith('5'):
-                    if response.status_code == 401:
-                        flash('Invalid password. Please try agein...', 'danger')
-                        #flash('%s (%s)' % (response.reason, response.status_code))
-                    else:
-                        flash('%s (%s)' % (response.reason, response.status_code))
-                    return render_template('register.html', form=form, header='User Registration')
-
-                hash = make_secure_token(
-                    base64.b64encode(form.loginid.data.encode('ascii')) + base64.b64encode(form.password.data.encode('ascii')))
-                redis_store.hset(form.loginid.data, 'auth_token', hash)
-
-            redis_store.hset(form.loginid.data, 'email', form.email.data)
-            redis_store.hset(form.loginid.data, 'name', form.name.data)
-            redis_store.hset(form.loginid.data, 'role', form.role.data)
-
-    if loginid:
-        edit_user = redis_store.hgetall(loginid)
-        tmp = json.dumps(edit_user)
-        edit_user = json.loads(tmp)
-        form.loginid.data = loginid
-        form.name.data = edit_user.get('name')
-        form.email.data = edit_user.get('email')
-        form.role.data = edit_user.get('role')
-    flash_errors(form)
-    return render_template('register.html', form=form, header='User Registration', edit_user=loginid)
+# @app.route('/edit/user/<loginid>',methods=['GET', 'POST'])
+# @app.route('/register', methods=['GET', 'POST'])
+# def register(loginid=None):
+#     form = UserForm()
+#     if form.validate_on_submit():
+#         if ORCID_RE.match(form.loginid.data):
+#             # TODO: Check with ORCID OAUTH
+#             pass
+#         else:
+#             # TODO: This isn't right yet...
+#             if current_user.role != 'admin' and not loginid and form.password.data.encode('ascii') != 'admin':
+#                 response = requests.post('https://api-test.ub.rub.de/ldap/authenticate/',
+#                                          data={'nocheck': 'true',
+#                                                'userid': base64.b64encode(form.loginid.data.encode('ascii')),
+#                                                'passwd': base64.b64encode(form.password.data.encode('ascii'))})
+#                 if str(response.status_code).startswith('4') or str(response.status_code).startswith('5'):
+#                     if response.status_code == 401:
+#                         flash('Invalid password. Please try agein...', 'danger')
+#                         #flash('%s (%s)' % (response.reason, response.status_code))
+#                     else:
+#                         flash('%s (%s)' % (response.reason, response.status_code))
+#                     return render_template('register.html', form=form, header='User Registration')
+#
+#                 hash = make_secure_token(
+#                     base64.b64encode(form.loginid.data.encode('ascii')) + base64.b64encode(form.password.data.encode('ascii')))
+#                 redis_store.hset(form.loginid.data, 'auth_token', hash)
+#
+#             redis_store.hset(form.loginid.data, 'email', form.email.data)
+#             redis_store.hset(form.loginid.data, 'name', form.name.data)
+#             redis_store.hset(form.loginid.data, 'role', form.role.data)
+#
+#     if loginid:
+#         edit_user = redis_store.hgetall(loginid)
+#         tmp = json.dumps(edit_user)
+#         edit_user = json.loads(tmp)
+#         form.loginid.data = loginid
+#         form.name.data = edit_user.get('name')
+#         form.email.data = edit_user.get('email')
+#         form.role.data = edit_user.get('role')
+#     flash_errors(form)
+#     return render_template('register.html', form=form, header='User Registration', edit_user=loginid)
 
 @app.route('/search')
 def search():
@@ -589,7 +628,15 @@ def search():
         mystart = 1 + (pagination.page - 1) * pagination.per_page
         #myend = mystart + pagination.per_page - 1
         logging.info(query)
-        return render_template('resultlist.html', records=search_solr.results, pagination=pagination, facet_data=search_solr.facets, header=gettext('Resultlist'), site=theme(request.access_route), offset=mystart - 1, query=query, filterquery=filterquery)
+        return render_template('resultlist.html', records=search_solr.results, pagination=pagination, facet_data=search_solr.facets, header=query, site=theme(request.access_route), offset=mystart - 1, query=query, filterquery=filterquery, target='search')
+
+@app.route('/export/solr_dump')
+def solr_dump():
+    export_solr = Solr(export_field='wtf_json')
+    filename = export_solr.export()
+    flash(gettext('Exported internal format to %s' % filename), 'success')
+
+    return redirect('dashboard')
 
 if __name__ == '__main__':
     app.run()

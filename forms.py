@@ -1,7 +1,7 @@
 from flask import Markup
 from flask.ext.babel import gettext, ngettext, lazy_gettext
 from flask.ext.wtf import Form, RecaptchaField
-from wtforms import StringField, SubmitField, TextAreaField, BooleanField, SelectField, FileField, HiddenField, FieldList, FormField, PasswordField
+from wtforms import StringField, SubmitField, TextAreaField, BooleanField, SelectField, FileField, HiddenField, FieldList, FormField, PasswordField, SelectMultipleField
 from wtforms.validators import DataRequired, UUID, URL, Email, Optional, Regexp, ValidationError
 from wtforms.widgets import TextInput
 from re import IGNORECASE
@@ -16,6 +16,7 @@ LICENSES = (
 )
 
 LANGUAGES = [
+    ('', 'Select a Language'),
         ('alb', gettext('Albanian')),
         ('ara', gettext('Arabic')),
         ('bos', gettext('Bosnian')),
@@ -59,7 +60,7 @@ class URIForm(Form):
 
 class PersonForm(Form):
     name = StringField(gettext('Name'), widget=CustomTextInput(placeholder=gettext('Family name, given name')))
-    role = SelectField('Role', choices=[]) #  Use this as an interface: Roles are dependent on the publication type
+    role = SelectMultipleField('Role', choices=[]) #  Use this as an interface: Roles are dependent on the publication type
     uri = StringField(gettext('URI'), validators=[URL(), Optional()])
     viaf = StringField(gettext('VIAF'), validators=[Optional()], description=Markup(gettext('<a href="http://www.viaf.org" target="_blank">Find in VIAF</a>')))
     isni = StringField(gettext('ISNI'), validators=[Optional()], description=Markup(gettext('<a href="http://www.isni.org" target="_blank">Find in ISNI</a>')))
@@ -67,8 +68,8 @@ class PersonForm(Form):
     admin_only = ['viaf', 'isni']
 
 class AdvancedPrintPersonForm(PersonForm):
-    role = SelectField(gettext('Role'), choices=[
-        ('', 'Select a Role'),
+    role = SelectMultipleField(gettext('Role'), choices=[
+        ('', gettext('Select one or more Roles')),
         ('aut', gettext('Author')),
         ('aft', gettext('Author of Afterword')),
         ('aui', gettext('Author of Introduction')),
@@ -84,8 +85,8 @@ class PrintPersonForm(PersonForm):
     name_other = StringField(gettext('Name Variant'), widget=CustomTextInput(placeholder=gettext('Name variant for the person')))
     birth_date = StringField(gettext('Birth Date'))
     death_date = StringField(gettext('Death Date'))
-    role = SelectField(gettext('Role'), choices=[
-        ('', 'Select a Role'),
+    role = SelectMultipleField(gettext('Role'), choices=[
+        ('', gettext('Select one or more Roles')),
         ('ann', gettext('Annotator')),
         ('aut', gettext('Author')),
         ('ato', gettext('Autographer')),
@@ -99,8 +100,8 @@ class PrintPersonForm(PersonForm):
     ])
 
 class CodexPersonForm(PrintPersonForm):
-    role = SelectField(gettext('Role'), choices=[
-        ('', 'Select a Role'),
+    role = SelectMultipleField(gettext('Role'), choices=[
+        ('', gettext('Select one or more Roles')),
         ('ann', gettext('Annotator')),
         ('aut', gettext('Author')),
         ('ato', gettext('Autographer')),
@@ -115,10 +116,11 @@ class CodexPersonForm(PrintPersonForm):
 
 class CorporationForm(Form):
     name = StringField(gettext('Name'))
-    role = SelectField(gettext('Role'), choices=[
-        ('', 'Select a Role'),
+    role = SelectMultipleField(gettext('Role'), choices=[
+        ('', 'Select one or more Roles'),
         ('edt', gettext('Editor')),
         ('his', gettext('Host institution')),
+        ('fmo', gettext('Former Owner')),
     ])
     gnd = StringField(gettext('GND'), validators=[Optional(), Regexp('(1|10)\d{7}[0-9X]|[47]\d{6}-\d|[1-9]\d{0,7}-[0-9X]|3\d{7}[0-9X]')])
     viaf = StringField(gettext('VIAF'), validators=[Optional()])
@@ -147,6 +149,7 @@ class TranslatedTitleForm(Form):
 
 class BasicWorkForm(Form):
     pubtype = SelectField(gettext('Type'), validators=[Optional()], choices=[
+        ('', 'Select a Publication Type'),
         ('ArticleJournal', gettext('Article in Journal')),
         ('Catalogue', gettext('Catalogue')),
         ('Chapter', gettext('Chapter')),
@@ -220,7 +223,7 @@ class CatalogueForm(BasicWorkForm):
         ]
 
 class WorkForm(BasicWorkForm):
-    DOI = StringField(gettext('DOI'), validators=[Optional(), Regexp('^10.\d{4}/\d+-\d+X?(\d+)\d+<[\d\w]+:[\d\w]*>\d+.\d+.\w+;\d$', IGNORECASE)])
+    DOI = StringField(gettext('DOI'), validators=[Optional(), Regexp('^10.\d{4}/.+', IGNORECASE)])
     issued = StringField(gettext('Date'), validators=[DataRequired(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
     circa = BooleanField(gettext('Estimated'))
     additions = StringField(gettext('Additions'), validators=[Optional()])
@@ -249,7 +252,7 @@ class ContainerForm(AdvancedPrintForm):
         ('facsimile', gettext('Facsimile')),
         ('festschrift', gettext('Festschrift')),
     ])
-    ISBN = FieldList(StringField(gettext('ISBN of the Collection'), validators=[Optional(), Isbn]), min_entries=1)
+    ISBN = FieldList(StringField(gettext('ISBN'), validators=[Optional(), Isbn]), min_entries=1)
 
 class CollectionForm(ContainerForm):
 
@@ -277,8 +280,8 @@ class CollectionForm(ContainerForm):
 
 class ConferenceForm(CollectionForm):
     event_name = StringField(gettext('Name of the event'), validators=[Optional()])
-    startdate_conference = StringField(gettext('First day of the event'), validators=[Optional(), Regexp('[12]\d{3}-[01]\d-[0123]\d')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
-    enddate_conference = StringField(gettext('Last day of the event'), validators=[Optional(), Regexp('[12]\d{3}-[01]\d-[0123]\d')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
+    startdate_conference = StringField(gettext('First day of the event'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
+    enddate_conference = StringField(gettext('Last day of the event'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
     place = StringField(gettext('Location of the event'), validators=[Optional()])
 
     def groups(self):
@@ -307,7 +310,7 @@ class ConferenceForm(CollectionForm):
 class EditionForm(CollectionForm):
     pass
 
-class TranslationForm(EditionForm):
+class TranslationForm(CollectionForm):
     pass
 
 class MonographForm(AdvancedPrintForm):
@@ -483,8 +486,8 @@ class ArticleRelationForm(ChapterRelationForm):
     issue = StringField(gettext('Issue'))
 
 class ContributionForm(WorkForm):
-    parent_title = StringField(gettext('Parent Title'), validators=[DataRequired()], widget=CustomTextInput(placeholder=gettext('The Title of the Parent Reference')))
-    parent_subtitle = StringField(gettext('Parent Subtitle'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The Subtitle of the Parent Reference')))
+    #parent_title = StringField(gettext('Parent Title'), validators=[DataRequired()], widget=CustomTextInput(placeholder=gettext('The Title of the Parent Reference')))
+    #parent_subtitle = StringField(gettext('Parent Subtitle'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The Subtitle of the Parent Reference')))
     subtype = SelectField(gettext('Subtype'), validators=[Optional()], choices=[
         ('', gettext('Select a Subtype')),
         ('afterword', gettext('Afterword')),
@@ -496,22 +499,21 @@ class ContributionForm(WorkForm):
     ])
     person = FieldList(FormField(AdvancedPrintPersonForm), min_entries=1)
 
-    user_only = ['parent_title', 'parent_subtitle']
+    #user_only = ['parent_title', 'parent_subtitle']
 
 class ChapterForm(ContributionForm):
     is_part_of = FieldList(FormField(ChapterRelationForm), min_entries=1)
 
     def groups(self):
         yield [
-            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement,
+            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.title_translated,
                        self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.parent_title, self.parent_subtitle, self.is_part_of],
-             'label': gettext('Journal')},
+            {'group': [self.is_part_of], 'label': gettext('Part of')},
             {'group': [self.has_part], 'label': gettext('Has Part')},
             {'group': [self.other_version], 'label': gettext('Other Version')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
@@ -527,15 +529,14 @@ class ArticleJournalForm(ContributionForm):
 
     def groups(self):
         yield [
-            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement,
+            {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.title_translated,
                        self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.parent_title, self.parent_subtitle, self.is_part_of],
-             'label': gettext('Journal')},
+            {'group': [self.is_part_of], 'label': gettext('Journal')},
             {'group': [self.has_part], 'label': gettext('Has Part')},
             {'group': [self.other_version], 'label': gettext('Other Version')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
@@ -707,6 +708,9 @@ class UserForm(Form):
     password = PasswordField(gettext('Password'))
     name = StringField(gettext('Name'), description=gettext('First Name Last Name'))
     email = StringField(gettext('Email'), validators=[Email(),])
-    role = SelectField(gettext('Role'), choices=[('user', gettext('User')), ('admin', gettext('Admin'))], default='user')
+    role = SelectField(gettext('Role'), choices=[
+        ('', 'Select a Role'),
+        ('user', gettext('User')),
+        ('admin', gettext('Admin'))], default='user')
     recaptcha = RecaptchaField()
     #submit = SubmitField(Markup('<i class="fa fa-user-plus"></i> Register'))

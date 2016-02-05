@@ -64,3 +64,7 @@ label > input[type="file"] {display: none;}
 .tab-container .col-xs-9 {padding-left: 0px;}
 .control-label {margin-left: 15px;}
 #lib_filter {margin-bottom: 64px;}
+.multi_enclosure .control-label {text-transform: uppercase; font-size: 12px;}
+#map, #record_map {height: 360px; margin-top: 14px;}
+#map {margin-top: -55px;}
+dd hr {margin-bottom: 6px; margin-top: 6px;}
