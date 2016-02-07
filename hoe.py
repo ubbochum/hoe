@@ -158,7 +158,7 @@ SOURCE_CLASS_MAP = {
     'Other': 'secondary',
 }
 
-def _record2solr(form, action):
+def _record2solr(form):
     solr_data = {}
     wtf = json.dumps(form.data)
     solr_data.setdefault('wtf_json', wtf)
@@ -241,6 +241,13 @@ def _record2solr(form, action):
             solr_data.setdefault('container_title', form.data.get(field).strip())
         if field == 'series_title' and form.data.get(field):
             solr_data.setdefault('series_title', form.data.get(field).strip())
+        # if field == 'is_part_of' and len(form.data.get(field)) > 0:
+        #     for idx, ipo in enumerate(form.data.get(field)):
+        #         if ipo.get('is_part_of'):
+        #             ipo_solr = Solr(query='id:%s' % ipo.get('is_part_of'), facet='false')
+        #             ipo_solr.request()
+        #             if ipo_solr.results[0]:
+        #                 solr_data.setdefault('container_title', ipo_solr.results[0].get('title'))
         if field == 'ISSN' and len(form.data.get(field)) > 0:
             for issn in form.data.get(field):
                 solr_data.setdefault('issn', []).append(issn.strip())
@@ -323,7 +330,7 @@ def new_record(pubtype='article-journal', primary_id=''):
             flash_errors(form)
             return render_template('test_form.html', form=form, header=gettext('New Record'),
                                    site=theme(request.access_route), action='create', pubtype=pubtype)
-        _record2solr(form, action='create')
+        _record2solr(form)
         return redirect(url_for('dashboard'))
 
 
@@ -537,7 +544,7 @@ def login():
     form = LoginForm()
     next = get_redirect_target()
     #return render_template('login.html', form=form, header='Sign In', next=next, orcid_sandbox_client_id=orcid_sandbox_client_id)
-    return render_template('login.html', form=form, header='Sign In', next=next, site=theme(request.access_route))
+    return render_template('login.html', form=form, header=gettext('Sign In'), next=next, site=theme(request.access_route))
 
 @app.route('/logout')
 @login_required
@@ -631,12 +638,48 @@ def search():
         return render_template('resultlist.html', records=search_solr.results, pagination=pagination, facet_data=search_solr.facets, header=query, site=theme(request.access_route), offset=mystart - 1, query=query, filterquery=filterquery, target='search')
 
 @app.route('/export/solr_dump')
-def solr_dump():
+def export_solr_dump():
     export_solr = Solr(export_field='wtf_json')
     filename = export_solr.export()
+    target_solr = Solr(core='hoe_users', data=[{'id': '%s_%s' % (current_user.id, filename.split('_')[1]), 'dump': open(filename).read()}])
+    target_solr.update()
     flash(gettext('Exported internal format to %s' % filename), 'success')
 
     return redirect('dashboard')
+
+@app.route('/import/solr_dumps')
+def import_solr_dumps():
+    page = int(request.args.get('page', 1))
+    solr_dumps = Solr(core='hoe_users', query='id:*.json', facet='false', start=(page - 1) * 10)
+    solr_dumps.request()
+    num_found = solr_dumps.count()
+    pagination = Pagination(page=page, total=num_found, found=num_found, bs_version=3, search=True,
+                                record_name=gettext('dumps'),
+                                search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
+    mystart = 1 + (pagination.page - 1) * pagination.per_page
+    return render_template('solr_dumps.html', records=solr_dumps.results, offset=mystart - 1, pagination=pagination, header=gettext('Import Dump'), del_redirect='dashboard')
+
+@app.route('/import/solr_dump/<filename>')
+def import_solr_dump(filename=''):
+    if filename:
+
+        import_solr = Solr(core='hoe_users', query='id:%s' % filename, facet='false')
+        import_solr.request()
+
+        thedata = json.loads(import_solr.results[0].get('dump')[0])
+        for doc in thedata:
+            form = PUBTYPE2FORM.get(doc.get('pubtype')).from_json(doc)
+            _record2solr(form)
+        flash('%s records imported!' % len(thedata), 'success')
+
+        return redirect('dashboard')
+
+@app.route('/delete/solr_dump/<record_id>')
+def delete_dump(record_id=''):
+    delete_record_solr = Solr(core='hoe_users', del_id=record_id)
+    delete_record_solr.delete()
+
+    return jsonify({'deleted': True})
 
 if __name__ == '__main__':
     app.run()
