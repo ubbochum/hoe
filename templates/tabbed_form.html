@@ -64,9 +64,6 @@
 {% endblock %}
 {% block scripts %}
     {{ super() }}
-    {% if action == 'update' %}
-        <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
-    {% endif %}
     <script>
         function scrollto(element) {
             $('html, body').animate({scrollTop: $(element).offset().top}, 'slow');
@@ -131,12 +128,12 @@
         $(document).on('change', '#ISBN', function (event) {
             dedupe('isbn', $(this));
         });
-        {#$(document).on('change', '#pubtype', function(event){
+        $(document).on('change', '#pubtype', function(event){
             console.log($(this).val());
             console.log($('#id').val());
             $.post('/update/' + $(this).val() + '/' + $('#id').val(), $('#theform').serialize());
             window.location.href = '/update/' + $(this).val() + '/' + $('#id').val();
-        });#}
+        });
         {% if action == 'create' %}
             $(document).on('change', '#pubtype', function (event) {
                 var pubtype = $(this).val();
@@ -149,14 +146,14 @@
                 });
             });
         {% elif action == 'update' %}
-            console.log($('.row').attr('id'));
-            var socket = io.connect('https://hb2.ub.rub.de/socketio/hb2');
+            {#console.log($('.row').attr('id'));
+            var socket = io.connect('https://hb2.ub.rub.de/socketio/hb2');#}
             $(document).on('change', '#pubtype', function (event) {
                 window.location.href = '/update/' + $(this).val() + '/' + $('.row').attr('id');
             });
-            $(document).on('submit', '#theform', function (event) {
+            {#$(document).on('submit', '#theform', function (event) {
                 socket.emit('unlock', {data: $('.row').attr('id')});
-            });
+            });#}
         {% endif %}
     </script>
     <script>

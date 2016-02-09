@@ -133,7 +133,7 @@ def index():
 
 @app.route('/contact')
 def contact():
-    return redirect('mailto:bibliographie-ub.rub.de')
+    return redirect('mailto:ottomanhistoriography@rub.de')
 
 def flash_errors(form):
     for field, errors in form.errors.items():
@@ -325,6 +325,33 @@ def dashboard():
 def new_record(pubtype='article-journal', primary_id=''):
     form = PUBTYPE2FORM.get(pubtype)()
 
+    if request.is_xhr:
+        logging.info(request.form)
+        form.formdata = request.form
+        # Do we have any data already?
+        if not form.title.data:
+            solr_data = {}
+            wtf = json.dumps(form.data)
+            solr_data.setdefault('wtf_json', wtf)
+            for field in form.data:
+                # logging.info('%s => %s' % (field, form.data.get(field)))
+                if field == 'id':
+                    solr_data.setdefault('id', form.data.get(field).strip())
+                if field == 'created':
+                    solr_data.setdefault('created', form.data.get(field).strip().replace(' ', 'T') + 'Z')
+                if field == 'changed':
+                    solr_data.setdefault('changed', form.data.get(field).strip().replace(' ', 'T') + 'Z')
+                if field == 'owner':
+                    solr_data.setdefault('owner', form.data.get(field).strip())
+                if field == 'pubtype':
+                    solr_data.setdefault('pubtype', form.data.get(field).strip())
+
+            record_solr = Solr(core='hoe', data=[solr_data])
+            record_solr.update()
+        else:
+            _record2solr(form)
+        return jsonify({'status': 200})
+
     if form.validate_on_submit():
         if form.errors:
             flash_errors(form)
@@ -333,7 +360,8 @@ def new_record(pubtype='article-journal', primary_id=''):
         _record2solr(form)
         return redirect(url_for('dashboard'))
 
-
+    if request.args.get('subtype'):
+        form.subtype.data = request.args.get('subtype')
     form.id.data = str(uuid.uuid4())
     form.created.data = datetime.datetime.now()
     form.changed.data = datetime.datetime.now()
