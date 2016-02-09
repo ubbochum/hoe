@@ -32,8 +32,10 @@
             accessToken: 'pk.eyJ1IjoiYWhhZ2VuYnJ1Y2giLCJhIjoiY2lqdnY1cHB2MGMxMnc4bTNnczkxNW1kNCJ9.kfslXFi1i7n_xPCXQ5lsHA'
         }).addTo(map);
         {% for lib_facet in libraries %}
+            {% if lib_facet.library.latitude and lib_facet.library.longitude %}
             L.marker([{{ lib_facet.library.latitude }}, {{ lib_facet.library.longitude }}]).addTo(map)
-            .bindPopup('<a href="{{ lib_facet.library.uri }}">{{ lib_facet.library.label }}</a>.<br><a href="/search?q={{ query|urlencode }}&amp;filter=flibrary:%22{{ lib_facet.library.label|urlencode }}%22{% if filterquery %}{% for fq in filterquery %}&amp;filter={{ fq }}{% endfor %}{% endif %}{% if mysort %}&amp;sort={{ mysort }}{% endif %}">{{ _("Show all %(count)s records", count=lib_facet.count) }}</a>');
+            .bindPopup('<a href="{{ lib_facet.library.uri }}">{{ lib_facet.library.label }}</a>.<br><a href="/search?q={{ query|urlencode }}&amp;filter=flibrary:%22{{ lib_facet.library.label|urlencode }}%22{% if filterquery %}{% for fq in filterquery %}&amp;filter={{ fq }}{% endfor %}{% endif %}{% if mysort %}&amp;sort={{ mysort }}{% endif %}">{{ _("Show all %(count)s records", count=flibraries.get(lib_facet.library.label)) }}</a>');
+            {% endif %}
         {% endfor %}
     </script>
 {% endblock %}

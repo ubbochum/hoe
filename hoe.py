@@ -345,10 +345,26 @@ def new_record(pubtype='article-journal', primary_id=''):
 @app.route('/retrieve/<pubtype>/<record_id>')
 def show_record(pubtype, record_id=''):
     ROLE_MAP = {
+        'ann': gettext('Annotator'),
         'aut': gettext('Author'),
+        'aft': gettext('Author of Afterword'),
+        'aui': gettext('Author of Introduction'),
+        'ato': gettext('Autographer'),
+        'bnd': gettext('Binder'),
+        'dte': gettext('Dedicatee'),
+        'dto': gettext('Dedicator'),
         'edt': gettext('Editor'),
-        'his': gettext('Host institution'),
         'fmo': gettext('Former Owner'),
+        'hnr': gettext('Honoree'),
+        'his': gettext('Host institution'),
+        'ill': gettext('Illuminator'),
+        'ive': gettext('Interviewee'),
+        'ivr': gettext('Interviewer'),
+        'pat': gettext('Patron'),
+        'prt': gettext('Printer'),
+        'scr': gettext('Scribe'),
+        'spk': gettext('Speaker'),
+        'trl': gettext('Translator'),
     }
     LANGUAGE_MAP = {
         'alb': gettext('Albanian'),
@@ -360,7 +376,8 @@ def show_record(pubtype, record_id=''):
         'eng': gettext('English'),
         'fre': gettext('French'),
         'ger': gettext('German'),
-        'gre': gettext('Greek'),
+        'grc': gettext('Ancient Greek'),
+        'gre': gettext('Modern Greek'),
         'ita': gettext('Italian'),
         'lat': gettext('Latin'),
         'peo': gettext('Persian'),
@@ -406,7 +423,7 @@ def edit_record(record_id='', pubtype=''):
             return render_template('tabbed_form.html', form=form,
                                    header=gettext('Edit: %(title)s', title=form.data.get('title')),
                                    site=theme(request.access_route), action='update', pubtype=pubtype)
-        _record2solr(form, action='update')
+        _record2solr(form)
         return redirect(url_for('dashboard'))
 
     form.changed.data = datetime.datetime.now()
@@ -634,8 +651,19 @@ def search():
         pagination = Pagination(page=page, total=num_found, found=num_found, bs_version=3, search=True, record_name=gettext('titles'), search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
         mystart = 1 + (pagination.page - 1) * pagination.per_page
         #myend = mystart + pagination.per_page - 1
-        logging.info(query)
-        return render_template('resultlist.html', records=search_solr.results, pagination=pagination, facet_data=search_solr.facets, header=query, site=theme(request.access_route), offset=mystart - 1, query=query, filterquery=filterquery, target='search')
+        #logging.info(query)
+        flibraries = {}
+        for flib in search_solr.facets.get('flibrary'):
+            flibraries.setdefault(list(flib.keys())[0], list(flib.values())[0])
+        #logging.info(flibraries)
+        libraries = []
+        for lib_facet in search_solr.facets.get('library'):
+            for library in lib_facet:
+                libraries.append({'library': eval(library)})
+        return render_template('resultlist.html', records=search_solr.results, pagination=pagination,
+                               facet_data=search_solr.facets, header=query, site=theme(request.access_route),
+                               offset=mystart - 1, query=query, filterquery=filterquery, flibraries=flibraries,
+                               libraries=libraries, target='search')
 
 @app.route('/export/solr_dump')
 def export_solr_dump():
@@ -657,7 +685,7 @@ def import_solr_dumps():
                                 record_name=gettext('dumps'),
                                 search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
     mystart = 1 + (pagination.page - 1) * pagination.per_page
-    return render_template('solr_dumps.html', records=solr_dumps.results, offset=mystart - 1, pagination=pagination, header=gettext('Import Dump'), del_redirect='dashboard')
+    return render_template('solr_dumps.html', records=solr_dumps.results, offset=mystart - 1, pagination=pagination, header=gettext('Import Dump'))
 
 @app.route('/import/solr_dump/<filename>')
 def import_solr_dump(filename=''):
@@ -673,13 +701,6 @@ def import_solr_dump(filename=''):
         flash('%s records imported!' % len(thedata), 'success')
 
         return redirect('dashboard')
-
-@app.route('/delete/solr_dump/<record_id>')
-def delete_dump(record_id=''):
-    delete_record_solr = Solr(core='hoe_users', del_id=record_id)
-    delete_record_solr.delete()
-
-    return jsonify({'deleted': True})
 
 if __name__ == '__main__':
     app.run()

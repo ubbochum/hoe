@@ -26,7 +26,8 @@ LANGUAGES = [
         ('eng', gettext('English')),
         ('fre', gettext('French')),
         ('ger', gettext('German')),
-        ('gre', gettext('Greek')),
+        ('grc', gettext('Ancient Greek')),
+        ('gre', gettext('Modern Greek')),
         ('ita', gettext('Italian')),
         ('lat', gettext('Latin')),
         ('peo', gettext('Persian')),
@@ -224,7 +225,7 @@ class CatalogueForm(BasicWorkForm):
 
 class WorkForm(BasicWorkForm):
     DOI = StringField(gettext('DOI'), validators=[Optional(), Regexp('^10.\d{4}/.+', IGNORECASE)])
-    issued = StringField(gettext('Date'), validators=[DataRequired(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
+    issued = StringField(gettext('Date'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
     circa = BooleanField(gettext('Estimated'))
     additions = StringField(gettext('Additions'), validators=[Optional()])
     keyword = FieldList(FormField(URIForm), min_entries=1)

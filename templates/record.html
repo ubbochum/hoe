@@ -188,19 +188,35 @@
                     {% endfor %}
                 </dd>
             {% endif %}
+            {% if record.data.uri %}
+                <dt>
+                    {% trans count=record.data.uri|length %}
+                    URI
+                    {% pluralize %}
+                    URIs
+                    {% endtrans %}
+                </dt>
+                <dd>
+                    {% for uri in record.data.uri %}
+                        <a href="{{ uri }}">{{ uri }}</a>{% if not loop.last %}<br/>{% endif %}
+                    {% endfor %}
+                </dd>
+            {% endif %}
             {% if record.data.abstract %}
                 <dt>{{ _('Description') }}</dt>
                 <dd>{{ record.data.abstract }}</dd>
             {% endif %}
-            {% if record.data.library.0.latitude %}
-                <dt>
-                    {% trans count=record.data.library|length %}
-                    Library
-                    {% pluralize %}
-                    Libraries
-                    {% endtrans %}
-                </dt>
-                <dd id="record_map"></dd>
+            {% if record.data.library %}
+                {% if record.data.library.0.latitude %}
+                    <dt>
+                        {% trans count=record.data.library|length %}
+                        Library
+                        {% pluralize %}
+                        Libraries
+                        {% endtrans %}
+                    </dt>
+                    <dd id="record_map"></dd>
+                {% endif %}
             {% endif %}
             {% if mlt %}
                 <dt>{{ _('Similar Records') }}</dt>
@@ -267,23 +283,25 @@
             $.post('/apparent_duplicate', {'id': '{{ record_id }}', 'apparent_dup': dup});
         })*/
     </script>
-    {% if record.data.library.0.latitude %}
-    <script src="{{ url_for('static', filename='leaflet/leaflet.js') }}"></script>
-    <script>
-        var map = L.map('record_map').setView([48.7, 20.2], 3);
+    {% if record.data.library %}
+        {% if record.data.library.0.latitude %}
+        <script src="{{ url_for('static', filename='leaflet/leaflet.js') }}"></script>
+        <script>
+            var map = L.map('record_map').setView([48.7, 20.2], 3);
 
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
-            maxZoom: 18,
-            id: 'ahagenbruch.p072ck6j',
-            accessToken: 'pk.eyJ1IjoiYWhhZ2VuYnJ1Y2giLCJhIjoiY2lqdnY1cHB2MGMxMnc4bTNnczkxNW1kNCJ9.kfslXFi1i7n_xPCXQ5lsHA'
-        }).addTo(map);
-        {% for library in record.library %}
-            {% if library.data.latitude and library.data.longitude %}
-            L.marker([{{ library.data.latitude }}, {{ library.data.longitude }}]).addTo(map)
-            .bindPopup('<a href="{{ library.data.uri }}">{{ library.data.label }}</a>.<br><a href="/search?q=flibrary:%22{{ library.data.label|urlencode }}%22">{{ _("Show all records") }}</a>');
-            {% endif %}
-        {% endfor %}
-    </script>
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+                maxZoom: 18,
+                id: 'ahagenbruch.p072ck6j',
+                accessToken: 'pk.eyJ1IjoiYWhhZ2VuYnJ1Y2giLCJhIjoiY2lqdnY1cHB2MGMxMnc4bTNnczkxNW1kNCJ9.kfslXFi1i7n_xPCXQ5lsHA'
+            }).addTo(map);
+            {% for library in record.library %}
+                {% if library.data.latitude and library.data.longitude %}
+                L.marker([{{ library.data.latitude }}, {{ library.data.longitude }}]).addTo(map)
+                .bindPopup('<a href="{{ library.data.uri }}">{{ library.data.label }}</a>.<br><a href="/search?q=flibrary:%22{{ library.data.label|urlencode }}%22">{{ _("Show all records") }}</a>');
+                {% endif %}
+            {% endfor %}
+        </script>
+        {% endif %}
     {% endif %}
 {% endblock %}
