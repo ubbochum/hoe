@@ -26,8 +26,7 @@ LANGUAGES = [
         ('eng', gettext('English')),
         ('fre', gettext('French')),
         ('ger', gettext('German')),
-        ('grc', gettext('Ancient Greek')),
-        ('gre', gettext('Modern Greek')),
+        ('gre', gettext('Greek')),
         ('ita', gettext('Italian')),
         ('lat', gettext('Latin')),
         ('peo', gettext('Persian')),
@@ -131,12 +130,14 @@ class CorporationForm(Form):
 
 class HasPartForm(Form):
     has_part = StringField(gettext('Has Part'))
+    pass
 
 class IsPartOfForm(Form):
     is_part_of = StringField(gettext('Is Part of'))
 
 class OtherVersionForm(Form):
     other_version = StringField(gettext('Other Version'))
+    pass
 
 class ContainerRelationForm(IsPartOfForm):
     volume = StringField(gettext('Volume'), validators=[Optional()])
@@ -148,7 +149,7 @@ class TranslatedTitleForm(Form):
     translated_title = StringField(gettext('Translated Title'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The translated title of the work')))
     language = SelectField(gettext('Language'), validators=[Optional()], choices=LANGUAGES)
 
-class BasicWorkForm(Form):
+class WorkForm(Form):
     pubtype = SelectField(gettext('Type'), validators=[Optional()], choices=[
         ('', 'Select a Publication Type'),
         ('ArticleJournal', gettext('Article in Journal')),
@@ -183,11 +184,21 @@ class BasicWorkForm(Form):
     owner = StringField(gettext('Owner'), validators=[DataRequired()], widget=CustomTextInput(readonly='readonly'))
     #deskman = StringField(gettext('Deskman'), validators=[Optional()])
     license = SelectField(gettext('License'), choices=LICENSES)
-    is_part_of = FieldList(FormField(IsPartOfForm), min_entries=1)
-    has_part = FieldList(FormField(HasPartForm), min_entries=1)
-    other_version = FieldList(FormField(OtherVersionForm), min_entries=1)
+    is_part_of = FieldList(StringField(gettext('Is Part of')), min_entries=1)
+    has_part = FieldList(StringField(gettext('Has Part')), min_entries=1)
+    other_version = FieldList(StringField(gettext('Other Version')), min_entries=1)
+    relation = FieldList(StringField(gettext('Is related to')), min_entries=1)
     key_publication = BooleanField(gettext('Key Publication'),
                                    description='A very important title to be included on a special publication list.')
+    DOI = StringField(gettext('DOI'), validators=[Optional(), Regexp('^10.\d{4}/.+', IGNORECASE)])
+    issued = StringField(gettext('Date'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
+    circa = BooleanField(gettext('Estimated'))
+    additions = StringField(gettext('Additions'), validators=[Optional()])
+    keyword = FieldList(FormField(URIForm), min_entries=1)
+    keyword_temporal = FieldList(StringField(gettext('Temporal'), validators=[Optional()]), min_entries=1)
+    keyword_geographic = FieldList(StringField(gettext('Geographic'), validators=[Optional()]), min_entries=1)
+    abstract = TextAreaField(gettext('Abstract'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('An abstract of the work')))
+    number_of_pages = StringField(gettext('Extent'), validators=[Optional()])
 
     #admin_only = ['id', 'created', 'changed', 'owner', 'deskman','viaf', 'isni']
     #user_only = ['role']
@@ -201,38 +212,6 @@ class LibraryForm(URIForm):
     longitude = StringField(gettext('Longitude'))
     call_number = StringField(gettext('Call Number'), validators=[Optional()], widget=CustomTextInput(
         placeholder=gettext('The string indicating the location of the work in the library')))
-
-class CatalogueForm(BasicWorkForm):
-    library = FieldList(FormField(LibraryForm), min_entries=1)
-
-    def groups(self):
-        yield [
-            {'group': [self.pubtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
-                        self.accessed, self.note, self.license
-                       ],
-             'label': gettext('Basic')},
-            {'group': [self.uri], 'label': gettext('ID')},
-            {'group': [self.person], 'label': gettext('Person')},
-            {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.is_part_of],
-             'label': gettext('Part of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
-            {'group': [self.library], 'label':gettext('Library')},
-            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
-             'label': gettext('Administrative')},
-        ]
-
-class WorkForm(BasicWorkForm):
-    DOI = StringField(gettext('DOI'), validators=[Optional(), Regexp('^10.\d{4}/.+', IGNORECASE)])
-    issued = StringField(gettext('Date'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
-    circa = BooleanField(gettext('Estimated'))
-    additions = StringField(gettext('Additions'), validators=[Optional()])
-    keyword = FieldList(FormField(URIForm), min_entries=1)
-    keyword_temporal = FieldList(StringField(gettext('Temporal'), validators=[Optional()]), min_entries=1)
-    keyword_geographic = FieldList(StringField(gettext('Geographic'), validators=[Optional()]), min_entries=1)
-    abstract = TextAreaField(gettext('Abstract'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('An abstract of the work')))
-    number_of_pages = StringField(gettext('Extent'), validators=[Optional()])
 
 class BasicPrintForm(WorkForm):
     publisher = StringField(gettext('Publisher'))
@@ -248,14 +227,36 @@ class AdvancedPrintForm(BasicPrintForm):
 class ContainerForm(AdvancedPrintForm):
     number_of_volumes = StringField(gettext('Number of Volumes'), validators=[Optional()])
     is_part_of = FieldList(FormField(ContainerRelationForm), min_entries=1)
+    ISBN = FieldList(StringField(gettext('ISBN'), validators=[Optional(), Isbn]), min_entries=1)
+
+class CatalogueForm(ContainerForm):
+
+    def groups(self):
+        yield [
+            {'group': [self.pubtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
+                       self.issued, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       ],
+             'label': gettext('Basic')},
+            {'group': [self.uri, self.DOI, self.ISBN, self.hbz_id], 'label': gettext('ID')},
+            {'group': [self.person], 'label': gettext('Person')},
+            {'group': [self.corporation], 'label': gettext('Corporation')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
+            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+                        ],
+             'label': gettext('Keyword')},
+            {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
+            {'group': [self.library], 'label':gettext('Library')},
+            {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
+             'label': gettext('Administrative')},
+        ]
+
+class CollectionForm(ContainerForm):
     subtype = SelectField(gettext('Subtype'), validators=[Optional()], choices=[
         ('', gettext('Select a Subtype')),
         ('facsimile', gettext('Facsimile')),
         ('festschrift', gettext('Festschrift')),
+        ('lexicon', gettext('Lexicon')),
     ])
-    ISBN = FieldList(StringField(gettext('ISBN'), validators=[Optional(), Isbn]), min_entries=1)
-
-class CollectionForm(ContainerForm):
 
     def groups(self):
         yield [
@@ -266,10 +267,7 @@ class CollectionForm(ContainerForm):
             {'group': [self.uri, self.DOI, self.ISBN, self.hbz_id], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.is_part_of],
-             'label': gettext('Part of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                         ],
              'label': gettext('Keyword')},
@@ -284,6 +282,11 @@ class ConferenceForm(CollectionForm):
     startdate_conference = StringField(gettext('First day of the event'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
     enddate_conference = StringField(gettext('Last day of the event'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=gettext('YYYY-MM-DD')), description=gettext("If you don't know the month and/or day please use 01"))
     place = StringField(gettext('Location of the event'), validators=[Optional()])
+    subtype = SelectField(gettext('Subtype'), validators=[Optional()], choices=[
+        ('', gettext('Select a Subtype')),
+        ('facsimile', gettext('Facsimile')),
+        ('festschrift', gettext('Festschrift')),
+    ])
 
     def groups(self):
         yield [
@@ -295,10 +298,7 @@ class ConferenceForm(CollectionForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.event_name, self.startdate_conference, self.enddate_conference, self.place], 'label': gettext('Event')},
-            {'group': [self.is_part_of],
-             'label': gettext('Part of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword,self.keyword_temporal, self.keyword_geographic
                         ],
              'label': gettext('Keyword')},
@@ -309,9 +309,13 @@ class ConferenceForm(CollectionForm):
         ]
 
 class EditionForm(CollectionForm):
-    pass
+    subtype = SelectField(gettext('Subtype'), validators=[Optional()], choices=[
+        ('', gettext('Select a Subtype')),
+        ('facsimile', gettext('Facsimile')),
+        ('festschrift', gettext('Festschrift')),
+    ])
 
-class TranslationForm(CollectionForm):
+class TranslationForm(EditionForm):
     pass
 
 class MonographForm(AdvancedPrintForm):
@@ -333,10 +337,7 @@ class MonographForm(AdvancedPrintForm):
             {'group': [self.uri, self.DOI, self.ISBN, self.hbz_id], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.is_part_of],
-             'label': gettext('Part of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                         ],
              'label': gettext('Keyword')},
@@ -392,6 +393,7 @@ class PrintForm(BasicPrintForm):
     printing_patent = StringField(gettext('Printing Patent'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The right to print a work')))
     publisher = StringField(gettext('Printer'))
     provenance = TextAreaField(gettext('Provenance'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('Information on the ownership of the work')))
+    autograph_text = TextAreaField(gettext('Autograph'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The text of the autograph')))
 
     def groups(self):
         yield [
@@ -403,13 +405,11 @@ class PrintForm(BasicPrintForm):
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.is_part_of], 'label': gettext('Part Of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                        ],
              'label': gettext('Keyword')},
-            {'group': [self.abstract, self.incipit, self.explicit, self.vignette, self.frontispiece], 'label': gettext('Content')},
+            {'group': [self.abstract, self.incipit, self.explicit, self.autograph_text, self.vignette, self.frontispiece], 'label': gettext('Content')},
             {'group': [self.publisher, self.publisher_place, self.printing_patent, self.printers_mark], 'label': gettext('Printer')},
             {'group': [self.library], 'label':gettext('Library')},
             {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
@@ -455,6 +455,7 @@ class CodexForm(WorkForm):
     library = FieldList(FormField(LibraryForm), min_entries=1)
     origin = StringField(gettext('Place of Origin'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The place the codex originated in')))
     provenance = TextAreaField(gettext('Provenance'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('Information on the ownership of the codex')))
+    autograph_text = TextAreaField(gettext('Autograph'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The text of the autograph')))
 
     def groups(self):
         yield [
@@ -466,13 +467,11 @@ class CodexForm(WorkForm):
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.is_part_of], 'label': gettext('Part Of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                        ],
              'label': gettext('Keyword')},
-            {'group': [self.abstract, self.incipit, self.explicit, self.vignette], 'label': gettext('Content')},
+            {'group': [self.abstract, self.incipit, self.explicit, self.autograph_text, self.vignette], 'label': gettext('Content')},
             {'group': [self.library], 'label':gettext('Library')},
             {'group': [self.id, self.created, self.changed, self.owner, self.key_publication],
              'label': gettext('Administrative')},
@@ -514,9 +513,7 @@ class ChapterForm(ContributionForm):
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.is_part_of], 'label': gettext('Part of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                         ],
              'label': gettext('Keyword')},
@@ -538,8 +535,7 @@ class ArticleJournalForm(ContributionForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of], 'label': gettext('Journal')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                         ],
              'label': gettext('Keyword')},
@@ -564,10 +560,7 @@ class SeriesForm(SerialForm):
             {'group': [self.ISSN, self.ZDBID, self.uri, self.DOI], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.is_part_of],
-             'label': gettext('Part of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                         ],
              'label': gettext('Keyword')},
@@ -594,10 +587,7 @@ class JournalForm(SerialForm):
             {'group': [self.ISSN, self.ZDBID, self.uri, self.DOI], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.is_part_of],
-             'label': gettext('Part of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                         ],
              'label': gettext('Keyword')},
@@ -627,10 +617,7 @@ class InternetDocumentForm(WorkForm):
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.is_part_of],
-             'label': gettext('Part of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                         ],
              'label': gettext('Keyword')},
@@ -656,10 +643,7 @@ class LectureForm(WorkForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.event_name, self.startdate_conference, self.enddate_conference, self.place], 'label': gettext('Event')},
-            {'group': [self.is_part_of],
-             'label': gettext('Part of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                         ],
              'label': gettext('Keyword')},
@@ -689,10 +673,7 @@ class OtherForm(WorkForm):
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
-            {'group': [self.is_part_of],
-             'label': gettext('Part of')},
-            {'group': [self.has_part], 'label': gettext('Has Part')},
-            {'group': [self.other_version], 'label': gettext('Other Version')},
+            {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
             {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
                         ],
              'label': gettext('Keyword')},

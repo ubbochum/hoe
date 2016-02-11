@@ -13,7 +13,7 @@
         {% include 'navbar.html' %}
         <div class="row">
             <div class="col-sm-6 col-sm-offset-1">
-                <h2>Sign in with your RUB credentials<span class="pull-right"><i>or</i></span></h2>
+                <h2>{{ _('Sign in with your RUB credentials') }}<span class="pull-right"><i>or</i></span></h2>
                 <form method="post" class="form-horizontal">
                     {{ form.csrf_token }}
                     <div class="form-group">
@@ -30,14 +30,14 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-6 pull-right">
-                            <button type="reset" class="btn btn-danger">Clear</button>
-                            <button type="submit" class="btn btn-primary submit">Submit</button>
+                            <button type="reset" class="btn btn-danger">{{ _('Clear') }}</button>
+                            <button type="submit" class="btn btn-primary submit">{{ _('Submit') }}</button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="col-sm-4">
-                <h2><a href="https://sandbox.orcid.org/oauth/authorize?client_id={{ orcid_sandbox_client_id }}&amp;response_type=code&amp;scope=/authenticate&amp;redirect_url=" class="btn btn-lg btn-default"><img src="{{ url_for('static', filename='site/img/orcid_32x32.png') }}"> Sign in with ORCID</a></h2>
+                <h2><a href="https://sandbox.orcid.org/oauth/authorize?client_id={{ orcid_sandbox_client_id }}&amp;response_type=code&amp;scope=/authenticate&amp;redirect_url=" class="btn btn-lg btn-default"><img src="{{ url_for('static', filename='site/img/orcid_32x32.png') }}"> {{ _('Sign in with ORCID') }}</a></h2>
             </div>
         </div>
     </div>

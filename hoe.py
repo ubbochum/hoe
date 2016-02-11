@@ -133,7 +133,7 @@ def index():
 
 @app.route('/contact')
 def contact():
-    return redirect('mailto:ottomanhistoriography@rub.de')
+    return redirect('mailto:%s' % secrets.contact_mail)
 
 def flash_errors(form):
     for field, errors in form.errors.items():
@@ -156,6 +156,52 @@ SOURCE_CLASS_MAP = {
     'InternetDocument': 'secondary',
     'Lecture': 'secondary',
     'Other': 'secondary',
+}
+
+ROLE_MAP = {
+    'ann': gettext('Annotator'),
+    'aut': gettext('Author'),
+    'aft': gettext('Author of Afterword'),
+    'aui': gettext('Author of Introduction'),
+    'ato': gettext('Autographer'),
+    'bnd': gettext('Binder'),
+    'dte': gettext('Dedicatee'),
+    'dto': gettext('Dedicator'),
+    'edt': gettext('Editor'),
+    'fmo': gettext('Former Owner'),
+    'hnr': gettext('Honoree'),
+    'his': gettext('Host institution'),
+    'ill': gettext('Illuminator'),
+    'ive': gettext('Interviewee'),
+    'ivr': gettext('Interviewer'),
+    'pat': gettext('Patron'),
+    'prt': gettext('Printer'),
+    'scr': gettext('Scribe'),
+    'spk': gettext('Speaker'),
+    'trl': gettext('Translator'),
+}
+
+LANGUAGE_MAP = {
+    'alb': gettext('Albanian'),
+    'ara': gettext('Arabic'),
+    'bos': gettext('Bosnian'),
+    'bul': gettext('Bulgarian'),
+    'hrv': gettext('Croatian'),
+    'dut': gettext('Dutch'),
+    'eng': gettext('English'),
+    'fre': gettext('French'),
+    'ger': gettext('German'),
+    'grc': gettext('Ancient Greek'),
+    'gre': gettext('Modern Greek'),
+    'ita': gettext('Italian'),
+    'lat': gettext('Latin'),
+    'peo': gettext('Persian'),
+    'pol': gettext('Polish'),
+    'rum': gettext('Romanian'),
+    'rus': gettext('Russian'),
+    'srp': gettext('Serbian'),
+    'spa': gettext('Spanish'),
+    'tur': gettext('Turkish'),
 }
 
 def _record2solr(form):
@@ -200,7 +246,7 @@ def _record2solr(form):
         if field == 'issued':
             year = form.data.get(field)[0:4].strip()
             solr_data.setdefault('date', form.data.get(field).strip())
-            if SOURCE_CLASS_MAP.get(form.data.get('pubtype')) == 'primary':
+            if SOURCE_CLASS_MAP.get(form.data.get('pubtype')) == 'primary' and year:
                 if int(year) >= 1400 and int(year) < 1500:
                     solr_data.setdefault('issued_primary', '1400-1500')
                 elif int(year) >= 1500 and int(year) < 1600:
@@ -318,7 +364,7 @@ def dashboard():
                            header=gettext('Dashboard'), site=theme(request.access_route),
                            offset=mystart - 1, query=query, filterquery=filterquery, pagination=pagination,
                            now=datetime.datetime.now(), flibraries=flibraries, libraries=libraries, target='dashboard',
-                           )
+                           del_redirect='dashboard')
 
 @app.route('/create/<pubtype>', methods=['GET', 'POST'])
 @login_required
@@ -368,54 +414,11 @@ def new_record(pubtype='article-journal', primary_id=''):
     form.owner.data = current_user.id
     form.pubtype.data = pubtype
 
-    return render_template('tabbed_form.html', form=form, header=gettext('New Record'), site=theme(request.access_route), pubtype=pubtype, action='create')
+    return render_template('tabbed_form.html', form=form, header=gettext('New Record'), site=theme(request.access_route),
+                           pubtype=pubtype, action='create', record_id=form.id.data)
 
 @app.route('/retrieve/<pubtype>/<record_id>')
 def show_record(pubtype, record_id=''):
-    ROLE_MAP = {
-        'ann': gettext('Annotator'),
-        'aut': gettext('Author'),
-        'aft': gettext('Author of Afterword'),
-        'aui': gettext('Author of Introduction'),
-        'ato': gettext('Autographer'),
-        'bnd': gettext('Binder'),
-        'dte': gettext('Dedicatee'),
-        'dto': gettext('Dedicator'),
-        'edt': gettext('Editor'),
-        'fmo': gettext('Former Owner'),
-        'hnr': gettext('Honoree'),
-        'his': gettext('Host institution'),
-        'ill': gettext('Illuminator'),
-        'ive': gettext('Interviewee'),
-        'ivr': gettext('Interviewer'),
-        'pat': gettext('Patron'),
-        'prt': gettext('Printer'),
-        'scr': gettext('Scribe'),
-        'spk': gettext('Speaker'),
-        'trl': gettext('Translator'),
-    }
-    LANGUAGE_MAP = {
-        'alb': gettext('Albanian'),
-        'ara': gettext('Arabic'),
-        'bos': gettext('Bosnian'),
-        'bul': gettext('Bulgarian'),
-        'hrv': gettext('Croatian'),
-        'dut': gettext('Dutch'),
-        'eng': gettext('English'),
-        'fre': gettext('French'),
-        'ger': gettext('German'),
-        'grc': gettext('Ancient Greek'),
-        'gre': gettext('Modern Greek'),
-        'ita': gettext('Italian'),
-        'lat': gettext('Latin'),
-        'peo': gettext('Persian'),
-        'pol': gettext('Polish'),
-        'rum': gettext('Romanian'),
-        'rus': gettext('Russian'),
-        'srp': gettext('Serbian'),
-        'spa': gettext('Spanish'),
-        'tur': gettext('Turkish'),
-    }
     show_record_solr = Solr(query='id:%s' % record_id, core='hoe', mlt=True, mlt_fields=['title', 'description', 'keyword'])
     show_record_solr.request()
 
@@ -556,7 +559,7 @@ def login():
         #user_info = user.get_user(request.form.get('username'))
         next = get_redirect_target()
 
-        authuser = requests.post('https://api-test.ub.rub.de/ldap/authenticate/',
+        authuser = requests.post('https://api.ub.rub.de/ldap/authenticate/',
                                  data={'nocheck': 'true',
                                        'userid': base64.b64encode(request.form.get('username').encode('ascii')),
                                        'passwd': base64.b64encode(request.form.get('password').encode('ascii'))}).json()
@@ -731,4 +734,4 @@ def import_solr_dump(filename=''):
         return redirect('dashboard')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5001)

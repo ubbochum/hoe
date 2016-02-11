@@ -6,7 +6,7 @@
 {% endblock %}
 {% block site_content %}
     {{ super() }}
-    <div class="row" id="{{ record_id }}">
+    <div class="row record_start" id="{{ record_id }}">
         <div>
             {% if form.errors %}
                 {{ form.errors }}
@@ -128,19 +128,19 @@
         $(document).on('change', '#ISBN', function (event) {
             dedupe('isbn', $(this));
         });
-        $(document).on('change', '#pubtype', function(event){
+        {#$(document).on('change', '#pubtype', function(event){
             console.log($(this).val());
             console.log($('#id').val());
             $.post('/update/' + $(this).val() + '/' + $('#id').val(), $('#theform').serialize());
             window.location.href = '/update/' + $(this).val() + '/' + $('#id').val();
-        });
+        });#}
         {% if action == 'create' %}
             $(document).on('change', '#pubtype', function (event) {
                 var pubtype = $(this).val();
                 //$('#pubtype select').val('{{ pubtype }}');
                 $('#pubtype option[value="{{ pubtype }}"]').prop('selected', true);
                 $.post('/create/{{ pubtype }}', $('#theform').serialize(), function () {
-                    window.location.href = '/update/' + pubtype + '/' + $('.row').attr('id');
+                    window.location.href = '/update/' + pubtype + '/' + $('.record_start').attr('id');
                 }).fail(function (e) {
                     console.log(e);
                 });
@@ -149,7 +149,7 @@
             {#console.log($('.row').attr('id'));
             var socket = io.connect('https://hb2.ub.rub.de/socketio/hb2');#}
             $(document).on('change', '#pubtype', function (event) {
-                window.location.href = '/update/' + $(this).val() + '/' + $('.row').attr('id');
+                window.location.href = '/update/' + $(this).val() + '/' + $('.record_start').attr('id');
             });
             {#$(document).on('submit', '#theform', function (event) {
                 socket.emit('unlock', {data: $('.row').attr('id')});
