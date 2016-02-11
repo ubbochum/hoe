@@ -172,6 +172,7 @@ class WorkForm(Form):
     subtitle = StringField(gettext('Subtitle'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('The subtitle of the work')))
     title_supplement = StringField(gettext('Title Supplement'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('Additions to the title of the work')))
     title_translated = FieldList(FormField(TranslatedTitleForm), min_entries=1)
+    transliterated_title = FieldList(StringField(gettext('Transliterated Title')), min_entries = 1)
     person = FieldList(FormField(PersonForm), min_entries=1)
     corporation = FieldList(FormField(CorporationForm), min_entries=1)
     uri = FieldList(StringField(gettext('URL'), validators=[URL(), Optional()]), min_entries=1)

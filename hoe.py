@@ -140,6 +140,24 @@ def flash_errors(form):
         for error in errors:
             flash('Error in the %s field: %s' % (getattr(form, field).label.text, error), 'error')
 
+PUBTYPE2TEXT = {
+    'ArticleJournal': gettext('Article in Journal'),
+    'Catalogue': gettext('Catalogue'),
+    'Chapter': gettext('Chapter'),
+    'Codex': gettext('Codex'),
+    'Collection': gettext('Collection'),
+    'Conference': gettext('Conference'),
+    'Edition': gettext('Edition'),
+    'InternetDocument': gettext('Internet Document'),
+    'Journal': gettext('Journal'),
+    'Lecture': gettext('Lecture'),
+    'Monograph': gettext('Monograph'),
+    'Print': gettext('Print'),
+    'Series': gettext('Series'),
+    'Translation': gettext('Translation'),
+    'Other': gettext('Other'),
+}
+
 SOURCE_CLASS_MAP = {
     'Codex': 'primary',
     'Print': 'primary',
@@ -364,7 +382,7 @@ def dashboard():
                            header=gettext('Dashboard'), site=theme(request.access_route),
                            offset=mystart - 1, query=query, filterquery=filterquery, pagination=pagination,
                            now=datetime.datetime.now(), flibraries=flibraries, libraries=libraries, target='dashboard',
-                           del_redirect='dashboard')
+                           del_redirect='dashboard', pubtype_map=PUBTYPE2TEXT)
 
 @app.route('/create/<pubtype>', methods=['GET', 'POST'])
 @login_required
@@ -694,7 +712,7 @@ def search():
         return render_template('resultlist.html', records=search_solr.results, pagination=pagination,
                                facet_data=search_solr.facets, header=query, site=theme(request.access_route),
                                offset=mystart - 1, query=query, filterquery=filterquery, flibraries=flibraries,
-                               libraries=libraries, target='search')
+                               libraries=libraries, target='search', pubtype_map=PUBTYPE2TEXT)
 
 @app.route('/export/solr_dump')
 def export_solr_dump():

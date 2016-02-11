@@ -1,2 +1,2 @@
 <a href="{{ url_for('show_record', pubtype=record.pubtype, record_id=record.id) }}">{{ record.title|truncate(80) }}</a><br/>
-{% if record.person %}{% for author in record.person %}{{ author }}{% if not loop.last %}; {% endif %}{% endfor %}, {% endif %}{{ record.issued }}
+{% if record.person %}{% for author in record.person %}{{ author }}{% if not loop.last %}; {% endif %}{% endfor %}, {% endif %}{{ record.issued }} | {{ pubtype_map.get(record.pubtype) }}

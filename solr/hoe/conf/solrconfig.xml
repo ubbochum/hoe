@@ -834,10 +834,10 @@
        <str name="defType">edismax</str>
        <str name="lowercaseOperators">false</str>
        <str name="qf">
-          exacttitle^40.0 title^10.0 subtitle^5.0 translated_title^10.0 description^7.5 keyword^10.0 incipit^4.0 explicit^4.0 frontispice^4.0 vignette^4.0 note^1.0 person^20.0 series_title^6.0 container_title^6.0 provenance^2.0 corporation^5.0 isbn^1.0 issn^1.0 library_place^1.0 origin_place^5.0
+          exacttitle^40.0 title^10.0 subtitle^5.0 translated_title^10.0 description^7.5 keyword^10.0 incipit^4.0 explicit^4.0 frontispice^4.0 vignette^4.0 note^1.0 person^20.0 series_title^6.0 container_title^6.0 provenance^2.0 corporation^5.0 isbn^1.0 issn^1.0 library_place^1.0 origin_place^5.0 id^1.0
        </str>
        <str name="pf">
-		   exacttitle^40.0 title^10.0 subtitle^5.0 translated_title^10.0 description^7.5 keyword^10.0 incipit^4.0 explicit^4.0 frontispice^4.0 vignette^4.0 note^1.0 person^20.0 series_title^6.0 container_title^6.0 provenance^2.0 corporation^5.0 isbn^1.0 issn^1.0 library_place^1.0 origin_place^5.0
+		   exacttitle^40.0 title^10.0 subtitle^5.0 translated_title^10.0 description^7.5 keyword^10.0 incipit^4.0 explicit^4.0 frontispice^4.0 vignette^4.0 note^1.0 person^20.0 series_title^6.0 container_title^6.0 provenance^2.0 corporation^5.0 isbn^1.0 issn^1.0 library_place^1.0 origin_place^5.0 id^1.0
        </str>
        <!--<str name="boost">recip(ms(NOW/YEAR,date_boost),3.16e-11,1,1)</str>-->
          <!--<str name="boost">pubmed_cites</str>-->
