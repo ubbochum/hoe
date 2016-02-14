@@ -316,7 +316,7 @@ def _record2solr(form):
         if field == 'issued' and form.data.get(field):
             year = form.data.get(field)[0:4].strip()
             solr_data.setdefault('date', form.data.get(field).strip())
-            if SOURCE_CLASS_MAP.get(form.data.get('pubtype')) == 'primary' and year:
+            if SOURCE_CLASS_MAP.get(form.data.get('pubtype')) == 'Primary Literature' and year:
                 if int(year) >= 1400 and int(year) < 1500:
                     solr_data.setdefault('issued_primary', '1400-1500')
                 elif int(year) >= 1500 and int(year) < 1600:
