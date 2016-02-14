@@ -274,8 +274,8 @@ def _record2solr(form):
     for field in form.data:
         #logging.info('%s => %s' % (field, form.data.get(field)))
         if field == 'id':
-            delete_record_solr = Solr(del_id=form.data.get(field))
-            delete_record_solr.delete()
+            #delete_record_solr = Solr(del_id=form.data.get(field))
+            #delete_record_solr.delete()
             solr_data.setdefault('id', form.data.get(field))
         if field == 'created':
             solr_data.setdefault('created', form.data.get(field).replace(' ', 'T') + 'Z')
@@ -363,13 +363,13 @@ def _record2solr(form):
             try:
                 for ipo in form.data.get(field):
                     if ipo:
-                        logging.info(ipo)
+                        #logging.info(ipo)
                         if 'is_part_of' in ipo:
                             logging.info('POOP')
                             if ipo.get('is_part_of'):
                                 ipo_ids.append(ipo.get('is_part_of'))
                         else:
-                            logging.info('PEEP')
+                            #logging.info('PEEP')
                             ipo_ids.append(ipo)
                 query = '{!terms f=id}%s' % ','.join(ipo_ids)
                 if len(ipo_ids) == 1:
@@ -385,8 +385,8 @@ def _record2solr(form):
             except AttributeError as e:
                 logging.error(e)
         if field == 'has_part' and len(form.data.get(field)) > 0:
-            for myhp in form.data.get(field):
-                logging.info('HP ' + myhp)
+            #for myhp in form.data.get(field):
+                #logging.info('HP ' + myhp)
             hp_ids = []
             hp_solr = ''
             try:
@@ -408,8 +408,8 @@ def _record2solr(form):
             except AttributeError as e:
                 logging.error(e)
         if field == 'other_version' and len(form.data.get(field)) > 0:
-            for myov in form.data.get(field):
-                logging.info('OV ' + myov)
+            #for myov in form.data.get(field):
+                #logging.info('OV ' + myov)
             ov_ids = []
             ov_solr = ''
             try:
@@ -427,14 +427,14 @@ def _record2solr(form):
                             gettext('Not all IDs from relation "other version" could be found! Ref: %s' % form.data.get('id')),
                             'warning')
                     for doc in ov_solr.results:
-                        logging.info(json.loads(doc.get('wtf_json')))
+                        #logging.info(json.loads(doc.get('wtf_json')))
                         myjson = json.loads(doc.get('wtf_json'))
                         solr_data.setdefault('other_version', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
             except AttributeError as e:
                 logging.error(e)
         if field == 'relation' and len(form.data.get(field)) > 0:
-            for myrel in form.data.get(field):
-                logging.info('REL ' + myrel)
+            #for myrel in form.data.get(field):
+                #logging.info('REL ' + myrel)
             rel_ids = []
             rel_solr = ''
             try:
@@ -534,7 +534,7 @@ def new_record(pubtype='article-journal', primary_id=''):
     form = PUBTYPE2FORM.get(pubtype)()
 
     if request.is_xhr:
-        logging.info(request.form)
+        #logging.info(request.form)
         form.formdata = request.form
         # Do we have any data already?
         if not form.title.data:
@@ -731,7 +731,7 @@ def login():
                                  data={'nocheck': 'true',
                                        'userid': base64.b64encode(request.form.get('username').encode('ascii')),
                                        'passwd': base64.b64encode(request.form.get('password').encode('ascii'))}).json()
-        logging.info(authuser)
+        #logging.info(authuser)
         if authuser.get('email'):
             user_solr = Solr(core='hoe_users', query='id:%s' % authuser.get('id'), facet='false')
             user_solr.request()
