@@ -64,6 +64,8 @@ PUBTYPE2FORM = {
     'Lecture': LectureForm,
     'Codex': CodexForm,
     'Series': SeriesForm,
+    'CodexChapter': CodexChapterForm,
+    'PrintChapter': PrintChapterForm,
 }
 
 @app.template_filter('rem_form_count')
@@ -144,6 +146,8 @@ PUBTYPE2TEXT = {
     'ArticleJournal': gettext('Article in Journal'),
     'Catalogue': gettext('Catalogue'),
     'Chapter': gettext('Chapter'),
+    'CodexChapter': gettext('Chapter in Codex'),
+    'PrintChapter': gettext('Chapter in Print'),
     'Codex': gettext('Codex'),
     'Collection': gettext('Collection'),
     'Conference': gettext('Conference'),
@@ -158,22 +162,63 @@ PUBTYPE2TEXT = {
     'Other': gettext('Other'),
 }
 
+SUBTYPE2TEXT = {
+    'facsimile': gettext('Facsimile'),
+    'festschrift': gettext('Festschrift'),
+    'lexicon': gettext('Lexicon'),
+    'afterword': gettext('Afterword'),
+    'introduction': gettext('Introduction'),
+    'lexicon_article': gettext('Article in Lexicon'),
+    'review': gettext('Review'),
+    'translation': gettext('Translation'),
+}
+
+GENRE2TEXT = {
+    'apocalypse': gettext('Apocalypse'),
+    'artifact': gettext('Artifact'),
+    'chronicle': gettext('Chronicle'),
+    'church_chronicle': gettext('Church Chronicle'),
+    'chronograph': gettext('Chronograph'),
+    'cosmography': gettext('Cosmography'),
+    'encomium': gettext('Encomium'),
+    'hagiography': gettext('Hagiography'),
+    'history': gettext('History'),
+    'legend': gettext('Legend'),
+    'letter': gettext('Letter'),
+    'memoirs': gettext('Memoirs'),
+    'memorandum': gettext('Memorandum'),
+    'mirror': gettext('Mirror of princes'),
+    'panegyric': gettext('Panegyric'),
+    'parenesis': gettext('Parenesis'),
+    'poem': gettext('Poem'),
+    'polemic': gettext('Polemic'),
+    'prophesy': gettext('Prophesy'),
+    'proskynetarion': gettext('Proskynetarion'),
+    'psalter': gettext('Psalter'),
+    'threnody': gettext('Threnody'),
+    'verse_chronicle': gettext('Verse Chronicle'),
+    'vita': gettext('Vita'),
+    'other': gettext('Other')
+}
+
 SOURCE_CLASS_MAP = {
-    'Codex': 'primary',
-    'Print': 'primary',
-    'Catalogue': 'primary',
-    'Edition': 'primary',
-    'Translation': 'primary',
-    'ArticleJournal': 'secondary',
-    'Chapter': 'secondary',
-    'Monograph': 'secondary',
-    'Conference': 'secondary',
-    'Collection': 'secondary',
-    'Series': 'secondary',
-    'Journal': 'secondary',
-    'InternetDocument': 'secondary',
-    'Lecture': 'secondary',
-    'Other': 'secondary',
+    'Codex': gettext('Primary Literature'),
+    'Print': gettext('Primary Literature'),
+    'CodexChapter': gettext('Primary Literature'),
+    'PrintChapter': gettext('Primary Literature'),
+    'Catalogue': gettext('Primary Literature'),
+    'Edition': gettext('Primary Literature'),
+    'Translation': gettext('Primary Literature'),
+    'ArticleJournal': gettext('Secondary Literature'),
+    'Chapter': gettext('Secondary Literature'),
+    'Monograph': gettext('Secondary Literature'),
+    'Conference': gettext('Secondary Literature'),
+    'Collection': gettext('Secondary Literature'),
+    'Series': gettext('Secondary Literature'),
+    'Journal': gettext('Secondary Literature'),
+    'InternetDocument': gettext('Secondary Literature'),
+    'Lecture': gettext('Secondary Literature'),
+    'Other': gettext('Secondary Literature'),
 }
 
 ROLE_MAP = {
@@ -229,6 +274,8 @@ def _record2solr(form):
     for field in form.data:
         #logging.info('%s => %s' % (field, form.data.get(field)))
         if field == 'id':
+            delete_record_solr = Solr(del_id=form.data.get(field))
+            delete_record_solr.delete()
             solr_data.setdefault('id', form.data.get(field))
         if field == 'created':
             solr_data.setdefault('created', form.data.get(field).replace(' ', 'T') + 'Z')
@@ -238,9 +285,12 @@ def _record2solr(form):
             solr_data.setdefault('owner', form.data.get(field))
         if field == 'pubtype':
             solr_data.setdefault('pubtype', form.data.get(field))
+            solr_data.setdefault('fpubtype', PUBTYPE2TEXT.get(form.data.get(field)))
             solr_data.setdefault('source_class', SOURCE_CLASS_MAP.get(form.data.get(field)))
+        if field == 'subtype' and form.data.get(field) != None:
+            solr_data.setdefault('subtype', SUBTYPE2TEXT.get(form.data.get(field)))
         if field == 'genre' and form.data.get(field):
-            solr_data.setdefault('subtype', form.data.get(field))
+            solr_data.setdefault('genre', GENRE2TEXT.get(form.data.get(field)))
         if field == 'title':
             solr_data.setdefault('title', form.data.get(field).strip())
             solr_data.setdefault('exacttitle', form.data.get(field).strip())
@@ -257,11 +307,13 @@ def _record2solr(form):
             solr_data.setdefault('vignette', form.data.get(field).strip())
         if field == 'frontispiece' and form.data.get(field):
             solr_data.setdefault('frontispiece', form.data.get(field).strip())
+        if field == 'autograph_text' and form.data.get(field):
+            solr_data.setdefault('autograph', form.data.get(field).strip())
         if field == 'provenance' and form.data.get(field):
             solr_data.setdefault('provenance', form.data.get(field).strip())
         if field == 'note' and form.data.get(field):
             solr_data.setdefault('note', form.data.get(field).strip())
-        if field == 'issued':
+        if field == 'issued' and form.data.get(field):
             year = form.data.get(field)[0:4].strip()
             solr_data.setdefault('date', form.data.get(field).strip())
             if SOURCE_CLASS_MAP.get(form.data.get('pubtype')) == 'primary' and year:
@@ -287,7 +339,7 @@ def _record2solr(form):
         if field == 'language' and len(form.data.get(field)) > 0:
             for lang in form.data.get(field):
                 if lang != '':
-                    solr_data.setdefault('language', []).append(lang)
+                    solr_data.setdefault('language', []).append(LANGUAGE_MAP.get(lang))
         if field == 'person' and len(form.data.get(field)) > 0:
             FACET_ROLES = {'aut', 'edt', 'trl'}
             for idx, person in enumerate(form.data.get(field)):
@@ -301,17 +353,109 @@ def _record2solr(form):
                     solr_data.setdefault('corporation', []).append(corporation.get('name').strip())
         if field == 'abstract' and form.data.get(field):
             solr_data.setdefault('description', form.data.get(field).strip())
-        if field == 'container_title' and form.data.get(field):
-            solr_data.setdefault('container_title', form.data.get(field).strip())
-        if field == 'series_title' and form.data.get(field):
-            solr_data.setdefault('series_title', form.data.get(field).strip())
-        # if field == 'is_part_of' and len(form.data.get(field)) > 0:
-        #     for idx, ipo in enumerate(form.data.get(field)):
-        #         if ipo.get('is_part_of'):
-        #             ipo_solr = Solr(query='id:%s' % ipo.get('is_part_of'), facet='false')
-        #             ipo_solr.request()
-        #             if ipo_solr.results[0]:
-        #                 solr_data.setdefault('container_title', ipo_solr.results[0].get('title'))
+        # if field == 'container_title' and form.data.get(field):
+        #     solr_data.setdefault('container_title', form.data.get(field).strip())
+        # if field == 'series_title' and form.data.get(field):
+        #     solr_data.setdefault('series_title', form.data.get(field).strip())
+        if field == 'is_part_of' and len(form.data.get(field)) > 0:
+            ipo_ids = []
+            ipo_solr = ''
+            try:
+                for ipo in form.data.get(field):
+                    if ipo:
+                        logging.info(ipo)
+                        if 'is_part_of' in ipo:
+                            logging.info('POOP')
+                            if ipo.get('is_part_of'):
+                                ipo_ids.append(ipo.get('is_part_of'))
+                        else:
+                            logging.info('PEEP')
+                            ipo_ids.append(ipo)
+                query = '{!terms f=id}%s' % ','.join(ipo_ids)
+                if len(ipo_ids) == 1:
+                    query = 'id:%s' % ipo_ids[0]
+                if len(ipo_ids) > 0:
+                    ipo_solr = Solr(query=query, facet='false', fields=['wtf_json'])
+                    ipo_solr.request()
+                    if len(ipo_solr.results) == 0:
+                        flash(gettext('Not all IDs from relation "is part of" could be found! Ref: %s' % form.data.get('id')), 'warning')
+                    for doc in ipo_solr.results:
+                        myjson = json.loads(doc.get('wtf_json'))
+                        solr_data.setdefault('is_part_of', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+            except AttributeError as e:
+                logging.error(e)
+        if field == 'has_part' and len(form.data.get(field)) > 0:
+            for myhp in form.data.get(field):
+                logging.info('HP ' + myhp)
+            hp_ids = []
+            hp_solr = ''
+            try:
+                for hp in form.data.get(field):
+                    if hp:
+                        hp_ids.append(hp)
+                query = '{!terms f=id}%s' % ','.join(hp_ids)
+                if len(hp_ids) == 1:
+                    query = 'id:%s' % hp_ids[0]
+                if len(hp_ids) > 0:
+                    hp_solr = Solr(query=query, facet='false', fields=['wtf_json'])
+                    hp_solr.request()
+                    if len(hp_solr.results) == 0:
+                        flash(
+                            gettext('Not all IDs from relation "has part" could be found! Ref: %s' % form.data.get('id')), 'warning')
+                    for doc in hp_solr.results:
+                        myjson = json.loads(doc.get('wtf_json'))
+                        solr_data.setdefault('has_part', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+            except AttributeError as e:
+                logging.error(e)
+        if field == 'other_version' and len(form.data.get(field)) > 0:
+            for myov in form.data.get(field):
+                logging.info('OV ' + myov)
+            ov_ids = []
+            ov_solr = ''
+            try:
+                for version in form.data.get(field):
+                    if version:
+                        ov_ids.append(version)
+                query = '{!terms f=id}%s' % ','.join(ov_ids)
+                if len(ov_ids) == 1:
+                    query = 'id:%s' % ov_ids[0]
+                if len(ov_ids) > 0:
+                    ov_solr = Solr(query=query, facet='false', fields=['wtf_json'])
+                    ov_solr.request()
+                    if len(ov_solr.results) == 0:
+                        flash(
+                            gettext('Not all IDs from relation "other version" could be found! Ref: %s' % form.data.get('id')),
+                            'warning')
+                    for doc in ov_solr.results:
+                        logging.info(json.loads(doc.get('wtf_json')))
+                        myjson = json.loads(doc.get('wtf_json'))
+                        solr_data.setdefault('other_version', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+            except AttributeError as e:
+                logging.error(e)
+        if field == 'relation' and len(form.data.get(field)) > 0:
+            for myrel in form.data.get(field):
+                logging.info('REL ' + myrel)
+            rel_ids = []
+            rel_solr = ''
+            try:
+                for related in form.data.get(field):
+                    if related:
+                        rel_ids.append(related)
+                query = '{!terms f=id}%s' % ','.join(rel_ids)
+                if len(rel_ids) == 1:
+                    query = 'id:%s' % rel_ids[0]
+                if len(rel_ids) > 0:
+                    rel_solr = Solr(query=query, facet='false', fields=['wtf_json'])
+                    rel_solr.request()
+                    if len(rel_solr.results) == 0:
+                        flash(
+                            gettext('Not all IDs from relation "related item" could be found! Ref: %s' % form.data.get('id')),
+                            'warning')
+                    for doc in rel_solr.results:
+                        myjson = json.loads(doc.get('wtf_json'))
+                        solr_data.setdefault('related_item', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+            except AttributeError as e:
+                logging.error(e)
         if field == 'ISSN' and len(form.data.get(field)) > 0:
             for issn in form.data.get(field):
                 solr_data.setdefault('issn', []).append(issn.strip())
@@ -340,7 +484,7 @@ def _record2solr(form):
         if field == 'origin' and form.data.get(field):
             solr_data.setdefault('origin_place', form.data.get(field))
 
-    logging.info(solr_data)
+    #logging.info(solr_data)
     record_solr = Solr(core='hoe', data=[solr_data])
     record_solr.update()
 
@@ -351,10 +495,10 @@ def dashboard():
     mystart = 0
     query = '*:*'
     filterquery = request.values.getlist('filter')
+    rows = secrets.SOLR_ROWS
     # Solr(start=(page - 1) * 10, query=query, fquery=filterquery, sort=sorting)
-    dashboard_solr = Solr(start=(page - 1) * 10, query=query, sort='created asc',
-                          facet_fields=secrets.SOLR_FACETS,
-                          fquery=filterquery)
+    dashboard_solr = Solr(start=(page - 1) * int(rows), query=query, sort='created asc', rows=rows,
+                          facet_fields=secrets.SOLR_FACETS, fquery=filterquery)
     dashboard_solr.request()
 
     num_found = dashboard_solr.count()
@@ -365,7 +509,7 @@ def dashboard():
                                header=gettext('Dashboard'), site=theme(request.access_route), pagination=None)
     else:
         pagination = Pagination(page=page, total=num_found, found=num_found, bs_version=3, search=True,
-                                record_name=gettext('titles'),
+                                record_name=gettext('titles'), per_page=int(rows),
                                 search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
         mystart = 1 + (pagination.page - 1) * pagination.per_page
         # myend = mystart + pagination.per_page - 1
@@ -440,12 +584,18 @@ def show_record(pubtype, record_id=''):
     show_record_solr = Solr(query='id:%s' % record_id, core='hoe', mlt=True, mlt_fields=['title', 'description', 'keyword'])
     show_record_solr.request()
 
+    is_part_of = show_record_solr.results[0].get('is_part_of')
+    has_part = show_record_solr.results[0].get('has_part')
+    other_version = show_record_solr.results[0].get('other_version')
+    related_item = show_record_solr.results[0].get('related_item')
     thedata = json.loads(show_record_solr.results[0].get('wtf_json'))
     form = PUBTYPE2FORM.get(pubtype).from_json(thedata)
 
     return render_template('record.html', record=form, header=form.data.get('title'), site=theme(request.access_route),
                            action='retrieve', record_id=record_id, del_redirect='dashboard', pubtype=pubtype,
-                           role_map=ROLE_MAP, lang_map=LANGUAGE_MAP, mlt=show_record_solr.mlt_results)
+                           role_map=ROLE_MAP, lang_map=LANGUAGE_MAP, pubtype_map=PUBTYPE2TEXT, subtype_map=SUBTYPE2TEXT,
+                           genre_map=GENRE2TEXT, mlt=show_record_solr.mlt_results, is_part_of=is_part_of,
+                           has_part=has_part, other_version=other_version, related_item=related_item)
 
 @app.route('/update/<pubtype>/<record_id>', methods=['GET', 'POST'])
 @login_required
@@ -495,7 +645,7 @@ def make_admin(user_id=''):
 
 @app.route('/delete/<record_id>')
 def delete_record(record_id=''):
-    delete_record_solr = Solr(core='hoe', del_id=record_id)
+    delete_record_solr = Solr(del_id=record_id)
     delete_record_solr.delete()
 
     return jsonify({'deleted': True})
@@ -688,7 +838,9 @@ def search():
     else:
         sorting = 'issued desc'
 
-    search_solr = Solr(start=(page - 1) * 10, query=query, fquery=filterquery, sort=sorting, facet='true', facet_fields=secrets.SOLR_FACETS)
+    rows = secrets.SOLR_ROWS
+    search_solr = Solr(start=(page - 1) * int(rows), query=query, fquery=filterquery, sort=sorting, facet='true',
+                       facet_fields=secrets.SOLR_FACETS, rows=rows)
     search_solr.request()
     num_found = search_solr.count()
     if num_found == 1:
@@ -697,7 +849,9 @@ def search():
         flash(gettext('Your Search Found no Results'))
         return redirect(url_for('index'))
     else:
-        pagination = Pagination(page=page, total=num_found, found=num_found, bs_version=3, search=True, record_name=gettext('titles'), search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
+        pagination = Pagination(page=page, total=num_found, found=num_found, bs_version=3, search=True,
+                                record_name=gettext('titles'), per_page=int(rows),
+                                search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
         mystart = 1 + (pagination.page - 1) * pagination.per_page
         #myend = mystart + pagination.per_page - 1
         #logging.info(query)
@@ -750,6 +904,24 @@ def import_solr_dump(filename=''):
         flash('%s records imported!' % len(thedata), 'success')
 
         return redirect('dashboard')
+
+@app.route('/delete/solr_dump/<record_id>')
+def delete_dump(record_id=''):
+    delete_record_solr = Solr(core='hoe_users', del_id=record_id)
+    delete_record_solr.delete()
+
+    return jsonify({'deleted': True})
+
+@app.route('/retrieve/related_items/<relation>/<record_ids>')
+def show_related_item(relation='', record_ids=''):
+    query = query='{!terms f=id}%s' % record_ids
+    if ',' not in record_ids:
+        query = 'id:%s' % record_ids
+    relation_solr = Solr(query=query, facet='false')
+    relation_solr.request()
+
+    return jsonify({'relation': relation, 'docs': relation_solr.results})
+
 
 if __name__ == '__main__':
     app.run(port=5001)

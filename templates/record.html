@@ -8,6 +8,7 @@
     {{ super() }}
     <div class="row">
         <div class="col-sm-10">
+        <h3>{{ record.data.title }}</h3>
 {#        {{ record.data }}#}
         <dl class="dl-horizontal">
             {% if record.data.subtitle %}
@@ -66,6 +67,10 @@
                     {{ record.data.printers_mark }}
                 </dd>
             {% endif %}
+            {% if record.data.autograph_text %}
+                <dt>{{ _('Autograph') }}</dt>
+                <dd>{{ record.data.autograph_text }}</dd>
+            {% endif %}
             {% if record.data.title_translated.0.translated_title %}
                 <dt>
                     {% trans count=record.data.title_translated|length %}
@@ -117,7 +122,7 @@
                     {{ _('Publication Type') }}
                 </dt>
                 <dd>
-                    {{ record.data.pubtype }}{% if record.data.subtype and record.data.subtype != 'None' %} | {{ record.data.subtype|capitalize() }}{% endif %}{% if record.data.genre and record.data.genre != 'None' %} | {{ record.data.genre }}{% endif %}
+                    {{ pubtype_map.get(record.data.pubtype) }}{% if record.data.subtype and record.data.subtype != 'None' %} | {{ subtype_map.get(record.data.subtype) }}{% endif %}{% if record.data.genre and record.data.genre != 'None' %} | {{ genre_map.get(record.data.genre) }}{% endif %}
                 </dd>
             {% endif %}
             {% if record.data.issued %}
@@ -172,23 +177,47 @@
                     {% endfor %}
                 </dd>
             {% endif %}
-            {% if record.data.is_part_of.0.is_part_of %}
+            {% if is_part_of %}
                 <dt>{{ _('Is Part Of') }}</dt>
                 <dd>
-                    {% for ipo in record.data.is_part_of %}
-                        <a href="/retrieve/{{ record.data.pubtype }}/{{ ipo.is_part_of }}">{{ ipo.is_part_of }}</a>{% if not loop.last %}, {% endif %}
+                    <ul class="list-unstyled">
+                    {% for part in is_part_of %}
+                        <li>{{ part|safe }}</li>
                     {% endfor %}
+                    </ul>
                 </dd>
             {% endif %}
-            {% if record.data.other_version.0.other_version %}
+            {% if has_part %}
+                <dt>{{ _('Has Part') }}</dt>
+                <dd>
+                    <ul class="list-unstyled">
+                    {% for part in has_part %}
+                        <li>{{ part|safe }}</li>
+                    {% endfor %}
+                    </ul>
+                </dd>
+            {% endif %}
+            {% if other_version %}
                 <dt>{{ _('Other Version') }}</dt>
                 <dd>
-                    {% for ov in record.data.other_version %}
-                        <a href="/retrieve/{{ record.data.pubtype }}/{{ ov.other_version }}">{{ ov.other_version }}</a>{% if not loop.last %}, {% endif %}
+                    <ul class="list-unstyled">
+                    {% for version in other_version %}
+                        <li>{{ version|safe }}</li>
                     {% endfor %}
+                    </ul>
                 </dd>
             {% endif %}
-            {% if record.data.uri %}
+            {% if related_item %}
+                <dt>{{ _('Related Item') }}</dt>
+                <dd>
+                    <ul class="list-unstyled">
+                    {% for relation in related_item %}
+                        <li>{{ relation|safe }}</li>
+                    {% endfor %}
+                    </ul>
+                </dd>
+            {% endif %}
+            {% if record.data.uri.0 %}
                 <dt>
                     {% trans count=record.data.uri|length %}
                     URI
@@ -229,8 +258,10 @@
                     </ul>
                 </dd>
             {% endif %}
-            <dt>{{ _('Record Information') }}</dt>
-            <dd>{{ _('Created %(created)s by %(owner)s.', created=record.data.created|mk_time|humanize(), owner=record.data.owner) }}{% if record.data.created != record.data.changed %} {{ _('Last changed %(changed)s.', changed=record.data.changed|mk_time|humanize()) }}{% endif %}</dd>
+            {% if current_user.role == 'admin' %}
+                <dt>{{ _('Record Information') }}</dt>
+                <dd>{{ _('Created %(created)s by %(owner)s.', created=record.data.created|mk_time|humanize(), owner=record.data.owner) }}{% if record.data.created != record.data.changed %} {{ _('Last changed %(changed)s.', changed=record.data.changed|mk_time|humanize()) }}{% endif %}</dd>
+            {% endif %}
         </dl>
         </div>
         <div class="col-sm-2">

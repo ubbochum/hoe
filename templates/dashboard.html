@@ -19,22 +19,10 @@
                 {% include 'remove_filters.html' %}
                 {{ pagination.links }}
                 <table class="table table-bordered">
-                    {#<thead>
-                        <tr>
-                            <td>#</td>
-                            <td>{{ _('Title') }}</td>
-                            #}{#<td>{{ _('Created') }}</td>
-                            <td>{{ _('Changed') }}</td>#}{#
-                            <td>{{ _('Action') }}</td>
-                        </tr>
-                    </thead>#}
                     {% for record in records %}
                         <tr>
                             <th scope="row">{{ loop.index + offset }}</th>
-                            <td>{% include 'resultlist_record.html' %}<br/>
-    {#                        {% for author in record.author %}{{ author.literal }}{% endfor %}, {% if record.circa == 'y' %}ca. {% endif %}{% if record.issued %}{{ record.issued.values()|list()|first|first }}{% endif %}</td>#}
-                            {#<td>{{ (now - record.created|mk_time())|humanize() }}</td>
-                            <td>{{ (now - record.changed|mk_time())|humanize() }}</td>#}
+                            <td>{% include 'resultlist_record.html' %}</td>
                             <td class="dropdown">
                                 <button class="btn btn-default dropdown-toggle" type="button" id="action{{ loop.index }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-cog"></i> Action <span class="fa fa-caret-down"></span></button>
                                 <ul class="dropdown-menu" aria-labelledby="action{{ loop.index }}">
@@ -71,6 +59,16 @@
                     page_reload();
                 }
             });
+        });
+        $(document).on('click', '.rel_item', function(event){
+            event.preventDefault();
+            $(this).siblings('.hidden').toggleClass('hidden show_ri');
+            $(this).replaceWith('<a href="#" class="no_rel_item"><i class="fa fa-minus-square-o"></i> {{ _("Hide Related Items") }}</a>');
+        });
+        $(document).on('click', '.no_rel_item', function(event){
+            event.preventDefault();
+            $(this).siblings('.show_ri').toggleClass('hidden show_ri');
+            $(this).replaceWith('<a href="#" class="rel_item"><i class="fa fa-plus-square-o"></i> {{ _("Show Related Items") }}</a>');
         });
     </script>
     <script src="{{ url_for('static', filename='leaflet/leaflet.js') }}"></script>

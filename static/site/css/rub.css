@@ -1,3 +1,4 @@
+body {font-family: 'Roboto', sans-serif;}
 body, .tabs-left > li.active > a {color: #003560;}
 body, .tabs-left > li > a {background-color: #f1f1f1;}
 header h1, a, footer hr {color: #8dae10;}
@@ -18,25 +19,15 @@ header {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
     padding-bottom: 2em;
 }
-header p {
-    min-height: 1.5em;
-}
-header h1, header h2 {
-    margin-left: 14px;
-    vertical-align: text-top;
-    text-transform: uppercase;
-}
-header h1 {
-    font-size: 1.5em;
-}
-header h2 {
-    font-size: 1em;
-}
+header p {min-height: 1.5em;}
+header h1, header h2 {margin-left: 14px; vertical-align: text-top; text-transform: uppercase;}
+header h1 {font-size: 1.5em;}
+header h2 {font-size: 1em;}
 .header-nav {padding-right: 14px;}
 .header-nav a {text-transform: uppercase; color: #5c5c5c; font-size: 0.689em;}
 main {padding-top: 2.5em;}
 footer {margin: 36px -14px 0px -14px; background-color: white;}
-footer hr {border-top: #8dae10 solid 1px;}
+footer hr {border-top: #8dae10 solid 2px;}
 footer p {margin-left: 14px;}
 #rub-wortmarke {min-height: 16px; margin-top: 56px; margin-left: 14px;}
 #rub-label {max-height: 136px; margin-right: -50px;}
@@ -52,7 +43,9 @@ nav {margin-left: -15px !important; margin-right: -15px !important;}
 .navbar-inverse {background-color: #8dae10; color: white; border-color: #8dae10;}
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:hover {color: white; text-decoration: none;}
 .navbar-right {padding-right: 28px;}
-.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {background-color: #003560;}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus,
+.navbar-inverse .navbar-nav > .active > a:hover, a:focus,
+.navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {background-color: #003560;}
 #facets h1 {text-transform: uppercase; font-size: 14px; margin-top: 15px;}
 #facets ul {padding: 0 0 15px 15px;}
 .search_form_active {background-color: #003560; margin-right: 0px; border-color: #003560;}
@@ -64,7 +57,12 @@ label > input[type="file"] {display: none;}
 .tab-container .col-xs-9 {padding-left: 0px;}
 .control-label {margin-left: 15px;}
 #lib_filter {margin-bottom: 64px;}
-.multi_enclosure .control-label {text-transform: uppercase; font-size: 12px;}
+/*.multi_enclosure:last-child {border-bottom: 1px solid #eeeeee;}*/
+.multi_enclosure .control-label, .subfield_label {font-size: 14px; font-weight: 700;}
 #map, #record_map {height: 360px; margin-top: 14px;}
 #map {margin-top: -56px;}
 dd hr {margin-bottom: 6px; margin-top: 6px;}
+a:focus {background-color: transparent;}
+.help-block {margin-top: 8px;margin-left:32px;}
+.multi_enclosure .form-group {margin-bottom: 0;}
+.rel_item, .no_rel_item {color: #999999;}

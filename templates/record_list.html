@@ -1,13 +1,8 @@
-<ul class="list-unstyled">
+<table class="table table-bordered">
     {% for record in records %}
-        <li class="record clearfix">
-            <div class="col-sm-1"><span class="record_count pull-right">{{ loop.index + offset }}</span></div>
-            <div class="col-sm-7">
-                {% include 'resultlist_record.html' %}
-            </div>
-            {% if current_user.role == 'admin' %}
-                {% if record.apparent_dup %}<div class="col-sm-4"><div class="alert alert-warning"><i class="fa fa-warning"></i> {{ _('Apparent Duplicate') }}</div></div>{% endif %}
-            {% endif %}
-        </li>
+        <tr>
+            <th scope="row">{{ loop.index + offset }}</th>
+            <td>{% include 'resultlist_record.html' %}</td>
+        </tr>
     {% endfor %}
-</ul>
+</table>

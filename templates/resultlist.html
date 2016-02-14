@@ -11,8 +11,7 @@
             {% include 'hoe_facets.html' %}
         </div>
         <div class="col-sm-8">
-            {{ pagination.info }}
-
+            <h4>{{ pagination.info }}</h4>
             {{ pagination.links }}
             {% include 'record_list.html' %}
             {{ pagination.links }}
@@ -21,6 +20,18 @@
 {% endblock %}
 {% block scripts %}
     {{ super() }}
+    <script>
+        $(document).on('click', '.rel_item', function(event){
+            event.preventDefault();
+            $(this).siblings('.hidden').toggleClass('hidden show_ri');
+            $(this).replaceWith('<a href="#" class="no_rel_item"><i class="fa fa-minus-square-o"></i> {{ _("Hide Related Items") }}</a>');
+        });
+        $(document).on('click', '.no_rel_item', function(event){
+            event.preventDefault();
+            $(this).siblings('.show_ri').toggleClass('hidden show_ri');
+            $(this).replaceWith('<a href="#" class="rel_item"><i class="fa fa-plus-square-o"></i> {{ _("Show Related Items") }}</a>');
+        });
+    </script>
     <script src="{{ url_for('static', filename='leaflet/leaflet.js') }}"></script>
     <script>
         var map = L.map('map').setView([48.7, 20.2], 3);

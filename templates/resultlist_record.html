@@ -1,2 +1,40 @@
 <a href="{{ url_for('show_record', pubtype=record.pubtype, record_id=record.id) }}">{{ record.title|truncate(80) }}</a><br/>
-{% if record.person %}{% for author in record.person %}{{ author }}{% if not loop.last %}; {% endif %}{% endfor %}, {% endif %}{{ record.issued }} | {{ pubtype_map.get(record.pubtype) }}
+{% if record.person %}{% for author in record.person %}{{ author }}{% if not loop.last %}; {% endif %}{% endfor %}, {% endif %}
+{% if record.corporation %}{{ record.corporation }}, {% endif %}
+{% if record.pubtype == 'Series' and not record.person and not record.corporation %}{{ record.publisher }}{% endif %}
+{% if record.issued %}{{ record.issued }} | {% endif %}{{ pubtype_map.get(record.pubtype) }}
+{% if record.is_part_of or record.has_part or record.other_version or record.related_item %}
+<br/><a href="#" class="rel_item"><i class="fa fa-plus-square-o"></i> {{ _('Show Related Items') }}</a>
+    {% if record.is_part_of %}
+        <h5 class="hidden">{{ _('Is Part Of') }}</h5>
+        <ul class="hidden list-unstyled">
+        {% for part in record.is_part_of %}
+            <li>{{ part|safe }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% if record.has_part %}
+        <h5 class="hidden">{{ _('Has Part') }}</h5>
+        <ul class="hidden list-unstyled">
+        {% for part in record.has_part %}
+            <li>{{ part|safe }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% if record.other_version %}
+        <h5 class="hidden">{{ _('Other Version') }}</h5>
+        <ul class="hidden list-unstyled">
+        {% for version in record.other_version %}
+            <li>{{ version|safe }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% if record.related_item %}
+        <h5 class="hidden">{% if record.source_class == 'Primary Literature' %}{{ _('Secondary Literature') }}{% else %}{{ _('Primary Literature') }}{% endif %}</h5>
+        <ul class="hidden list-unstyled">
+        {% for related in record.related_item %}
+            <li>{{ related|safe }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endif %}

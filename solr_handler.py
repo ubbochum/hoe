@@ -142,8 +142,8 @@ class Solr(object):
             # if self.boost_most_recent == 'true':
             #     params += '&boost=recip(ms(NOW/YEAR,year_boost),3.16e-11,1,1)'
             #self.response = eval(urllib.request.urlopen('%s%s' % (url, mparams)).read())
-            logging.info(url)
-            logging.info(mparams)
+            #logging.info(url)
+            #logging.info(mparams)
             self.response = eval(requests.get('%s%s' % (url, mparams)).text)
             for mlt in self.response.get('moreLikeThis'):
                 self.mlt_results = self.response.get('moreLikeThis').get(mlt).get('docs')
