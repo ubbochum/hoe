@@ -245,7 +245,7 @@ class CatalogueForm(ContainerForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI, self.ISBN, self.hbz_id], 'label': gettext('ID')},
@@ -272,7 +272,7 @@ class CollectionForm(ContainerForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI, self.ISBN, self.hbz_id], 'label': gettext('ID')},
@@ -302,7 +302,7 @@ class ConferenceForm(CollectionForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI, self.ISBN, self.hbz_id], 'label': gettext('ID')},
@@ -342,7 +342,7 @@ class MonographForm(AdvancedPrintForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.edition, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI, self.ISBN, self.hbz_id], 'label': gettext('ID')},
@@ -410,7 +410,7 @@ class PrintForm(BasicPrintForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.circa, self.language, self.accessed, self.number_of_pages, self.origin, self.provenance, self.additions,
+                       self.transliterated_title, self.issued, self.circa, self.language, self.accessed, self.number_of_pages, self.origin, self.provenance, self.additions,
                        self.note, self.license
                        ],
              'label': gettext('Basic')},
@@ -473,7 +473,7 @@ class CodexForm(WorkForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.circa, self.language, self.accessed, self.number_of_pages, self.number_of_lines, self.origin, self.provenance, self.additions,
+                       self.transliterated_title, self.issued, self.circa, self.language, self.accessed, self.number_of_pages, self.number_of_lines, self.origin, self.provenance, self.additions,
                        self.note, self.license
                        ],
              'label': gettext('Basic')},
@@ -529,7 +529,7 @@ class CodexChapterForm(WorkForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
@@ -553,7 +553,7 @@ class PrintChapterForm(CodexChapterForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
@@ -601,7 +601,7 @@ class ChapterForm(ContributionForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
@@ -622,7 +622,7 @@ class ArticleJournalForm(ContributionForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
@@ -648,7 +648,7 @@ class SeriesForm(SerialForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.title, self.subtitle, self.title_supplement, self.language, self.title_translated,
-                       self.issued, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.number_of_volumes, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.ISSN, self.ZDBID, self.uri, self.DOI], 'label': gettext('ID')},
@@ -675,7 +675,7 @@ class JournalForm(SerialForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.title, self.subtitle, self.journal_abbreviation, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.publisher, self.publisher_place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.ISSN, self.ZDBID, self.uri, self.DOI], 'label': gettext('ID')},
@@ -706,7 +706,7 @@ class InternetDocumentForm(WorkForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.place, self.number_of_pages, self.number, self.accessed, self.last_update, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.place, self.number_of_pages, self.number, self.accessed, self.last_update, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
@@ -732,7 +732,7 @@ class LectureForm(WorkForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.title, self.subtitle, self.title_supplement, self.title_translated, self.lecture_title,
-                       self.issued, self.language, self.place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.place, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
@@ -764,7 +764,7 @@ class OtherForm(WorkForm):
     def groups(self):
         yield [
             {'group': [self.pubtype, self.subtype, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.issued, self.language, self.edition, self.place, self.number_of_pages, self.number, self.accessed, self.additions, self.note, self.license
+                       self.transliterated_title, self.issued, self.language, self.edition, self.place, self.number_of_pages, self.number, self.accessed, self.additions, self.note, self.license
                        ],
              'label': gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': gettext('ID')},
