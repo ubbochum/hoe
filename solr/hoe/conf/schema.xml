@@ -170,6 +170,13 @@
         <field name="origin_place" type="string" indexed="true" stored="true"/>
         <field name="key_publication" type="boolean" indexed="true" stored="true"/>
         <dynamicField name="*" type="ignored"/>
+        <!-- Auto-complete fields -->
+        <field name="title_suggest" type="text_suggest" indexed="true" stored="true" multiValued="true"/>
+        <field name="title_suggest_edge" type="text_suggest_edge" indexed="true" stored="true" multiValued="true"/>
+        <field name="title_suggest_ngram" type="text_suggest_ngram" indexed="true" stored="true" multiValued="true"/>
+        <copyField source="title" dest="title_suggest"/>
+        <copyField source="title" dest="title_suggest_edge"/>
+        <copyField source="title" dest="title_suggest_ngram"/>
     </fields>
 
 

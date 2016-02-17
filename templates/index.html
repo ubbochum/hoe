@@ -1,51 +1,34 @@
-{% extends 'bootstrap/base.html' %}
+{% extends 'site_base.html' %}
 
-{% block styles %}
-    {{ super() }}
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
-    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
+{% block site_styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='leaflet/leaflet.css') }}"/>
     <style>
         #map { height: 360px; }
     </style>
 {% endblock %}
 
-{% block content %}
-    <div class="container">
-        {% include 'header.html' %}
-        {% include 'navbar.html' %}
-        <div class="row">
-            <div id="map"></div>
+{% block site_content %}
+    <div class="row">
+        <div id="map"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-1 col-sm-10">
+            <h3>{{ _('Project Description') }}</h3>
+            <div class="col-sm-4">The envisaged database aims at establishing the first comprehensive bibliography of early modern historiography in Ottoman Europe, thereby providing a lasting support for historical research. In the framework of a culture mainly shaped by religious writing, the polyglot historiography of the region represented an important section of secular writing and for this reason has constantly been drawn upon as a primary source for the study of social and cultural history as well as for the intellectual entanglement among the cultural spheres within Ottoman Europe and their intercommunication with the Mediterranean and Central European regions.</div>
+            <div class="col-sm-4">For the first time, the project will comprise the entire body of historiographic texts written in all the languages of Ottoman Europe between 1500 and 1800 and merge the data into one integral bibliography. Thus, the advanced bibliographic indexing of the scattered and hardly available texts will allow for searching the material irrespective of language and genre, for highlighting the inter-textual entanglements and interdependencies, and for indicating the currently available printed or online editions respectively. Access to the database will be provided via the website of the Centre for Mediterranean Studies at the Ruhr-Universität Bochum which has a special focus on the circulation of cultural knowledge and closely cooperates with the Chair of Ottoman and Turkish History at the Ruhr-Universität Bochum.</div>
+            <div class="col-sm-4">Thus, early modern South Eastern European and Mediterranean studies will be provided with a durable and easily updatable key instrument for their particular research interests, which, in the long run, could even be transformed into a research portal linking libraries, research institutions and individual researchers across national borders. The planned “Bibliographical Database Historiography in Ottoman Europe (15th–18th centuries)” is not only supposed to have a signaling effect upon a research landscape that is still highly disjointed, but rather understands itself as an essential step towards a comparative research that conceives of Ottoman Europe as a space shared by a variety of cultures, languages, and religions.</div>
         </div>
-        <div class="row">
-            <div class="col-sm-offset-1 col-sm-10">
-                <h3>{{ _('Project Description') }}</h3>
-                <div class="col-sm-4">The envisaged database aims at establishing the first comprehensive bibliography of early modern historiography in Ottoman Europe, thereby providing a lasting support for historical research. In the framework of a culture mainly shaped by religious writing, the polyglot historiography of the region represented an important section of secular writing and for this reason has constantly been drawn upon as a primary source for the study of social and cultural history as well as for the intellectual entanglement among the cultural spheres within Ottoman Europe and their intercommunication with the Mediterranean and Central European regions.</div>
-                <div class="col-sm-4">For the first time, the project will comprise the entire body of historiographic texts written in all the languages of Ottoman Europe between 1500 and 1800 and merge the data into one integral bibliography. Thus, the advanced bibliographic indexing of the scattered and hardly available texts will allow for searching the material irrespective of language and genre, for highlighting the inter-textual entanglements and interdependencies, and for indicating the currently available printed or online editions respectively. Access to the database will be provided via the website of the Centre for Mediterranean Studies at the Ruhr-Universität Bochum which has a special focus on the circulation of cultural knowledge and closely cooperates with the Chair of Ottoman and Turkish History at the Ruhr-Universität Bochum.</div>
-                <div class="col-sm-4">Thus, early modern South Eastern European and Mediterranean studies will be provided with a durable and easily updatable key instrument for their particular research interests, which, in the long run, could even be transformed into a research portal linking libraries, research institutions and individual researchers across national borders. The planned “Bibliographical Database Historiography in Ottoman Europe (15th–18th centuries)” is not only supposed to have a signaling effect upon a research landscape that is still highly disjointed, but rather understands itself as an essential step towards a comparative research that conceives of Ottoman Europe as a space shared by a variety of cultures, languages, and religions.</div>
-            </div>
-        </div>
-        {% include 'footer.html' %}
     </div>
 {% endblock %}
-{% block scripts %}
-    {{ super() }}
+{% block site_scripts %}
     <script src="{{ url_for('static', filename='leaflet/leaflet.js') }}"></script>
-
-		<script>
-		var map = L.map('map').setView([43.7, 17.2], 5);
-
-			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-			    attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
-			    maxZoom: 18,
-			    id: 'ahagenbruch.p072ck6j',
-			    accessToken: 'pk.eyJ1IjoiYWhhZ2VuYnJ1Y2giLCJhIjoiY2lqdnY1cHB2MGMxMnc4bTNnczkxNW1kNCJ9.kfslXFi1i7n_xPCXQ5lsHA'
-			}).addTo(map);
-
-		{#L.marker([40.4236908, -3.6899472]).addTo(map)
-		    .bindPopup('<a href="https://www.bne.es">National Library of Spain</a>.');
-		L.marker([44.4466031, 26.0899701]).addTo(map)
-		    .bindPopup('<a href="https://www.biblacad.ro/eng_index.html">Romanian Academy Library</a>.');#}
-		</script>
+    <script>
+    var map = L.map('map').setView([43.7, 17.2], 5);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'ahagenbruch.p072ck6j',
+        accessToken: 'pk.eyJ1IjoiYWhhZ2VuYnJ1Y2giLCJhIjoiY2lqdnY1cHB2MGMxMnc4bTNnczkxNW1kNCJ9.kfslXFi1i7n_xPCXQ5lsHA'
+    }).addTo(map);
+    </script>
 {% endblock %}

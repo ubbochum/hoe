@@ -1,6 +1,5 @@
 {% extends 'site_base.html' %}
 {% block site_content %}
-    {{ super() }}
     {% include 'confirm_delete_modal.html' %}
     <p>{% include 'admin_nav.html' %}</p>
         <div class="row">
@@ -24,8 +23,7 @@
             {{ pagination.links }}</div>
         </div>
 {% endblock %}
-{% block scripts %}
-    {{ super() }}
+{% block site_scripts %}
     <script>
         function page_reload(){
             setTimeout(function(){
@@ -44,5 +42,4 @@
             });
         });
     </script>
-    <script src="https://togetherjs.com/togetherjs-min.js"></script>
 {% endblock %}

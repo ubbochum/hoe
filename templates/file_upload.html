@@ -14,9 +14,7 @@
             </div>
         </div>
 {% endblock %}
-{% block scripts %}
-    {{ super() }}
-    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+{% block site_scripts %}
     <script src="{{ url_for('static', filename='js/dropzone.min.js') }}"></script>
     <script>
         function redirect_homepage(){

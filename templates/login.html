@@ -1,44 +1,28 @@
-{% extends 'bootstrap/base.html' %}
+{% extends 'site_base.html' %}
 
-{% block styles %}
-    {{ super() }}
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
-    <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
-{% endblock %}
-
-{% block content %}
-    <div class="container">
-        {% include 'header.html' %}
-        {% include 'navbar.html' %}
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-1">
-                <h2>{{ _('Sign in with your RUB credentials') }}<span class="pull-right"><i>or</i></span></h2>
-                <form method="post" class="form-horizontal">
-                    {{ form.csrf_token }}
-                    <div class="form-group">
-                        {{ form.username.label(class='col-sm-2 control-label') }}
-                        <div class="col-sm-6">
-                            {{ form.username(class='form-control',placeholder='Your RZ Login Name') }}
-                        </div>
+{% block site_content %}
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-1">
+            <h2>{{ _('Sign in with your RUB credentials') }}<span class="pull-right"><i>or</i></span></h2>
+            <form method="post" class="form-horizontal" id="theform">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    {{ form.username.label(class='col-sm-2 control-label') }}
+                    <div class="col-sm-6">
+                        {{ form.username(class='form-control',placeholder='Your RZ Login Name') }}
                     </div>
-                    <div class="form-group">
-                        {{ form.password.label(class='col-sm-2 control-label') }}
-                        <div class="col-sm-6">
-                            {{ form.password(class='form-control',placeholder='Your RZ Password') }}
-                        </div>
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class='col-sm-2 control-label') }}
+                    <div class="col-sm-6">
+                        {{ form.password(class='form-control',placeholder='Your RZ Password') }}
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-6 pull-right">
-                            <button type="reset" class="btn btn-danger">{{ _('Clear') }}</button>
-                            <button type="submit" class="btn btn-primary submit">{{ _('Submit') }}</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-sm-4">
-                <h2><a href="https://sandbox.orcid.org/oauth/authorize?client_id={{ orcid_sandbox_client_id }}&amp;response_type=code&amp;scope=/authenticate&amp;redirect_url=" class="btn btn-lg btn-default"><img src="{{ url_for('static', filename='site/img/orcid_32x32.png') }}"> {{ _('Sign in with ORCID') }}</a></h2>
-            </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-4">
+            <h2><a href="https://sandbox.orcid.org/oauth/authorize?client_id={{ orcid_sandbox_client_id }}&amp;response_type=code&amp;scope=/authenticate&amp;redirect_url=" class="btn btn-lg btn-default"><img src="{{ url_for('static', filename='site/img/orcid_32x32.png') }}"> {{ _('Sign in with ORCID') }}</a></h2>
         </div>
     </div>
+    <div class="row">{% include 'submit_form.html' %}</div>
 {% endblock %}

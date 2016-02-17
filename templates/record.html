@@ -1,6 +1,5 @@
 {% extends 'site_base.html' %}
-{% block head %}
-    {{ super() }}
+{% block site_styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='leaflet/leaflet.css') }}"/>
 {% endblock %}
 {% block modal %}{% include 'confirm_delete_modal.html' %}{% endblock %}
@@ -244,7 +243,10 @@
                         Libraries
                         {% endtrans %}
                     </dt>
-                    <dd id="record_map"></dd>
+                    <dd>
+                        <div>{{ record.library.0.data.label }} | {{ record.library.0.data.call_number }}</div>
+                        <div id="record_map"></div>
+                    </dd>
                 {% endif %}
             {% endif %}
             {% if mlt %}
@@ -274,8 +276,7 @@
         </div>
     </div>
 {% endblock %}
-{% block scripts %}
-    {{ super() }}
+{% block site_scripts %}
     <script type="application/ld+json">
         {
             "@context": "http://schema.org",

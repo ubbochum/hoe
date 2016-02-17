@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='octicons/octicons.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
+    {% block site_styles %}{% endblock %}
 {% endblock %}
 {% block content %}
     {% block modal %}{% endblock %}
@@ -17,4 +18,42 @@
         {% block site_content %}{% endblock %}
         {% include 'footer.html' %}
     </div>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    <script async defer src="https://hypothes.is/embed.js"></script>
+    {#<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.min.js"></script>#}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.min.js"></script>
+    <script>
+        var hoe = new Bloodhound({
+            datumTokenizer: function(d){
+                return Bloodhound.tokenizers.whitespace(d.title)
+            },
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                ajax: {datatype: 'jsonp', jsonp: 'json.wrf'},
+                url: 'http://127.0.0.1/typeahead/hoe/%QUERY?callback=?',
+                filter: function(data){
+                    return data.response.docs;
+                }
+            },
+            identify: function(obj){return obj.id;}
+        });
+        hoe.initialize();
+        $('#typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 2,
+        }, {
+            name: 'hoe',
+            display: 'title',
+            source: hoe.ttAdapter()
+        });
+        $('#typeahead').bind('typeahead:selected', function(ev, suggestion) {
+            //console.log('Selection: ' + JSON.stringify(suggestion));
+            document.location = '/search?q=' + encodeURIComponent(suggestion.id);
+        });
+    </script>
+    {% block site_scripts %}{% endblock %}
 {% endblock %}

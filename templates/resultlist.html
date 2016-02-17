@@ -1,10 +1,8 @@
 {% extends 'site_base.html' %}
-{% block head %}
-    {{ super() }}
+{% block site_styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='leaflet/leaflet.css') }}"/>
 {% endblock %}
 {% block site_content %}
-    {{ super() }}
     <div class="row">
         <div class="col-sm-4" id="facets">
             {% include 'remove_filters.html' %}
@@ -18,8 +16,7 @@
         </div>
     </div>
 {% endblock %}
-{% block scripts %}
-    {{ super() }}
+{% block site_scripts %}
     <script>
         $(document).on('click', '.rel_item', function(event){
             event.preventDefault();

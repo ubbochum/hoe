@@ -1,11 +1,9 @@
 {% extends 'site_base.html' %}
 {% import 'render_form.html' as render_form with context %}
-{% block styles %}
-    {{ super() }}
+{% block site_styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='site/css/bootstrap.vertical-tabs.min.css') }}">
 {% endblock %}
 {% block site_content %}
-    {{ super() }}
     <div class="row record_start" id="{{ record_id }}">
         <div>
             {% if form.errors %}
@@ -62,8 +60,7 @@
     </div>
     <div class="row">{% include 'submit_form.html' %}</div>
 {% endblock %}
-{% block scripts %}
-    {{ super() }}
+{% block site_scripts %}
     <script>
         function scrollto(element) {
             $('html, body').animate({scrollTop: $(element).offset().top}, 'slow');
@@ -162,5 +159,4 @@
             $(this).val(event.originalEvent.dataTransfer.getData('text').split('/').pop());
         })
     </script>
-    <script src="https://togetherjs.com/togetherjs-min.js"></script>
 {% endblock %}

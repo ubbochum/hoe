@@ -2,7 +2,7 @@
 {% if record.person %}{% for author in record.person %}{{ author }}{% if not loop.last %}; {% endif %}{% endfor %}, {% endif %}
 {% if record.corporation %}{{ record.corporation }}, {% endif %}
 {% if record.pubtype == 'Series' and not record.person and not record.corporation %}{{ record.publisher }}{% endif %}
-{% if record.issued %}{{ record.issued }} | {% endif %}{{ pubtype_map.get(record.pubtype) }}
+{% if record.issued %}{{ record.issued }} | {% endif %}{{ pubtype_map.get(record.pubtype) }}{% if record.subtype %} | {{ record.subtype }}{% endif %}{% if record.genre %} | {{ record.genre }}{% endif %}
 {% if record.is_part_of or record.has_part or record.other_version or record.related_item %}
 <br/><a href="#" class="rel_item"><i class="fa fa-plus-square-o"></i> {{ _('Show Related Items') }}</a>
     {% if record.is_part_of %}

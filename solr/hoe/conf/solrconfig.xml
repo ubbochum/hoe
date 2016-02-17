@@ -1450,12 +1450,9 @@
             <str name="echoParams">explicit</str>
             <str name="defType">edismax</str>
             <str name="rows">20</str>
-            <str name="fl">title,subtitle,journal_title,date,id</str>
-            <!--<str name="qf">title_suggest^30 title_suggest_ngram^50.0 collection_suggest^15 collection_suggest_ngram^25.0</str>-->
-            <str name="qf">title_suggest^30.0 title_suggest_ngram^50.0 subtitle_suggest^15.0
-                subtitle_suggest_ngram^20.0
-            </str>
-            <str name="pf">title_suggest_edge^50.0 subtitle_suggest_edge^20.0</str>
+            <str name="fl">title,id</str>
+            <str name="qf">title_suggest^30.0 title_suggest_ngram^50.0</str>
+            <str name="pf">title_suggest_edge^50.0</str>
             <str name="wt">json</str>
             <str name="stream.contentType">application/javascript</str>
             <str name="omitHeader">true</str>

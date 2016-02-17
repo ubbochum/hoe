@@ -1,13 +1,42 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+# The MIT License
+#
+#  Copyright 2015-2016 University Library Bochum <ottomanhistoriography@ruhr-uni-bochum.de>.
+#
+#  Permission is hereby granted, free of charge, to any person obtaining a copy
+#  of this software and associated documentation files (the "Software"), to deal
+#  in the Software without restriction, including without limitation the rights
+#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#  copies of the Software, and to permit persons to whom the Software is
+#  furnished to do so, subject to the following conditions:
+#
+#  The above copyright notice and this permission notice shall be included in
+#  all copies or substantial portions of the Software.
+#
+#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+#  THE SOFTWARE.
+
 import logging
 import uuid
 import base64
 import datetime
 import re
 import requests
-import pickle
 import simplejson as json
 import wtforms_json
-import secrets
+
+try:
+    import site_secrets as secrets
+except ImportError:
+    import secrets
+
 from flask import Flask, render_template, redirect, request, jsonify, flash, url_for, Markup
 from flask.ext.babel import Babel
 from flask.ext.bootstrap import Bootstrap
@@ -18,9 +47,9 @@ from flask_wtf.csrf import CsrfProtect
 from urllib import parse
 from solr_handler import Solr
 from datadiff import diff_dict
+from multiprocessing import Pool
 
 from forms import *
-from config import *
 
 logging.basicConfig (level=logging.INFO,
     format='%(asctime)s %(levelname)-4s %(message)s',
@@ -267,7 +296,7 @@ LANGUAGE_MAP = {
     'tur': gettext('Turkish'),
 }
 
-def _record2solr(form):
+def _record2solr_doc(form):
     solr_data = {}
     wtf = json.dumps(form.data)
     solr_data.setdefault('wtf_json', wtf)
@@ -365,7 +394,7 @@ def _record2solr(form):
                     if ipo:
                         #logging.info(ipo)
                         if 'is_part_of' in ipo:
-                            logging.info('POOP')
+                            #logging.info('POOP')
                             if ipo.get('is_part_of'):
                                 ipo_ids.append(ipo.get('is_part_of'))
                         else:
@@ -485,7 +514,10 @@ def _record2solr(form):
             solr_data.setdefault('origin_place', form.data.get(field))
 
     #logging.info(solr_data)
-    record_solr = Solr(core='hoe', data=[solr_data])
+    return solr_data
+
+def _record2solr(form):
+    record_solr = Solr(core='hoe', data=[_record2solr_doc(form)])
     record_solr.update()
 
 @app.route('/dashboard')
@@ -563,8 +595,9 @@ def new_record(pubtype='article-journal', primary_id=''):
     if form.validate_on_submit():
         if form.errors:
             flash_errors(form)
-            return render_template('test_form.html', form=form, header=gettext('New Record'),
-                                   site=theme(request.access_route), action='create', pubtype=pubtype)
+            return render_template('tabbed_form.html', form=form, header=gettext('New Record'),
+                                   site=theme(request.access_route), action='create', pubtype=pubtype,
+                                   record_id=form.id.data)
         _record2solr(form)
         return redirect(url_for('dashboard'))
 
@@ -890,17 +923,23 @@ def import_solr_dumps():
     mystart = 1 + (pagination.page - 1) * pagination.per_page
     return render_template('solr_dumps.html', records=solr_dumps.results, offset=mystart - 1, pagination=pagination, header=gettext('Import Dump'))
 
+def _import_data(doc):
+    form = PUBTYPE2FORM.get(doc.get('pubtype')).from_json(doc)
+    return _record2solr_doc(form)
+
 @app.route('/import/solr_dump/<filename>')
 def import_solr_dump(filename=''):
     if filename:
-
+        solr_data = []
         import_solr = Solr(core='hoe_users', query='id:%s' % filename, facet='false')
         import_solr.request()
 
         thedata = json.loads(import_solr.results[0].get('dump')[0])
-        for doc in thedata:
-            form = PUBTYPE2FORM.get(doc.get('pubtype')).from_json(doc)
-            _record2solr(form)
+        pool = Pool(4)
+        solr_data.append(pool.map(_import_data, thedata))
+        import_solr = Solr(core='hoe', data=solr_data[0])
+        import_solr.update()
+
         flash('%s records imported!' % len(thedata), 'success')
 
         return redirect('dashboard')
