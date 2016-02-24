@@ -1,4 +1,4 @@
-# Historiography of the Ottoman Empire
+# Historiography of Ottoman Europe
 
 Live Site: [https://hoe.ub.rub.de](https://hoe.ub.rub.de)
 

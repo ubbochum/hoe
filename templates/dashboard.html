@@ -11,11 +11,11 @@
         </div>#}
         <div class="row">
             <div class="col-sm-4">
+                {% include 'remove_filters.html' %}
                 {% include 'hoe_facets.html' %}
             </div>
             <div class="col-sm-8">
                 <h4>{{ pagination.info }}</h4>
-                {% include 'remove_filters.html' %}
                 {{ pagination.links }}
                 <table class="table table-bordered">
                     {% for record in records %}

@@ -9,7 +9,10 @@
         <h5 class="hidden">{{ _('Is Part Of') }}</h5>
         <ul class="hidden list-unstyled">
         {% for part in record.is_part_of %}
-            <li>{{ part|safe }}</li>
+{#            <li>{{ part|safe }}</li>#}
+            {% with mypart = part|deserialize_json %}
+                <li><a href="{{ url_for('show_record', pubtype=mypart.pubtype, record_id=mypart.id) }}">{{ mypart.title }}</a></li>
+            {% endwith %}
         {% endfor %}
         </ul>
     {% endif %}
@@ -17,7 +20,10 @@
         <h5 class="hidden">{{ _('Has Part') }}</h5>
         <ul class="hidden list-unstyled">
         {% for part in record.has_part %}
-            <li>{{ part|safe }}</li>
+{#            <li>{{ part|safe }}</li>#}
+            {% with mypart = part|deserialize_json %}
+                <li><a href="{{ url_for('show_record', pubtype=mypart.pubtype, record_id=mypart.id) }}">{{ mypart.title }}</a></li>
+            {% endwith %}
         {% endfor %}
         </ul>
     {% endif %}
@@ -25,7 +31,10 @@
         <h5 class="hidden">{{ _('Other Version') }}</h5>
         <ul class="hidden list-unstyled">
         {% for version in record.other_version %}
-            <li>{{ version|safe }}</li>
+{#            <li>{{ version|safe }}</li>#}
+            {% with myversion = version|deserialize_json %}
+                <li><a href="{{ url_for('show_record', pubtype=myversion.pubtype, record_id=myversion.id) }}">{{ myversion.title }}</a></li>
+            {% endwith %}
         {% endfor %}
         </ul>
     {% endif %}
@@ -33,7 +42,10 @@
         <h5 class="hidden">{% if record.source_class == 'Primary Literature' %}{{ _('Secondary Literature') }}{% else %}{{ _('Primary Literature') }}{% endif %}</h5>
         <ul class="hidden list-unstyled">
         {% for related in record.related_item %}
-            <li>{{ related|safe }}</li>
+{#            <li>{{ related|safe }}</li>#}
+            {% with myrelated = related|deserialize_json %}
+                <li><a href="{{ url_for('show_record', pubtype=myrelated.pubtype, record_id=myrelated.id) }}">{{ myrelated.title }}</a></li>
+            {% endwith %}
         {% endfor %}
         </ul>
     {% endif %}

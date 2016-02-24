@@ -23,7 +23,4 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-LANGUAGES = {
-    'en': 'English',
-    'de': 'Deutsch',
-}
+LANGUAGES = ['en', 'de', 'ru', 'ro', 'tr']

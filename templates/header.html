@@ -17,6 +17,6 @@
             <span style="margin-top: -12px; display: block;">{% if current_user.is_authenticated %}<i class="fa fa-user"></i> {{ current_user.name }} <a href="{{ url_for('logout') }}"><i class="fa fa-sign-out"></i></a>{% else %}{% if header != 'Sign In' %}<a href="{{ url_for('login', next=request.path) }}"><i class="fa fa-sign-in"></i> {{ _('Sign In') }}</a>{% endif %}{% endif %}</span>
         </span>
     </p>
-    <h1><img src="/static/site/img/dromedary.svg" height="48px"> <span style="vertical-align: -70%;">{{ _('Historiography of the Ottoman Empire') }}</span></h1>
+    <h1><img src="/static/site/img/dromedary.svg" height="48px"> <span style="vertical-align: -70%;">{{ _('Historiography of Ottoman Europe') }}</span></h1>
 {#    <h2>{{ header }}</h2>#}
 </header>

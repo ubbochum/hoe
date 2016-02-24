@@ -6,7 +6,7 @@
     {{ super() }}
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static', filename='font-awesome/css/font-awesome.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='octicons/octicons.css') }}">
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='octicons/octicons.css') }}">#}
     <link rel="stylesheet" href="{{ url_for('static', filename='site/css/rub.css') }}">
     {% block site_styles %}{% endblock %}
 {% endblock %}
@@ -21,7 +21,7 @@
 {% endblock %}
 {% block scripts %}
     {{ super() }}
-    <script async defer src="https://hypothes.is/embed.js"></script>
+{#    <script async defer src="https://hypothes.is/embed.js"></script>#}
     {#<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.min.js"></script>#}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.min.js"></script>

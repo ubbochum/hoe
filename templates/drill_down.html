@@ -1,30 +1,16 @@
 {% macro facets(facet='', category='', heading='', target='search') %}
-    {% if facet %}<h4>{{ _('%(title)s', title=heading) }}</h4>
-    <ul class="list-group">
-        {% for list in facet %}
-            {% for cat, count in list.items() %}
-                <li class="list-group-item">
-                    <a href="/{{ target }}?q={{ query|urlencode }}&amp;filter={{ category }}:%22{{ cat|urlencode }}%22{% if filterquery %}{% for fq in filterquery %}&amp;filter={{ fq }}{% endfor %}{% endif %}{% if mysort %}&amp;sort={{ mysort }}{% endif %}"
-                       title="{{ cat|safe }}">{{ cat|safe }}
-                    </a><span class="badge">{{ count }}</span>
-                </li>
-            {% endfor %}
-        {% endfor %}
-    </ul>{% endif %}
-    {#<div class="panel panel-default">
-        <div class="panel-heading">{{ _('%(title)s', title=heading) }}</div>
+    {% if facet.buckets %}
+        <h4>{{ _('%(title)s', title=heading) }}</h4>
         <ul class="list-group">
-            {% for list in facet %}
-                {% for cat, count in list.items() %}
-                    <li class="list-group-item">
-                        <a href="/search?q={{ query|urlencode }}&amp;filter={{ category }}:%22{{ cat|urlencode }}%22{% if filterquery %}{% for fq in filterquery %}&amp;filter={{ fq }}{% endfor %}{% endif %}{% if mysort %}&amp;sort={{ mysort }}{% endif %}"
-                           title="{{ cat|safe }}">{{ cat|safe }}
-                        </a><span class="badge">{{ count }}</span>
-                    </li>
-                {% endfor %}
-            {% endfor %}
+        {% for bucket in facet.buckets %}
+            <li class="list-group-item">
+                <a href="/{{ target }}?q={{ query|urlencode }}&amp;filter={{ category }}:%22{{ bucket.val|urlencode }}%22{% if filterquery %}{% for fq in filterquery %}&amp;filter={{ fq }}{% endfor %}{% endif %}{% if mysort %}&amp;sort={{ mysort }}{% endif %}"
+                   title="{{ bucket.val|safe }}">{{ bucket.val|safe }}
+                </a><span class="badge">{{ bucket.count }}</span>
+            </li>
+        {% endfor %}
         </ul>
-    </div>#}
+    {% endif %}
 {% endmacro %}
 
 {% macro simple_filter(category='', heading='', target='search') %}

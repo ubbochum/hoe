@@ -83,6 +83,10 @@ class URIForm(Form):
     label = StringField(gettext('Label'), validators=[Optional()])
     uri = StringField(gettext('URI'), validators=[URL(), Optional()])
 
+class KeywordGeographicForm(URIForm):
+    latitude = StringField(gettext('Latitude'))
+    longitude = StringField(gettext('Longitude'))
+
 class PersonForm(Form):
     name = StringField(gettext('Name'), widget=CustomTextInput(placeholder=gettext('Family name, given name')))
     role = SelectMultipleField('Role', choices=[]) #  Use this as an interface: Roles are dependent on the publication type
@@ -231,7 +235,7 @@ class WorkForm(Form):
     additions = StringField(gettext('Additions'), validators=[Optional()])
     keyword = FieldList(FormField(URIForm), min_entries=1)
     keyword_temporal = FieldList(StringField(gettext('Temporal'), validators=[Optional()]), min_entries=1)
-    keyword_geographic = FieldList(StringField(gettext('Geographic'), validators=[Optional()]), min_entries=1)
+    geographic = FieldList(FormField(KeywordGeographicForm), min_entries=1)
     abstract = TextAreaField(gettext('Abstract'), validators=[Optional()], widget=CustomTextInput(placeholder=gettext('An abstract of the work')))
     number_of_pages = StringField(gettext('Extent'), validators=[Optional()])
 
@@ -277,7 +281,7 @@ class CatalogueForm(ContainerForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
@@ -304,7 +308,7 @@ class CollectionForm(ContainerForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
@@ -335,7 +339,7 @@ class ConferenceForm(CollectionForm):
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.event_name, self.startdate_conference, self.enddate_conference, self.place], 'label': gettext('Event')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword,self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword,self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
@@ -374,7 +378,7 @@ class MonographForm(AdvancedPrintForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
@@ -388,13 +392,17 @@ class PrintForm(BasicPrintForm):
         ('', gettext('Select a Genre')),
         ('apocalypse', gettext('Apocalypse')),
         ('artifact', gettext('Artifact')),
+        ('autobiography', gettext('Autobiography')),
+        ('cartulary', gettext('Cartulary')),
         ('chronicle', gettext('Chronicle')),
         ('church_chronicle', gettext('Church Chronicle')),
         ('chronograph', gettext('Chronograph')),
         ('cosmography', gettext('Cosmography')),
         ('encomium', gettext('Encomium')),
+        ('false_document', gettext('False Document')),
         ('hagiography', gettext('Hagiography')),
         ('history', gettext('History')),
+        ('hoe'), gettext('History of the Ottoman Emperors'),
         ('legend', gettext('Legend')),
         ('letter', gettext('Letter')),
         ('memoirs', gettext('Memoirs')),
@@ -443,7 +451,7 @@ class PrintForm(BasicPrintForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                        ],
              'label': gettext('Keyword')},
             {'group': [self.abstract, self.incipit, self.explicit, self.autograph_text, self.vignette, self.frontispiece], 'label': gettext('Content')},
@@ -458,13 +466,17 @@ class CodexForm(WorkForm):
         ('', gettext('Select a Genre')),
         ('apocalypse', gettext('Apocalypse')),
         ('artifact', gettext('Artifact')),
+        ('autobiography', gettext('Autobiography')),
+        ('cartulary', gettext('Cartulary')),
         ('chronicle', gettext('Chronicle')),
         ('church_chronicle', gettext('Church Chronicle')),
         ('chronograph', gettext('Chronograph')),
         ('cosmography', gettext('Cosmography')),
         ('encomium', gettext('Encomium')),
+        ('false_document', gettext('False Document')),
         ('hagiography', gettext('Hagiography')),
         ('history', gettext('History')),
+        ('hoe', gettext('History of the Ottoman Emperors')),
         ('legend', gettext('Legend')),
         ('letter', gettext('Letter')),
         ('memoirs', gettext('Memoirs')),
@@ -506,7 +518,7 @@ class CodexForm(WorkForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                        ],
              'label': gettext('Keyword')},
             {'group': [self.abstract, self.incipit, self.explicit, self.autograph_text], 'label': gettext('Content')},
@@ -520,13 +532,17 @@ class CodexChapterForm(WorkForm):
         ('', gettext('Select a Genre')),
         ('apocalypse', gettext('Apocalypse')),
         ('artifact', gettext('Artifact')),
+        ('autobiography', gettext('Autobiography')),
+        ('cartulary', gettext('Cartulary')),
         ('chronicle', gettext('Chronicle')),
         ('church_chronicle', gettext('Church Chronicle')),
         ('chronograph', gettext('Chronograph')),
         ('cosmography', gettext('Cosmography')),
         ('encomium', gettext('Encomium')),
+        ('false_document', gettext('False Document')),
         ('hagiography', gettext('Hagiography')),
         ('history', gettext('History')),
+        ('hoe', gettext('History of the Ottoman Emperors')),
         ('legend', gettext('Legend')),
         ('letter', gettext('Letter')),
         ('memoirs', gettext('Memoirs')),
@@ -561,7 +577,7 @@ class CodexChapterForm(WorkForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract, self.incipit, self.explicit], 'label':gettext('Content')},
@@ -585,7 +601,7 @@ class PrintChapterForm(CodexChapterForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract, self.incipit, self.explicit, self.vignette], 'label':gettext('Content')},
@@ -599,7 +615,7 @@ class ChapterRelationForm(IsPartOfForm):
     volume = StringField(gettext('Volume'))
 
 class ArticleRelationForm(ChapterRelationForm):
-    volume = StringField(gettext('Volume'))
+    #volume = StringField(gettext('Volume'))
     issue = StringField(gettext('Issue'))
 
 class ContributionForm(WorkForm):
@@ -633,7 +649,7 @@ class ChapterForm(ContributionForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract], 'label':gettext('Content')},
@@ -655,7 +671,7 @@ class ArticleJournalForm(ContributionForm):
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of], 'label': gettext('Journal')},
             {'group': [self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract], 'label':gettext('Content')},
@@ -680,7 +696,7 @@ class SeriesForm(SerialForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
@@ -707,7 +723,7 @@ class JournalForm(SerialForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract, self.table_of_contents], 'label': gettext('Content')},
@@ -738,7 +754,7 @@ class InternetDocumentForm(WorkForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract], 'label':gettext('Content')},
@@ -765,7 +781,7 @@ class LectureForm(WorkForm):
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.event_name, self.startdate_conference, self.enddate_conference, self.place], 'label': gettext('Event')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract], 'label':gettext('Content')},
@@ -796,7 +812,7 @@ class OtherForm(WorkForm):
             {'group': [self.person], 'label': gettext('Person')},
             {'group': [self.corporation], 'label': gettext('Corporation')},
             {'group': [self.is_part_of, self.has_part, self.other_version, self.relation], 'label': gettext('Relations')},
-            {'group': [self.keyword, self.keyword_temporal, self.keyword_geographic
+            {'group': [self.keyword, self.keyword_temporal, self.geographic
                         ],
              'label': gettext('Keyword')},
             {'group': [self.abstract], 'label':gettext('Content')},

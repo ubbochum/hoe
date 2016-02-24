@@ -29,7 +29,7 @@ import secrets
 from werkzeug import iri_to_uri
 import simplejson as json
 import logging
-import time
+#import time
 
 logging.basicConfig (level=logging.INFO,
     format='%(asctime)s %(levelname)-4s %(message)s',
@@ -38,7 +38,7 @@ logging.basicConfig (level=logging.INFO,
 
 class Solr(object):
     def __init__(self, host=secrets.SOLR_HOST, port=secrets.SOLR_PORT, application='solr', handler='select',
-                 query='*:*', fquery=[], fields=[], writer='python', start='0', rows='10', facet='true',
+                 query='*:*', fquery=[], fields=[], writer='python', start='0', rows='10', facet='false',
                  facet_fields=secrets.SOLR_FACETS, facet_mincount=0, facet_limit=10, facet_offset=0, sort='score desc',
                  terms_fl='', terms_limit=10, terms_prefix='', terms_sort='count', mlt=False, mlt_fields=[],
                  omitHeader='false', query_field='', sort_facet_by_index={}, fuzzy='false',
@@ -46,7 +46,7 @@ class Solr(object):
                  spellcheck_count=5, suggest_query='', group='false', group_field='', group_limit=1,
                  group_sort='score desc', group_ngroups='true', coordinates='0,0', json_nl='arrmap',# cursor='',
                  boost_most_recent='false', csv_separator='\t', core=secrets.SOLR_CORE, stats='false', stats_fl=[],
-                 data='', del_id='', export_field='', export_dir='/tmp'):
+                 data='', del_id='', export_field='', json_facet={}):
         self.host = host
         self.port = port
         self.application = application
@@ -99,7 +99,8 @@ class Solr(object):
         self.data = data
         self.del_id = del_id
         self.export_field = export_field
-        self.export_dir = export_dir
+        #self.export_dir = export_dir
+        self.json_facet = json_facet
 
     def request(self):
         params = ''
@@ -109,7 +110,7 @@ class Solr(object):
         fuzzy_tilde= ''
         if self.fuzzy == 'true':
             fuzzy_tilde = '~'
-        if self.facet == 'true':
+        if self.facet == 'true': # Old-style facetting...
             facets = '&facet.field='.join(self.facet_fields)
             params = '%s?q=%s%s&wt=%s&start=%s&rows=%s&facet.limit=%s&facet.mincount=%s&facet.offset=%s&facet.field=%s&json.nl=%s&facet=%s&facet.sort=%s&omitHeader=%s&defType=%s&facet.threads=-1' % (
                 self.handler, self.query, fuzzy_tilde, self.writer, self.start, self.rows, self.facet_limit,
@@ -142,6 +143,9 @@ class Solr(object):
                 params += '&boost=recip(ms(NOW/YEAR,year_boost),3.16e-11,1,1)'
             if self.writer == 'csv':
                 params += '&csv.separator=%s' % self.csv_separator
+            #logging.info(self.json_facet)
+            if self.json_facet:
+                params += '&json.facet=%s' % (json.dumps(self.json_facet))
         if len(self.fquery) > 0:
             for fq in (self.fquery):
                 try:
@@ -231,6 +235,9 @@ class Solr(object):
             self.facets = self.response.get('facet_counts').get('facet_fields')
         if len(self.facet_tree) > 0:
             self.tree = self.response.get('facet_counts').get('facet_pivot')
+        if self.json_facet:
+            #logging.info(self.response.get('facets'))
+            self.facets = self.response.get('facets')
         if self.spellcheck == 'true' or self.handler.endswith('suggest'):
             try:
                 self.suggestions = self.response.get('spellcheck').get('suggestions')
@@ -298,10 +305,11 @@ class Solr(object):
                 done = True
             cm = resp.get('nextCursorMark')
 
-        with open('%s/%s_%s.json' % (self.export_dir, self.core, int(time.time())), 'w') as dumpfile:
-            json.dump(export_docs, dumpfile, indent=4)
+        #with open('%s/%s_%s.json' % (self.export_dir, self.core, int(time.time())), 'w') as dumpfile:
+            #json.dump(export_docs, dumpfile, indent=4)
 
-        return '%s/%s_%s.json' % (self.export_dir, self.core, int(time.time()))
+        #return '%s/%s_%s.json' % (self.export_dir, self.core, int(time.time()))
+        return export_docs
 
     def __len__(self):
         return len(self.results)

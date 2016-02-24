@@ -31,13 +31,14 @@ import re
 import requests
 import simplejson as json
 import wtforms_json
+import time
 
 try:
     import site_secrets as secrets
 except ImportError:
     import secrets
 
-from flask import Flask, render_template, redirect, request, jsonify, flash, url_for, Markup
+from flask import Flask, render_template, redirect, request, jsonify, flash, url_for, Markup, Response, send_file
 from flask.ext.babel import Babel
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required, make_secure_token, AnonymousUserMixin
@@ -48,8 +49,10 @@ from urllib import parse
 from solr_handler import Solr
 from datadiff import diff_dict
 from multiprocessing import Pool
+from io import BytesIO
 
 from forms import *
+from config import LANGUAGES
 
 logging.basicConfig (level=logging.INFO,
     format='%(asctime)s %(levelname)-4s %(message)s',
@@ -71,7 +74,7 @@ humanize_filter = Humanize(app)
 bootstrap = Bootstrap(app)
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
-CsrfProtect(app)
+csrf = CsrfProtect(app)
 
 wtforms_json.init()
 
@@ -110,6 +113,10 @@ def mk_time_filter(mytime):
 def last_split_filter(category):
     return category.rsplit('-', 1)[1]
 
+@app.template_filter('deserialize_json')
+def deserialize_json_filter(thejson):
+    return json.loads(thejson)
+
 def theme(ip):
     # logging.info(ip[0])
     site = ''
@@ -135,11 +142,11 @@ def _diff_struct(a, b):
                 pass
     return diffs
 
-
+@humanize_filter.localeselector
 @babel.localeselector
 def get_locale():
-    #return request.accept_languages.best_match(LANGUAGES.keys())
-    return 'de'
+    return request.accept_languages.best_match(LANGUAGES)
+
 
 @app.route('/')
 @app.route('/index')
@@ -203,15 +210,20 @@ SUBTYPE2TEXT = {
 }
 
 GENRE2TEXT = {
+    #, , , chronicle,
     'apocalypse': gettext('Apocalypse'),
     'artifact': gettext('Artifact'),
+    'autobiography': gettext('Autobiography'),
+    'cartulary': gettext('Cartulary'),
     'chronicle': gettext('Chronicle'),
     'church_chronicle': gettext('Church Chronicle'),
     'chronograph': gettext('Chronograph'),
     'cosmography': gettext('Cosmography'),
     'encomium': gettext('Encomium'),
+    'false_document': gettext('False Document'),
     'hagiography': gettext('Hagiography'),
     'history': gettext('History'),
+    'hoe': gettext('History of the Ottoman Emperors'),
     'legend': gettext('Legend'),
     'letter': gettext('Letter'),
     'memoirs': gettext('Memoirs'),
@@ -408,9 +420,16 @@ def _record2solr_doc(form):
                     ipo_solr.request()
                     if len(ipo_solr.results) == 0:
                         flash(gettext('Not all IDs from relation "is part of" could be found! Ref: %s' % form.data.get('id')), 'warning')
-                    for doc in ipo_solr.results:
+                    for idx, doc in enumerate(ipo_solr.results):
                         myjson = json.loads(doc.get('wtf_json'))
-                        solr_data.setdefault('is_part_of', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+                        #solr_data.setdefault('is_part_of', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+                        solr_data.setdefault('is_part_of', []).append(json.dumps({'pubtype': myjson.get('pubtype'),
+                                                                       'id': myjson.get('id'),
+                                                                       'title': myjson.get('title'),
+                                                                       'page_first': form.data.get(field)[idx].get('page_first', ''),
+                                                                       'page_last': form.data.get(field)[idx].get('page_last', ''),
+                                                                       'volume': form.data.get(field)[idx].get('volume', ''),
+                                                                       'issue': form.data.get(field)[idx].get('issue', '')}))
             except AttributeError as e:
                 logging.error(e)
         if field == 'has_part' and len(form.data.get(field)) > 0:
@@ -433,7 +452,10 @@ def _record2solr_doc(form):
                             gettext('Not all IDs from relation "has part" could be found! Ref: %s' % form.data.get('id')), 'warning')
                     for doc in hp_solr.results:
                         myjson = json.loads(doc.get('wtf_json'))
-                        solr_data.setdefault('has_part', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+                        #solr_data.setdefault('has_part', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+                        solr_data.setdefault('has_part', []).append(json.dumps({'pubtype': myjson.get('pubtype'),
+                                                                     'id': myjson.get('id'),
+                                                                     'title': myjson.get('title'),}))
             except AttributeError as e:
                 logging.error(e)
         if field == 'other_version' and len(form.data.get(field)) > 0:
@@ -458,7 +480,10 @@ def _record2solr_doc(form):
                     for doc in ov_solr.results:
                         #logging.info(json.loads(doc.get('wtf_json')))
                         myjson = json.loads(doc.get('wtf_json'))
-                        solr_data.setdefault('other_version', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+                        #solr_data.setdefault('other_version', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+                        solr_data.setdefault('other_version', []).append(json.dumps({'pubtype': myjson.get('pubtype'),
+                                                                     'id': myjson.get('id'),
+                                                                     'title': myjson.get('title'),}))
             except AttributeError as e:
                 logging.error(e)
         if field == 'relation' and len(form.data.get(field)) > 0:
@@ -482,7 +507,10 @@ def _record2solr_doc(form):
                             'warning')
                     for doc in rel_solr.results:
                         myjson = json.loads(doc.get('wtf_json'))
-                        solr_data.setdefault('related_item', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+                        #solr_data.setdefault('related_item', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
+                        solr_data.setdefault('related_item', []).append(json.dumps({'pubtype': myjson.get('pubtype'),
+                                                                     'id': myjson.get('id'),
+                                                                     'title': myjson.get('title'),}))
             except AttributeError as e:
                 logging.error(e)
         if field == 'ISSN' and len(form.data.get(field)) > 0:
@@ -530,7 +558,7 @@ def dashboard():
     rows = secrets.SOLR_ROWS
     # Solr(start=(page - 1) * 10, query=query, fquery=filterquery, sort=sorting)
     dashboard_solr = Solr(start=(page - 1) * int(rows), query=query, sort='created asc', rows=rows,
-                          facet_fields=secrets.SOLR_FACETS, fquery=filterquery)
+                          json_facet=secrets.SOLR_FACETS, fquery=filterquery)
     dashboard_solr.request()
 
     num_found = dashboard_solr.count()
@@ -547,13 +575,11 @@ def dashboard():
         # myend = mystart + pagination.per_page - 1
 
     flibraries = {}
-    for flib in dashboard_solr.facets.get('flibrary'):
-        flibraries.setdefault(list(flib.keys())[0], list(flib.values())[0])
-    #logging.info(flibraries)
+    for flib in dashboard_solr.facets.get('flibrary').get('buckets'):
+        flibraries.setdefault(flib.get('val'), flib.get('count'))
     libraries = []
-    for lib_facet in dashboard_solr.facets.get('library'):
-        for library in lib_facet:
-            libraries.append({'library': eval(library)})
+    for lib in dashboard_solr.facets.get('library').get('buckets'):
+        libraries.append({'library': eval(lib.get('val'))})
     return render_template('dashboard.html', records=dashboard_solr.results, facet_data=dashboard_solr.facets,
                            header=gettext('Dashboard'), site=theme(request.access_route),
                            offset=mystart - 1, query=query, filterquery=filterquery, pagination=pagination,
@@ -629,6 +655,14 @@ def show_record(pubtype, record_id=''):
                            role_map=ROLE_MAP, lang_map=LANGUAGE_MAP, pubtype_map=PUBTYPE2TEXT, subtype_map=SUBTYPE2TEXT,
                            genre_map=GENRE2TEXT, mlt=show_record_solr.mlt_results, is_part_of=is_part_of,
                            has_part=has_part, other_version=other_version, related_item=related_item)
+
+@csrf.exempt
+@app.route('/update/json', methods=['GET', 'POST'])
+def json_edit_record():
+    form = PUBTYPE2FORM.get(request.form.get('pubtype'))()
+    form.formdata = request.form
+    _record2solr(form)
+    return jsonify({'poop': 'poop'})
 
 @app.route('/update/<pubtype>/<record_id>', methods=['GET', 'POST'])
 @login_required
@@ -872,8 +906,8 @@ def search():
         sorting = 'issued desc'
 
     rows = secrets.SOLR_ROWS
-    search_solr = Solr(start=(page - 1) * int(rows), query=query, fquery=filterquery, sort=sorting, facet='true',
-                       facet_fields=secrets.SOLR_FACETS, rows=rows)
+    search_solr = Solr(start=(page - 1) * int(rows), query=query, fquery=filterquery, sort=sorting,
+                       json_facet=secrets.SOLR_FACETS, rows=rows)
     search_solr.request()
     num_found = search_solr.count()
     if num_found == 1:
@@ -887,15 +921,12 @@ def search():
                                 search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
         mystart = 1 + (pagination.page - 1) * pagination.per_page
         #myend = mystart + pagination.per_page - 1
-        #logging.info(query)
         flibraries = {}
-        for flib in search_solr.facets.get('flibrary'):
-            flibraries.setdefault(list(flib.keys())[0], list(flib.values())[0])
-        #logging.info(flibraries)
+        for flib in search_solr.facets.get('flibrary').get('buckets'):
+            flibraries.setdefault(flib.get('val'), flib.get('count'))
         libraries = []
-        for lib_facet in search_solr.facets.get('library'):
-            for library in lib_facet:
-                libraries.append({'library': eval(library)})
+        for lib in search_solr.facets.get('library').get('buckets'):
+            libraries.append({'library': eval(lib.get('val'))})
         return render_template('resultlist.html', records=search_solr.results, pagination=pagination,
                                facet_data=search_solr.facets, header=query, site=theme(request.access_route),
                                offset=mystart - 1, query=query, filterquery=filterquery, flibraries=flibraries,
@@ -903,13 +934,17 @@ def search():
 
 @app.route('/export/solr_dump')
 def export_solr_dump():
+    '''
+    Export the wtf_json field of every doc in the index to a new document in the users core and to the user's local file
+    system. Uses the current user's ID and a timestamp as the document ID and file name.
+    '''
+    filename = '%s_%s.json' % (current_user.id, int(time.time()))
     export_solr = Solr(export_field='wtf_json')
-    filename = export_solr.export()
-    target_solr = Solr(core='hoe_users', data=[{'id': '%s_%s' % (current_user.id, filename.split('_')[1]), 'dump': open(filename).read()}])
+    export_docs = export_solr.export()
+    target_solr = Solr(core='hoe_users', data=[{'id': filename, 'dump': json.dumps(export_docs)}])
     target_solr.update()
-    flash(gettext('Exported internal format to %s' % filename), 'success')
 
-    return redirect('dashboard')
+    return send_file(BytesIO(str.encode(json.dumps(export_docs))), attachment_filename=filename, as_attachment=True)
 
 @app.route('/import/solr_dumps')
 def import_solr_dumps():
@@ -921,7 +956,8 @@ def import_solr_dumps():
                                 record_name=gettext('dumps'),
                                 search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
     mystart = 1 + (pagination.page - 1) * pagination.per_page
-    return render_template('solr_dumps.html', records=solr_dumps.results, offset=mystart - 1, pagination=pagination, header=gettext('Import Dump'))
+    return render_template('solr_dumps.html', records=solr_dumps.results, offset=mystart - 1, pagination=pagination,
+                           header=gettext('Import Dump'), del_redirect='import/solr_dumps')
 
 def _import_data(doc):
     form = PUBTYPE2FORM.get(doc.get('pubtype')).from_json(doc)
