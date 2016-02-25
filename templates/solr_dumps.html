@@ -1,26 +1,33 @@
 {% extends 'site_base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 {% block site_content %}
     {% include 'confirm_delete_modal.html' %}
     <p>{% include 'admin_nav.html' %}</p>
         <div class="row">
-            <div class="col-sm-12"><h4>{{ pagination.info }}</h4>
-            {{ pagination.links }}
-            <table class="table">
-                {% for record in records %}
-                    <tr>
-                        <th scope="row">{{ loop.index + offset }}</th>
-                        <td>{{ record.id }}<br/>
-                        <td class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="action{{ loop.index }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-cog"></i> Action <span class="fa fa-caret-down"></span></button>
-                            <ul class="dropdown-menu" aria-labelledby="action{{ loop.index }}">
-                                <li><a href="{{ url_for('import_solr_dump', filename=record.id) }}"><i class="fa fa-cloud-download"></i> {{ _('Import Dump') }}</a></li>
-                                {% if current_user.role == 'admin' %}<li class="bg-danger"><a href="#" data-href="{{ url_for('delete_dump', record_id=record.id) }}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> {{ _('Delete') }}</a></li>{% endif %}
-                            </ul>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-            {{ pagination.links }}</div>
+            <div class="col-sm-6">
+                <h4>{{ pagination.info }}</h4>
+                {{ pagination.links }}
+                <table class="table">
+                    {% for record in records %}
+                        <tr>
+                            <th scope="row">{{ loop.index + offset }}</th>
+                            <td>{{ record.id }}<br/>
+                            <td class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="action{{ loop.index }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-cog"></i> Action <span class="fa fa-caret-down"></span></button>
+                                <ul class="dropdown-menu" aria-labelledby="action{{ loop.index }}">
+                                    <li><a href="{{ url_for('import_solr_dump', filename=record.id) }}"><i class="fa fa-cloud-download"></i> {{ _('Import Dump') }}</a></li>
+                                    {% if current_user.role == 'admin' %}<li class="bg-danger"><a href="#" data-href="{{ url_for('delete_dump', record_id=record.id) }}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> {{ _('Delete') }}</a></li>{% endif %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {{ pagination.links }}
+            </div>
+            <div class="col-sm-6">
+                <h4>{{ _('Upload JSON File') }}</h4>
+                {{ wtf.quick_form(form, form_type='inline', action='/import/solr_dump/somefile') }}
+            </div>
         </div>
 {% endblock %}
 {% block site_scripts %}

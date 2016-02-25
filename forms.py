@@ -821,6 +821,9 @@ class OtherForm(WorkForm):
              'label': gettext('Administrative')},
         ]
 
+class FileUploadForm(Form):
+    file = FileField(gettext('Solr Dump'))
+    submit = SubmitField(gettext('Send File'))
 
 ########################################################################
 class UserForm(Form):

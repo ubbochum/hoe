@@ -50,6 +50,7 @@ from solr_handler import Solr
 from datadiff import diff_dict
 from multiprocessing import Pool
 from io import BytesIO
+from werkzeug import secure_filename
 
 from forms import *
 from config import LANGUAGES
@@ -948,6 +949,9 @@ def export_solr_dump():
 
 @app.route('/import/solr_dumps')
 def import_solr_dumps():
+    '''
+    Import Solr dumps either from the users core or from the local file system.
+    '''
     page = int(request.args.get('page', 1))
     solr_dumps = Solr(core='hoe_users', query='id:*.json', facet='false', start=(page - 1) * 10)
     solr_dumps.request()
@@ -956,29 +960,37 @@ def import_solr_dumps():
                                 record_name=gettext('dumps'),
                                 search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
     mystart = 1 + (pagination.page - 1) * pagination.per_page
+    form = FileUploadForm()
     return render_template('solr_dumps.html', records=solr_dumps.results, offset=mystart - 1, pagination=pagination,
-                           header=gettext('Import Dump'), del_redirect='import/solr_dumps')
+                           header=gettext('Import Dump'), del_redirect='import/solr_dumps', form=form)
 
 def _import_data(doc):
     form = PUBTYPE2FORM.get(doc.get('pubtype')).from_json(doc)
     return _record2solr_doc(form)
 
-@app.route('/import/solr_dump/<filename>')
+@app.route('/import/solr_dump/<filename>', methods=['GET', 'POST'])
 def import_solr_dump(filename=''):
-    if filename:
-        solr_data = []
-        import_solr = Solr(core='hoe_users', query='id:%s' % filename, facet='false')
-        import_solr.request()
+    thedata = ''
+    solr_data = []
+    if request.method == 'GET':
+        if filename:
+            import_solr = Solr(core='hoe_users', query='id:%s' % filename, facet='false')
+            import_solr.request()
 
-        thedata = json.loads(import_solr.results[0].get('dump')[0])
-        pool = Pool(4)
-        solr_data.append(pool.map(_import_data, thedata))
-        import_solr = Solr(core='hoe', data=solr_data[0])
-        import_solr.update()
+            thedata = json.loads(import_solr.results[0].get('dump')[0])
+    elif request.method == 'POST':
+        form = FileUploadForm()
+        if form.validate_on_submit():
+            thedata = json.loads(form.file.data.stream.read())
 
-        flash('%s records imported!' % len(thedata), 'success')
+    pool = Pool(4)
+    solr_data.append(pool.map(_import_data, thedata))
+    import_solr = Solr(core='hoe', data=solr_data[0])
+    import_solr.update()
 
-        return redirect('dashboard')
+    flash('%s records imported!' % len(thedata), 'success')
+
+    return redirect('dashboard')
 
 @app.route('/delete/solr_dump/<record_id>')
 def delete_dump(record_id=''):
