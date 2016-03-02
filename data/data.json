@@ -1,0 +1,6684 @@
+[
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Edition",
+    "ISBN": [
+      "9789734707386"
+    ],
+    "publisher": "Paralela 45",
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "B\u00e2zgan, Melentina",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "(1692-1714)",
+    "publisher_place": "Pite\u0219ti",
+    "table_of_contents": "",
+    "id": "04f92b0b-12ab-4f58-ac36-04bbef73f03a",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      },
+      {
+        "uri": "",
+        "label": "princely chancellary"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Wallachia",
+        "label": "Wallachia"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Constantin_Br\u00e2ncoveanu",
+        "label": "Constantin Br\u00e2ncoveanu"
+      },
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-12 10:10:41.421420",
+    "relation": [
+      "e0178f70-c21b-4944-9ff2-eb8f4c8a6b71"
+    ],
+    "abstract": "435 official documents issued in Romania between April 30, 1689, and January 18, 1714 by the Wallachian princely chancellery of Constantin Br\u00e2ncoveanu. Copied from the original documents in an official contemporary codex, they are now held at DANIC \u2013 Ms. 705.",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "2009",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Condica Marii Logofet\u0327ii",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "rum"
+    ],
+    "title_translated": [
+      {
+        "language": "eng",
+        "translated_title": "Register of documents issued by the office of the Grand Logothete 1692-1714"
+      }
+    ],
+    "created": "2016-02-03 16:22:38.028605",
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "Bucharest",
+        "label": "Direc\u021bia Arhivelor Na\u021bionale Istorice Centrale (The National Archives of Romania)",
+        "uri": "http://www.arhivelenationale.ro/",
+        "latitude": "44.3963254",
+        "longitude": "26.1175761",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "df5fade7-c96a-42a6-8983-bc48a82c427d",
+        "volume": "5"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Monograph",
+    "ISBN": [
+      ""
+    ],
+    "publisher": "Hell\u0113nikon Institouton Benetias Byzantin\u014dn kai Metabyzantin\u014dn Spoud\u014dn",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "0000  0003  6623  2632",
+        "name": "Tatake\u0304s, Basileios N.",
+        "viaf": "88924818"
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "\u03c6\u03b9\u03bb\u03bf\u0301\u03c3\u03bf\u03c6\u03bf\u03c2, \u03b8\u03b5\u03bf\u03bb\u03bf\u0301\u03b3\u03bf\u03c2, \u03c6\u03b9\u03bb\u03bf\u0301\u03bb\u03bf\u03b3\u03bf\u03c2",
+    "publisher_place": "Venice",
+    "table_of_contents": "",
+    "id": "0c4f7d31-e474-463e-aba9-0383c1a7532c",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-11 15:12:16.937334",
+    "relation": [
+      "b082799c-d281-41b1-9830-b52fae39cabf"
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1973",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "18, 162",
+    "title": "\u0393\u03b5\u03c1\u03b1\u0301\u03c3\u03b9\u03bc\u03bf\u03c2 \u0392\u03bb\u03b1\u0301\u03c7\u03bf\u03c2 \u03bf \u039a\u03c1\u03b7\u0301\u03c2 (1605/7-1685)",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-09 11:23:09.721060",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "None",
+    "pubtype": "Journal",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "Libraire Honor\u00e9 Champion",
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Chatelain, \u00c9mile",
+        "viaf": ""
+      },
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Dorez, L\u00e9on",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Paris",
+    "table_of_contents": "",
+    "id": "0c9ee0c8-3527-4ddf-90e3-490f92cf572c",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "78ab3227-bfd6-4d4d-9d74-8d66adbc30a0"
+    ],
+    "changed": "2016-02-12 09:57:03.483692",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Revue des Biblioth\u00e8ques",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "fre"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-02 14:40:10.892868",
+    "journal_abbreviation": [
+      ""
+    ],
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Monograph",
+    "ISBN": [
+      ""
+    ],
+    "publisher": "Hetaireia Makedonik\u014dn Spud\u014dn",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "0000  0001  0924  1407",
+        "name": "Zachariadu, Elisabet A.",
+        "viaf": "91480231"
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Thessaloniki",
+    "table_of_contents": "",
+    "id": "0d49ade4-3ee8-4b7c-969d-51cc00856288",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-11 13:02:43.450761",
+    "relation": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1960",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "93",
+    "title": "\u03a4\u1f78 \u03a7\u03c1\u03bf\u03bd\u03b9\u03ba\u1f78 \u03c4\u1ff6\u03bd \u03a4\u03bf\u03cd\u03c1\u03ba\u03c9\u03bd \u03a3\u03bf\u03c5\u03bb\u03c4\u03ac\u03bd\u03c9\u03bd (\u03c4\u03bf\u1fe6 \u0392\u03b1\u03c1\u03b2\u03b5\u03c1\u03b9\u03bd\u03bf\u1fe6 \u1f11\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03bf\u1fe6 \u03ba\u03ce\u03b4\u03b9\u03ba\u03b1 111) \u03ba\u03b1\u1f76 \u03c4\u1f78 \u1f30\u03c4\u03b1\u03bb\u03b9\u03ba\u1f79 \u03c4\u03bf\u03c5 \u03c0\u03c1\u1f79\u03c4\u03c5\u03c0\u03bf",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      ""
+    ],
+    "title_translated": [
+      {
+        "language": "gre",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-11 13:02:43.450761",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "None",
+    "pubtype": "Journal",
+    "ISSN": [
+      "0013-6662"
+    ],
+    "publisher": "CSIC",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      "http://emerita.revistas.csic.es/index.php/emerita"
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "revista de linguistica y filolog\u00eda clasica",
+    "publisher_place": "Madrid",
+    "table_of_contents": "",
+    "id": "0fe74ea7-4b7c-4bfd-9869-54f708235475",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "57566ce5-5672-45f0-a838-d4b1387758b5"
+    ],
+    "changed": "2016-02-12 10:14:54.790894",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "ZDBID": "2227039-5",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Emerita",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "spa"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-04 10:28:57.008498",
+    "journal_abbreviation": [
+      ""
+    ],
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "decdcbd9-5ba0-444a-83af-9b17c68cecd4",
+        "volume": "33"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Collection",
+    "ISBN": [
+      ""
+    ],
+    "publisher": "H\u0430\u0443\u043aa \u043b\u0435\u043d\u0438\u043d\u0433\u0440\u0430\u0434\u0441\u043a\u043e\u0435 \u043e\u0442\u0434\u0435\u043b\u0435\u043d\u0438\u0435",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "\u0410\u043a\u0430\u0434\u0435\u043c\u0438\u044f \u043d\u0430\u0443\u043a CCC\u0420, \u0418\u043d\u0441\u0442\u0438\u0442\u0443\u0442 \u0440\u0443\u0441\u0441\u043a\u043e\u0439 \u043b\u0438\u0442\u0435\u0440\u0430\u0442\u0443\u0440\u044b (\u043f\u0443\u0448\u043a\u0438\u043d\u0441\u043a\u0438\u0439 \u0434\u043e\u043c)",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Saint Petersburg",
+    "table_of_contents": "",
+    "id": "1e86b7f3-d19a-4cde-ac31-8d32e415eee3",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "a52bdeec-6815-49b2-b91f-c174eb62b37b"
+    ],
+    "changed": "2016-02-17 10:50:14.395535",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "\u041e\u0442\u0434\u0435\u043b\u044c\u043d\u044b\u0439 \u043e\u0442\u0442\u0438\u0441\u043a",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1979",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "\u0414\u0440\u0435\u0432\u043d\u0435\u0440\u0443\u0441\u0441\u043a\u0438\u0435 \u043b\u0438\u0442\u0435\u0440\u0430\u0442\u0443\u0440\u043d\u044b\u0435 \u043f\u0430\u043c\u044f\u0442\u043d\u0438\u043a\u0438",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "rus"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-17 10:41:29.746556",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "None",
+    "pubtype": "Journal",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "1ef0a482-a940-40bf-8184-ddb65b9bd8a3",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "c4d42b54-6c39-4fa9-83e2-066eb95aca97"
+    ],
+    "changed": "2016-02-12 09:59:17.934374",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "\u03a0\u03c1\u03b1\u03ba\u03c4\u03b9\u03ba\u1f70 \u03c4\u1fc6\u03c2 \u1f08\u03ba\u03b1\u03b4\u03b7\u03bc\u03af\u03b1\u03c2 \u1f08\u03b8\u03b7\u03bd\u1ff6\u03bd",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-03 10:06:09.217196",
+    "journal_abbreviation": [
+      ""
+    ],
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "f231de45-7d22-4893-9175-751a97a13f8b",
+        "page_first": "86",
+        "page_last": "97"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "CodexChapter",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "isni": "",
+        "name": "Anonymous",
+        "birth_date": "",
+        "uri": "",
+        "viaf": "",
+        "name_other": "",
+        "death_date": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "explicit": "",
+    "subtitle": "",
+    "incipit": "",
+    "id": "229e8c8b-0f91-4990-a25d-a5bffd465e90",
+    "keyword": [
+      {
+        "uri": "",
+        "label": "Turkish Sultans"
+      },
+      {
+        "uri": "",
+        "label": "Elizabeth Zachariadou"
+      },
+      {
+        "uri": "",
+        "label": "Giustiniani"
+      },
+      {
+        "uri": "",
+        "label": "fall of Constantinople"
+      },
+      {
+        "uri": "",
+        "label": "(Pseudo)Dorotheos"
+      },
+      {
+        "uri": "",
+        "label": "Francesco Sansovino"
+      },
+      {
+        "uri": "",
+        "label": "Annali Turcheschi"
+      },
+      {
+        "uri": "",
+        "label": "Balkans"
+      },
+      {
+        "uri": "",
+        "label": "South-Eastern Europe"
+      },
+      {
+        "uri": "",
+        "label": "Mehmed the Conqueror"
+      },
+      {
+        "uri": "",
+        "label": "Mehmed III"
+      },
+      {
+        "uri": "",
+        "label": "Cardinal Antonio Barberini"
+      },
+      {
+        "uri": "",
+        "label": "Monsignor Paul Canart"
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-12 14:31:58.981554",
+    "relation": [
+      "78ab3227-bfd6-4d4d-9d74-8d66adbc30a0",
+      "bb1bd1de-3973-40c8-a2c1-ca2ff6ba5498",
+      "c4d42b54-6c39-4fa9-83e2-066eb95aca97",
+      "0d49ade4-3ee8-4b7c-969d-51cc00856288",
+      "66accc1f-b346-420b-9ccf-21d08b9dc78c"
+    ],
+    "abstract": "",
+    "library": [
+      {
+        "place": "Vatican City",
+        "label": "Bibliotheca Apostolica Vaticana",
+        "uri": "https://www.vatlib.it/",
+        "latitude": "41.9047603",
+        "longitude": "12.4524336",
+        "call_number": "Barberinus graecus 111"
+      }
+    ],
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1600",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "license": "",
+    "number_of_pages": "",
+    "title": "\u03a7\u03c1\u03bf\u03bd\u03b9\u03ba\u1f78\u03bd \u03c0\u03b5\u03c1\u1f76 \u03c4\u1ff6\u03bd \u03a4\u03bf\u03cd\u03c1\u03ba\u03c9\u03bd \u03a3\u03bf\u03c5\u03bb\u03c4\u03ac\u03bd\u03c9\u03bd",
+    "other_version": [
+      "855b434f-0fb9-492a-8ba5-ddf852f9bc3e",
+      "8bd581a9-36d2-489d-9953-c20a186753a0",
+      "a969ff46-1e19-4599-a72a-64f523af6407",
+      "d90bdd28-9153-4e61-b539-5e683d1715de"
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "eng",
+        "translated_title": "Chronicle of the Turkish Sultans"
+      }
+    ],
+    "genre": "",
+    "created": "2016-02-02 13:00:15.801986",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "lexicon",
+    "pubtype": "Collection",
+    "ISBN": [
+      "978-88-12-00032-6"
+    ],
+    "publisher": "Ist. della Enciclopedia Italiana",
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Arecco, Davide",
+        "viaf": ""
+      },
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Caravale, Mario",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "Istituto della Enciclopedia Italiana <Rom>",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "T. 75",
+    "publisher_place": "Rome",
+    "table_of_contents": "",
+    "id": "2aca2591-ab58-4f2e-b827-ab7648276e03",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "5c3b7b91-43cb-4b05-ad6d-aac9b9ce2f27"
+    ],
+    "changed": "2016-02-11 15:21:55.451423",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "2011",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "XV, 872",
+    "title": "Dizionario biografico degli italiani ",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "ita"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-11 15:15:52.742678",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "subtype": "festschrift",
+    "title": "Byzantine narrative",
+    "ISBN": [
+      "1876503246",
+      "9781876503246"
+    ],
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Burke, John",
+        "viaf": ""
+      },
+      {
+        "role": [
+          "hnr"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Scott, Roger",
+        "viaf": ""
+      },
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Betka, Ursula",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "subtitle": "Papers in honour of Roger Scott",
+    "publisher_place": "Melbourne; Virginia, Queensland",
+    "table_of_contents": "http://swbplus.bsz-bw.de/bsz259027936inh.htm",
+    "relation": [
+      ""
+    ],
+    "note": "",
+    "edition": "",
+    "hbz_id": "",
+    "owner": "rosensn9",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "language": [
+      "eng"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "startdate_conference": "",
+    "title_supplement": "",
+    "number_of_volumes": "",
+    "circa": false,
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "place": "",
+    "publisher": "Australian Association for Byzantine Studies",
+    "DOI": "",
+    "additions": "",
+    "event_name": "",
+    "enddate_conference": "",
+    "id": "2aefa921-a3ea-42cb-a0b4-78be431b4b03",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "60f51da6-031c-482e-ba23-ed846f3f5b3c"
+    ],
+    "changed": "2016-02-15 11:55:07.070752",
+    "abstract": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "2006",
+    "number_of_pages": "XXIV, 624",
+    "pubtype": "Conference",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "Australian Association for Byzantine Studies",
+        "gnd": ""
+      }
+    ],
+    "license": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-03 11:36:31.633143",
+    "transliterated_title": [
+      ""
+    ]
+  },
+  {
+    "subtype": "",
+    "title": "Byzantina Mediolanensia",
+    "ISBN": [
+      "8872844959"
+    ],
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Conca, Fabrizio",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "subtitle": "",
+    "publisher_place": "Soveria Mannelli (Catanzaro)",
+    "table_of_contents": "",
+    "relation": [
+      ""
+    ],
+    "note": "",
+    "edition": "",
+    "hbz_id": "",
+    "owner": "anoynimouse",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "language": [
+      ""
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "startdate_conference": "1994-10-19",
+    "title_supplement": "",
+    "number_of_volumes": "",
+    "circa": false,
+    "is_part_of": [
+      {
+        "is_part_of": "e7c035c8-0ff9-4e04-8a0c-de4f9a431ae6",
+        "volume": "3"
+      }
+    ],
+    "place": "Milano",
+    "publisher": "Rubbettino",
+    "DOI": "",
+    "additions": "",
+    "event_name": ": V Congresso Nazionale di Studi Bizantini",
+    "enddate_conference": "1994-10-22",
+    "id": "2b8a8939-6fd1-403b-ac62-29bb874cbbb3",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "4ede3533-4adb-433c-ab3a-1e4f62e0f342"
+    ],
+    "changed": "2016-02-12 10:16:36.224690",
+    "abstract": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1996",
+    "number_of_pages": "450",
+    "pubtype": "Conference",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "license": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-04 11:09:06.689239",
+    "transliterated_title": [
+      ""
+    ]
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Series",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "2d970394-e46a-4f96-8e0e-f799d078f53f",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "d90bdd28-9153-4e61-b539-5e683d1715de"
+    ],
+    "changed": "2016-02-12 09:56:17.676072",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Late Byzantine & Ottoman studies",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "eng"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-02 14:38:10.016954",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "4688a6b2-fbeb-4517-81d5-ceb1baba9883",
+        "page_first": "149",
+        "page_last": "168",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Chapter",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "Pissis, Nikolas",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-15 16:48:12.992708",
+    "relation": [
+      "b1e94ef0-20fe-4b2e-91b5-837c26d91bb7"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "2014",
+    "license": "",
+    "number_of_pages": "",
+    "title": "\u03a7\u03c1\u03b7\u03c3\u03bc\u03bf\u03bb\u03bf\u03b3\u03af\u03b1 \u03ba\u03b1\u03b9 \u03c1\u03c9\u03c3\u03b9\u03ba\u03ae \u03c0\u03c1\u03bf\u03c3\u03b4\u03bf\u03ba\u03af\u03b1",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-15 16:48:12.992708",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "380141e3-e735-4270-8c01-e30c60732da1"
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Catalogue",
+    "ISBN": [
+      "84-505-2828-3"
+    ],
+    "publisher": "Ministerio de cultura",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "Andres, Gregorio de",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Madrid",
+    "table_of_contents": "",
+    "id": "3bc37b68-c818-4e8d-ba03-3ff9f56d02cb",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-11 13:56:07.253993",
+    "relation": [
+      "dde27a65-3f0a-4e17-b076-b06b85a53601"
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1987",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "XI,621",
+    "title": "Catalogo de los codices griegos de la Biblioteca Nacional",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      ""
+    ],
+    "title_translated": [
+      {
+        "language": "spa",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-10 15:54:50.325513",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "8e9dd808-c8e4-47bc-a090-498e11f77cf3",
+        "page_first": "331",
+        "page_last": "392",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "facsimile",
+    "pubtype": "Chapter",
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Laskarid\u0113s,  Chr\u0113stos P.",
+        "viaf": ""
+      },
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "http://dbpedia.org/resource/Gerasimos_Vlachos",
+        "isni": "0000 0003 5899 5015",
+        "name": "Vlachos, Gerasimos",
+        "viaf": "215298798"
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "rus",
+        "translated_title": "\u041e\u0434\u043e\u043b\u0435\u043d\u0438\u0435 \u043d\u0430 \u0422\u0443\u0440\u0441\u043a\u043e\u0435 \u0446\u0430\u0440\u0441\u0442\u0432\u043e"
+      },
+      {
+        "language": "eng",
+        "translated_title": "Victory over the Turkish Empire"
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-15 15:10:46.296466",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "license": "",
+    "number_of_pages": "",
+    "title": "\u0398\u03c1\u1f77\u03b1\u03bc\u03b2\u03bf\u03c2 \u03ba\u03b1\u03c4\u1f70 \u03c4\u1fc6\u03c2 \u03c4\u1ff6\u03bd \u03a4\u03bf\u03c5\u03c1\u03ba\u1ff6\u03bd \u03b2\u03b1\u03c3\u03b9\u03bb\u03b5\u1f77\u03b1\u03c2",
+    "other_version": [
+      "b1e94ef0-20fe-4b2e-91b5-837c26d91bb7"
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "rus"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-15 15:10:38.155000",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "3f373ddb-3905-44a8-bda5-511c29f6b868"
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "None",
+    "pubtype": "Journal",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "42ea3488-4f1a-4153-bdfc-1c81f3cd32bc",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "bb1bd1de-3973-40c8-a2c1-ca2ff6ba5498"
+    ],
+    "changed": "2016-02-12 09:58:17.107900",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "\u039d\u03ad\u03bf\u03c2 \u1f19\u03bb\u03bb\u03b7\u03bd\u03bf\u03bc\u03bd\u03ae\u03bc\u03c9\u03bd",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-03 09:47:29.758217",
+    "journal_abbreviation": [
+      ""
+    ],
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Collection",
+    "ISBN": [
+      "9789604009374"
+    ],
+    "publisher": "Pelekanos",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "\u03a0\u03c1\u03b1\u03ba\u03c4\u03b9\u03ba\u03ac \u0391' \u0395\u03c0\u03b9\u03c3\u03c4\u03b7\u03bc\u03bf\u03bd\u03b9\u03ba\u03ae\u03c2 \u0397\u03bc\u03b5\u03c1\u03af\u03b4\u03b1\u03c2 \u03a4\u03bc\u03ae\u03bc\u03b1\u03c4\u03bf\u03c2 \u03a3\u03bb\u03b1\u03b2\u03b9\u03ba\u03ce\u03bd \u03a3\u03c0\u03bf\u03c5\u03b4\u03ce\u03bd",
+    "publisher_place": "Athens",
+    "table_of_contents": "",
+    "id": "4688a6b2-fbeb-4517-81d5-ceb1baba9883",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "380141e3-e735-4270-8c01-e30c60732da1"
+    ],
+    "changed": "2016-02-15 16:48:29.517654",
+    "relation": [
+      ""
+    ],
+    "abstract": "\u0397 \u03b5\u03c0\u03b9\u03c4\u03c5\u03c7\u03af\u03b1 \u03c4\u03bf\u03c5 \u03c0\u03c1\u03ce\u03c4\u03bf\u03c5 \u03a3\u03c5\u03bd\u03b5\u03b4\u03c1\u03af\u03bf\u03c5 \u03bc\u03b1\u03c2 \u03bf\u03b4\u03ae\u03b3\u03b7\u03c3\u03b5 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c0\u03cc\u03c6\u03b1\u03c3\u03b7 \u03bd\u03b1 \u03bf\u03c1\u03b3\u03b1\u03bd\u03ce\u03c3\u03bf\u03c5\u03bc\u03b5 \u03c4\u03b7\u03bd \u0392\u0384 \u0395\u03c0\u03b9\u03c3\u03c4\u03b7\u03bc\u03bf\u03bd\u03b9\u03ba\u03ae \u0397\u03bc\u03b5\u03c1\u03af\u03b4\u03b1, \u03c3\u03b5 \u03c3\u03c5\u03bd\u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1 \u03bc\u03b5 \u03c4\u03bf \u038a\u03b4\u03c1\u03c5\u03bc\u03b1 \"\u0391\u03bb\u03ad\u03be\u03b1\u03bd\u03b4\u03c1\u03bf\u03c2 \u03a3\u03bf\u03bb\u03b6\u03b5\u03bd\u03af\u03c4\u03c3\u03b9\u03bd\", \u03bc\u03b5 \u03b8\u03ad\u03bc\u03b1 \"\u0395\u03ba\u03b1\u03c4\u03cc \u03c7\u03c1\u03cc\u03bd\u03b9\u03b1 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03ad\u03bd\u03b1\u03c1\u03be\u03b7 \u03c4\u03bf\u03c5 \u0391\u0384 \u03a0\u03b1\u03b3\u03ba\u03bf\u03c3\u03bc\u03af\u03bf\u03c5 \u03a0\u03bf\u03bb\u03ad\u03bc\u03bf\u03c5. \u0397 \u03a1\u03c9\u03c3\u03b9\u03ba\u03ae \u0394\u03b9\u03b1\u03c3\u03c0\u03bf\u03c1\u03ac \u03c3\u03c4\u03bf\u03bd \u03b5\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03cc \u03c7\u03ce\u03c1\u03bf \u03ba\u03b1\u03b9 \u03c3\u03c4\u03b1 \u0392\u03b1\u03bb\u03ba\u03ac\u03bd\u03b9\u03b1\". \u03a3\u03c4\u03bf\u03bd \u03c0\u03b1\u03c1\u03cc\u03bd\u03c4\u03b1 \u03c4\u03cc\u03bc\u03bf \u03b5\u03ba\u03c4\u03c5\u03c0\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03b9 \u03b4\u03b5\u03ba\u03b1\u03ad\u03be\u03b9 \u03b1\u03bd\u03b1\u03ba\u03bf\u03b9\u03bd\u03ce\u03c3\u03b5\u03b9\u03c2, \u03b3\u03b9\u03b1\u03c4\u03af \u03ba\u03ac\u03c0\u03bf\u03b9\u03b5\u03c2 \u03b4\u03b5\u03bd \u03bc\u03b1\u03c2 \u03b1\u03c0\u03b5\u03c3\u03c4\u03ac\u03bb\u03b7\u03c3\u03b1\u03bd, \u03c9\u03c3\u03c4\u03cc\u03c3\u03bf \u03c4\u03bf \u03a0\u03c1\u03cc\u03b3\u03c1\u03b1\u03bc\u03bc\u03b1 \u03c4\u03bf\u03c5 \u03a3\u03c5\u03bd\u03b5\u03b4\u03c1\u03af\u03bf\u03c5 \u03c0\u03b1\u03c1\u03bf\u03c5\u03c3\u03b9\u03ac\u03b6\u03b5\u03b9 \u03cc\u03bb\u03bf\u03c5\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03bf\u03bc\u03b9\u03bb\u03b7\u03c4\u03ad\u03c2 \u03bc\u03b5 \u03c4\u03b1 \u03b8\u03ad\u03bc\u03b1\u03c4\u03ac \u03c4\u03bf\u03c5\u03c2. \u039f \u03b1\u03bd\u03b1\u03b3\u03bd\u03ce\u03c3\u03c4\u03b7\u03c2 \u03b8\u03b1 \u03b4\u03b5\u03b9 \u03cc\u03c4\u03b9 \u03c0\u03b5\u03c1\u03b9\u03bb\u03b1\u03bc\u03b2\u03ac\u03bd\u03bf\u03bd\u03c4\u03b1\u03b9 \u03b8\u03ad\u03bc\u03b1\u03c4\u03b1 \u03b3\u03b5\u03bd\u03b9\u03ba\u03ac \u03b3\u03b9\u03b1 \u03c4\u03bf \u03b5\u03c5\u03c1\u03cd\u03c4\u03b5\u03c1\u03bf \u03b5\u03c1\u03b5\u03c5\u03bd\u03b7\u03c4\u03b9\u03ba\u03cc \u03ba\u03b1\u03b9 \u03b4\u03b9\u03b4\u03b1\u03ba\u03c4\u03b9\u03ba\u03cc \u03b6\u03ae\u03c4\u03b7\u03bc\u03b1 \"\u03a3\u03bb\u03ac\u03b2\u03bf\u03b9 \u03ba\u03b1\u03b9 \u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03cc\u03c2 \u03ba\u03cc\u03c3\u03bc\u03bf\u03c2\", \u03b8\u03ad\u03bc\u03b1\u03c4\u03b1 \u03bc\u03b5\u03c3\u03b1\u03b9\u03c9\u03bd\u03b9\u03ba\u03ae\u03c2 \u03c6\u03b9\u03bb\u03bf\u03bb\u03bf\u03b3\u03af\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03b9\u03c3\u03c4\u03bf\u03c1\u03af\u03b1\u03c2, \u03b3\u03bb\u03c9\u03c3\u03c3\u03bf\u03bb\u03bf\u03b3\u03b9\u03ba\u03ac \u03ba\u03b1\u03b9 \u03bd\u03b5\u03cc\u03c4\u03b5\u03c1\u03b7\u03c2 \u03b9\u03c3\u03c4\u03bf\u03c1\u03af\u03b1\u03c2.",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "2014",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "247",
+    "title": "\u03a3\u03bb\u03ac\u03b2\u03bf\u03b9 \u03ba\u03b1\u03b9 \u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03cc\u03c2 \u039a\u03cc\u03c3\u03bc\u03bf\u03c2",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-15 16:46:02.535253",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "origin": "",
+    "person": [
+      {
+        "role": [],
+        "isni": "",
+        "name": "",
+        "birth_date": "",
+        "uri": "",
+        "viaf": "",
+        "name_other": "",
+        "death_date": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "incipit": "",
+    "id": "4924a861-93f8-40fe-8bd3-3fa0c1ec6f31",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "b1e94ef0-20fe-4b2e-91b5-837c26d91bb7"
+    ],
+    "changed": "2016-02-15 14:50:01.873651",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "explicit": "",
+    "note": "This codex is a 17th century Russian contemporary translation.Mentioned by the 18th century erudite monk Kaisarios Dapontes, the Greek version is lost.",
+    "number_of_pages": "",
+    "provenance": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "number_of_lines": "",
+    "autograph_text": "",
+    "title": "\u0411\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0430 \u0421\u0430\u043d\u043a\u0442-\u041f\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433\u0441\u043a\u043e\u0439 \u0414\u0443\u0445\u043e\u0432\u043d\u043e\u0439 \u0410\u043a\u0430\u0434\u0435\u043c\u0438\u0438 \u0438 \u0421\u0435\u043c\u0438\u043d\u0430\u0440\u0438\u0438 171",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "pubtype": "Codex",
+    "DOI": "",
+    "language": [
+      "rus"
+    ],
+    "title_translated": [
+      {
+        "language": "eng",
+        "translated_title": "The Library of the St Petersburg Theological Academy and Seminary 171"
+      }
+    ],
+    "genre": "",
+    "created": "2016-02-15 14:50:01.873651",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "2b8a8939-6fd1-403b-ac62-29bb874cbbb3",
+        "page_first": "269",
+        "page_last": "274",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Chapter",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Macris, Daniele",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-12 13:02:13.639575",
+    "relation": [
+      "dde27a65-3f0a-4e17-b076-b06b85a53601"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1996",
+    "license": "",
+    "number_of_pages": "",
+    "title": "Le fonti della Synopsis historiarum di Costantino Lascaris",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "ita"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-04 11:11:01.553806",
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "circa": false,
+    "id": "4ede3533-4adb-433c-ab3a-1e4f62e0f342"
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "0fe74ea7-4b7c-4bfd-9869-54f708235475",
+        "issue": "",
+        "page_first": "211",
+        "page_last": "288",
+        "volume": "34"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "ArticleJournal",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Fern\u00e1ndez Pomar, J. M.",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-12 10:15:52.857214",
+    "relation": [
+      "dde27a65-3f0a-4e17-b076-b06b85a53601"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1966",
+    "license": "",
+    "number_of_pages": "",
+    "title": "La colecci\u00f3n de Uceda y los manuscritos griegos de Constantino L\u00e1scaris",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "spa"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-04 10:31:56.426761",
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "circa": false,
+    "id": "57566ce5-5672-45f0-a838-d4b1387758b5"
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Series",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "5885c3a4-7411-4d5d-87e9-d9167965f4a6",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "8e9dd808-c8e4-47bc-a090-498e11f77cf3"
+    ],
+    "changed": "2016-02-15 15:09:43.239862",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Ell\u0113nismos kai kosmos t\u014dn slab\u014dn ",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      ""
+    ],
+    "title_translated": [
+      {
+        "language": "gre",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-15 15:06:58.719458",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "2aca2591-ab58-4f2e-b827-ab7648276e03",
+        "page_first": "",
+        "page_last": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Chapter",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Zago, Roberto",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      "http://www.treccani.it/enciclopedia/alvise-mocenigo_res-f835a49a-d924-11e0-8aa7-d5ce3506d72e_%28Dizionario_Biografico%29/"
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-12 10:36:23.859530",
+    "relation": [
+      "b082799c-d281-41b1-9830-b52fae39cabf"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "license": "",
+    "number_of_pages": "",
+    "title": "Alvise Mocenigo",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      ""
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-11 15:20:30.371557",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "5c3b7b91-43cb-4b05-ad6d-aac9b9ce2f27"
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "None",
+    "pubtype": "Journal",
+    "ISSN": [
+      "1108-3980"
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Venice",
+    "table_of_contents": "",
+    "id": "5cc240fc-5897-465d-a18d-72d2d0b38cb9",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "b1b1faff-4ca9-48d2-b8d3-2a84ad4cc5a3"
+    ],
+    "changed": "2016-02-15 16:39:26.559609",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "ZDBID": "282407-3",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "\u0398\u03b7\u03c3\u03b1\u03c5\u03c1\u03af\u03c3\u03bc\u03b1\u03c4\u03b1",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "ita",
+        "translated_title": "Thesaurismata : bollettino dell'Istituto Ellenico di Studi Bizantini e Postbizantini"
+      }
+    ],
+    "created": "2016-02-15 16:34:53.368997",
+    "journal_abbreviation": [
+      ""
+    ],
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "2aefa921-a3ea-42cb-a0b4-78be431b4b03",
+        "page_first": "204",
+        "page_last": "220",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Chapter",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Sakel, Dean A.",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-12 10:34:50.244188",
+    "relation": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "license": "",
+    "number_of_pages": "",
+    "title": "A Probable Solution to the Problem of the Chronicle of the Turkish Sultans",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "eng"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-11 13:25:18.496263",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "60f51da6-031c-482e-ba23-ed846f3f5b3c"
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "c749feff-6eee-435f-9375-24ca3789443e",
+        "page_first": "253",
+        "page_last": "263",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Chapter",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Philippides, Marios",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-15 12:46:05.264572",
+    "relation": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1990",
+    "license": "",
+    "number_of_pages": "",
+    "title": "Early Post-Byzantine Historiography",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "eng"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-03 11:00:09.390398",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "66accc1f-b346-420b-9ccf-21d08b9dc78c"
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "abe44fc4-3762-44ac-9c5e-5d2b3c8c9940",
+        "volume": "17"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Collection",
+    "ISBN": [
+      ""
+    ],
+    "publisher": "Firenze Univ. Press",
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Salvo, Maria di",
+        "viaf": ""
+      },
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Alberti, Alberto",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "Studi filologici e letterari",
+    "publisher_place": "Firenze",
+    "table_of_contents": "https://www.gbv.de/dms/casalini/12/12624497.pdf",
+    "id": "77134b7e-8c67-4745-a6b4-7023049e174c",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "eeb27dfe-a3a8-47ae-8111-6fe2e61b5bf8"
+    ],
+    "changed": "2016-02-15 16:30:39.224467",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "XXIII, 221",
+    "title": "Italia, Russia e mondo slavo",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "ita",
+      "rus",
+      "eng"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-15 15:57:51.721996",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Catalogue",
+    "ISBN": [
+      ""
+    ],
+    "publisher": "Monitorul Oficial \u015fi Imprimeriile Statului \u2013 Imprimeria Na\u0163ional\u0103",
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Camariano, Nestor",
+        "viaf": ""
+      },
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Litzica, Constantin",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "Academiei Rom\u00e2ne",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "Tomul 2",
+    "publisher_place": "Bucharest",
+    "table_of_contents": "",
+    "id": "77406d4f-b908-44fc-93dc-c1cd090f4afc",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-11 14:54:44.204134",
+    "relation": [
+      "b082799c-d281-41b1-9830-b52fae39cabf"
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1940",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "205",
+    "title": "Catalogul manuscriptelor Grece\u015fti",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      ""
+    ],
+    "title_translated": [
+      {
+        "language": "rum",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-11 14:54:44.204134",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "0c9ee0c8-3527-4ddf-90e3-490f92cf572c",
+        "issue": "",
+        "page_first": "81",
+        "page_last": "125",
+        "volume": "42"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "ArticleJournal",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Ricci, Seymour de",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-11 10:47:00.169282",
+    "relation": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1907",
+    "license": "",
+    "number_of_pages": "",
+    "title": "Liste sommaire des manuscrits grecs de la Bibliotheca Barberina",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "fre"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-02 14:46:46.380489",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "78ab3227-bfd6-4d4d-9d74-8d66adbc30a0"
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "8245eb80-8dd2-4c7f-a95c-640ef23f1171",
+        "volume": "9"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Edition",
+    "ISBN": [
+      ""
+    ],
+    "publisher": "Editura Academiei RSR",
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Cron\u021b, Gheorghe",
+        "viaf": ""
+      },
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Constantinescu, Alexandru",
+        "viaf": ""
+      },
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Popescu, Anicu\u021ba ",
+        "viaf": ""
+      },
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "R\u0103dulescu, Theodora",
+        "viaf": ""
+      },
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Teg\u0103neanu, Constantin",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      "http://bit.ly/1JUZi1i"
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Bucharest",
+    "table_of_contents": "",
+    "id": "7a3b6753-d61f-43e3-8c8a-44c76eac0c17",
+    "keyword": [
+      {
+        "uri": "",
+        "label": "Juridical documents"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Wallachia",
+        "label": "Wallachia"
+      },
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-12 09:45:55.782514",
+    "relation": [
+      ""
+    ],
+    "abstract": "930 juridical documents written in Wallachia between 1775 and 1781, extracted (mainly) from DANIC Ms. 1 to 8",
+    "number_of_volumes": "",
+    "note": "http://cautare-b.arhivelenationale.ro/cautare-b/detail.aspx?ID=535256",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1985",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Acte judiciare din \u021aara Rom\u00e2neasc\u0103 1775-1781",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "rum"
+    ],
+    "title_translated": [
+      {
+        "language": "eng",
+        "translated_title": "Judicial Documents from Wallachia 1775-1781"
+      }
+    ],
+    "created": "2016-02-02 11:00:57.435557",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "Bucharest",
+        "label": "Direc\u021bia Arhivelor Na\u021bionale Istorice Centrale (The National Archives of Romania)",
+        "uri": "http://www.arhivelenationale.ro/",
+        "latitude": "44.3963254",
+        "longitude": "26.1175761",
+        "call_number": "VL-B-II-2086"
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "None",
+    "pubtype": "Journal",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Ioannina",
+    "table_of_contents": "",
+    "id": "8016415a-3eee-4ada-b3db-2840cb30a833",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "8bd581a9-36d2-489d-9953-c20a186753a0"
+    ],
+    "changed": "2016-02-12 10:47:27.137440",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "ZDBID": "413190-3",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "\u1f18\u03c0\u03b9\u03c3\u03c4\u03b7\u03bc\u03bf\u03bd\u03b9\u03ba\u1f74 \u1f18\u03c0\u03b5\u03c4\u03b7\u03c1\u1f76\u03c2 \u03c4\u1fc6\u03c2 \u03a6\u03b9\u03bb\u03bf\u03c3\u03bf\u03c6\u03b9\u03ba\u1fc6\u03c2 \u03c4\u03bf\u1fe6 \u03a0\u03b1\u03bd\u03b5\u03c0\u03b9\u03c3\u03c4\u03b7\u03bc\u03af\u03bf\u03c5 \u1f08\u03b8\u03b7\u03bd\u1ff6\u03bd ",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-02 13:45:47.902242",
+    "journal_abbreviation": [
+      ""
+    ],
+    "owner": "rosensn9",
+    "title_supplement": "Epistemonike Epeteris tes Philosophikes Scholes tu Panepistemiu Ioanninon",
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Series",
+    "ISSN": [
+      "0567-9710"
+    ],
+    "publisher": "Academia de \u015etiin\u0163e Sociale \u015fi Politice a RSR. Institutul de istorie \u201cN. Iorga\u201d ",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Bucharest",
+    "table_of_contents": "",
+    "id": "8245eb80-8dd2-4c7f-a95c-640ef23f1171",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "7a3b6753-d61f-43e3-8c8a-44c76eac0c17"
+    ],
+    "changed": "2016-02-12 10:46:41.232816",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "ZDBID": "980138-8",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Adunarea izvoarelor vechiului drept rom\u00e2nesc scris",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      ""
+    ],
+    "title_translated": [
+      {
+        "language": "fre",
+        "translated_title": "Collection des sources de l'ancien droit roumain \u00e9crit"
+      }
+    ],
+    "created": "2016-02-02 11:48:03.192180",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Edition",
+    "ISBN": [
+      ""
+    ],
+    "publisher": "Spudast\u0113rion Byzantin\u0113s kai Neoell\u0113nik\u0113s Philologias tu Panepist\u0113miu Ath\u0113n\u014dn",
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "0000  0001  1700  599X ",
+        "name": "Zoras, Georgios Th.",
+        "viaf": "117533917 "
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "Panepist\u0113mio Ath\u0113n\u014dn / Spudast\u0113rion Byzantin\u0113s kai Neoell\u0113nik\u0113s Philologias",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "\u03ba\u03b1\u03c4\u1f70 \u03c4\u1f78\u03bd \u0392\u03b1\u03c1\u03b2\u03b5\u03c1\u03b9\u03bd\u1f78\u03bd \u1f11\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u1f78\u03bd \u03ba\u03ce\u03b4\u03b9\u03ba\u03b1 111",
+    "publisher_place": "Athens",
+    "table_of_contents": "",
+    "id": "855b434f-0fb9-492a-8ba5-ddf852f9bc3e",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-15 12:28:12.826282",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1958",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "383",
+    "title": "\u03a7\u03c1\u03bf\u03bd\u03b9\u03ba\u1f78\u03bd \u03c0\u03b5\u03c1\u1f76 \u03c4\u1ff6\u03bd \u03a4\u03bf\u03cd\u03c1\u03ba\u03c9\u03bd \u03a3\u03bf\u03c5\u03bb\u03c4\u03ac\u03bd\u03c9\u03bd ",
+    "other_version": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-02 13:26:39.669568",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "9de3a04d-ae33-4330-9c2a-5b3ad72bedcb",
+        "volume": "28"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Collection",
+    "ISBN": [
+      "88-86135-66-1"
+    ],
+    "publisher": "Dipartimento di Scienze Filologiche e Storiche",
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Rizzi, Daniela",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Trento",
+    "table_of_contents": "",
+    "id": "866751f4-5e67-48ac-b80c-50228921b675",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "eeb27dfe-a3a8-47ae-8111-6fe2e61b5bf8"
+    ],
+    "changed": "2016-02-15 15:46:50.823203",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "623",
+    "title": "Archivio italo-russo",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "ita",
+      "rus"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-15 15:44:36.477519",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "8016415a-3eee-4ada-b3db-2840cb30a833",
+        "issue": "",
+        "page_first": "597",
+        "page_last": "604",
+        "volume": "16"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "ArticleJournal",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Zoras, Georgios Th.",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "\u03a0\u03c1\u03bf\u03c3\u03b8\u03ad\u03c3\u03b5\u03b9\u03c2 \u03ba\u03b1\u1f76 \u03a0\u03b1\u03c1\u03b1\u03c4\u03b7\u03c1\u03ae\u03c3\u03b5\u03b9\u03c2",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-12 09:52:47.295042",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1965-66",
+    "license": "",
+    "number_of_pages": "",
+    "title": "\u03a4\u1f78 \u03a7\u03c1\u03bf\u03bd\u03b9\u03ba\u1f78 \u03c4\u1ff6\u03bd \u03a4\u03bf\u03cd\u03c1\u03ba\u03c9\u03bd \u03a3\u03bf\u03c5\u03bb\u03c4\u03ac\u03bd\u03c9\u03bd ",
+    "other_version": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-02 13:47:18.509424",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "8bd581a9-36d2-489d-9953-c20a186753a0"
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "5885c3a4-7411-4d5d-87e9-d9167965f4a6",
+        "volume": "4"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Edition",
+    "ISBN": [
+      "960-12-1108-X"
+    ],
+    "publisher": " University Studio Press",
+    "person": [
+      {
+        "role": [
+          "edt",
+          "trl"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Laskarid\u0113s,  Chr\u0113stos P.",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Thessaloniki",
+    "table_of_contents": "",
+    "id": "8e9dd808-c8e4-47bc-a090-498e11f77cf3",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "3f373ddb-3905-44a8-bda5-511c29f6b868",
+      "d0e8e27b-6096-4c76-8f70-edec0d86390b"
+    ],
+    "changed": "2016-02-15 15:27:42.812576",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "2002",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "408",
+    "title": "\u0397 \u03c3\u03c4\u03ac\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03a1\u03c9\u03c3\u03af\u03b1\u03c2 \u03c3\u03c4\u03bf\u03bd \u03c0\u03cc\u03bb\u03b5\u03bc\u03bf \u03c4\u03b7\u03c2 \u039a\u03c1\u03ae\u03c4\u03b7\u03c2 1645-1669",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre",
+      "rus"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-15 15:02:23.002691",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "adb43324-caa6-4945-af3d-936f73d482c3",
+        "volume": "7"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Monograph",
+    "ISBN": [
+      "84-00-07761-X"
+    ],
+    "publisher": "Consejo Superior de Investigaciones Cient\u00edficas",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "Mart\u00ednez Manzano, Teresa",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "Semblanza de un humanista bizantino",
+    "publisher_place": "Madrid",
+    "table_of_contents": "",
+    "id": "975a2a5a-5ccb-4570-b337-31e22db26b09",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-11 14:05:10.115042",
+    "relation": [
+      "dde27a65-3f0a-4e17-b076-b06b85a53601"
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1998",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "XII, 244",
+    "title": "Constantino L\u00e1scaris",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre",
+      "spa"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-04 12:55:51.830069",
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Series",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "9de3a04d-ae33-4330-9c2a-5b3ad72bedcb",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "866751f4-5e67-48ac-b80c-50228921b675"
+    ],
+    "changed": "2016-02-15 15:46:23.120619",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Labirinti / Dipartimento di Studi Letterari, Linguistici e Filologici",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      ""
+    ],
+    "title_translated": [
+      {
+        "language": "ita",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-15 15:46:23.120619",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "1e86b7f3-d19a-4cde-ac31-8d32e415eee3",
+        "page_first": "88",
+        "page_last": "107",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Chapter",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "Waugh, Daniel Clarke",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "\u043f\u0430\u043c\u044f\u0442\u043d\u0438\u043a \u0430\u043d\u0442\u0438\u0442\u0443\u0440\u0435\u0446\u043a\u043e\u0439 \u043f\u0443\u0431\u043b\u0438\u0446\u0438\u0441\u0442\u0438\u043a\u0438 17 \u0432.",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-17 10:50:36.603802",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "license": "",
+    "number_of_pages": "",
+    "title": "\u041e\u0434\u043e\u043b\u0435\u043d\u0438\u0435 \u043d\u0430 \u0422\u0443\u0440\u0441\u043a\u043e\u0435 \u0446\u0430\u0440\u0441\u0442\u0432\u043e\u043e",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "rus"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-17 10:50:36.603802",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "a52bdeec-6815-49b2-b91f-c174eb62b37b"
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "origin": "",
+    "person": [
+      {
+        "role": [
+          "aut",
+          "ato"
+        ],
+        "isni": "0000  0001  2123  8649",
+        "name": "Lascaris, Constantine",
+        "birth_date": "1434",
+        "uri": "http://dbpedia.org/resource/Constantine_Lascaris",
+        "viaf": "103841990",
+        "name_other": "",
+        "death_date": "1501"
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "incipit": "",
+    "id": "a6386b1a-ec14-44de-bb00-6e3dc79d72b5",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "dde27a65-3f0a-4e17-b076-b06b85a53601"
+    ],
+    "changed": "2016-02-12 14:20:38.684663",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "explicit": "",
+    "note": "",
+    "number_of_pages": "",
+    "provenance": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1499",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "number_of_lines": "",
+    "autograph_text": "",
+    "title": "Cod. gr. 4621",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "pubtype": "Codex",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "genre": "",
+    "created": "2016-02-12 14:20:38.684663",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "Madrid",
+        "label": "National Library of Spain",
+        "uri": "https://www.bne.es",
+        "latitude": "40.4236908",
+        "longitude": "-3.6899472",
+        "call_number": "cod. gr. 4621"
+      }
+    ],
+    "circa": true
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Translation",
+    "ISBN": [
+      "3-222-10467-0"
+    ],
+    "publisher": "Styria",
+    "person": [
+      {
+        "role": [
+          "trl"
+        ],
+        "uri": "",
+        "isni": "0000000116465353 ",
+        "name": "Kreutel, Richard Franz",
+        "viaf": "55073201 "
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "die anonyme vulg\u00e4rgriechische Chronik Codex Barberianus Graecus 111 (Anonymus Zoras)",
+    "publisher_place": "Graz [u.a.]",
+    "table_of_contents": "",
+    "id": "a969ff46-1e19-4599-a72a-64f523af6407",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-14 18:37:03.419923",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1971",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "277",
+    "title": "Leben und Taten der t\u00fcrkischen Kaiser",
+    "other_version": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "ger"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-02 14:14:59.897448",
+    "owner": "rosensn9",
+    "title_supplement": "\u00fcbers., eingel. u. erl. von Richard F. Kreutel",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Series",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "abe44fc4-3762-44ac-9c5e-5d2b3c8c9940",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "77134b7e-8c67-4745-a6b4-7023049e174c"
+    ],
+    "changed": "2016-02-15 16:29:41.527167",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Biblioteca di Studi slavistici",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "ita"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-15 16:29:41.527167",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "origin": "",
+    "person": [
+      {
+        "role": [
+          "aut",
+          "ato"
+        ],
+        "isni": "0000 0003 5899 5015",
+        "name": "Vlachos, Gerasimos",
+        "birth_date": "1605/1607",
+        "uri": "http://dbpedia.org/resource/Gerasimos_Vlachos",
+        "viaf": "215298798",
+        "name_other": "",
+        "death_date": "1685"
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "incipit": "",
+    "id": "acefd2a9-0ddb-48c6-bfd3-05d04e50ab83",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "b082799c-d281-41b1-9830-b52fae39cabf"
+    ],
+    "changed": "2016-02-12 14:44:14.619630",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "explicit": "",
+    "note": "",
+    "number_of_pages": "",
+    "provenance": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1649",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "number_of_lines": "",
+    "autograph_text": "Don Girassimo Vlacho Greco di Creta predicatore",
+    "title": "Ms. gr. 889",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "pubtype": "Codex",
+    "DOI": "",
+    "language": [
+      "ita"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "genre": "",
+    "created": "2016-02-12 14:44:14.619630",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "Bucharest",
+        "label": "Library of the Romanian Academy (BAR)",
+        "uri": "http://www.biblacad.ro/eng_index.html",
+        "latitude": "44.4466031",
+        "longitude": "26.0899701",
+        "call_number": "ms. gr. 889"
+      }
+    ],
+    "circa": true
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Series",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": " Biblioteca Graeca et Latina aevi posterioris",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "adb43324-caa6-4945-af3d-936f73d482c3",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "975a2a5a-5ccb-4570-b337-31e22db26b09"
+    ],
+    "changed": "2016-02-15 12:41:14.399946",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "ZDBID": "23880636",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Nueva Roma",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      ""
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-04 11:37:10.947455",
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "None",
+    "pubtype": "Journal",
+    "ISSN": [
+      "0034-7043",
+      "1453-1755"
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "b03c286f-baa4-48a4-ae14-635303be9e24",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "e0178f70-c21b-4944-9ff2-eb8f4c8a6b71"
+    ],
+    "changed": "2016-02-12 10:12:26.701435",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "ZDBID": "429544-4",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Revista Arhivelor ",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "rum"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-03 16:30:16.995857",
+    "journal_abbreviation": [
+      ""
+    ],
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "acefd2a9-0ddb-48c6-bfd3-05d04e50ab83",
+        "page_first": "35",
+        "page_last": "42"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "CodexChapter",
+    "person": [
+      {
+        "role": [
+          "aut",
+          "ato"
+        ],
+        "isni": "0000 0003 5899 5015",
+        "name": "Vlachos, Gerasimos",
+        "birth_date": "1605/1607",
+        "uri": "http://dbpedia.org/resource/Gerasimos_Vlachos",
+        "viaf": "215298798",
+        "name_other": "",
+        "death_date": "1685"
+      },
+      {
+        "role": [
+          "dte"
+        ],
+        "isni": "",
+        "name": "Mocenigo, Alvise",
+        "birth_date": "1583",
+        "uri": "",
+        "viaf": "6041970",
+        "name_other": "",
+        "death_date": "1654"
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "explicit": "",
+    "subtitle": "",
+    "incipit": "Sorgono tal hora dall\u2019avida terra et dal liquido blemento le fumose essalationi",
+    "id": "b082799c-d281-41b1-9830-b52fae39cabf",
+    "keyword": [
+      {
+        "uri": "http://dbpedia.org/resource/Alvise_II_Mocenigo",
+        "label": "Alvise Mocenigo"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Heraklion",
+        "label": "Monastery of Saint Catherine in Candia"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Metochion",
+        "label": "Metochion of Sinai in Herakleion"
+      },
+      {
+        "uri": "ttp://dbpedia.org/resource/Martinengo",
+        "label": "Martinengo bastion"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/San_Teodoro,_Sardinia'",
+        "label": "San Teodoro isle"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Cretan_War_(1645%E2%80%9369)",
+        "label": "Cretan War"
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-12 14:44:29.416476",
+    "relation": [
+      "77406d4f-b908-44fc-93dc-c1cd090f4afc",
+      "0c4f7d31-e474-463e-aba9-0383c1a7532c",
+      "5c3b7b91-43cb-4b05-ad6d-aac9b9ce2f27"
+    ],
+    "abstract": "Encomium of Alvise Mocenigo (\u2020 1654) delivered by Gerasimos Vlachos on November 25th, 1649, in the monastery of Saint Catherine in Candia (that is, the Metochion of Sinai in Herakleion). It celebrates the successful defence of the Martinengo bastion and the recovery of the small San Teodoro isle during the first stages of the Cretan War (1645-1669).",
+    "library": [
+      {
+        "place": "Bucharest",
+        "label": "Library of the Romanian Academy (BAR)",
+        "uri": "http://www.biblacad.ro/eng_index.html",
+        "latitude": "44.4466031",
+        "longitude": "26.0899701",
+        "call_number": "ms. gr. 889"
+      }
+    ],
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1649",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "license": "",
+    "number_of_pages": "35-42",
+    "title": "Trionfo del illustrissimo et eccelentissimo Signor Alvise Mocenico Secondo Procurator di San Marco et dignissimo Capitan General da Mar",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "ita"
+    ],
+    "title_translated": [
+      {
+        "language": "eng",
+        "translated_title": "The Triumph of the most excellent and illustrious messer Alvise Mocenigo [...]"
+      }
+    ],
+    "genre": "encomium",
+    "created": "2016-01-29 16:31:13.228683",
+    "owner": "hagena1z",
+    "title_supplement": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "5cc240fc-5897-465d-a18d-72d2d0b38cb9",
+        "issue": "",
+        "page_first": "9",
+        "page_last": "20",
+        "volume": "30"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "ArticleJournal",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Maltezou, Chryssa A.",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-15 16:41:19.431064",
+    "relation": [
+      "b1e94ef0-20fe-4b2e-91b5-837c26d91bb7"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "2000",
+    "license": "",
+    "number_of_pages": "",
+    "title": "\u039f\u03b9 \u00ab\u03b1\u03bc\u03c0\u03b1\u03c3\u03b1\u03b4\u03cc\u03c1\u03bf\u03b9 \u03c4\u03b7\u03c2 \u039c\u03b5\u03b3\u03ac\u03bb\u03b7\u03c2 \u039c\u03bf\u03c3\u03c7\u03bf\u03b2\u03af\u03b1\u03c2\u00bb \u03c3\u03c4\u03b7 \u0392\u03b5\u03bd\u03b5\u03c4\u03af\u03b1 \u03ba\u03b1\u03b9 \u03bf \u039a\u03c1\u03b7\u03c4\u03b9\u03ba\u03cc\u03c2 \u03a0\u03cc\u03bb\u03b5\u03bc\u03bf\u03c2",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-15 16:36:11.805483",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "b1b1faff-4ca9-48d2-b8d3-2a84ad4cc5a3"
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "4924a861-93f8-40fe-8bd3-3fa0c1ec6f31",
+        "page_first": "55",
+        "page_last": "82"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "CodexChapter",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "isni": "0000 0003 5899 5015",
+        "name": "Vlachos, Gerasimos",
+        "birth_date": "1605/1607",
+        "uri": "http://dbpedia.org/resource/Gerasimos_Vlachos",
+        "viaf": "215298798",
+        "name_other": "",
+        "death_date": "1685"
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "explicit": "",
+    "subtitle": "",
+    "incipit": "",
+    "id": "b1e94ef0-20fe-4b2e-91b5-837c26d91bb7",
+    "keyword": [
+      {
+        "uri": "http://dbpedia.org/resource/Alexis_of_Russia",
+        "label": "Aleksey Mikhailovich"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Cretan_War_(1645%E2%80%9369)",
+        "label": "Cretan War"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Grand_Duchy_of_Moscow",
+        "label": "Muscovy"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Venice",
+        "label": "Venice"
+      },
+      {
+        "uri": "https://www.wikidata.org/wiki/Q2585589",
+        "label": "Kaisarios Dapontes"
+      },
+      {
+        "uri": "",
+        "label": "Liberation of the Orthodox"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Ottoman_Empire",
+        "label": "Turkish Empire"
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-17 13:46:38.549899",
+    "relation": [
+      "eeb27dfe-a3a8-47ae-8111-6fe2e61b5bf8",
+      "b1b1faff-4ca9-48d2-b8d3-2a84ad4cc5a3",
+      "380141e3-e735-4270-8c01-e30c60732da1",
+      "a52bdeec-6815-49b2-b91f-c174eb62b37b"
+    ],
+    "abstract": "Anti-turkish polemic by Gerasimos Vlachos adressed in 1656 to tsar Aleksej Michajlovi\u010d (1629-1676). It is an attempt to convince Muscovite authorities to engage in war against the Ottoman empire in order to liberate the enslaved and persecuted Orthodox. As the Cretan War (1645-1669) was far from being over, Vlachos sent his plea to Muscovy by means of a Russian embassy in Venice.",
+    "library": [
+      {
+        "place": "St Petersburg",
+        "label": "The Library of the St Petersburg Theological Academy and Seminary",
+        "uri": "http://spbda.ru/",
+        "latitude": "59.9176445",
+        "longitude": "30.3834133",
+        "call_number": ""
+      }
+    ],
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1656",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "license": "",
+    "number_of_pages": "",
+    "title": "\u0398\u03c1\u1f77\u03b1\u03bc\u03b2\u03bf\u03c2 \u03ba\u03b1\u03c4\u1f70 \u03c4\u1fc6\u03c2 \u03c4\u1ff6\u03bd \u03a4\u03bf\u03c5\u03c1\u03ba\u1ff6\u03bd \u03b2\u03b1\u03c3\u03b9\u03bb\u03b5\u1f77\u03b1\u03c2",
+    "other_version": [
+      "3f373ddb-3905-44a8-bda5-511c29f6b868",
+      "d0e8e27b-6096-4c76-8f70-edec0d86390b"
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "rus",
+        "translated_title": "\u041e\u0434\u043e\u043b\u0435\u043d\u0438\u0435 \u043d\u0430 \u0422\u0443\u0440\u0441\u043a\u043e\u0435 \u0446\u0430\u0440\u0441\u0442\u0432\u043e"
+      },
+      {
+        "language": "eng",
+        "translated_title": "Victory over the Turkish Empire"
+      }
+    ],
+    "genre": "polemic",
+    "created": "2016-01-29 18:45:53.552636",
+    "owner": "hagena1z",
+    "title_supplement": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Series",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          "edt"
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "Center for Medieval and Early Renaissance Studies <Binghamton, NY> ",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "State University of New York at Binghamton",
+    "publisher_place": "Albany, N.Y.",
+    "table_of_contents": "",
+    "id": "b4da3bf8-3152-4d40-941c-8c2af79fa5d9",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "c749feff-6eee-435f-9375-24ca3789443e"
+    ],
+    "changed": "2016-02-14 18:41:08.309186",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Papers of the ... annual meeting of the Center for Medieval and Early Renaissance Studies",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "eng"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-03 10:27:06.221066",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "42ea3488-4f1a-4153-bdfc-1c81f3cd32bc",
+        "issue": "4",
+        "page_first": "454",
+        "page_last": "455",
+        "volume": "5"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "ArticleJournal",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "http://dbpedia.org/resource/Spyridon_Lambros",
+        "isni": "0000000121279918",
+        "name": "Lampros, Spyrido\u0304n P.",
+        "viaf": "36908473 "
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-11 10:48:41.550072",
+    "relation": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1908",
+    "license": "",
+    "number_of_pages": "",
+    "title": "\u03a0\u03b5\u03c1\u03af \u03c4\u03b9\u03bd\u03c9\u03bd \u0392\u03b1\u03c1\u03b2\u03b5\u03c1\u03b9\u03bd\u1ff6\u03bd \u039a\u03c9\u03b4\u03af\u03ba\u03c9\u03bd",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-03 09:53:44.753644",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "bb1bd1de-3973-40c8-a2c1-ca2ff6ba5498"
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "1ef0a482-a940-40bf-8184-ddb65b9bd8a3",
+        "issue": "",
+        "page_first": "447",
+        "page_last": "449",
+        "volume": "5"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "ArticleJournal",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "0000000110231759 ",
+        "name": "Moravcsik, Gyula",
+        "viaf": "27197996 "
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-12 10:00:27.068325",
+    "relation": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1930",
+    "license": "",
+    "number_of_pages": "3",
+    "title": "\u1f0c\u03b3\u03bd\u03c9\u03c3\u03c4\u03bf\u03bd \u1f19\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u1f78\u03bd \u03a7\u03c1\u03bf\u03bd\u03b9\u03ba\u1f78\u03bd \u03c0\u03b5\u03c1\u03af \u03c4\u1fc6\u03c2 \u1f39\u03c3\u03c4\u03bf\u03c1\u03af\u03b1\u03c2 \u03c4\u1ff6\u03bd \u1f48\u03b8\u03c9\u03bc\u03b1\u03bd\u1ff6\u03bd \u03a3\u03bf\u03c5\u03bb\u03c4\u03ac\u03bd\u03c9\u03bd",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-03 10:08:10.009102",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "c4d42b54-6c39-4fa9-83e2-066eb95aca97"
+  },
+  {
+    "subtype": "",
+    "title": "The classics in the Middle Ages",
+    "ISBN": [
+      "0-86698-078-4"
+    ],
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "000000008343615X ",
+        "name": "Bernardo, Aldo S.",
+        "viaf": "51812796 "
+      },
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Levin, Saul",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "subtitle": "Papers",
+    "publisher_place": "Binghamton, N.Y.",
+    "table_of_contents": "",
+    "relation": [
+      ""
+    ],
+    "note": "",
+    "edition": "",
+    "hbz_id": "",
+    "owner": "rosensn9",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "language": [
+      "eng"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "startdate_conference": "1986-01-01",
+    "title_supplement": "",
+    "number_of_volumes": "",
+    "circa": false,
+    "is_part_of": [
+      {
+        "is_part_of": "b4da3bf8-3152-4d40-941c-8c2af79fa5d9",
+        "volume": ""
+      }
+    ],
+    "place": "Binghamton, N.Y.",
+    "publisher": "Center for Medieval & Early Renaissance Studies",
+    "DOI": "",
+    "additions": "",
+    "event_name": "Annual conference of the Center for Medieval and Early Renaissance Studies, 20",
+    "enddate_conference": "",
+    "id": "c749feff-6eee-435f-9375-24ca3789443e",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "66accc1f-b346-420b-9ccf-21d08b9dc78c"
+    ],
+    "changed": "2016-02-12 10:01:16.865172",
+    "abstract": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1990",
+    "number_of_pages": "VI, 425",
+    "pubtype": "Conference",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "license": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-03 10:24:57.057682",
+    "transliterated_title": [
+      ""
+    ]
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "8e9dd808-c8e4-47bc-a090-498e11f77cf3",
+        "page_first": "303",
+        "page_last": "324",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "translation",
+    "pubtype": "Chapter",
+    "person": [
+      {
+        "role": [
+          "trl"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Laskarid\u0113s,  Chr\u0113stos P.",
+        "viaf": ""
+      },
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "rus",
+        "translated_title": "\u041e\u0434\u043e\u043b\u0435\u043d\u0438\u0435 \u043d\u0430 \u0422\u0443\u0440\u0441\u043a\u043e\u0435 \u0446\u0430\u0440\u0441\u0442\u0432\u043e"
+      },
+      {
+        "language": "eng",
+        "translated_title": "Victory over the Turkish Empire"
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-15 15:33:05.407009",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "2002",
+    "license": "",
+    "number_of_pages": "",
+    "title": "\u0398\u03c1\u1f77\u03b1\u03bc\u03b2\u03bf\u03c2 \u03ba\u03b1\u03c4\u1f70 \u03c4\u1fc6\u03c2 \u03c4\u1ff6\u03bd \u03a4\u03bf\u03c5\u03c1\u03ba\u1ff6\u03bd \u03b2\u03b1\u03c3\u03b9\u03bb\u03b5\u1f77\u03b1\u03c2",
+    "other_version": [
+      "b1e94ef0-20fe-4b2e-91b5-837c26d91bb7"
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-15 15:22:25.000408",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "d0e8e27b-6096-4c76-8f70-edec0d86390b"
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Edition",
+    "ISBN": [
+      ""
+    ],
+    "publisher": "Sakellarios",
+    "person": [
+      {
+        "role": [
+          "edt"
+        ],
+        "uri": "http://dbpedia.org/resource/Spyridon_Lambros",
+        "isni": "0000  0001  2127  9918",
+        "name": "Lampros, Spyrido\u0304n P.",
+        "viaf": "36908473"
+      },
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "http://dbpedia.org/resource/Constantine_Lascaris",
+        "isni": "0000  0001  2123  8649",
+        "name": "Lascaris, Constantine",
+        "viaf": "22298682"
+      }
+    ],
+    "uri": [
+      "http://anemi.lib.uoc.gr/metadata/d/c/8/metadata-1fa0e29fb7fe4884d751f0cfdf89b417_1237291037.tkl"
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "Athens",
+    "table_of_contents": "",
+    "id": "d5859e9e-c54c-4d88-914b-47a52b2c2b1c",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-11 13:48:03.782340",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1910",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "80",
+    "title": "\u039a\u03c9\u03bd\u03c3\u03c4\u03b1\u03bd\u03c4\u03af\u03bd\u03bf\u03c5 \u039b\u03b1\u03c3\u03ba\u03ac\u03c1\u03b5\u03c9\u03c2 \u03b1\u03bd\u03ad\u03ba\u03b4\u03bf\u03c4\u03bf\u03c2 \u03c3\u03cd\u03bd\u03bf\u03c8\u03b9\u03c2 \u03b9\u03c3\u03c4\u03bf\u03c1\u03b9\u03ce\u03bd",
+    "other_version": [
+      "dde27a65-3f0a-4e17-b076-b06b85a53601"
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-04 10:08:22.836928",
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "2d970394-e46a-4f96-8e0e-f799d078f53f",
+        "volume": "4"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Translation",
+    "ISBN": [
+      "0-89241-430-8"
+    ],
+    "publisher": "Aristide D. Caratzas ",
+    "person": [
+      {
+        "role": [
+          "trl"
+        ],
+        "uri": "",
+        "isni": "0000000119187475 ",
+        "name": "Philippides, Marios",
+        "viaf": "110054244 "
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "An Anonymous Greek Chronicle of the Seventeenth Century (Codex Barberinus Graecus 111)",
+    "publisher_place": "New Rochelle, N.Y.",
+    "table_of_contents": "",
+    "id": "d90bdd28-9153-4e61-b539-5e683d1715de",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-15 12:50:31.633806",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1990",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "229",
+    "title": "Byzantium, Europe, and the Early Ottoman Sultans, 1373-1513",
+    "other_version": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "eng"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-02 14:28:22.137330",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "a6386b1a-ec14-44de-bb00-6e3dc79d72b5",
+        "page_first": "140",
+        "page_last": "176r"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "CodexChapter",
+    "person": [
+      {
+        "role": [
+          "aut",
+          "ato"
+        ],
+        "isni": "0000  0001  2123  8649",
+        "name": "Lascaris, Constantine",
+        "birth_date": "1434",
+        "uri": "http://dbpedia.org/resource/Constantine_Lascaris",
+        "viaf": "103841990",
+        "name_other": "",
+        "death_date": "1501"
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "explicit": "",
+    "subtitle": "",
+    "incipit": "",
+    "id": "dde27a65-3f0a-4e17-b076-b06b85a53601",
+    "keyword": [
+      {
+        "uri": "http://dbpedia.org/resource/Adam",
+        "label": "Creation of Adam"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Morea",
+        "label": "Ottoman conquest of Morea"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/George_Hamartolos",
+        "label": "Georgios Monachos"
+      },
+      {
+        "uri": "http://dbpedia.org/resource/Fall_of_Constantinople",
+        "label": "Fall of Constantinople"
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-15 12:57:23.495345",
+    "relation": [
+      "3bc37b68-c818-4e8d-ba03-3ff9f56d02cb",
+      "57566ce5-5672-45f0-a838-d4b1387758b5",
+      "4ede3533-4adb-433c-ab3a-1e4f62e0f342",
+      "975a2a5a-5ccb-4570-b337-31e22db26b09",
+      "f92ada99-3b10-48eb-ad3e-9612deb7e4e3"
+    ],
+    "abstract": "As shown by the title, the \u201cSynopsis\u201d is a compendious chronicle from the creation of Adam to the Ottoman conquest of Morea (1460). Drafted towards the end of the 15th century, it is highly indebted to Byzantine chroniclers such as Georgios Monachos (\u201cGeorge the Monk\u201d), yet it also includes Lascaris\u2019 own observations on contemporary events \u2013 the fall of Constantinople, for example.",
+    "library": [
+      {
+        "place": "Madrid",
+        "label": "National Library of Spain",
+        "uri": "https://www.bne.es",
+        "latitude": "40.4236908",
+        "longitude": "-3.6899472",
+        "call_number": "cod. gr. 4621"
+      }
+    ],
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "license": "",
+    "number_of_pages": "140-176",
+    "title": "\u03a3\u03cd\u03bd\u03bf\u03c8\u03b9\u03c2 \u1f31\u03c3\u03c4\u03bf\u03c1\u03b9\u03ba\u1ff6\u03bd",
+    "other_version": [
+      "d5859e9e-c54c-4d88-914b-47a52b2c2b1c"
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "gre"
+    ],
+    "title_translated": [
+      {
+        "language": "eng",
+        "translated_title": "Synopsis of the Histories"
+      }
+    ],
+    "genre": "chronicle",
+    "created": "2016-01-29 13:31:10.712726",
+    "owner": "hagena1z",
+    "title_supplement": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Series",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "decdcbd9-5ba0-444a-83af-9b17c68cecd4",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "1e86b7f3-d19a-4cde-ac31-8d32e415eee3"
+    ],
+    "changed": "2016-02-17 10:49:07.758731",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "\u0422\u0440\u0443\u0434\u044b \u043e\u0442\u0434\u0435\u043b\u0430 \u0434\u0440\u0435\u0432\u043d\u0435\u0440\u0443\u0441\u0441\u043a\u043e\u0439 \u043b\u0438\u0442\u0435\u0440\u0430\u0442\u0443\u0440\u044b",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "rus"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-17 10:49:07.758731",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Series",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "df5fade7-c96a-42a6-8983-bc48a82c427d",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "0c4f7d31-e474-463e-aba9-0383c1a7532c"
+    ],
+    "changed": "2016-02-12 10:32:18.180505",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Biblioteca dell'Istituto Ellenico di Studi Bizantini e Postbizantini di Venezia",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "ita"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-09 12:17:31.712327",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "b03c286f-baa4-48a4-ae14-635303be9e24",
+        "issue": "1",
+        "page_first": "219",
+        "page_last": "227",
+        "volume": "1/2"
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "ArticleJournal",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Po\u0219t\u0103ri\u021b\u0103, Emilia",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-11 13:40:04.102916",
+    "relation": [
+      "04f92b0b-12ab-4f58-ac36-04bbef73f03a"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1975",
+    "license": "",
+    "number_of_pages": "",
+    "title": "Condica Marii Logofe\u021bii de toate c\u0103r\u021bile lui Constantin Br\u00e2ncoveanu vv. (1692-1713)",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "rum"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-03 16:35:28.147654",
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "circa": false,
+    "id": "e0178f70-c21b-4944-9ff2-eb8f4c8a6b71"
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "pubtype": "Series",
+    "ISSN": [
+      ""
+    ],
+    "publisher": "",
+    "person": [
+      {
+        "role": [
+          ""
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "Colloqui",
+    "publisher_place": "",
+    "table_of_contents": "",
+    "id": "e7c035c8-0ff9-4e04-8a0c-de4f9a431ae6",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "2b8a8939-6fd1-403b-ac62-29bb874cbbb3"
+    ],
+    "changed": "2016-02-15 13:02:00.021138",
+    "relation": [
+      ""
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "ZDBID": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Medioevo romanzo e orientale",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "note": "",
+    "DOI": "",
+    "language": [
+      "ita"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-04 11:09:29.800561",
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "866751f4-5e67-48ac-b80c-50228921b675",
+        "page_first": "57",
+        "page_last": "83",
+        "volume": ""
+      },
+      {
+        "is_part_of": "77134b7e-8c67-4745-a6b4-7023049e174c",
+        "page_first": "97",
+        "page_last": "116",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Chapter",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "uri": "",
+        "isni": "",
+        "name": "Salvo, Maria di",
+        "viaf": ""
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "osservazioni e nuovi materiali",
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-15 15:57:39.961324",
+    "relation": [
+      "b1e94ef0-20fe-4b2e-91b5-837c26d91bb7"
+    ],
+    "abstract": "",
+    "note": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "",
+    "license": "",
+    "number_of_pages": "",
+    "title": "La missione di I. \u010cemodanov a Venezia (1656-1657)",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "ita"
+    ],
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "created": "2016-02-15 15:47:53.646795",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "circa": false,
+    "id": "eeb27dfe-a3a8-47ae-8111-6fe2e61b5bf8"
+  },
+  {
+    "is_part_of": [
+      ""
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "origin": "",
+    "person": [
+      {
+        "role": [
+          "aut"
+        ],
+        "isni": "",
+        "name": "Anonymous",
+        "birth_date": "",
+        "uri": "",
+        "viaf": "",
+        "name_other": "",
+        "death_date": ""
+      },
+      {
+        "role": [
+          "fmo"
+        ],
+        "isni": "",
+        "name": "Barberini, Antonio",
+        "birth_date": "1607",
+        "uri": "",
+        "viaf": "",
+        "name_other": "",
+        "death_date": "1671"
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [
+          ""
+        ],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "",
+    "incipit": "",
+    "id": "f231de45-7d22-4893-9175-751a97a13f8b",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      "229e8c8b-0f91-4990-a25d-a5bffd465e90"
+    ],
+    "changed": "2016-02-12 09:46:36.211824",
+    "relation": [
+      ""
+    ],
+    "abstract": "According to Elizabeth Zachariadou, the Chronicle has been composed after 1573 and before 1625. Using sources as Bishop Leonardo Giustiniani\u2019s account of the fall of Constantinople in 1453, (Pseudo)Dorotheos\u2019 chronicle, and especially the second edition of Francesco Sansovino\u2019s Annali Turcheschi, it depicts the life of the Ottoman sultans, as well as the conquest of the Balkans and its impact on South-Eastern Europe. The life and deeds of Mehmed the Conqueror receive special attention. The Chronicle starts in 1373 and ends, with lacunae, in 1513; several fragments deal with the reign of Mehmed III (1595-1603).",
+    "explicit": "",
+    "note": "The codex is acephalous and incomplete, and it copies another incomplete manuscript, now lost.",
+    "number_of_pages": "",
+    "provenance": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "1600",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "number_of_lines": "",
+    "autograph_text": "",
+    "title": "Codex Barberinus Graecus 111",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "pubtype": "Codex",
+    "DOI": "",
+    "language": [
+      ""
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "genre": "chronicle",
+    "created": "2016-02-02 12:00:25.180619",
+    "owner": "rosensn9",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "Vatican City",
+        "label": "Bibliotheca Apostolica Vaticana",
+        "uri": "https://www.vatlib.it/",
+        "latitude": "41.9047603",
+        "longitude": "12.4524336",
+        "call_number": "Barberinus graecus 111 "
+      }
+    ],
+    "circa": true
+  },
+  {
+    "is_part_of": [
+      {
+        "is_part_of": "",
+        "volume": ""
+      }
+    ],
+    "transliterated_title": [
+      ""
+    ],
+    "subtype": "",
+    "pubtype": "Monograph",
+    "ISBN": [
+      "9789731671666",
+      "9731671668"
+    ],
+    "publisher": "Editura Muzeului Nat\u0327ional al Literaturii Roma\u0302ne (MNLR)",
+    "person": [
+      {
+        "role": [],
+        "uri": "",
+        "isni": "",
+        "name": "T\u0327ipa\u0306u, Mihai Gheorghe",
+        "viaf": "309576576"
+      }
+    ],
+    "uri": [
+      ""
+    ],
+    "additions": "",
+    "license": "",
+    "corporation": [
+      {
+        "role": [],
+        "viaf": "",
+        "isni": "",
+        "name": "",
+        "gnd": ""
+      }
+    ],
+    "subtitle": "M\u0103rturia scrierilor grece\u0219ti",
+    "publisher_place": "Bucharest",
+    "table_of_contents": "",
+    "id": "f92ada99-3b10-48eb-ad3e-9612deb7e4e3",
+    "keyword": [
+      {
+        "uri": "",
+        "label": ""
+      }
+    ],
+    "key_publication": false,
+    "has_part": [
+      ""
+    ],
+    "changed": "2016-02-11 14:07:51.783289",
+    "relation": [
+      "dde27a65-3f0a-4e17-b076-b06b85a53601"
+    ],
+    "abstract": "",
+    "number_of_volumes": "",
+    "note": "",
+    "edition": "",
+    "keyword_temporal": [
+      ""
+    ],
+    "issued": "2013",
+    "geographic": [
+      {
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "label": ""
+      }
+    ],
+    "hbz_id": "",
+    "number_of_pages": "",
+    "title": "Identitate post-bizantina\u0306 i\u0302n sud-estul Europei",
+    "other_version": [
+      ""
+    ],
+    "accessed": "",
+    "DOI": "",
+    "language": [
+      "rum"
+    ],
+    "title_translated": [
+      {
+        "language": "",
+        "translated_title": ""
+      }
+    ],
+    "created": "2016-02-04 13:06:15.026713",
+    "owner": "anoynimouse",
+    "title_supplement": "",
+    "library": [
+      {
+        "place": "",
+        "label": "",
+        "uri": "",
+        "latitude": "",
+        "longitude": "",
+        "call_number": ""
+      }
+    ],
+    "circa": false
+  }
+]
