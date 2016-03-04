@@ -496,11 +496,13 @@
                         {% endtrans %}
                     </dt>
                     <dd>
-    <div>{{ record.library.0.data.label }} | {{ record.library.0.data.call_number }}</div>
-    <div id="record_map"></div>
-</dd>
+                        <div>{{ record.library.0.data.label }}{% if record.library.0.data.call_number %} | {{ record.library.0.data.call_number }}{% endif %}</div>
+                        <div id="record_map"></div>
+                    </dd>
                 {% endif %}
             {% endif %}
+            <dt>{{ _('Permalink') }}</dt>
+            <dd>{{ request.url }} <button title="{{ _('Copy to Clipboard') }}" class="btn btn-default btn-xs permalink" data-clipboard-text="{{ request.url }}" data-clipboard-action="copy"><i class="octicon octicon-clippy"></i></button></dd>
             {% if mlt %}
                 <dt>{{ _('Similar Records') }}</dt>
                 <dd>
@@ -508,7 +510,6 @@
                         {% for doc in mlt %}
                             <li><a href="/retrieve/{{ doc.pubtype }}/{{ doc.id }}">{{ doc.title }}, {{ doc.issued }}</a></li>
                         {% endfor %}
-
                     </ul>
                 </dd>
             {% endif %}
@@ -538,6 +539,30 @@
     </div>
 {% endblock %}
 {% block site_scripts %}
+    <script src="{{ url_for('static', filename='site/js/clipboard.min.js') }}"></script>
+    <script>
+        Notification.requestPermission();
+        function clp_notify(){
+            if(!('Notification' in window)){
+                alert('{{ _("This browser does not support system notifications") }}');
+            }
+            else if(Notification.permission === 'granted'){
+                var notification = new Notification('{{ _("Copied to clipboard") }}');
+            }
+            else if(Notification.permission === 'denied'){
+                Notification.requestPermission(function(permission){
+                    if(Notification.permission === 'granted'){
+                        var notification = new Notification('{{ _("Copied to clipboard") }}');
+                    }
+                });
+            }
+        }
+        var btns = document.querySelectorAll('.permalink');
+        var clipboard = new Clipboard(btns);
+        clipboard.on('success', function(e){
+            clp_notify();
+        })
+    </script>
     {% if config.DEBUG and current_user.role == 'admin' %}
     <script src="{{ url_for('static', filename='prism/prism.js') }}"></script>
     {% endif %}

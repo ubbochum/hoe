@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-04 02:21+0100\n"
+"POT-Creation-Date: 2016-03-04 13:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -371,7 +371,7 @@ msgstr ""
 msgid "The translated title of the work"
 msgstr ""
 
-#: forms.py:186 forms.py:217
+#: forms.py:186 forms.py:217 templates/hoe_facets.html:6
 msgid "Language"
 msgstr ""
 
@@ -689,6 +689,7 @@ msgstr ""
 #: forms.py:283 forms.py:310 forms.py:340 forms.py:380 forms.py:453
 #: forms.py:520 forms.py:579 forms.py:603 forms.py:651 forms.py:672
 #: forms.py:698 forms.py:725 forms.py:756 forms.py:782 forms.py:814
+#: templates/hoe_facets.html:4
 msgid "Person"
 msgstr ""
 
@@ -707,6 +708,7 @@ msgstr ""
 #: forms.py:288 forms.py:315 forms.py:346 forms.py:385 forms.py:458
 #: forms.py:525 forms.py:584 forms.py:608 forms.py:656 forms.py:678
 #: forms.py:703 forms.py:730 forms.py:761 forms.py:788 forms.py:819
+#: templates/hoe_facets.html:5
 msgid "Keyword"
 msgstr ""
 
@@ -774,7 +776,7 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
-#: forms.py:393 forms.py:467 forms.py:533
+#: forms.py:393 forms.py:467 forms.py:533 templates/hoe_facets.html:11
 msgid "Genre"
 msgstr ""
 
@@ -1289,7 +1291,7 @@ msgid "Cancel"
 msgstr ""
 
 #: templates/confirm_delete_modal.html:14 templates/dashboard.html:30
-#: templates/record.html:533 templates/solr_dumps.html:19
+#: templates/record.html:534 templates/solr_dumps.html:19
 msgid "Delete"
 msgstr ""
 
@@ -1301,7 +1303,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: templates/dashboard.html:29 templates/record.html:532
+#: templates/dashboard.html:29 templates/record.html:533
 msgid "Edit"
 msgstr ""
 
@@ -1359,6 +1361,26 @@ msgstr ""
 
 #: templates/header.html:20
 msgid "Historiography of Ottoman Europe"
+msgstr ""
+
+#: templates/hoe_facets.html:7
+msgid "Primary Publication Century"
+msgstr ""
+
+#: templates/hoe_facets.html:8
+msgid "Secondary Publication Year"
+msgstr ""
+
+#: templates/hoe_facets.html:9 templates/record.html:121
+msgid "Publication Type"
+msgstr ""
+
+#: templates/hoe_facets.html:10
+msgid "Publication Subtype"
+msgstr ""
+
+#: templates/hoe_facets.html:12
+msgid "Source Class"
 msgstr ""
 
 #: templates/index.html:16
@@ -1513,10 +1535,6 @@ msgstr[1] ""
 msgid "GND"
 msgstr ""
 
-#: templates/record.html:121
-msgid "Publication Type"
-msgstr ""
-
 #: templates/record.html:129
 msgid ""
 "\n"
@@ -1645,7 +1663,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: templates/record.html:459
+#: templates/record.html:459 templates/translation_strings.html:5
 msgid "Table of Contents"
 msgstr ""
 
@@ -1661,25 +1679,41 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+#: templates/record.html:504
+msgid "Permalink"
+msgstr ""
+
 #: templates/record.html:505
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: templates/record.html:507
 msgid "Similar Records"
 msgstr ""
 
-#: templates/record.html:516
+#: templates/record.html:517
 msgid "Record Information"
 msgstr ""
 
-#: templates/record.html:517
+#: templates/record.html:518
 #, python-format
 msgid "Created %(created)s by %(owner)s."
 msgstr ""
 
-#: templates/record.html:517
+#: templates/record.html:518
 #, python-format
 msgid "Last changed %(changed)s."
 msgstr ""
 
-#: templates/record.html:602
+#: templates/record.html:547
+msgid "This browser does not support system notifications"
+msgstr ""
+
+#: templates/record.html:550 templates/record.html:555
+msgid "Copied to clipboard"
+msgstr ""
+
+#: templates/record.html:627
 msgid "Show all records"
 msgstr ""
 
@@ -1732,5 +1766,17 @@ msgstr ""
 
 #: templates/tabbed_form.html:118
 msgid "This Title Does Not Exist Yet!"
+msgstr ""
+
+#: templates/translation_strings.html:2
+msgid "Title translated"
+msgstr ""
+
+#: templates/translation_strings.html:3
+msgid "Geographic"
+msgstr ""
+
+#: templates/translation_strings.html:4
+msgid "Is part of"
 msgstr ""
 

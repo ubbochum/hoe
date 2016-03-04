@@ -50,7 +50,7 @@ from solr_handler import Solr
 from datadiff import diff_dict
 from multiprocessing import Pool
 from io import BytesIO
-from werkzeug import secure_filename
+#from werkzeug import secure_filename
 
 from forms import *
 from config import LANGUAGES

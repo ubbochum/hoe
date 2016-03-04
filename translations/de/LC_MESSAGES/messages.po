@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hoe\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-04 02:21+0100\n"
-"PO-Revision-Date: 2016-03-04 01:41+0000\n"
+"POT-Creation-Date: 2016-03-04 13:38+0100\n"
+"PO-Revision-Date: 2016-03-04 12:40+0000\n"
 "Last-Translator: André Hagenbruch\n"
 "Language-Team: German (Germany) (http://www.transifex.com/ubbochum/hoe/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -375,7 +375,7 @@ msgstr "Übersetzter Titel"
 msgid "The translated title of the work"
 msgstr "Der übersetzte Titel des Werks"
 
-#: forms.py:186 forms.py:217
+#: forms.py:186 forms.py:217 templates/hoe_facets.html:6
 msgid "Language"
 msgstr "Sprache"
 
@@ -693,6 +693,7 @@ msgstr "ID"
 #: forms.py:283 forms.py:310 forms.py:340 forms.py:380 forms.py:453
 #: forms.py:520 forms.py:579 forms.py:603 forms.py:651 forms.py:672
 #: forms.py:698 forms.py:725 forms.py:756 forms.py:782 forms.py:814
+#: templates/hoe_facets.html:4
 msgid "Person"
 msgstr "Person"
 
@@ -711,6 +712,7 @@ msgstr "Relationen"
 #: forms.py:288 forms.py:315 forms.py:346 forms.py:385 forms.py:458
 #: forms.py:525 forms.py:584 forms.py:608 forms.py:656 forms.py:678
 #: forms.py:703 forms.py:730 forms.py:761 forms.py:788 forms.py:819
+#: templates/hoe_facets.html:5
 msgid "Keyword"
 msgstr "Schlagwort"
 
@@ -778,7 +780,7 @@ msgstr "z.B. \"Paris\""
 msgid "Event"
 msgstr "Veranstaltung"
 
-#: forms.py:393 forms.py:467 forms.py:533
+#: forms.py:393 forms.py:467 forms.py:533 templates/hoe_facets.html:11
 msgid "Genre"
 msgstr "Genre"
 
@@ -1292,7 +1294,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: templates/confirm_delete_modal.html:14 templates/dashboard.html:30
-#: templates/record.html:533 templates/solr_dumps.html:19
+#: templates/record.html:534 templates/solr_dumps.html:19
 msgid "Delete"
 msgstr "Löschen"
 
@@ -1304,7 +1306,7 @@ msgstr "Aktion"
 msgid "View"
 msgstr "Anzeigen"
 
-#: templates/dashboard.html:29 templates/record.html:532
+#: templates/dashboard.html:29 templates/record.html:533
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -1363,6 +1365,26 @@ msgstr "Kontakt"
 #: templates/header.html:20
 msgid "Historiography of Ottoman Europe"
 msgstr "Historiographie des Osmanischen Europa"
+
+#: templates/hoe_facets.html:7
+msgid "Primary Publication Century"
+msgstr "Jahrhundert in Primärliteratur"
+
+#: templates/hoe_facets.html:8
+msgid "Secondary Publication Year"
+msgstr "Erscheinungsjahr in Sekundärliteratur"
+
+#: templates/hoe_facets.html:9 templates/record.html:121
+msgid "Publication Type"
+msgstr "Publikationstyp"
+
+#: templates/hoe_facets.html:10
+msgid "Publication Subtype"
+msgstr "Untertyp"
+
+#: templates/hoe_facets.html:12
+msgid "Source Class"
+msgstr "Art der Quelle"
 
 #: templates/index.html:16
 msgid "Project Description"
@@ -1515,10 +1537,6 @@ msgstr[1] "\nKörperschaften"
 msgid "GND"
 msgstr "GND"
 
-#: templates/record.html:121
-msgid "Publication Type"
-msgstr "Publikationstyp"
-
 #: templates/record.html:129
 msgid ""
 "\n"
@@ -1647,7 +1665,7 @@ msgstr "Zuletzt aktualisiert"
 msgid "Description"
 msgstr "Beschreibung"
 
-#: templates/record.html:459
+#: templates/record.html:459 templates/translation_strings.html:5
 msgid "Table of Contents"
 msgstr "Inhaltsverzeichnis"
 
@@ -1663,25 +1681,41 @@ msgid_plural ""
 msgstr[0] "\n                        Bibliothek\n                        "
 msgstr[1] "\n                        Bibliotheken\n                        "
 
+#: templates/record.html:504
+msgid "Permalink"
+msgstr "Permalink"
+
 #: templates/record.html:505
+msgid "Copy to Clipboard"
+msgstr "In die Zwischenablage kopieren"
+
+#: templates/record.html:507
 msgid "Similar Records"
 msgstr "Ähnliche Titel"
 
-#: templates/record.html:516
+#: templates/record.html:517
 msgid "Record Information"
 msgstr "Information zum Datensatz"
 
-#: templates/record.html:517
+#: templates/record.html:518
 #, python-format
 msgid "Created %(created)s by %(owner)s."
 msgstr "%(created)s von %(owner)s angelegt."
 
-#: templates/record.html:517
+#: templates/record.html:518
 #, python-format
 msgid "Last changed %(changed)s."
 msgstr "Letzte Änderung %(changed)s."
 
-#: templates/record.html:602
+#: templates/record.html:547
+msgid "This browser does not support system notifications"
+msgstr "Dieser Browser unterstützt keine Systembenachrichtigungen"
+
+#: templates/record.html:550 templates/record.html:555
+msgid "Copied to clipboard"
+msgstr "In die Zwischenablage kopiert"
+
+#: templates/record.html:627
 msgid "Show all records"
 msgstr "Zeige alle Titel"
 
@@ -1734,3 +1768,15 @@ msgstr "Hier"
 #: templates/tabbed_form.html:118
 msgid "This Title Does Not Exist Yet!"
 msgstr "Dieser Titel existiert noch nicht!"
+
+#: templates/translation_strings.html:2
+msgid "Title translated"
+msgstr "Übersetzter Titel"
+
+#: templates/translation_strings.html:3
+msgid "Geographic"
+msgstr "Geographisches Schlagwort"
+
+#: templates/translation_strings.html:4
+msgid "Is part of"
+msgstr "Ist Teil von"
