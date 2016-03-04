@@ -39,7 +39,7 @@ except ImportError:
     import secrets
 
 from flask import Flask, render_template, redirect, request, jsonify, flash, url_for, Markup, Response, send_file
-from flask.ext.babel import Babel
+from flask.ext.babel import Babel, lazy_gettext, refresh
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required, make_secure_token, AnonymousUserMixin
 from flask.ext.paginate import Pagination
@@ -166,9 +166,9 @@ def index():
         numFound = index_solr.count()
         records = index_solr.results
         if numFound == 0:
-            flash(gettext("You haven't registered any records with us yet. Please do so now..."), 'danger')
+            flash(lazy_gettext("You haven't registered any records with us yet. Please do so now..."), 'danger')
 
-    return render_template('index.html', header=gettext('Home'), site=theme(request.access_route), numFound=numFound, records=records)
+    return render_template('index.html', header=lazy_gettext('Home'), site=theme(request.access_route), numFound=numFound, records=records)
 
 @app.route('/contact')
 def contact():
@@ -180,133 +180,262 @@ def flash_errors(form):
             flash('Error in the %s field: %s' % (getattr(form, field).label.text, error), 'error')
 
 PUBTYPE2TEXT = {
-    'ArticleJournal': gettext('Article in Journal'),
-    'Catalogue': gettext('Catalogue'),
-    'Chapter': gettext('Chapter'),
-    'CodexChapter': gettext('Chapter in Codex'),
-    'PrintChapter': gettext('Chapter in Print'),
-    'Codex': gettext('Codex'),
-    'Collection': gettext('Collection'),
-    'Conference': gettext('Conference'),
-    'Edition': gettext('Edition'),
-    'InternetDocument': gettext('Internet Document'),
-    'Journal': gettext('Journal'),
-    'Lecture': gettext('Lecture'),
-    'Monograph': gettext('Monograph'),
-    'Print': gettext('Print'),
-    'Series': gettext('Series'),
-    'Translation': gettext('Translation'),
-    'Other': gettext('Other'),
+    'ArticleJournal': lazy_gettext('Article in Journal'),
+    'Catalogue': lazy_gettext('Catalogue'),
+    'Chapter': lazy_gettext('Chapter'),
+    'CodexChapter': lazy_gettext('Chapter in Codex'),
+    'PrintChapter': lazy_gettext('Chapter in Print'),
+    'Codex': lazy_gettext('Codex'),
+    'Collection': lazy_gettext('Collection'),
+    'Conference': lazy_gettext('Conference'),
+    'Edition': lazy_gettext('Edition'),
+    'InternetDocument': lazy_gettext('Internet Document'),
+    'Journal': lazy_gettext('Journal'),
+    'Lecture': lazy_gettext('Lecture'),
+    'Monograph': lazy_gettext('Monograph'),
+    'Print': lazy_gettext('Print'),
+    'Series': lazy_gettext('Series'),
+    'Translation': lazy_gettext('Translation'),
+    'Other': lazy_gettext('Other'),
 }
 
 SUBTYPE2TEXT = {
-    'facsimile': gettext('Facsimile'),
-    'festschrift': gettext('Festschrift'),
-    'lexicon': gettext('Lexicon'),
-    'afterword': gettext('Afterword'),
-    'introduction': gettext('Introduction'),
-    'lexicon_article': gettext('Article in Lexicon'),
-    'review': gettext('Review'),
-    'translation': gettext('Translation'),
+    'facsimile': lazy_gettext('Facsimile'),
+    'festschrift': lazy_gettext('Festschrift'),
+    'lexicon': lazy_gettext('Lexicon'),
+    'afterword': lazy_gettext('Afterword'),
+    'introduction': lazy_gettext('Introduction'),
+    'lexicon_article': lazy_gettext('Article in Lexicon'),
+    'review': lazy_gettext('Review'),
+    'translation': lazy_gettext('Translation'),
 }
 
 GENRE2TEXT = {
     #, , , chronicle,
-    'apocalypse': gettext('Apocalypse'),
-    'artifact': gettext('Artifact'),
-    'autobiography': gettext('Autobiography'),
-    'cartulary': gettext('Cartulary'),
-    'chronicle': gettext('Chronicle'),
-    'church_chronicle': gettext('Church Chronicle'),
-    'chronograph': gettext('Chronograph'),
-    'cosmography': gettext('Cosmography'),
-    'encomium': gettext('Encomium'),
-    'false_document': gettext('False Document'),
-    'hagiography': gettext('Hagiography'),
-    'history': gettext('History'),
-    'hoe': gettext('History of the Ottoman Emperors'),
-    'legend': gettext('Legend'),
-    'letter': gettext('Letter'),
-    'memoirs': gettext('Memoirs'),
-    'memorandum': gettext('Memorandum'),
-    'mirror': gettext('Mirror of princes'),
-    'panegyric': gettext('Panegyric'),
-    'parenesis': gettext('Parenesis'),
-    'poem': gettext('Poem'),
-    'polemic': gettext('Polemic'),
-    'prophesy': gettext('Prophesy'),
-    'proskynetarion': gettext('Proskynetarion'),
-    'psalter': gettext('Psalter'),
-    'threnody': gettext('Threnody'),
-    'verse_chronicle': gettext('Verse Chronicle'),
-    'vita': gettext('Vita'),
-    'other': gettext('Other')
+    'apocalypse': lazy_gettext('Apocalypse'),
+    'artifact': lazy_gettext('Artifact'),
+    'autobiography': lazy_gettext('Autobiography'),
+    'cartulary': lazy_gettext('Cartulary'),
+    'chronicle': lazy_gettext('Chronicle'),
+    'church_chronicle': lazy_gettext('Church Chronicle'),
+    'chronograph': lazy_gettext('Chronograph'),
+    'cosmography': lazy_gettext('Cosmography'),
+    'encomium': lazy_gettext('Encomium'),
+    'false_document': lazy_gettext('False Document'),
+    'hagiography': lazy_gettext('Hagiography'),
+    'history': lazy_gettext('History'),
+    'hoe': lazy_gettext('History of the Ottoman Emperors'),
+    'legend': lazy_gettext('Legend'),
+    'letter': lazy_gettext('Letter'),
+    'memoirs': lazy_gettext('Memoirs'),
+    'memorandum': lazy_gettext('Memorandum'),
+    'mirror': lazy_gettext('Mirror of princes'),
+    'panegyric': lazy_gettext('Panegyric'),
+    'parenesis': lazy_gettext('Parenesis'),
+    'poem': lazy_gettext('Poem'),
+    'polemic': lazy_gettext('Polemic'),
+    'prophesy': lazy_gettext('Prophesy'),
+    'proskynetarion': lazy_gettext('Proskynetarion'),
+    'psalter': lazy_gettext('Psalter'),
+    'threnody': lazy_gettext('Threnody'),
+    'verse_chronicle': lazy_gettext('Verse Chronicle'),
+    'vita': lazy_gettext('Vita'),
+    'other': lazy_gettext('Other')
 }
 
 SOURCE_CLASS_MAP = {
-    'Codex': gettext('Primary Literature'),
-    'Print': gettext('Primary Literature'),
-    'CodexChapter': gettext('Primary Literature'),
-    'PrintChapter': gettext('Primary Literature'),
-    'Catalogue': gettext('Primary Literature'),
-    'Edition': gettext('Primary Literature'),
-    'Translation': gettext('Primary Literature'),
-    'ArticleJournal': gettext('Secondary Literature'),
-    'Chapter': gettext('Secondary Literature'),
-    'Monograph': gettext('Secondary Literature'),
-    'Conference': gettext('Secondary Literature'),
-    'Collection': gettext('Secondary Literature'),
-    'Series': gettext('Secondary Literature'),
-    'Journal': gettext('Secondary Literature'),
-    'InternetDocument': gettext('Secondary Literature'),
-    'Lecture': gettext('Secondary Literature'),
-    'Other': gettext('Secondary Literature'),
+    'Codex': lazy_gettext('Primary Literature'),
+    'Print': lazy_gettext('Primary Literature'),
+    'CodexChapter': lazy_gettext('Primary Literature'),
+    'PrintChapter': lazy_gettext('Primary Literature'),
+    'Catalogue': lazy_gettext('Primary Literature'),
+    'Edition': lazy_gettext('Primary Literature'),
+    'Translation': lazy_gettext('Primary Literature'),
+    'ArticleJournal': lazy_gettext('Secondary Literature'),
+    'Chapter': lazy_gettext('Secondary Literature'),
+    'Monograph': lazy_gettext('Secondary Literature'),
+    'Conference': lazy_gettext('Secondary Literature'),
+    'Collection': lazy_gettext('Secondary Literature'),
+    'Series': lazy_gettext('Secondary Literature'),
+    'Journal': lazy_gettext('Secondary Literature'),
+    'InternetDocument': lazy_gettext('Secondary Literature'),
+    'Lecture': lazy_gettext('Secondary Literature'),
+    'Other': lazy_gettext('Secondary Literature'),
 }
 
 ROLE_MAP = {
-    'ann': gettext('Annotator'),
-    'aut': gettext('Author'),
-    'aft': gettext('Author of Afterword'),
-    'aui': gettext('Author of Introduction'),
-    'ato': gettext('Autographer'),
-    'bnd': gettext('Binder'),
-    'dte': gettext('Dedicatee'),
-    'dto': gettext('Dedicator'),
-    'edt': gettext('Editor'),
-    'fmo': gettext('Former Owner'),
-    'hnr': gettext('Honoree'),
-    'his': gettext('Host institution'),
-    'ill': gettext('Illuminator'),
-    'ive': gettext('Interviewee'),
-    'ivr': gettext('Interviewer'),
-    'pat': gettext('Patron'),
-    'prt': gettext('Printer'),
-    'scr': gettext('Scribe'),
-    'spk': gettext('Speaker'),
-    'trl': gettext('Translator'),
+    'ann': lazy_gettext('Annotator'),
+    'aut': lazy_gettext('Author'),
+    'aft': lazy_gettext('Author of Afterword'),
+    'aui': lazy_gettext('Author of Introduction'),
+    'ato': lazy_gettext('Autographer'),
+    'bnd': lazy_gettext('Binder'),
+    'dte': lazy_gettext('Dedicatee'),
+    'dto': lazy_gettext('Dedicator'),
+    'edt': lazy_gettext('Editor'),
+    'fmo': lazy_gettext('Former Owner'),
+    'hnr': lazy_gettext('Honoree'),
+    'his': lazy_gettext('Host institution'),
+    'ill': lazy_gettext('Illuminator'),
+    'ive': lazy_gettext('Interviewee'),
+    'ivr': lazy_gettext('Interviewer'),
+    'pat': lazy_gettext('Patron'),
+    'prt': lazy_gettext('Printer'),
+    'scr': lazy_gettext('Scribe'),
+    'spk': lazy_gettext('Speaker'),
+    'trl': lazy_gettext('Translator'),
 }
 
 LANGUAGE_MAP = {
-    'alb': gettext('Albanian'),
-    'ara': gettext('Arabic'),
-    'bos': gettext('Bosnian'),
-    'bul': gettext('Bulgarian'),
-    'hrv': gettext('Croatian'),
-    'dut': gettext('Dutch'),
-    'eng': gettext('English'),
-    'fre': gettext('French'),
-    'ger': gettext('German'),
-    'grc': gettext('Ancient Greek'),
-    'gre': gettext('Modern Greek'),
-    'ita': gettext('Italian'),
-    'lat': gettext('Latin'),
-    'peo': gettext('Persian'),
-    'pol': gettext('Polish'),
-    'rum': gettext('Romanian'),
-    'rus': gettext('Russian'),
-    'srp': gettext('Serbian'),
-    'spa': gettext('Spanish'),
-    'tur': gettext('Turkish'),
+    'alb': lazy_gettext('Albanian'),
+    'ara': lazy_gettext('Arabic'),
+    'bos': lazy_gettext('Bosnian'),
+    'bul': lazy_gettext('Bulgarian'),
+    'hrv': lazy_gettext('Croatian'),
+    'dut': lazy_gettext('Dutch'),
+    'eng': lazy_gettext('English'),
+    'fre': lazy_gettext('French'),
+    'ger': lazy_gettext('German'),
+    'grc': lazy_gettext('Ancient Greek'),
+    'gre': lazy_gettext('Modern Greek'),
+    'ita': lazy_gettext('Italian'),
+    'lat': lazy_gettext('Latin'),
+    'peo': lazy_gettext('Persian'),
+    'pol': lazy_gettext('Polish'),
+    'rum': lazy_gettext('Romanian'),
+    'rus': lazy_gettext('Russian'),
+    'srp': lazy_gettext('Serbian'),
+    'spa': lazy_gettext('Spanish'),
+    'tur': lazy_gettext('Turkish'),
+}
+
+NO_TR_PUBTYPE2TEXT = {
+    'ArticleJournal': 'Article in Journal',
+    'Catalogue': 'Catalogue',
+    'Chapter': 'Chapter',
+    'CodexChapter': 'Chapter in Codex',
+    'PrintChapter': 'Chapter in Print',
+    'Codex': 'Codex',
+    'Collection': 'Collection',
+    'Conference': 'Conference',
+    'Edition': 'Edition',
+    'InternetDocument': 'Internet Document',
+    'Journal': 'Journal',
+    'Lecture': 'Lecture',
+    'Monograph': 'Monograph',
+    'Print': 'Print',
+    'Series': 'Series',
+    'Translation': 'Translation',
+    'Other': 'Other',
+}
+
+NO_TR_SUBTYPE2TEXT = {
+    'facsimile': 'Facsimile',
+    'festschrift': 'Festschrift',
+    'lexicon': 'Lexicon',
+    'afterword': 'Afterword',
+    'introduction': 'Introduction',
+    'lexicon_article': 'Article in Lexicon',
+    'review': 'Review',
+    'translation': 'Translation',
+}
+
+NO_TR_GENRE2TEXT = {
+    'apocalypse': 'Apocalypse',
+    'artifact': 'Artifact',
+    'autobiography': 'Autobiography',
+    'cartulary': 'Cartulary',
+    'chronicle': 'Chronicle',
+    'church_chronicle': 'Church Chronicle',
+    'chronograph': 'Chronograph',
+    'cosmography': 'Cosmography',
+    'encomium': 'Encomium',
+    'false_document': 'False Document',
+    'hagiography': 'Hagiography',
+    'history': 'History',
+    'hoe': 'History of the Ottoman Emperors',
+    'legend': 'Legend',
+    'letter': 'Letter',
+    'memoirs': 'Memoirs',
+    'memorandum': 'Memorandum',
+    'mirror': 'Mirror of princes',
+    'panegyric': 'Panegyric',
+    'parenesis': 'Parenesis',
+    'poem': 'Poem',
+    'polemic': 'Polemic',
+    'prophesy': 'Prophesy',
+    'proskynetarion': 'Proskynetarion',
+    'psalter': 'Psalter',
+    'threnody': 'Threnody',
+    'verse_chronicle': 'Verse Chronicle',
+    'vita': 'Vita',
+    'other': 'Other'
+}
+
+NO_TR_SOURCE_CLASS_MAP = {
+    'Codex': 'Primary Literature',
+    'Print': 'Primary Literature',
+    'CodexChapter': 'Primary Literature',
+    'PrintChapter': 'Primary Literature',
+    'Catalogue': 'Primary Literature',
+    'Edition': 'Primary Literature',
+    'Translation': 'Primary Literature',
+    'ArticleJournal': 'Secondary Literature',
+    'Chapter': 'Secondary Literature',
+    'Monograph': 'Secondary Literature',
+    'Conference': 'Secondary Literature',
+    'Collection': 'Secondary Literature',
+    'Series': 'Secondary Literature',
+    'Journal': 'Secondary Literature',
+    'InternetDocument': 'Secondary Literature',
+    'Lecture': 'Secondary Literature',
+    'Other': 'Secondary Literature',
+}
+
+NO_TR_ROLE_MAP = {
+    'ann': 'Annotator',
+    'aut': 'Author',
+    'aft': 'Author of Afterword',
+    'aui': 'Author of Introduction',
+    'ato': 'Autographer',
+    'bnd': 'Binder',
+    'dte': 'Dedicatee',
+    'dto': 'Dedicator',
+    'edt': 'Editor',
+    'fmo': 'Former Owner',
+    'hnr': 'Honoree',
+    'his': 'Host institution',
+    'ill': 'Illuminator',
+    'ive': 'Interviewee',
+    'ivr': 'Interviewer',
+    'pat': 'Patron',
+    'prt': 'Printer',
+    'scr': 'Scribe',
+    'spk': 'Speaker',
+    'trl': 'Translator',
+}
+
+NO_TR_LANGUAGE_MAP = {
+    'alb': 'Albanian',
+    'ara': 'Arabic',
+    'bos': 'Bosnian',
+    'bul': 'Bulgarian',
+    'hrv': 'Croatian',
+    'dut': 'Dutch',
+    'eng': 'English',
+    'fre': 'French',
+    'ger': 'German',
+    'grc': 'Ancient Greek',
+    'gre': 'Modern Greek',
+    'ita': 'Italian',
+    'lat': 'Latin',
+    'peo': 'Persian',
+    'pol': 'Polish',
+    'rum': 'Romanian',
+    'rus': 'Russian',
+    'srp': 'Serbian',
+    'spa': 'Spanish',
+    'tur': 'Turkish',
 }
 
 def _record2solr_doc(form):
@@ -327,12 +456,12 @@ def _record2solr_doc(form):
             solr_data.setdefault('owner', form.data.get(field))
         if field == 'pubtype':
             solr_data.setdefault('pubtype', form.data.get(field))
-            solr_data.setdefault('fpubtype', PUBTYPE2TEXT.get(form.data.get(field)))
-            solr_data.setdefault('source_class', SOURCE_CLASS_MAP.get(form.data.get(field)))
+            solr_data.setdefault('fpubtype', NO_TR_PUBTYPE2TEXT.get(form.data.get(field)))
+            solr_data.setdefault('source_class', NO_TR_SOURCE_CLASS_MAP.get(form.data.get(field)))
         if field == 'subtype' and form.data.get(field) != None:
-            solr_data.setdefault('subtype', SUBTYPE2TEXT.get(form.data.get(field)))
+            solr_data.setdefault('subtype', NO_TR_SUBTYPE2TEXT.get(form.data.get(field)))
         if field == 'genre' and form.data.get(field):
-            solr_data.setdefault('genre', GENRE2TEXT.get(form.data.get(field)))
+            solr_data.setdefault('genre', NO_TR_GENRE2TEXT.get(form.data.get(field)))
         if field == 'title':
             solr_data.setdefault('title', form.data.get(field).strip())
             solr_data.setdefault('exacttitle', form.data.get(field).strip())
@@ -358,7 +487,7 @@ def _record2solr_doc(form):
         if field == 'issued' and form.data.get(field):
             year = form.data.get(field)[0:4].strip()
             solr_data.setdefault('date', form.data.get(field).strip())
-            if SOURCE_CLASS_MAP.get(form.data.get('pubtype')) == 'Primary Literature' and year:
+            if NO_TR_SOURCE_CLASS_MAP.get(form.data.get('pubtype')) == 'Primary Literature' and year:
                 if int(year) >= 1400 and int(year) < 1500:
                     solr_data.setdefault('issued_primary', '1400-1500')
                 elif int(year) >= 1500 and int(year) < 1600:
@@ -381,7 +510,7 @@ def _record2solr_doc(form):
         if field == 'language' and len(form.data.get(field)) > 0:
             for lang in form.data.get(field):
                 if lang != '':
-                    solr_data.setdefault('language', []).append(LANGUAGE_MAP.get(lang))
+                    solr_data.setdefault('language', []).append(NO_TR_LANGUAGE_MAP.get(lang))
         if field == 'person' and len(form.data.get(field)) > 0:
             FACET_ROLES = {'aut', 'edt', 'trl'}
             for idx, person in enumerate(form.data.get(field)):
@@ -420,7 +549,7 @@ def _record2solr_doc(form):
                     ipo_solr = Solr(query=query, facet='false', fields=['wtf_json'])
                     ipo_solr.request()
                     if len(ipo_solr.results) == 0:
-                        flash(gettext('Not all IDs from relation "is part of" could be found! Ref: %s' % form.data.get('id')), 'warning')
+                        flash(lazy_gettext('Not all IDs from relation "is part of" could be found! Ref: %s' % form.data.get('id')), 'warning')
                     for idx, doc in enumerate(ipo_solr.results):
                         myjson = json.loads(doc.get('wtf_json'))
                         #solr_data.setdefault('is_part_of', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
@@ -450,7 +579,7 @@ def _record2solr_doc(form):
                     hp_solr.request()
                     if len(hp_solr.results) == 0:
                         flash(
-                            gettext('Not all IDs from relation "has part" could be found! Ref: %s' % form.data.get('id')), 'warning')
+                            lazy_gettext('Not all IDs from relation "has part" could be found! Ref: %s' % form.data.get('id')), 'warning')
                     for doc in hp_solr.results:
                         myjson = json.loads(doc.get('wtf_json'))
                         #solr_data.setdefault('has_part', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
@@ -476,7 +605,7 @@ def _record2solr_doc(form):
                     ov_solr.request()
                     if len(ov_solr.results) == 0:
                         flash(
-                            gettext('Not all IDs from relation "other version" could be found! Ref: %s' % form.data.get('id')),
+                            lazy_gettext('Not all IDs from relation "other version" could be found! Ref: %s' % form.data.get('id')),
                             'warning')
                     for doc in ov_solr.results:
                         #logging.info(json.loads(doc.get('wtf_json')))
@@ -504,7 +633,7 @@ def _record2solr_doc(form):
                     rel_solr.request()
                     if len(rel_solr.results) == 0:
                         flash(
-                            gettext('Not all IDs from relation "related item" could be found! Ref: %s' % form.data.get('id')),
+                            lazy_gettext('Not all IDs from relation "related item" could be found! Ref: %s' % form.data.get('id')),
                             'warning')
                     for doc in rel_solr.results:
                         myjson = json.loads(doc.get('wtf_json'))
@@ -565,13 +694,13 @@ def dashboard():
     num_found = dashboard_solr.count()
 
     if num_found == 0:
-        flash(gettext('There Are No Records Yet!'))
+        flash(lazy_gettext('There Are No Records Yet!'))
         return render_template('dashboard.html', records=dashboard_solr.results, facet_data=dashboard_solr.facets,
-                               header=gettext('Dashboard'), site=theme(request.access_route), pagination=None)
+                               header=lazy_gettext('Dashboard'), site=theme(request.access_route), pagination=None)
     else:
         pagination = Pagination(page=page, total=num_found, found=num_found, bs_version=3, search=True,
-                                record_name=gettext('titles'), per_page=int(rows),
-                                search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
+                                record_name=lazy_gettext('titles'), per_page=int(rows),
+                                search_msg=lazy_gettext('Showing {start} to {end} of {found} {record_name}'))
         mystart = 1 + (pagination.page - 1) * pagination.per_page
         # myend = mystart + pagination.per_page - 1
 
@@ -582,7 +711,7 @@ def dashboard():
     for lib in dashboard_solr.facets.get('library').get('buckets'):
         libraries.append({'library': eval(lib.get('val'))})
     return render_template('dashboard.html', records=dashboard_solr.results, facet_data=dashboard_solr.facets,
-                           header=gettext('Dashboard'), site=theme(request.access_route),
+                           header=lazy_gettext('Dashboard'), site=theme(request.access_route),
                            offset=mystart - 1, query=query, filterquery=filterquery, pagination=pagination,
                            now=datetime.datetime.now(), flibraries=flibraries, libraries=libraries, target='dashboard',
                            del_redirect='dashboard', pubtype_map=PUBTYPE2TEXT)
@@ -622,7 +751,7 @@ def new_record(pubtype='article-journal', primary_id=''):
     if form.validate_on_submit():
         if form.errors:
             flash_errors(form)
-            return render_template('tabbed_form.html', form=form, header=gettext('New Record'),
+            return render_template('tabbed_form.html', form=form, header=lazy_gettext('New Record'),
                                    site=theme(request.access_route), action='create', pubtype=pubtype,
                                    record_id=form.id.data)
         _record2solr(form)
@@ -636,7 +765,7 @@ def new_record(pubtype='article-journal', primary_id=''):
     form.owner.data = current_user.id
     form.pubtype.data = pubtype
 
-    return render_template('tabbed_form.html', form=form, header=gettext('New Record'), site=theme(request.access_route),
+    return render_template('tabbed_form.html', form=form, header=lazy_gettext('New Record'), site=theme(request.access_route),
                            pubtype=pubtype, action='create', record_id=form.id.data)
 
 @app.route('/retrieve/<pubtype>/<record_id>')
@@ -679,7 +808,7 @@ def edit_record(record_id='', pubtype=''):
         form = PUBTYPE2FORM.get(pubtype).from_json(thedata)
 
     if thedata.get('pubtype') != pubtype:
-        flash(Markup(gettext(
+        flash(Markup(lazy_gettext(
             '<p><i class="fa fa-exclamation-triangle fa-3x"></i> <h3>The following data are incompatible with this publication type</h3></p>')) + _diff_struct(
             thedata, form.data), 'error')
         form.pubtype.data = pubtype
@@ -688,14 +817,14 @@ def edit_record(record_id='', pubtype=''):
         if form.errors:
             flash_errors(form)
             return render_template('tabbed_form.html', form=form,
-                                   header=gettext('Edit: %(title)s', title=form.data.get('title')),
+                                   header=lazy_gettext('Edit: %(title)s', title=form.data.get('title')),
                                    site=theme(request.access_route), action='update', pubtype=pubtype)
         _record2solr(form)
         return redirect(url_for('dashboard'))
 
     form.changed.data = datetime.datetime.now()
 
-    return render_template('tabbed_form.html', form=form, header=gettext('Edit: %(title)s',
+    return render_template('tabbed_form.html', form=form, header=lazy_gettext('Edit: %(title)s',
                                                                          title=form.data.get('title')),
                            site=theme(request.access_route), action='update', pubtype=pubtype, record_id=record_id)
 
@@ -705,10 +834,10 @@ def make_admin(user_id=''):
     if user_id:
         ma_solr = Solr(core='hoe_users', data=[{'id': user_id, 'role': {'set': 'admin'}}])
         ma_solr.update()
-        flash(gettext('%s upgraded to admin!' % user_id), 'success')
+        flash(lazy_gettext('%s upgraded to admin!' % user_id), 'success')
         return redirect(url_for('index'))
     else:
-        flash(gettext('You did not supply an ID!'), 'danger')
+        flash(lazy_gettext('You did not supply an ID!'), 'danger')
         return redirect(url_for('index'))
 
 @app.route('/delete/<record_id>')
@@ -737,6 +866,7 @@ class User(UserMixin):
         self.email = email
         self.accesstoken = accesstoken
         user_solr = Solr(core='hoe_users', query='id:%s' % id, facet='false')
+        logging.info(user_solr.port)
         user_solr.request()
         if user_solr.count() > 0:
             _user = user_solr.results[0]
@@ -762,9 +892,9 @@ class User(UserMixin):
             return None
 
 class LoginForm(Form):
-    username = StringField(gettext('Username'))
-    password = PasswordField(gettext('Password'))
-    wayf = HiddenField(gettext('Where Are You From?'))
+    username = StringField(lazy_gettext('Username'))
+    password = PasswordField(lazy_gettext('Password'))
+    wayf = HiddenField(lazy_gettext('Where Are You From?'))
 
 def is_safe_url(target):
     ref_url = parse.urlparse(request.host_url)
@@ -828,7 +958,7 @@ def login():
     form = LoginForm()
     next = get_redirect_target()
     #return render_template('login.html', form=form, header='Sign In', next=next, orcid_sandbox_client_id=orcid_sandbox_client_id)
-    return render_template('login.html', form=form, header=gettext('Sign In'), next=next, site=theme(request.access_route))
+    return render_template('login.html', form=form, header=lazy_gettext('Sign In'), next=next, site=theme(request.access_route))
 
 @app.route('/logout')
 @login_required
@@ -914,12 +1044,12 @@ def search():
     if num_found == 1:
         return redirect(url_for('show_record', record_id=search_solr.results[0].get('id'), pubtype=search_solr.results[0].get('pubtype')))
     elif num_found == 0:
-        flash(gettext('Your Search Found no Results'))
+        flash(lazy_gettext('Your Search Found no Results'))
         return redirect(url_for('index'))
     else:
         pagination = Pagination(page=page, total=num_found, found=num_found, bs_version=3, search=True,
-                                record_name=gettext('titles'), per_page=int(rows),
-                                search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
+                                record_name=lazy_gettext('titles'), per_page=int(rows),
+                                search_msg=lazy_gettext('Showing {start} to {end} of {found} {record_name}'))
         mystart = 1 + (pagination.page - 1) * pagination.per_page
         #myend = mystart + pagination.per_page - 1
         flibraries = {}
@@ -933,6 +1063,7 @@ def search():
                                offset=mystart - 1, query=query, filterquery=filterquery, flibraries=flibraries,
                                libraries=libraries, target='search', pubtype_map=PUBTYPE2TEXT)
 
+@login_required
 @app.route('/export/solr_dump')
 def export_solr_dump():
     '''
@@ -945,8 +1076,10 @@ def export_solr_dump():
     target_solr = Solr(core='hoe_users', data=[{'id': filename, 'dump': json.dumps(export_docs)}])
     target_solr.update()
 
-    return send_file(BytesIO(str.encode(json.dumps(export_docs))), attachment_filename=filename, as_attachment=True)
+    return send_file(BytesIO(str.encode(json.dumps(export_docs))), attachment_filename=filename, as_attachment=True,
+                     cache_timeout=1, add_etags=True)
 
+@login_required
 @app.route('/import/solr_dumps')
 def import_solr_dumps():
     '''
@@ -957,17 +1090,18 @@ def import_solr_dumps():
     solr_dumps.request()
     num_found = solr_dumps.count()
     pagination = Pagination(page=page, total=num_found, found=num_found, bs_version=3, search=True,
-                                record_name=gettext('dumps'),
-                                search_msg=gettext('Showing {start} to {end} of {found} {record_name}'))
+                                record_name=lazy_gettext('dumps'),
+                                search_msg=lazy_gettext('Showing {start} to {end} of {found} {record_name}'))
     mystart = 1 + (pagination.page - 1) * pagination.per_page
     form = FileUploadForm()
     return render_template('solr_dumps.html', records=solr_dumps.results, offset=mystart - 1, pagination=pagination,
-                           header=gettext('Import Dump'), del_redirect='import/solr_dumps', form=form)
+                           header=lazy_gettext('Import Dump'), del_redirect='import/solr_dumps', form=form)
 
 def _import_data(doc):
     form = PUBTYPE2FORM.get(doc.get('pubtype')).from_json(doc)
     return _record2solr_doc(form)
 
+@login_required
 @app.route('/import/solr_dump/<filename>', methods=['GET', 'POST'])
 def import_solr_dump(filename=''):
     thedata = ''

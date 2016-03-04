@@ -180,7 +180,7 @@
                     {{ record.data.number_of_volumes }}
                 </dd>
             {% endif %}
-            {% if record.data.nnumber and record.data.number.0 %}
+            {% if record.data.number and record.data.number.0 %}
                 <dt>
                     {% trans count=record.data.number|length %}
                     Number
@@ -518,9 +518,12 @@
             {% endif %}
         </dl>
         {% if config.DEBUG and current_user.role == 'admin' %}
-            <div id="json_edit">
+            {#<div id="json_edit">
                 <pre  contenteditable="true"><code class="language-json">{{ record.data|tojson|safe }}</code></pre>
                 {% include 'submit_form.html' %}
+            </div>#}
+            <div>
+                <pre><code class="language-json">{{ record.data|tojson|safe }}</code></pre>
             </div>
         {% endif %}
         </div>

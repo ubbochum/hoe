@@ -1,23 +1,25 @@
-# German translations for .
+# Translations template for PROJECT.
 # Copyright (C) 2016 ORGANIZATION
-# This file is distributed under the same license as the  project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
+# This file is distributed under the same license as the PROJECT project.
+# 
+# Translators:
+# André Hagenbruch, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016
+# Sonja Rosenberger <sonja.rosenberger@rub.de>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version:  hoe\n"
+"Project-Id-Version: hoe\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-02 16:02+0100\n"
-"PO-Revision-Date: 2016-03-02 15:05+0000\n"
-"Last-Translator: Sonja Rosenberger <sonja.rosenberger@rub.de>\n"
-"Language: de\n"
-"Language-Team: German (Germany) "
-"(http://www.transifex.com/ubbochum/hoe/language/de_DE/)\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2016-03-03 23:03+0100\n"
+"PO-Revision-Date: 2016-03-03 22:06+0000\n"
+"Last-Translator: André Hagenbruch\n"
+"Language-Team: German (Germany) (http://www.transifex.com/ubbochum/hoe/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.2.0\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: forms.py:36
 msgid "Select a License"
@@ -524,9 +526,7 @@ msgstr "Signatur"
 
 #: forms.py:253
 msgid "The string indicating the location of the work in the library"
-msgstr ""
-"Eine Zeichenkette, die auf den Standort des Werks in der Bibliothek "
-"hinweist"
+msgstr "Eine Zeichenkette, die auf den Standort des Werks in der Bibliothek hinweist"
 
 #: forms.py:256 templates/record.html:169
 msgid "Publisher"
@@ -667,13 +667,12 @@ msgid "Artifact"
 msgstr "Artefakt"
 
 #: forms.py:395 forms.py:469 forms.py:535 hoe.py:217
-#, fuzzy
 msgid "Autobiography"
-msgstr "Hagiographie"
+msgstr "Autobiographie"
 
 #: forms.py:396 forms.py:470 forms.py:536 hoe.py:218
 msgid "Cartulary"
-msgstr ""
+msgstr "Kopialbuch"
 
 #: forms.py:397 forms.py:471 forms.py:537 hoe.py:219
 msgid "Chronicle"
@@ -697,7 +696,7 @@ msgstr "Lobrede"
 
 #: forms.py:402 forms.py:476 forms.py:542 hoe.py:224
 msgid "False Document"
-msgstr ""
+msgstr "Fälschung"
 
 #: forms.py:403 forms.py:477 forms.py:543 hoe.py:225
 msgid "Hagiography"
@@ -708,9 +707,8 @@ msgid "History"
 msgstr "Historie"
 
 #: forms.py:405 forms.py:479 forms.py:545 hoe.py:227
-#, fuzzy
 msgid "History of the Ottoman Emperors"
-msgstr "Historiographie des Osmanischen Reiches"
+msgstr "Geschichte der Osmanischen Herrscher"
 
 #: forms.py:406 forms.py:480 forms.py:546 hoe.py:228
 msgid "Legend"
@@ -845,8 +843,8 @@ msgid "The text of the autograph"
 msgstr "Der Text des Autographs"
 
 #: forms.py:441 forms.py:508 forms.py:567 hoe.py:254 hoe.py:255 hoe.py:256
-#: hoe.py:257 hoe.py:258 hoe.py:259 hoe.py:260 hoe.py:261 hoe.py:262 hoe.py:263
-#: templates/resultlist_record.html:42
+#: hoe.py:257 hoe.py:258 hoe.py:259 hoe.py:260 hoe.py:261 hoe.py:262
+#: hoe.py:263 templates/resultlist_record.html:42
 msgid "Secondary Literature"
 msgstr "Sekundärliteratur"
 
@@ -864,7 +862,7 @@ msgstr "Die Anzahl an Zeilen, aus denen der Codex besteht"
 
 #: forms.py:505
 msgid "The place the codex originated in"
-msgstr "Ursprungsort des Codex"
+msgstr "Der Ursprungsort des Codex"
 
 #: forms.py:506
 msgid "Information on the ownership of the codex"
@@ -947,13 +945,12 @@ msgid "The Title of the Lecture Series"
 msgstr "Der Titel der Vortragsreihe"
 
 #: forms.py:825
-#, fuzzy
 msgid "Solr Dump"
-msgstr "Datendump importieren"
+msgstr "Solr-Export"
 
 #: forms.py:826
 msgid "Send File"
-msgstr ""
+msgstr "Datei hochladen"
 
 #: forms.py:831 hoe.py:766
 msgid "Password"
@@ -981,9 +978,7 @@ msgstr "Administrator"
 
 #: hoe.py:169
 msgid "You haven't registered any records with us yet. Please do so now..."
-msgstr ""
-"Sie haben bisher keine Datensätze registriert. Gern können Sie das jetzt "
-"tun..."
+msgstr "Sie haben bisher keine Datensätze registriert. Gern können Sie das jetzt tun..."
 
 #: hoe.py:171 templates/navbar.html:4
 msgid "Home"
@@ -1000,9 +995,7 @@ msgstr "Neugriechisch"
 #: hoe.py:423
 #, python-format
 msgid "Not all IDs from relation \"is part of\" could be found! Ref: %s"
-msgstr ""
-"Nicht alle IDs der Relation \"is part of\" konnten gefunden werden! Ref: "
-"%s"
+msgstr "Nicht alle IDs der Relation \"is part of\" konnten gefunden werden! Ref: %s"
 
 #: hoe.py:453
 #, python-format
@@ -1012,16 +1005,12 @@ msgstr "Nicht alle IDs der Relation \"has part\" konnten gefunden werden! Ref: %
 #: hoe.py:479
 #, python-format
 msgid "Not all IDs from relation \"other version\" could be found! Ref: %s"
-msgstr ""
-"Nicht alle IDs der Relation \"other version\" konnten gefunden werden! "
-"Ref: %s"
+msgstr "Nicht alle IDs der Relation \"other version\" konnten gefunden werden! Ref: %s"
 
 #: hoe.py:507
 #, python-format
 msgid "Not all IDs from relation \"related item\" could be found! Ref: %s"
-msgstr ""
-"Nicht alle IDs der Relation \"related item\" konnten gefunden werden! "
-"Ref: %s"
+msgstr "Nicht alle IDs der Relation \"related item\" konnten gefunden werden! Ref: %s"
 
 #: hoe.py:568
 msgid "There Are No Records Yet!"
@@ -1033,7 +1022,7 @@ msgstr "Dashboard"
 
 #: hoe.py:573 hoe.py:921
 msgid "titles"
-msgstr "Titel"
+msgstr "Titeln"
 
 #: hoe.py:574 hoe.py:922 hoe.py:961
 msgid "Showing {start} to {end} of {found} {record_name}"
@@ -1045,11 +1034,9 @@ msgstr "Neuer Datensatz"
 
 #: hoe.py:682
 msgid ""
-"<p><i class=\"fa fa-exclamation-triangle fa-3x\"></i> <h3>The following "
-"data are incompatible with this publication type</h3></p>"
-msgstr ""
-"<p><i class=\"fa fa-exclamation-triangle fa-3x\"></i> <h3>Die folgenden "
-"Daten sind mit diesem Publikationstyp nicht kompatibel</h3></p>"
+"<p><i class=\"fa fa-exclamation-triangle fa-3x\"></i> <h3>The following data"
+" are incompatible with this publication type</h3></p>"
+msgstr "<p><i class=\"fa fa-exclamation-triangle fa-3x\"></i> <h3>Die folgenden Daten sind mit diesem Publikationstyp nicht kompatibel</h3></p>"
 
 #: hoe.py:691 hoe.py:699
 #, python-format
@@ -1083,7 +1070,7 @@ msgstr "Ihre Suche ergab kein Ergebnis"
 
 #: hoe.py:960
 msgid "dumps"
-msgstr "Exporte"
+msgstr "Exporten"
 
 #: hoe.py:965 templates/solr_dumps.html:18
 msgid "Import Dump"
@@ -1096,14 +1083,9 @@ msgstr "Nicht berechtigt"
 #: templates/401.html:17
 msgid ""
 "The server could not verify that you are authorized to access the URL "
-"requested. You either supplied the wrong credentials (e.g. a bad "
-"password), or your browser doesn't understand how to supply the "
-"credentials required."
-msgstr ""
-"Der Server konnte nicht bestätigen, dass Sie autorisiert sind, auf die "
-"aufgerufene URL zuzugreifen. Sie haben entweder die falschen Zugangsdaten"
-" eingegeben (z.B. ein falsches Passwort) oder Ihr Browser weiß nicht, wie"
-" er die benötigten Zugangsdaten übermitteln soll."
+"requested. You either supplied the wrong credentials (e.g. a bad password), "
+"or your browser doesn't understand how to supply the credentials required."
+msgstr "Der Server konnte nicht bestätigen, dass Sie autorisiert sind, auf die aufgerufene URL zuzugreifen. Sie haben entweder die falschen Zugangsdaten eingegeben (z.B. ein falsches Passwort) oder Ihr Browser weiß nicht, wie er die benötigten Zugangsdaten übermitteln soll."
 
 #: templates/401.html:18
 msgid "Please"
@@ -1127,9 +1109,7 @@ msgstr "Löschen bestätigen"
 
 #: templates/confirm_delete_modal.html:9
 msgid "You are about to delete one record, this procedure is irreversible."
-msgstr ""
-"Sie sind im Begriff, einen Datensatz zu löschen. Dies kann nicht "
-"rückgängig gemacht werden."
+msgstr "Sie sind im Begriff, einen Datensatz zu löschen. Dies kann nicht rückgängig gemacht werden."
 
 #: templates/confirm_delete_modal.html:10
 msgid "Do you want to proceed?"
@@ -1143,6 +1123,18 @@ msgstr "Abbrechen"
 #: templates/record.html:530 templates/solr_dumps.html:19
 msgid "Delete"
 msgstr "Löschen"
+
+#: templates/dashboard.html:26
+msgid "Action"
+msgstr "Aktion"
+
+#: templates/dashboard.html:28
+msgid "View"
+msgstr "Anzeigen"
+
+#: templates/dashboard.html:29 templates/record.html:529
+msgid "Edit"
+msgstr "Bearbeiten"
 
 #: templates/dashboard.html:32
 msgid "Add"
@@ -1166,7 +1158,7 @@ msgstr "Zugehörige Titel anzeigen"
 msgid "Show all %(count)s records"
 msgstr "Alle %(count)s Datensätze anzeigen"
 
-#: templates/drill_down.html:3 templates/drill_down.html:17
+#: templates/drill_down.html:17
 #, python-format
 msgid "%(title)s"
 msgstr "%(title)s"
@@ -1186,20 +1178,19 @@ msgstr "Nein"
 #: templates/footer.html:4
 msgid ""
 "A joint project between the <a href=\"http://www.ort.ruhr-uni-"
-"bochum.de/\">chair in History of the Ottoman Empire and Modern Turkey</a>"
-"  and the <a href=\"http://www.ub.rub.de/ub.html\">University "
-"Library</a>. Funded by the <a "
+"bochum.de/\">chair in History of the Ottoman Empire and Modern Turkey</a>  "
+"and the <a href=\"http://www.ub.rub.de/ub.html\">University Library</a>. "
+"Funded by the <a "
 "href=\"http://gepris.dfg.de/gepris/projekt/249662419\">DFG</a>."
-msgstr ""
+msgstr "Ein Gemeinschaftsprojekt des <a href=\"http://www.ort.ruhr-uni-bochum.de/\">Lehrstuhls für Geschichte des Osmanischen Reiches und der Türkei</a> und der <a href=\"http://www.ub.rub.de/ub.html\">Universitätsbibliothek</a>. Gefördert von der <a href=\"http://gepris.dfg.de/gepris/projekt/249662419\">DFG</a>."
 
 #: templates/footer.html:5
 msgid "Contact"
 msgstr "Kontakt"
 
 #: templates/header.html:20
-#, fuzzy
 msgid "Historiography of Ottoman Europe"
-msgstr "Historiographie des Osmanischen Reiches"
+msgstr "Historiographie des Osmanischen Europa"
 
 #: templates/index.html:16
 msgid "Project Description"
@@ -1209,49 +1200,60 @@ msgstr "Projektbeschreibung"
 msgid ""
 "The envisaged database aims at establishing the first comprehensive "
 "bibliography of early modern historiography in Ottoman Europe, thereby "
-"providing a lasting support for historical research. In the framework of "
-"a culture mainly shaped by religious writing, the polyglot historiography"
-" of the region represented an important section of secular writing and "
-"for this reason has constantly been drawn upon as a primary source for "
-"the study of social and cultural history as well as for the intellectual "
-"entanglement among the cultural spheres within Ottoman Europe and their "
+"providing a lasting support for historical research. In the framework of a "
+"culture mainly shaped by religious writing, the polyglot historiography of "
+"the region represented an important section of secular writing and for this "
+"reason has constantly been drawn upon as a primary source for the study of "
+"social and cultural history as well as for the intellectual entanglement "
+"among the cultural spheres within Ottoman Europe and their "
 "intercommunication with the Mediterranean and Central European regions."
-msgstr ""
+msgstr "Die geplante Datenbank beabsichtigt die erste umfassende Bibliographie zur frühneuzeitlichen Geschichtsschreibung im osmanischen Teil Europas zu erarbeiten und dauerhaft der historischen Forschung verfügbar zu machen. Im Rahmen einer weitestgehend von religiösem Schrifttum geprägten Kultur nahm die vielsprachige Historiographie innerhalb des Osmanischen Reichs einen zentralen Bereich säkularer Schriftlichkeit ein und wird daher als Quelle erster Güte zur Erforschung der Sozial- und Kulturgeschichte, aber auch der intellektuellen Verflechtungsgeschichte innerhalb der Kulturkreise des osmanischen Teils Europas sowie dessen Austausch mit dem mediterranen und mitteleuropäischen Raum herangezogen."
 
 #: templates/index.html:18
 msgid ""
 "For the first time, the project will comprise the entire body of "
-"historiographic texts written in all the languages of Ottoman Europe "
-"between 1500 and 1800 and merge the data into one integral bibliography. "
-"Thus, the advanced bibliographic indexing of the scattered and hardly "
-"available texts will allow for searching the material irrespective of "
-"language and genre, for highlighting the inter-textual entanglements and "
-"interdependencies, and for indicating the currently available printed or "
-"online editions respectively. Access to the database will be provided via"
-" the website of the Centre for Mediterranean Studies at the Ruhr-"
-"Universität Bochum which has a special focus on the circulation of "
-"cultural knowledge and closely cooperates with the Chair of Ottoman and "
-"Turkish History at the Ruhr-Universität Bochum."
-msgstr ""
+"historiographic texts written in all the languages of Ottoman Europe between"
+" 1500 and 1800 and merge the data into one integral bibliography. Thus, the "
+"advanced bibliographic indexing of the scattered and hardly available texts "
+"will allow for searching the material irrespective of language and genre, "
+"for highlighting the inter-textual entanglements and interdependencies, and "
+"for indicating the currently available printed or online editions "
+"respectively. Access to the database will be provided via the website of the"
+" Centre for Mediterranean Studies at the Ruhr-Universität Bochum which has a"
+" special focus on the circulation of cultural knowledge and closely "
+"cooperates with the Chair of Ottoman and Turkish History at the Ruhr-"
+"Universität Bochum."
+msgstr "In dem Vorhaben werden nun zum ersten Mal sämtliche historiographische Texte unter Berücksichtigung aller Schriftsprachen des osmanischen Europas im Zeitraum von ca. 1500 bis ca. 1800 berücksichtigt und in einer integrierten Bibliographie zusammengeführt. Die vertiefte bibliographische Erschließung der äußerst verstreuten und schwer verfügbaren Texte soll die Recherche des Materials in seiner Gattungs- und Sprachenvielfalt ermöglichen, die textlichen Verflechtungen und Abhängigkeitsbeziehungen kenntlich machen sowie den aktuellen Editionsstand (sei es in gedrucktem oder digitalem Format) abbilden. Der Zugriff auf die Datenbank wird über die Webseite des Zentrums für Mittelmeerstudien an der Ruhr-Universität Bochum sichergestellt, das einen ausgewiesenen Schwerpunkt auf der Zirkulation von kulturellem Wissen hat und eng mit dem Lehrstuhl für die Geschichte des Osmanischen Reiches und der Türkei an der Ruhr-Universität Bochum zusammenarbeitet."
 
 #: templates/index.html:19
 msgid ""
-"Thus, early modern South Eastern European and Mediterranean studies will "
-"be provided with a durable and easily updatable key instrument for their "
+"Thus, early modern South Eastern European and Mediterranean studies will be "
+"provided with a durable and easily updatable key instrument for their "
 "particular research interests, which, in the long run, could even be "
-"transformed into a research portal linking libraries, research "
-"institutions and individual researchers across national borders. The "
-"planned “Bibliographical Database Historiography in Ottoman Europe "
-"(15th–18th centuries)” is not only supposed to have a signaling effect "
-"upon a research landscape that is still highly disjointed, but rather "
-"understands itself as an essential step towards a comparative research "
-"that conceives of Ottoman Europe as a space shared by a variety of "
-"cultures, languages, and religions."
-msgstr ""
+"transformed into a research portal linking libraries, research institutions "
+"and individual researchers across national borders. The planned "
+"“Bibliographical Database Historiography in Ottoman Europe (15th–18th "
+"centuries)” is not only supposed to have a signaling effect upon a research "
+"landscape that is still highly disjointed, but rather understands itself as "
+"an essential step towards a comparative research that conceives of Ottoman "
+"Europe as a space shared by a variety of cultures, languages, and religions."
+msgstr "Der Frühneuzeitforschung zum südöstlichen und mediterranen Europa wird langfristig ein zentrales und bequem aktualisierbares Arbeits- und Forschungsinstrument zur Vefügung gestellt, das sich perspektivisch zu einem Forschungsportal ausbauen lässt, das Bibliotheken, Forschungsinstitutionen und WissenschaftlerInnen international miteinander vernetzt. Von der geplanten „Bibliographischen Datenbank zur Geschichtsschreibung im Osmanischen Europa (15.–18 Jh.)“ wird damit nicht nur eine Signalwirkung auf eine noch weitgehend disparate Forschungslandschaft erwartet; vielmehr stellt sie bereits selbst einen entscheidenden Schritt in Richtung einer komparativ angelegten Forschung dar, die das osmanische Europa als einen kultur-, sprach- und religionsübergreifenden Raum versteht."
 
 #: templates/login.html:6
 msgid "Sign in with your RUB credentials"
 msgstr "Mit Ihrer RUB-LoginID anmelden"
+
+#: templates/login.html:6
+msgid "or"
+msgstr "oder"
+
+#: templates/login.html:12
+msgid "Your RZ Login Name"
+msgstr "Ihr RZ-Login"
+
+#: templates/login.html:18
+msgid "Your RZ Password"
+msgstr "Ihr RZ-Passwort"
 
 #: templates/login.html:24
 msgid "Sign in with ORCID"
@@ -1274,9 +1276,8 @@ msgid "Go"
 msgstr "Los"
 
 #: templates/record.html:17
-#, fuzzy
 msgid "This is a Key Publication"
-msgstr "Schlüsselpublikation"
+msgstr "Dies ist eine Schlüsselpublikation"
 
 #: templates/record.html:32
 msgid ""
@@ -1287,16 +1288,10 @@ msgid_plural ""
 "\n"
 "                    Translated Titles\n"
 "                    "
-msgstr[0] ""
-"\n"
-"                    Übersetzter Titel\n"
-"                    "
-msgstr[1] ""
-"\n"
-"Übersetzte Titel"
+msgstr[0] "\n                    Übersetzter Titel\n                    "
+msgstr[1] "\nÜbersetzte Titel"
 
 #: templates/record.html:46
-#, fuzzy
 msgid ""
 "\n"
 "                    Transliterated Title\n"
@@ -1305,11 +1300,10 @@ msgid_plural ""
 "\n"
 "                    Transliterated Titles\n"
 "                    "
-msgstr[0] "Transliterierter Titel"
-msgstr[1] ""
+msgstr[0] "\n                    Transliterierter Titel\n                    "
+msgstr[1] "\n                    Transliterierte Titel\n                    "
 
 #: templates/record.html:61
-#, fuzzy
 msgid ""
 "\n"
 "                        Journal Abbreviation\n"
@@ -1318,8 +1312,8 @@ msgid_plural ""
 "\n"
 "                        Journal Abbreviations\n"
 "                        "
-msgstr[0] "Zeitschriftenabkürzung"
-msgstr[1] ""
+msgstr[0] "\n                        Zeitschriftenabkürzung\n                        "
+msgstr[1] "\n                        Zeitschriftenabkürzungen                        "
 
 #: templates/record.html:85
 msgid ""
@@ -1330,13 +1324,8 @@ msgid_plural ""
 "\n"
 "                    Persons\n"
 "                    "
-msgstr[0] ""
-"\n"
-"                    Person\n"
-"                    "
-msgstr[1] ""
-"\n"
-"Personen"
+msgstr[0] "\n                    Person\n                    "
+msgstr[1] "\nPersonen"
 
 #: templates/record.html:103
 msgid ""
@@ -1347,13 +1336,8 @@ msgid_plural ""
 "\n"
 "                    Corporations\n"
 "                    "
-msgstr[0] ""
-"\n"
-"                    Körperschaft\n"
-"                    "
-msgstr[1] ""
-"\n"
-"Körperschaften"
+msgstr[0] "\n                    Körperschaft\n                    "
+msgstr[1] "\nKörperschaften"
 
 #: templates/record.html:121
 msgid "Publication Type"
@@ -1368,19 +1352,12 @@ msgid_plural ""
 "\n"
 "                    Languages\n"
 "                    "
-msgstr[0] ""
-"\n"
-"                    Sprache\n"
-"                    "
-msgstr[1] ""
-"\n"
-"                    Sprachen\n"
-"                    "
+msgstr[0] "\n                    Sprache\n                    "
+msgstr[1] "\n                    Sprachen\n                    "
 
 #: templates/record.html:160
-#, fuzzy
 msgid "Location"
-msgstr "Relationen"
+msgstr "Ort"
 
 #: templates/record.html:185
 msgid ""
@@ -1391,8 +1368,8 @@ msgid_plural ""
 "\n"
 "                    Numbers\n"
 "                    "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "\nNummer"
+msgstr[1] "\nNummern"
 
 #: templates/record.html:207
 msgid "Issued"
@@ -1408,11 +1385,11 @@ msgstr "Ist Teil von"
 
 #: templates/record.html:223
 msgid "Vol."
-msgstr ""
+msgstr "Jg."
 
 #: templates/record.html:226
 msgid "p."
-msgstr ""
+msgstr "S."
 
 #: templates/record.html:297
 msgid ""
@@ -1423,23 +1400,16 @@ msgid_plural ""
 "\n"
 "                    Keywords\n"
 "                    "
-msgstr[0] ""
-"\n"
-"                    Schlagwort\n"
-"                    "
-msgstr[1] ""
-"\n"
-"                    Schlagworte\n"
-"                    "
+msgstr[0] "\n                    Schlagwort\n                    "
+msgstr[1] "\n                    Schlagworte\n                    "
 
 #: templates/record.html:338
 msgid "Related Item"
 msgstr "Zugehöriger Titel"
 
 #: templates/record.html:353
-#, fuzzy
 msgid "Number of Pages"
-msgstr "Anzahl der Zeilen"
+msgstr "Seitenzahl"
 
 #: templates/record.html:369
 msgid ""
@@ -1450,8 +1420,8 @@ msgid_plural ""
 "\n"
 "                    ISBNs\n"
 "                    "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "\n                    ISBN\n                    "
+msgstr[1] "\n                    ISBNs\n                    "
 
 #: templates/record.html:391
 msgid ""
@@ -1462,12 +1432,12 @@ msgid_plural ""
 "\n"
 "                    ISSNs\n"
 "                    "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "\n                    ISSN\n                    "
+msgstr[1] "\n                    ISSNs\n                    "
 
 #: templates/record.html:405
 msgid "ZDB ID"
-msgstr ""
+msgstr "ZDB-ID"
 
 #: templates/record.html:413
 msgid ""
@@ -1478,14 +1448,8 @@ msgid_plural ""
 "\n"
 "                    URIs\n"
 "                    "
-msgstr[0] ""
-"\n"
-"                    URI\n"
-"                    "
-msgstr[1] ""
-"\n"
-"                    URIs\n"
-"                    "
+msgstr[0] "\n                    URI\n                    "
+msgstr[1] "\n                    URIs\n                    "
 
 #: templates/record.html:427
 msgid ""
@@ -1496,11 +1460,10 @@ msgid_plural ""
 "\n"
 "                    DOIs\n"
 "                    "
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "\n                    DOI\n                    "
+msgstr[1] "\n                    DOIs\n                    "
 
 #: templates/record.html:439
-#, fuzzy
 msgid "Last Update"
 msgstr "Zuletzt aktualisiert"
 
@@ -1510,7 +1473,7 @@ msgstr "Beschreibung"
 
 #: templates/record.html:459
 msgid "Table of Contents"
-msgstr ""
+msgstr "Inhaltsverzeichnis"
 
 #: templates/record.html:492
 msgid ""
@@ -1521,14 +1484,8 @@ msgid_plural ""
 "\n"
 "                        Libraries\n"
 "                        "
-msgstr[0] ""
-"\n"
-"                        Bibliothek\n"
-"                        "
-msgstr[1] ""
-"\n"
-"                        Bibliotheken\n"
-"                        "
+msgstr[0] "\n                        Bibliothek\n                        "
+msgstr[1] "\n                        Bibliotheken\n                        "
 
 #: templates/record.html:505
 msgid "Similar Records"
@@ -1546,11 +1503,7 @@ msgstr "%(created)s von %(owner)s angelegt."
 #: templates/record.html:517
 #, python-format
 msgid "Last changed %(changed)s."
-msgstr "Letzte Änderung am %(changed)s."
-
-#: templates/record.html:529
-msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Letzte Änderung %(changed)s."
 
 #: templates/record.html:599
 msgid "Show all records"
@@ -1565,14 +1518,8 @@ msgid_plural ""
 "\n"
 "        Active Filters\n"
 "    "
-msgstr[0] ""
-"\n"
-"        Aktiver Filter\n"
-"    "
-msgstr[1] ""
-"\n"
-"        Aktive Filter\n"
-"    "
+msgstr[0] "\n        Aktiver Filter\n    "
+msgstr[1] "\n        Aktive Filter\n    "
 
 #: templates/render_form.html:13 templates/render_form.html:63
 msgid "Add another"
@@ -1585,7 +1532,7 @@ msgstr "Entfernen"
 
 #: templates/solr_dumps.html:28
 msgid "Upload JSON File"
-msgstr ""
+msgstr "JSON-Datei hochladen"
 
 #: templates/submit_form.html:3
 msgid "Clear"
@@ -1597,11 +1544,8 @@ msgstr "Abschicken"
 
 #: templates/tabbed_form.html:12
 msgid ""
-"Fields marked with <span style=\"color: orangered;\">*</span> are "
-"required."
-msgstr ""
-"Mit <span style=\"color: orangered;\">*</span> ausgezeichnete Felder "
-"müssen ausgefüllt werden."
+"Fields marked with <span style=\"color: orangered;\">*</span> are required."
+msgstr "Mit <span style=\"color: orangered;\">*</span> ausgezeichnete Felder müssen ausgefüllt werden."
 
 #: templates/tabbed_form.html:115
 msgid "This Title Already Exists!"
@@ -1614,40 +1558,3 @@ msgstr "Hier"
 #: templates/tabbed_form.html:118
 msgid "This Title Does Not Exist Yet!"
 msgstr "Dieser Titel existiert noch nicht!"
-
-#~ msgid "Geographic"
-#~ msgstr "Geographisches Schlagwort"
-
-#~ msgid "Exported internal format to %s"
-#~ msgstr "Internes Format nach %s exportiert"
-
-#~ msgid "Drop files here or click to upload"
-#~ msgstr "Dateien hierher ziehen oder klicken, um sie hochzuladen"
-
-#~ msgid ""
-#~ "Thank you for your data! We will"
-#~ " now process it and add it to"
-#~ " the bibliography."
-#~ msgstr ""
-#~ "Danke für Ihre Daten! Wir werden "
-#~ "sie jetzt bearbeiten und in die "
-#~ "Bibliographie einpflegen."
-
-#~ msgid ""
-#~ "A joint project between the chair "
-#~ "of the <a href=\"http://www.ort.ruhr-uni-"
-#~ "bochum.de/\">History of the Ottoman Empire "
-#~ "(Prof. Koller)</a>  and the <a "
-#~ "href=\"http://www.ub.rub.de/ub.html\">University Library</a>."
-#~ " Funded by the <a "
-#~ "href=\"http://gepris.dfg.de/gepris/projekt/249662419\">DFG</a>."
-#~ msgstr ""
-#~ "Ein Gemeinschaftsprojekt des Lehrstuhls <a "
-#~ "href=\"http://www.ort.ruhr-uni-bochum.de/\">für "
-#~ "Geschichte des Osmanischen Reiches und "
-#~ "der Türkei (Prof. Koller)</a>  und der"
-#~ " <a "
-#~ "href=\"http://www.ub.rub.de/ub.html\">Universitätsbibliothek</a>. "
-#~ "Gefördert von der <a "
-#~ "href=\"http://gepris.dfg.de/gepris/projekt/249662419\">DFG</a>."
-

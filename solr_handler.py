@@ -25,11 +25,14 @@
 
 import urllib
 import requests
-import secrets
 from werkzeug import iri_to_uri
 import simplejson as json
 import logging
-#import time
+
+try:
+    import site_secrets as secrets
+except ImportError:
+    import secrets
 
 logging.basicConfig (level=logging.INFO,
     format='%(asctime)s %(levelname)-4s %(message)s',

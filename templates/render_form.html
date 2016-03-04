@@ -57,7 +57,7 @@
         {% for entry in multifield.entries %}<div class="form-group" id="{{ entry.name }}_container">
 {#            <div class="col-sm-2 control-label" id="{{ multifield.name }}">{{ multifield.label }}</div>#}
             <div class="col-sm-2 control-label">{{ entry.label }}</div>
-            <div class="col-sm-6">{{ entry(class='form-control') }}</div>
+            <div class="col-sm-6">{% if entry.flags.required %}{{ entry(class='form-control',required='required') }}{% else %}{{ entry(class='form-control') }}{% endif %}</div>
             <div class="col-sm-1">
                 {% if loop.last %}
                     <a class="btn btn-sm btn-default add-atomic" href="#"><i class="fa fa-plus"></i> {{_('Add another')}}</a>

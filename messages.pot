@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-02 16:02+0100\n"
+"POT-Creation-Date: 2016-03-03 23:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1121,6 +1121,18 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: templates/dashboard.html:26
+msgid "Action"
+msgstr ""
+
+#: templates/dashboard.html:28
+msgid "View"
+msgstr ""
+
+#: templates/dashboard.html:29 templates/record.html:529
+msgid "Edit"
+msgstr ""
+
 #: templates/dashboard.html:32
 msgid "Add"
 msgstr ""
@@ -1143,7 +1155,7 @@ msgstr ""
 msgid "Show all %(count)s records"
 msgstr ""
 
-#: templates/drill_down.html:3 templates/drill_down.html:17
+#: templates/drill_down.html:17
 #, python-format
 msgid "%(title)s"
 msgstr ""
@@ -1227,6 +1239,18 @@ msgstr ""
 
 #: templates/login.html:6
 msgid "Sign in with your RUB credentials"
+msgstr ""
+
+#: templates/login.html:6
+msgid "or"
+msgstr ""
+
+#: templates/login.html:12
+msgid "Your RZ Login Name"
+msgstr ""
+
+#: templates/login.html:18
+msgid "Your RZ Password"
 msgstr ""
 
 #: templates/login.html:24
@@ -1477,10 +1501,6 @@ msgstr ""
 #: templates/record.html:517
 #, python-format
 msgid "Last changed %(changed)s."
-msgstr ""
-
-#: templates/record.html:529
-msgid "Edit"
 msgstr ""
 
 #: templates/record.html:599

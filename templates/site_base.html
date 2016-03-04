@@ -33,7 +33,7 @@
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
                 ajax: {datatype: 'jsonp', jsonp: 'json.wrf'},
-                url: 'http://127.0.0.1/typeahead/hoe/%QUERY?callback=?',
+                url: '/typeahead/hoe/%QUERY?callback=?',
                 filter: function(data){
                     return data.response.docs;
                 }

@@ -13,7 +13,7 @@
                             <th scope="row">{{ loop.index + offset }}</th>
                             <td>{{ record.id }}<br/>
                             <td class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="action{{ loop.index }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-cog"></i> Action <span class="fa fa-caret-down"></span></button>
+                                <button class="btn btn-default dropdown-toggle" type="button" id="action{{ loop.index }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-cog"></i> {{ _('Action') }} <span class="fa fa-caret-down"></span></button>
                                 <ul class="dropdown-menu" aria-labelledby="action{{ loop.index }}">
                                     <li><a href="{{ url_for('import_solr_dump', filename=record.id) }}"><i class="fa fa-cloud-download"></i> {{ _('Import Dump') }}</a></li>
                                     {% if current_user.role == 'admin' %}<li class="bg-danger"><a href="#" data-href="{{ url_for('delete_dump', record_id=record.id) }}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> {{ _('Delete') }}</a></li>{% endif %}
