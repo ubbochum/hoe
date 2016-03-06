@@ -39,7 +39,7 @@ except ImportError:
     import secrets
 
 from flask import Flask, render_template, redirect, request, jsonify, flash, url_for, Markup, Response, send_file
-from flask.ext.babel import Babel, lazy_gettext, refresh
+from flask.ext.babel import Babel, lazy_gettext, refresh, gettext
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required, make_secure_token, AnonymousUserMixin
 from flask.ext.paginate import Pagination
@@ -549,7 +549,7 @@ def _record2solr_doc(form):
                     ipo_solr = Solr(query=query, facet='false', fields=['wtf_json'])
                     ipo_solr.request()
                     if len(ipo_solr.results) == 0:
-                        flash(lazy_gettext('Not all IDs from relation "is part of" could be found! Ref: %s' % form.data.get('id')), 'warning')
+                        flash(gettext('Not all IDs from relation "is part of" could be found! Ref: %s' % form.data.get('id')), 'warning')
                     for idx, doc in enumerate(ipo_solr.results):
                         myjson = json.loads(doc.get('wtf_json'))
                         #solr_data.setdefault('is_part_of', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
@@ -579,7 +579,7 @@ def _record2solr_doc(form):
                     hp_solr.request()
                     if len(hp_solr.results) == 0:
                         flash(
-                            lazy_gettext('Not all IDs from relation "has part" could be found! Ref: %s' % form.data.get('id')), 'warning')
+                            gettext('Not all IDs from relation "has part" could be found! Ref: %s' % form.data.get('id')), 'warning')
                     for doc in hp_solr.results:
                         myjson = json.loads(doc.get('wtf_json'))
                         #solr_data.setdefault('has_part', []).append('<a href="/retrieve/%s/%s">%s</a>' % (myjson.get('pubtype'), myjson.get('id'), myjson.get('title')))
@@ -605,7 +605,7 @@ def _record2solr_doc(form):
                     ov_solr.request()
                     if len(ov_solr.results) == 0:
                         flash(
-                            lazy_gettext('Not all IDs from relation "other version" could be found! Ref: %s' % form.data.get('id')),
+                            gettext('Not all IDs from relation "other version" could be found! Ref: %s' % form.data.get('id')),
                             'warning')
                     for doc in ov_solr.results:
                         #logging.info(json.loads(doc.get('wtf_json')))
@@ -633,7 +633,7 @@ def _record2solr_doc(form):
                     rel_solr.request()
                     if len(rel_solr.results) == 0:
                         flash(
-                            lazy_gettext('Not all IDs from relation "related item" could be found! Ref: %s' % form.data.get('id')),
+                            gettext('Not all IDs from relation "related item" could be found! Ref: %s' % form.data.get('id')),
                             'warning')
                     for doc in rel_solr.results:
                         myjson = json.loads(doc.get('wtf_json'))
@@ -694,7 +694,7 @@ def dashboard():
     num_found = dashboard_solr.count()
 
     if num_found == 0:
-        flash(lazy_gettext('There Are No Records Yet!'))
+        flash(gettext('There Are No Records Yet!'))
         return render_template('dashboard.html', records=dashboard_solr.results, facet_data=dashboard_solr.facets,
                                header=lazy_gettext('Dashboard'), site=theme(request.access_route), pagination=None)
     else:
@@ -808,7 +808,7 @@ def edit_record(record_id='', pubtype=''):
         form = PUBTYPE2FORM.get(pubtype).from_json(thedata)
 
     if thedata.get('pubtype') != pubtype:
-        flash(Markup(lazy_gettext(
+        flash(Markup(gettext(
             '<p><i class="fa fa-exclamation-triangle fa-3x"></i> <h3>The following data are incompatible with this publication type</h3></p>')) + _diff_struct(
             thedata, form.data), 'error')
         form.pubtype.data = pubtype
@@ -834,10 +834,10 @@ def make_admin(user_id=''):
     if user_id:
         ma_solr = Solr(core='hoe_users', data=[{'id': user_id, 'role': {'set': 'admin'}}])
         ma_solr.update()
-        flash(lazy_gettext('%s upgraded to admin!' % user_id), 'success')
+        flash(gettext('%s upgraded to admin!' % user_id), 'success')
         return redirect(url_for('index'))
     else:
-        flash(lazy_gettext('You did not supply an ID!'), 'danger')
+        flash(gettext('You did not supply an ID!'), 'danger')
         return redirect(url_for('index'))
 
 @app.route('/delete/<record_id>')
@@ -866,7 +866,6 @@ class User(UserMixin):
         self.email = email
         self.accesstoken = accesstoken
         user_solr = Solr(core='hoe_users', query='id:%s' % id, facet='false')
-        logging.info(user_solr.port)
         user_solr.request()
         if user_solr.count() > 0:
             _user = user_solr.results[0]
@@ -952,13 +951,39 @@ def login():
 
             return redirect(next or url_for('index'))
         else:
-            flash("Username and Password Don't Match", 'danger')
+            flash(gettext("Username and Password Don't Match"), 'danger')
             return redirect('login')
 
-    form = LoginForm()
-    next = get_redirect_target()
-    #return render_template('login.html', form=form, header='Sign In', next=next, orcid_sandbox_client_id=orcid_sandbox_client_id)
-    return render_template('login.html', form=form, header=lazy_gettext('Sign In'), next=next, site=theme(request.access_route))
+    if request.referrer == 'https://orcid.org/oauth/authorize?client_id=%s0&response_type=code&scope=/authenticate&redirect_uri=https://hoe-test.ub.rub.de/login' % secrets.orcid_client_id and 'code' in request.args:
+        orcid_auth = requests.post('https://orcid.org/oauth/token', headers={'Accept': 'application/json'}, data={
+            'client_id': secrets.orcid_client_id, 'client_secret': secrets.orcid_client_secret,
+            'grant_type': 'authorization_code', 'redirect_uri': url_for(login)
+        }).json()
+        if 'orcid' in orcid_auth:
+            user_solr = Solr(core='hoe_users', query='id:%s' % orcid_auth.get('orcid'), facet='false')
+            user_solr.request()
+            if user_solr.count() == 0:
+                tmp = {}
+                tmp.setdefault('id', orcid_auth.get('orcid'))
+                tmp.setdefault('name', orcid_auth.get('name'))
+                tmp.setdefault('email', orcid_auth.get('email', ''))
+                tmp.setdefault('role', 'user')
+                tmp.setdefault('accesstoken', orcid_auth.get('access_token'))
+                new_user_solr = Solr(core='hoe_users', data=[tmp], facet='false')
+                new_user_solr.update()
+            user = User(orcid_auth.get('orcid'))
+            user.name = orcid_auth.get('name')
+            user.email = orcid_auth.get('email', '')
+            user.accesstoken = orcid_auth.get('accesstoken')
+            login_user(user)
+
+            return redirect(next or url_for('index'))
+    else:
+        form = LoginForm()
+        next = get_redirect_target()
+        #return render_template('login.html', form=form, header='Sign In', next=next, orcid_sandbox_client_id=orcid_sandbox_client_id)
+        return render_template('login.html', form=form, header=lazy_gettext('Sign In'), next=next,
+                               orcid_client_id=secrets.orcid_client_id, site=theme(request.access_route))
 
 @app.route('/logout')
 @login_required
@@ -1044,7 +1069,7 @@ def search():
     if num_found == 1:
         return redirect(url_for('show_record', record_id=search_solr.results[0].get('id'), pubtype=search_solr.results[0].get('pubtype')))
     elif num_found == 0:
-        flash(lazy_gettext('Your Search Found no Results'))
+        flash(gettext('Your Search Found no Results'))
         return redirect(url_for('index'))
     else:
         pagination = Pagination(page=page, total=num_found, found=num_found, bs_version=3, search=True,
@@ -1122,7 +1147,7 @@ def import_solr_dump(filename=''):
     import_solr = Solr(core='hoe', data=solr_data[0])
     import_solr.update()
 
-    flash('%s records imported!' % len(thedata), 'success')
+    flash(gettext('%(records)s records imported!', records=len(thedata)), 'success')
 
     return redirect('dashboard')
 

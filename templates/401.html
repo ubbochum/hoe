@@ -15,7 +15,7 @@
             <div class="col-sm-offset-1 col-sm-10">
                 <h3>{{ _('Unauthorized') }}</h3>
                 <p class="alert alert-danger">{{ _("The server could not verify that you are authorized to access the URL requested. You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.") }}</p>
-                <p>{{ _('Please') }} <a href="/login?next={{ request.url_rule.endpoint }}"><i class="fa fa-sign-in"></i> {{ _('Sign In') }}</a></p>
+                <p>{{ _('Please') }} <a href="{{ url_for('login', next=request.path) }}"><i class="fa fa-sign-in"></i> {{ _('Sign In') }}</a></p>
             </div>
         </div>
         {% include 'footer.html' %}

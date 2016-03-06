@@ -740,7 +740,7 @@ class InternetDocumentForm(WorkForm):
         ('lexicon_article', lazy_gettext('Article in Lexicon')),
         ('review', lazy_gettext('Review')),
     ])
-    uri = FieldList(StringField(lazy_gettext('URL'), widget=CustomTextInput(placeholder=lazy_gettext('A valid URL starting with https:// or http://')), validators=[URL(), DataRequired()]), min_entries=1)
+    #uri = FieldList(StringField(lazy_gettext('URL'), widget=CustomTextInput(placeholder=lazy_gettext('A valid URL starting with https:// or http://')), validators=[URL(), DataRequired()]), min_entries=1)
     last_update = StringField(lazy_gettext('Last update'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=lazy_gettext('YYYY-MM-DD'), description=lazy_gettext("Enter the year (YYYY) if month and/or day are unknown")))
     place = StringField(lazy_gettext('Place'), widget=CustomTextInput(placeholder=lazy_gettext('Where was the document published?'), validators=[Optional()]))
     number = FieldList(StringField(lazy_gettext('Number'), widget=CustomTextInput(placeholder=lazy_gettext('Does the document have a number?'), validators=[Optional()])), min_entries=1)

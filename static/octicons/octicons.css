@@ -1,0 +1,31 @@
+@charset "UTF-8";
+@font-face {
+  font-family: 'octicons';
+  src: url("./octicons.eot?#iefix&v=6f0908ee5b07e503e10c6040adaebd65ea4f4c0e") format("embedded-opentype"), url("./octicons.woff?v=6f0908ee5b07e503e10c6040adaebd65ea4f4c0e") format("woff"), url("./octicons.ttf?v=6f0908ee5b07e503e10c6040adaebd65ea4f4c0e") format("truetype"), url("./site-octicons.svg?v=6f0908ee5b07e503e10c6040adaebd65ea4f4c0e#octicons") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+.octicon, .mega-octicon {
+  font: normal normal normal 16px/1 octicons;
+  display: inline-block;
+  text-decoration: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.mega-octicon {
+  font-size: 32px; }
+
+.octicon-clippy:before {
+  content: '\f035'; }
+
+/*  */
+.octicon-package:before {
+  content: '\f0c4'; }
+
+/*  */
+
+/*# sourceMappingURL=octicons.css.map */
