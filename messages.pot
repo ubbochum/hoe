@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-04 13:38+0100\n"
+"POT-Creation-Date: 2016-03-07 09:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,7 +133,7 @@ msgstr ""
 msgid "URI"
 msgstr ""
 
-#: forms.py:84 forms.py:216 forms.py:743
+#: forms.py:84 forms.py:216
 msgid "A valid URL starting with https:// or http://"
 msgstr ""
 
@@ -484,7 +484,7 @@ msgstr ""
 msgid "The transliterated title of the work"
 msgstr ""
 
-#: forms.py:216 forms.py:743 templates/record.html:93
+#: forms.py:216 templates/record.html:93
 msgid "URL"
 msgstr ""
 
@@ -1122,7 +1122,7 @@ msgstr ""
 msgid "Send File"
 msgstr ""
 
-#: forms.py:833 hoe.py:896
+#: forms.py:833 hoe.py:895
 msgid "Password"
 msgstr ""
 
@@ -1190,11 +1190,11 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: hoe.py:702 hoe.py:1051
+#: hoe.py:702 hoe.py:1077
 msgid "titles"
 msgstr ""
 
-#: hoe.py:703 hoe.py:1052 hoe.py:1094
+#: hoe.py:703 hoe.py:1078 hoe.py:1120
 msgid "Showing {start} to {end} of {found} {record_name}"
 msgstr ""
 
@@ -1222,28 +1222,37 @@ msgstr ""
 msgid "You did not supply an ID!"
 msgstr ""
 
-#: hoe.py:895
+#: hoe.py:894
 msgid "Username"
 msgstr ""
 
-#: hoe.py:897
+#: hoe.py:896
 msgid "Where Are You From?"
 msgstr ""
 
-#: hoe.py:961 templates/401.html:18 templates/header.html:17
+#: hoe.py:954
+msgid "Username and Password Don't Match"
+msgstr ""
+
+#: hoe.py:986 templates/401.html:18 templates/header.html:17
 msgid "Sign In"
 msgstr ""
 
-#: hoe.py:1047
+#: hoe.py:1073
 msgid "Your Search Found no Results"
 msgstr ""
 
-#: hoe.py:1093
+#: hoe.py:1119
 msgid "dumps"
 msgstr ""
 
-#: hoe.py:1098 templates/solr_dumps.html:18
+#: hoe.py:1124 templates/solr_dumps.html:18
 msgid "Import Dump"
+msgstr ""
+
+#: hoe.py:1151
+#, python-format
+msgid "%(records)s records imported!"
 msgstr ""
 
 #: templates/401.html:16
@@ -1463,7 +1472,7 @@ msgstr ""
 msgid "Book"
 msgstr ""
 
-#: templates/navbar.html:50
+#: templates/navbar.html:46
 msgid "Go"
 msgstr ""
 
@@ -1679,16 +1688,16 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/record.html:504
+#: templates/record.html:505
+msgid "Similar Records"
+msgstr ""
+
+#: templates/record.html:514
 msgid "Permalink"
 msgstr ""
 
-#: templates/record.html:505
+#: templates/record.html:515
 msgid "Copy to Clipboard"
-msgstr ""
-
-#: templates/record.html:507
-msgid "Similar Records"
 msgstr ""
 
 #: templates/record.html:517
