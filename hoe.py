@@ -919,10 +919,10 @@ def load_user(id):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    next = get_redirect_target()
     if request.method == 'POST':
         user = User(request.form.get('username'))
         #user_info = user.get_user(request.form.get('username'))
-        next = get_redirect_target()
 
         authuser = requests.post('https://api.ub.rub.de/ldap/authenticate/',
                                  data={'nocheck': 'true',
@@ -954,10 +954,11 @@ def login():
             flash(gettext("Username and Password Don't Match"), 'danger')
             return redirect('login')
 
-    if request.referrer == 'https://orcid.org/oauth/authorize?client_id=%s0&response_type=code&scope=/authenticate&redirect_uri=https://hoe-test.ub.rub.de/login' % secrets.orcid_client_id and 'code' in request.args:
+    if 'code' in request.args:
         orcid_auth = requests.post('https://orcid.org/oauth/token', headers={'Accept': 'application/json'}, data={
             'client_id': secrets.orcid_client_id, 'client_secret': secrets.orcid_client_secret,
-            'grant_type': 'authorization_code', 'redirect_uri': url_for(login)
+            'code': request.args.get('code'), 'grant_type': 'authorization_code',
+            'redirect_uri': 'https://hoe-test.ub.rub.de/login?hoe_next=%s' % request.args.get('hoe_next')
         }).json()
         if 'orcid' in orcid_auth:
             user_solr = Solr(core='hoe_users', query='id:%s' % orcid_auth.get('orcid'), facet='false')
@@ -977,7 +978,7 @@ def login():
             user.accesstoken = orcid_auth.get('accesstoken')
             login_user(user)
 
-            return redirect(next or url_for('index'))
+            return redirect(request.args.get('hoe_next') or url_for('index'))
     else:
         form = LoginForm()
         next = get_redirect_target()
