@@ -21,7 +21,7 @@
             </form>
         </div>
         <div class="col-sm-4">
-            <h2><a href="https://orcid.org/oauth/authorize?client_id={{ orcid_client_id }}&amp;response_type=code&amp;scope=/authenticate&amp;redirect_uri=https://hoe-test.ub.rub.de{{ request.path }}" class="btn btn-lg btn-default"><img src="{{ url_for('static', filename='site/img/orcid_32x32.png') }}"> {{ _('Sign in with ORCID') }}</a></h2>
+            <h2><a href="https://orcid.org/oauth/authorize?client_id={{ orcid_client_id }}&amp;response_type=code&amp;scope=/authenticate&amp;redirect_uri=https://hoe-test.ub.rub.de/login?hoe_next={{ request.args.next }}" class="btn btn-lg btn-default"><img src="{{ url_for('static', filename='site/img/orcid_32x32.png') }}"> {{ _('Sign in with ORCID') }}</a></h2>
         </div>
     </div>
     <div class="row">{% include 'submit_form.html' %}</div>
