@@ -158,11 +158,11 @@ class CorporationForm(Form):
     admin_only = ['viaf', 'isni']
 
 class HasPartForm(Form):
-    has_part = StringField(lazy_gettext('Has Part'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the record that is part of this record')))
+    has_part = StringField(lazy_gettext('Has Part'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the record that is part of this record')))
     pass
 
 class IsPartOfForm(Form):
-    is_part_of = StringField(lazy_gettext('Is Part of'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the record this record is part of')))
+    is_part_of = StringField(lazy_gettext('Is Part of'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the record this record is part of')))
 
 class OtherVersionForm(Form):
     other_version = StringField(lazy_gettext('Other Version'))
@@ -223,12 +223,12 @@ class WorkForm(Form):
     owner = StringField(lazy_gettext('Owner'), validators=[DataRequired()], widget=CustomTextInput(readonly='readonly'))
     #deskman = StringField(lazy_gettext('Deskman'), validators=[Optional()])
     license = SelectField(lazy_gettext('License'), choices=LICENSES)
-    is_part_of = FieldList(StringField(lazy_gettext('Is Part of'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the record this record is part of'))), min_entries=1)
-    has_part = FieldList(StringField(lazy_gettext('Has Part'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the record that is part of this record'))), min_entries=1)
-    other_version = FieldList(StringField(lazy_gettext('Other Version'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the record this record is a different version of')), description=lazy_gettext("Other versions usually are translations and editions")), min_entries=1)
+    is_part_of = FieldList(StringField(lazy_gettext('Is Part of'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the record this record is part of'))), min_entries=1)
+    has_part = FieldList(StringField(lazy_gettext('Has Part'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the record that is part of this record'))), min_entries=1)
+    other_version = FieldList(StringField(lazy_gettext('Other Version'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the record this record is a different version of')), description=lazy_gettext("Other versions usually are translations and editions")), min_entries=1)
     relation = FieldList(StringField(lazy_gettext('Is related to')), min_entries=1)
     key_publication = BooleanField(lazy_gettext('Key Publication'),
-                                   description='A very important title to be included on a special publication list.')
+                                   description=lazy_gettext('A very important title to be included on a special publication list.'))
     DOI = StringField(lazy_gettext('DOI'), validators=[Optional(), Regexp('^10.\d{4}/.+', IGNORECASE)], widget=CustomTextInput(placeholder=lazy_gettext('e.g. 10.1163/156852006777502081')))
     issued = StringField(lazy_gettext('Date'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=lazy_gettext('YYYY-MM-DD')), description=lazy_gettext("Enter the year (YYYY) if month and/or day are unknown"))
     circa = BooleanField(lazy_gettext('Estimated'), description=lazy_gettext("If the date is estimated please tick this box"))
@@ -262,7 +262,7 @@ class AdvancedPrintForm(BasicPrintForm):
     edition = StringField('Edition', validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('Information on the edition of the work, e.g. "2nd revised ed."')))
     table_of_contents = StringField('Table of Contents', validators=[URL(), Optional()], widget=CustomTextInput(placeholder=lazy_gettext('e.g. http://d-nb.info/1035670232/04')))
     hbz_id = StringField(lazy_gettext('HBZ-ID'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('The ID given the work by the HBZ, e.g. HT018536436')))
-    relation = FieldList(StringField(lazy_gettext('Primary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the related primary literature'))), min_entries=1)
+    relation = FieldList(StringField(lazy_gettext('Primary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the related primary literature'))), min_entries=1)
 
     admin_only = ['hbz_id']
 
@@ -390,6 +390,10 @@ class MonographForm(AdvancedPrintForm):
         ]
 
 class PrintForm(BasicPrintForm):
+    subtype = SelectField(lazy_gettext('Subtype'), validators=[Optional()], choices=[
+        ('', lazy_gettext('Select a Subtype')),
+        ('translation', lazy_gettext('Translation')),
+    ])
     genre = SelectField(lazy_gettext('Genre'), choices=[
         ('', lazy_gettext('Select a Genre')),
         ('apocalypse', lazy_gettext('Apocalypse')),
@@ -440,11 +444,12 @@ class PrintForm(BasicPrintForm):
     publisher = StringField(lazy_gettext('Printer'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('Who printed the work?')))
     provenance = TextAreaField(lazy_gettext('Provenance'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('Who owned the work before?')))
     autograph_text = TextAreaField(lazy_gettext('Autograph'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('Please put the text of the autograph here')))
-    relation = FieldList(StringField(lazy_gettext('Secondary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the related secondary literature'))), min_entries=1)
+    relation = FieldList(StringField(lazy_gettext('Secondary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the related secondary literature'))), min_entries=1)
+    date_range = StringField(lazy_gettext('Date Range'), widget=CustomTextInput(placeholder=lazy_gettext('YYYY-YYYY')))
 
     def groups(self):
         yield [
-            {'group': [self.pubtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
+            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
                        self.transliterated_title, self.issued, self.circa, self.language, self.accessed, self.number_of_pages, self.origin, self.provenance, self.additions,
                        self.note, self.license
                        ],
@@ -464,6 +469,10 @@ class PrintForm(BasicPrintForm):
         ]
 
 class CodexForm(WorkForm):
+    subtype = SelectField(lazy_gettext('Subtype'), validators=[Optional()], choices=[
+        ('', lazy_gettext('Select a Subtype')),
+        ('translation', lazy_gettext('Translation')),
+    ])
     genre = SelectField(lazy_gettext('Genre'), choices=[
         ('', lazy_gettext('Select a Genre')),
         ('apocalypse', lazy_gettext('Apocalypse')),
@@ -507,11 +516,11 @@ class CodexForm(WorkForm):
     origin = StringField(lazy_gettext('Place of Origin'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('The place the codex originated in')))
     provenance = TextAreaField(lazy_gettext('Provenance'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('Who owned the codex before?')))
     autograph_text = TextAreaField(lazy_gettext('Autograph'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('Please put the text of the autograph here')))
-    relation = FieldList(StringField(lazy_gettext('Secondary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the related secondary literature'))), min_entries=1)
+    relation = FieldList(StringField(lazy_gettext('Secondary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the related secondary literature'))), min_entries=1)
 
     def groups(self):
         yield [
-            {'group': [self.pubtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
+            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
                        self.transliterated_title, self.issued, self.circa, self.language, self.accessed, self.number_of_pages, self.number_of_lines, self.origin, self.provenance, self.additions,
                        self.note, self.license
                        ],
@@ -530,6 +539,10 @@ class CodexForm(WorkForm):
         ]
 
 class CodexChapterForm(WorkForm):
+    subtype = SelectField(lazy_gettext('Subtype'), validators=[Optional()], choices=[
+        ('', lazy_gettext('Select a Subtype')),
+        ('translation', lazy_gettext('Translation')),
+    ])
     genre = SelectField(lazy_gettext('Genre'), choices=[
         ('', lazy_gettext('Select a Genre')),
         ('apocalypse', lazy_gettext('Apocalypse')),
@@ -566,12 +579,12 @@ class CodexChapterForm(WorkForm):
     incipit = TextAreaField(lazy_gettext('Incipit'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('The first words of the chapter')))
     explicit = TextAreaField(lazy_gettext('Explicit'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('The last words of the chapter')))
     is_part_of = FieldList(FormField(CodexChapterRelationForm), min_entries=1)
-    relation = FieldList(StringField(lazy_gettext('Secondary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the related secondary literature'))), min_entries=1)
+    relation = FieldList(StringField(lazy_gettext('Secondary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the related secondary literature'))), min_entries=1)
     library = FieldList(FormField(LibraryForm), min_entries=1)
 
     def groups(self):
         yield [
-            {'group': [self.pubtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
+            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
                        self.transliterated_title, self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': lazy_gettext('Basic')},
@@ -595,7 +608,7 @@ class PrintChapterForm(CodexChapterForm):
 
     def groups(self):
         yield [
-            {'group': [self.pubtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
+            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
                        self.transliterated_title, self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': lazy_gettext('Basic')},
@@ -634,7 +647,7 @@ class ContributionForm(WorkForm):
         ('translation', lazy_gettext('Translation')),
     ])
     person = FieldList(FormField(AdvancedPrintPersonForm), min_entries=1)
-    relation = FieldList(StringField(lazy_gettext('Primary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the related primary literature'))), min_entries=1)
+    relation = FieldList(StringField(lazy_gettext('Primary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the related primary literature'))), min_entries=1)
 
     #user_only = ['parent_title', 'parent_subtitle']
 
@@ -744,7 +757,7 @@ class InternetDocumentForm(WorkForm):
     last_update = StringField(lazy_gettext('Last update'), validators=[Optional(), Regexp('[12]\d{3}(?:-[01]\d)?(?:-[0123]\d)?')], widget=CustomTextInput(placeholder=lazy_gettext('YYYY-MM-DD'), description=lazy_gettext("Enter the year (YYYY) if month and/or day are unknown")))
     place = StringField(lazy_gettext('Place'), widget=CustomTextInput(placeholder=lazy_gettext('Where was the document published?'), validators=[Optional()]))
     number = FieldList(StringField(lazy_gettext('Number'), widget=CustomTextInput(placeholder=lazy_gettext('Does the document have a number?'), validators=[Optional()])), min_entries=1)
-    relation = FieldList(StringField(lazy_gettext('Primary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the related primary literature'))), min_entries=1)
+    relation = FieldList(StringField(lazy_gettext('Primary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the related primary literature'))), min_entries=1)
 
     def groups(self):
         yield [
@@ -770,7 +783,7 @@ class LectureForm(WorkForm):
     startdate_conference = StringField(lazy_gettext('First day of the event'), validators=[Optional(), Regexp('[12]\d{3}-[01]\d-[0123]\d')], widget=CustomTextInput(placeholder=lazy_gettext('YYYY-MM-DD')), description=lazy_gettext("Enter the year (YYYY) if month and/or day are unknown"))
     enddate_conference = StringField(lazy_gettext('Last day of the event'), validators=[Optional(), Regexp('[12]\d{3}-[01]\d-[0123]\d')], widget=CustomTextInput(placeholder=lazy_gettext('YYYY-MM-DD')), description=lazy_gettext("Enter the year (YYYY) if month and/or day are unknown"))
     place = StringField(lazy_gettext('Location of the event'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('e.g. "Paris"')))
-    relation = FieldList(StringField(lazy_gettext('Primary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the related primary literature'))), min_entries=1)
+    relation = FieldList(StringField(lazy_gettext('Primary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the related primary literature'))), min_entries=1)
 
     def groups(self):
         yield [
@@ -802,7 +815,7 @@ class OtherForm(WorkForm):
     edition = StringField('Edition', validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('Information on the edition of the work, e.g. "2nd revised ed."')))
     number = FieldList(StringField('Number', validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('Does the document have a number?'))), min_entries=1)
     library = FieldList(FormField(LibraryForm), min_entries=1)
-    relation = FieldList(StringField(lazy_gettext('Primary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The UUID of the related primary literature'))), min_entries=1)
+    relation = FieldList(StringField(lazy_gettext('Primary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the related primary literature'))), min_entries=1)
 
     def groups(self):
         yield [

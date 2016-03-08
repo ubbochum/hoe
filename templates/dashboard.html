@@ -15,7 +15,7 @@
                 {% include 'hoe_facets.html' %}
             </div>
             <div class="col-sm-8">
-                <h4>{{ pagination.info }}</h4>
+                {{ pagination.info }}
                 {{ pagination.links }}
                 <table class="table table-bordered">
                     {% for record in records %}

@@ -1,5 +1,5 @@
 {% import 'bootstrap/utils.html' as utils %}
-<nav role="navigation" class="collapse navbar-collapse navbar navbar-inverse">
+<nav class="collapse navbar-collapse navbar navbar-inverse">
     <ul class="nav navbar-nav">
         <li{% if header == 'Home' %} class="active"{% endif %}><a href="{{ url_for('index') }}"><i class="fa fa-home"></i> {{ _('Home') }}</a></li>
         <li class="divider"></li>

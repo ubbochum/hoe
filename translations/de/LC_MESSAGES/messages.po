@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hoe\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-04 13:38+0100\n"
-"PO-Revision-Date: 2016-03-04 12:40+0000\n"
+"POT-Creation-Date: 2016-03-08 15:42+0100\n"
+"PO-Revision-Date: 2016-03-08 14:48+0000\n"
 "Last-Translator: André Hagenbruch\n"
 "Language-Team: German (Germany) (http://www.transifex.com/ubbochum/hoe/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,7 @@ msgstr "Der Bezeichner des Schlagworts"
 msgid "URI"
 msgstr "URI"
 
-#: forms.py:84 forms.py:216 forms.py:743
+#: forms.py:84 forms.py:216
 msgid "A valid URL starting with https:// or http://"
 msgstr "Eine gültige URL, die mit https:// oder http:// anfängt"
 
@@ -157,7 +157,7 @@ msgstr "Längengrad"
 msgid "The east-west position of a place, e.g. 12.5113300"
 msgstr "Die ost-westliche Position eines Ortes, z.B. 12.5113300"
 
-#: forms.py:91 forms.py:147 forms.py:834
+#: forms.py:91 forms.py:147 forms.py:847
 msgid "Name"
 msgstr "Name"
 
@@ -193,7 +193,7 @@ msgstr "International Standard Name Identifier (0000000121238649)"
 msgid "<a href=\"http://www.isni.org\" target=\"_blank\">Find in ISNI</a>"
 msgstr "<a href=\"http://www.isni.org\" target=\"_blank\">In ISNI suchen</a>"
 
-#: forms.py:100 forms.py:117 forms.py:132 forms.py:148 forms.py:836
+#: forms.py:100 forms.py:117 forms.py:132 forms.py:148 forms.py:849
 msgid "Role"
 msgstr "Rolle"
 
@@ -293,7 +293,7 @@ msgstr "Buchmaler"
 msgid "Patron"
 msgstr "Mäzen"
 
-#: forms.py:128 forms.py:440 forms.py:460 hoe.py:283
+#: forms.py:128 forms.py:444 forms.py:465 hoe.py:283
 msgid "Printer"
 msgstr "Drucker"
 
@@ -323,16 +323,16 @@ msgid "Has Part"
 msgstr "Hat einen Teil"
 
 #: forms.py:161 forms.py:227
-msgid "The UUID of the record that is part of this record"
-msgstr "Die UUID des Datensatzes, der Teil dieses Datensatzes ist"
+msgid "The ID of the record that is part of this record"
+msgstr "Die ID des Datensatzes, von dem dieser Datensatz ein Teil ist"
 
 #: forms.py:165 forms.py:226
 msgid "Is Part of"
 msgstr "Ist Teil von"
 
 #: forms.py:165 forms.py:226
-msgid "The UUID of the record this record is part of"
-msgstr "Die UUID des Datensatzes, von dem dieser Datensatz ein Teil ist"
+msgid "The ID of the record this record is part of"
+msgstr "Die ID des Datensatzes, von dem dieser Datensatz ein Teil ist"
 
 #: forms.py:168 forms.py:228 templates/record.html:324
 #: templates/resultlist_record.html:31
@@ -355,11 +355,11 @@ msgstr "Letzte Seite oder letztes Folium"
 msgid "The last page or folio of the text, e.g. 100 or 100r"
 msgstr "Die letzte Seite / das letzte Folium, z.B. 100 oder 100r"
 
-#: forms.py:176 forms.py:179 forms.py:617 forms.py:620
+#: forms.py:176 forms.py:179 forms.py:630 forms.py:633
 msgid "Volume"
 msgstr "Band"
 
-#: forms.py:176 forms.py:617
+#: forms.py:176 forms.py:630
 msgid "The number of the volume this chapter is part of"
 msgstr "Die Nummer des Bandes, von dem dieses Kapitel ein Teil ist"
 
@@ -385,7 +385,7 @@ msgstr "Typ"
 
 #: forms.py:190
 msgid "Select a Publication Type"
-msgstr "Wählen Sie einen Publikationstyp"
+msgstr "Wählen Sie einen Publikationstyp aus"
 
 #: forms.py:191 hoe.py:183
 msgid "Article in Journal"
@@ -427,7 +427,7 @@ msgstr "Edition"
 msgid "Internet Document"
 msgstr "Internetdokument"
 
-#: forms.py:201 forms.py:674 hoe.py:193 templates/navbar.html:29
+#: forms.py:201 forms.py:687 hoe.py:193 templates/navbar.html:29
 msgid "Journal"
 msgstr "Zeitschrift"
 
@@ -447,11 +447,12 @@ msgstr "Druck"
 msgid "Series"
 msgstr "Reihe"
 
-#: forms.py:206 forms.py:634 hoe.py:198 hoe.py:210 templates/navbar.html:20
+#: forms.py:206 forms.py:395 forms.py:474 forms.py:544 forms.py:647 hoe.py:198
+#: hoe.py:210 templates/navbar.html:20
 msgid "Translation"
 msgstr "Übersetzung"
 
-#: forms.py:207 forms.py:423 forms.py:497 forms.py:563 hoe.py:199 hoe.py:243
+#: forms.py:207 forms.py:427 forms.py:506 forms.py:576 hoe.py:199 hoe.py:243
 #: templates/navbar.html:32
 msgid "Other"
 msgstr "Sonstiges"
@@ -488,7 +489,7 @@ msgstr "Transliterierter Titel"
 msgid "The transliterated title of the work"
 msgstr "Der transliterierte Titel des Werks"
 
-#: forms.py:216 forms.py:743 templates/record.html:93
+#: forms.py:216 templates/record.html:93
 msgid "URL"
 msgstr "URL"
 
@@ -504,13 +505,13 @@ msgstr "Zusatzinformationen zum Werk"
 msgid "Last Seen"
 msgstr "Zuletzt gesichtet"
 
-#: forms.py:219 forms.py:233 forms.py:324 forms.py:325 forms.py:744
-#: forms.py:770 forms.py:771
+#: forms.py:219 forms.py:233 forms.py:324 forms.py:325 forms.py:757
+#: forms.py:783 forms.py:784
 msgid "YYYY-MM-DD"
 msgstr "JJJJ-MM-TT"
 
-#: forms.py:219 forms.py:233 forms.py:324 forms.py:325 forms.py:744
-#: forms.py:770 forms.py:771
+#: forms.py:219 forms.py:233 forms.py:324 forms.py:325 forms.py:757
+#: forms.py:783 forms.py:784
 msgid "Enter the year (YYYY) if month and/or day are unknown"
 msgstr "Tragen Sie das Jahr ein (JJJJ), wenn Monat und/oder Tag unbekannt sind"
 
@@ -520,7 +521,7 @@ msgstr "UUID"
 
 #: forms.py:221
 msgid "Record Creation Date"
-msgstr "Datum der Erzeugung des Datensatzes"
+msgstr "Datum der Datensatzerzeugung"
 
 #: forms.py:222
 msgid "Record Change Date"
@@ -535,8 +536,8 @@ msgid "License"
 msgstr "Lizenz"
 
 #: forms.py:228
-msgid "The UUID of the record this record is a different version of"
-msgstr "Die UUID des Datensatzes, von dem dieser Datensatz eine andere Version darstellt"
+msgid "The ID of the record this record is a different version of"
+msgstr "Die ID des Datensatzes, von dem dieser Datensatz eine andere Version darstellt"
 
 #: forms.py:228
 msgid "Other versions usually are translations and editions"
@@ -549,6 +550,10 @@ msgstr "Steht in Beziehung zu"
 #: forms.py:230
 msgid "Key Publication"
 msgstr "Schlüsselpublikation"
+
+#: forms.py:231
+msgid "A very important title to be included on a special publication list."
+msgstr "Ein sehr wichtiger Titel, der Teil einer besonderen Publikationsliste ist."
 
 #: forms.py:232
 msgid "DOI"
@@ -595,8 +600,8 @@ msgid "The number of the pages of the work, e.g. 20"
 msgstr "Die Seitenzahl des Werks, z.B. 20"
 
 #: forms.py:246 forms.py:290 forms.py:317 forms.py:348 forms.py:387
-#: forms.py:461 forms.py:527 forms.py:586 forms.py:705 forms.py:732
-#: forms.py:821 templates/hoe_facets.html:2
+#: forms.py:466 forms.py:536 forms.py:599 forms.py:718 forms.py:745
+#: forms.py:834 templates/hoe_facets.html:2
 msgid "Library"
 msgstr "Bibliothek"
 
@@ -618,7 +623,7 @@ msgstr "Signatur"
 
 #: forms.py:253
 msgid "The string indicating the location of the work in the library"
-msgstr "Eine Zeichenkette, die auf den Standort des Werks in der Bibliothek hinweist"
+msgstr "Der Standort des Werks in der Bibliothek"
 
 #: forms.py:256 templates/record.html:169
 msgid "Publisher"
@@ -628,7 +633,7 @@ msgstr "Verlag"
 msgid "The publisher of the work, e.g. Springer"
 msgstr "Der Verlag des Werks, z.B. Springer"
 
-#: forms.py:257 forms.py:745 forms.py:801
+#: forms.py:257 forms.py:758 forms.py:814
 msgid "Place"
 msgstr "Ort"
 
@@ -636,7 +641,7 @@ msgstr "Ort"
 msgid "Where was the work published?"
 msgstr "Wo wurde das Werk veröffentlicht?"
 
-#: forms.py:262 forms.py:802
+#: forms.py:262 forms.py:815
 msgid "Information on the edition of the work, e.g. \"2nd revised ed.\""
 msgstr "Informationen zur Auflage des Werks, z.B. \"2. durchg. Aufl.\""
 
@@ -652,17 +657,17 @@ msgstr "HBZ-ID"
 msgid "The ID given the work by the HBZ, e.g. HT018536436"
 msgstr "Die vom HBZ vergebene ID, z.B. HT018536436"
 
-#: forms.py:265 forms.py:637 forms.py:747 forms.py:773 forms.py:805 hoe.py:247
+#: forms.py:265 forms.py:650 forms.py:760 forms.py:786 forms.py:818 hoe.py:247
 #: hoe.py:248 hoe.py:249 hoe.py:250 hoe.py:251 hoe.py:252 hoe.py:253
 #: templates/resultlist_record.html:42
 msgid "Primary Literature"
 msgstr "Primärliteratur"
 
-#: forms.py:265 forms.py:637 forms.py:747 forms.py:773 forms.py:805
-msgid "The UUID of the related primary literature"
-msgstr "Die UUID der zugehörigen Primärliteratur"
+#: forms.py:265 forms.py:650 forms.py:760 forms.py:786 forms.py:818
+msgid "The ID of the related primary literature"
+msgstr "Die ID der zugehörigen Primärliteratur"
 
-#: forms.py:270 forms.py:689 templates/record.html:177
+#: forms.py:270 forms.py:702 templates/record.html:177
 msgid "Number of Volumes"
 msgstr "Anzahl der Bände"
 
@@ -678,73 +683,75 @@ msgstr "ISBN"
 msgid "The ISBN of the work, e.g. 978-1-107-09077-4"
 msgstr "Die ISBN des Werks, z.B. 978-1-107-09077-4"
 
-#: forms.py:281 forms.py:308 forms.py:338 forms.py:378 forms.py:451
-#: forms.py:518 forms.py:577 forms.py:601 forms.py:649 forms.py:670
-#: forms.py:696 forms.py:723 forms.py:754 forms.py:780 forms.py:812
+#: forms.py:281 forms.py:308 forms.py:338 forms.py:378 forms.py:456
+#: forms.py:527 forms.py:590 forms.py:614 forms.py:662 forms.py:683
+#: forms.py:709 forms.py:736 forms.py:767 forms.py:793 forms.py:825
 msgid "Basic"
 msgstr "Basisdaten"
 
-#: forms.py:282 forms.py:309 forms.py:339 forms.py:379 forms.py:452
-#: forms.py:519 forms.py:578 forms.py:602 forms.py:650 forms.py:671
-#: forms.py:697 forms.py:724 forms.py:755 forms.py:781 forms.py:813
+#: forms.py:282 forms.py:309 forms.py:339 forms.py:379 forms.py:457
+#: forms.py:528 forms.py:591 forms.py:615 forms.py:663 forms.py:684
+#: forms.py:710 forms.py:737 forms.py:768 forms.py:794 forms.py:826
 msgid "ID"
 msgstr "ID"
 
-#: forms.py:283 forms.py:310 forms.py:340 forms.py:380 forms.py:453
-#: forms.py:520 forms.py:579 forms.py:603 forms.py:651 forms.py:672
-#: forms.py:698 forms.py:725 forms.py:756 forms.py:782 forms.py:814
+#: forms.py:283 forms.py:310 forms.py:340 forms.py:380 forms.py:458
+#: forms.py:529 forms.py:592 forms.py:616 forms.py:664 forms.py:685
+#: forms.py:711 forms.py:738 forms.py:769 forms.py:795 forms.py:827
 #: templates/hoe_facets.html:4
 msgid "Person"
 msgstr "Person"
 
-#: forms.py:284 forms.py:311 forms.py:341 forms.py:381 forms.py:454
-#: forms.py:521 forms.py:580 forms.py:604 forms.py:652 forms.py:673
-#: forms.py:699 forms.py:726 forms.py:757 forms.py:783 forms.py:815
+#: forms.py:284 forms.py:311 forms.py:341 forms.py:381 forms.py:459
+#: forms.py:530 forms.py:593 forms.py:617 forms.py:665 forms.py:686
+#: forms.py:712 forms.py:739 forms.py:770 forms.py:796 forms.py:828
 msgid "Corporation"
 msgstr "Körperschaft"
 
-#: forms.py:285 forms.py:312 forms.py:343 forms.py:382 forms.py:455
-#: forms.py:522 forms.py:581 forms.py:605 forms.py:653 forms.py:675
-#: forms.py:700 forms.py:727 forms.py:758 forms.py:785 forms.py:816
+#: forms.py:285 forms.py:312 forms.py:343 forms.py:382 forms.py:460
+#: forms.py:531 forms.py:594 forms.py:618 forms.py:666 forms.py:688
+#: forms.py:713 forms.py:740 forms.py:771 forms.py:798 forms.py:829
 msgid "Relations"
 msgstr "Relationen"
 
-#: forms.py:288 forms.py:315 forms.py:346 forms.py:385 forms.py:458
-#: forms.py:525 forms.py:584 forms.py:608 forms.py:656 forms.py:678
-#: forms.py:703 forms.py:730 forms.py:761 forms.py:788 forms.py:819
+#: forms.py:288 forms.py:315 forms.py:346 forms.py:385 forms.py:463
+#: forms.py:534 forms.py:597 forms.py:621 forms.py:669 forms.py:691
+#: forms.py:716 forms.py:743 forms.py:774 forms.py:801 forms.py:832
 #: templates/hoe_facets.html:5
 msgid "Keyword"
 msgstr "Schlagwort"
 
-#: forms.py:289 forms.py:316 forms.py:347 forms.py:386 forms.py:459
-#: forms.py:526 forms.py:585 forms.py:609 forms.py:657 forms.py:679
-#: forms.py:704 forms.py:731 forms.py:762 forms.py:789 forms.py:820
+#: forms.py:289 forms.py:316 forms.py:347 forms.py:386 forms.py:464
+#: forms.py:535 forms.py:598 forms.py:622 forms.py:670 forms.py:692
+#: forms.py:717 forms.py:744 forms.py:775 forms.py:802 forms.py:833
 msgid "Content"
 msgstr "Inhalt"
 
-#: forms.py:292 forms.py:319 forms.py:350 forms.py:389 forms.py:463
-#: forms.py:529 forms.py:588 forms.py:611 forms.py:659 forms.py:681
-#: forms.py:707 forms.py:734 forms.py:764 forms.py:791 forms.py:823
+#: forms.py:292 forms.py:319 forms.py:350 forms.py:389 forms.py:468
+#: forms.py:538 forms.py:601 forms.py:624 forms.py:672 forms.py:694
+#: forms.py:720 forms.py:747 forms.py:777 forms.py:804 forms.py:836
 msgid "Administrative"
 msgstr "Administrative Daten"
 
-#: forms.py:296 forms.py:327 forms.py:354 forms.py:364 forms.py:626
-#: forms.py:712 forms.py:738 forms.py:795
+#: forms.py:296 forms.py:327 forms.py:354 forms.py:364 forms.py:393
+#: forms.py:472 forms.py:542 forms.py:639 forms.py:725 forms.py:751
+#: forms.py:808
 msgid "Subtype"
 msgstr "Untertyp"
 
-#: forms.py:297 forms.py:328 forms.py:355 forms.py:365 forms.py:627
-#: forms.py:713 forms.py:739 forms.py:796
+#: forms.py:297 forms.py:328 forms.py:355 forms.py:365 forms.py:394
+#: forms.py:473 forms.py:543 forms.py:640 forms.py:726 forms.py:752
+#: forms.py:809
 msgid "Select a Subtype"
-msgstr "Wählen Sie einen Untertypen"
+msgstr "Wählen Sie einen Untertyp aus"
 
-#: forms.py:298 forms.py:329 forms.py:356 forms.py:366 forms.py:629
-#: forms.py:714 hoe.py:203
+#: forms.py:298 forms.py:329 forms.py:356 forms.py:366 forms.py:642
+#: forms.py:727 hoe.py:203
 msgid "Facsimile"
 msgstr "Faksimile"
 
-#: forms.py:299 forms.py:330 forms.py:357 forms.py:367 forms.py:630
-#: forms.py:715 forms.py:798 hoe.py:204
+#: forms.py:299 forms.py:330 forms.py:357 forms.py:367 forms.py:643
+#: forms.py:728 forms.py:811 hoe.py:204
 msgid "Festschrift"
 msgstr "Festschrift"
 
@@ -752,407 +759,415 @@ msgstr "Festschrift"
 msgid "Lexicon"
 msgstr "Lexikon"
 
-#: forms.py:323 forms.py:769
+#: forms.py:323 forms.py:782
 msgid "Name of the event"
 msgstr "Name der Veranstaltung"
 
-#: forms.py:323 forms.py:769
+#: forms.py:323 forms.py:782
 msgid "e.g. \"Congresso Nazionale di Studi Bizantini\""
 msgstr "z.B. \"Congresso Nazionale di Studi Bizantini\""
 
-#: forms.py:324 forms.py:770
+#: forms.py:324 forms.py:783
 msgid "First day of the event"
 msgstr "Erster Tag der Veranstaltung"
 
-#: forms.py:325 forms.py:771
+#: forms.py:325 forms.py:784
 msgid "Last day of the event"
 msgstr "Letzter Tag der Veranstaltung"
 
-#: forms.py:326 forms.py:772
+#: forms.py:326 forms.py:785
 msgid "Location of the event"
 msgstr "Veranstaltungsort"
 
-#: forms.py:326 forms.py:772 forms.py:801
+#: forms.py:326 forms.py:785 forms.py:814
 msgid "e.g. \"Paris\""
 msgstr "z.B. \"Paris\""
 
-#: forms.py:342 forms.py:784 templates/record.html:144
+#: forms.py:342 forms.py:797 templates/record.html:144
 msgid "Event"
 msgstr "Veranstaltung"
 
-#: forms.py:393 forms.py:467 forms.py:533 templates/hoe_facets.html:11
+#: forms.py:397 forms.py:476 forms.py:546 templates/hoe_facets.html:11
 msgid "Genre"
 msgstr "Genre"
 
-#: forms.py:394 forms.py:468 forms.py:534
+#: forms.py:398 forms.py:477 forms.py:547
 msgid "Select a Genre"
 msgstr "Wählen Sie ein Genre aus"
 
-#: forms.py:395 forms.py:469 forms.py:535 hoe.py:215
+#: forms.py:399 forms.py:478 forms.py:548 hoe.py:215
 msgid "Apocalypse"
 msgstr "Apokalypse"
 
-#: forms.py:396 forms.py:470 forms.py:536 hoe.py:216
+#: forms.py:400 forms.py:479 forms.py:549 hoe.py:216
 msgid "Artifact"
 msgstr "Artefakt"
 
-#: forms.py:397 forms.py:471 forms.py:537 hoe.py:217
+#: forms.py:401 forms.py:480 forms.py:550 hoe.py:217
 msgid "Autobiography"
 msgstr "Autobiographie"
 
-#: forms.py:398 forms.py:472 forms.py:538 hoe.py:218
+#: forms.py:402 forms.py:481 forms.py:551 hoe.py:218
 msgid "Cartulary"
 msgstr "Kopialbuch"
 
-#: forms.py:399 forms.py:473 forms.py:539 hoe.py:219
+#: forms.py:403 forms.py:482 forms.py:552 hoe.py:219
 msgid "Chronicle"
 msgstr "Chronik"
 
-#: forms.py:400 forms.py:474 forms.py:540 hoe.py:220
+#: forms.py:404 forms.py:483 forms.py:553 hoe.py:220
 msgid "Church Chronicle"
 msgstr "Kirchenchronik"
 
-#: forms.py:401 forms.py:475 forms.py:541 hoe.py:221
+#: forms.py:405 forms.py:484 forms.py:554 hoe.py:221
 msgid "Chronograph"
 msgstr "Chronograph"
 
-#: forms.py:402 forms.py:476 forms.py:542 hoe.py:222
+#: forms.py:406 forms.py:485 forms.py:555 hoe.py:222
 msgid "Cosmography"
 msgstr "Kosmographie"
 
-#: forms.py:403 forms.py:477 forms.py:543 hoe.py:223
+#: forms.py:407 forms.py:486 forms.py:556 hoe.py:223
 msgid "Encomium"
 msgstr "Lobrede"
 
-#: forms.py:404 forms.py:478 forms.py:544 hoe.py:224
+#: forms.py:408 forms.py:487 forms.py:557 hoe.py:224
 msgid "False Document"
 msgstr "Fälschung"
 
-#: forms.py:405 forms.py:479 forms.py:545 hoe.py:225
+#: forms.py:409 forms.py:488 forms.py:558 hoe.py:225
 msgid "Hagiography"
 msgstr "Hagiographie"
 
-#: forms.py:406 forms.py:480 forms.py:546 hoe.py:226
+#: forms.py:410 forms.py:489 forms.py:559 hoe.py:226
 msgid "History"
 msgstr "Historie"
 
-#: forms.py:407 forms.py:481 forms.py:547 hoe.py:227
+#: forms.py:411 forms.py:490 forms.py:560 hoe.py:227
 msgid "History of the Ottoman Emperors"
 msgstr "Geschichte der Osmanischen Herrscher"
 
-#: forms.py:408 forms.py:482 forms.py:548 hoe.py:228
+#: forms.py:412 forms.py:491 forms.py:561 hoe.py:228
 msgid "Legend"
 msgstr "Legende"
 
-#: forms.py:409 forms.py:483 forms.py:549 hoe.py:229
+#: forms.py:413 forms.py:492 forms.py:562 hoe.py:229
 msgid "Letter"
 msgstr "Brief"
 
-#: forms.py:410 forms.py:484 forms.py:550 hoe.py:230
+#: forms.py:414 forms.py:493 forms.py:563 hoe.py:230
 msgid "Memoirs"
 msgstr "Memoiren"
 
-#: forms.py:411 forms.py:485 forms.py:551 hoe.py:231
+#: forms.py:415 forms.py:494 forms.py:564 hoe.py:231
 msgid "Memorandum"
 msgstr "Memorandum"
 
-#: forms.py:412 forms.py:486 forms.py:552 hoe.py:232
+#: forms.py:416 forms.py:495 forms.py:565 hoe.py:232
 msgid "Mirror of princes"
 msgstr "Fürstenspiegel"
 
-#: forms.py:413 forms.py:487 forms.py:553 hoe.py:233
+#: forms.py:417 forms.py:496 forms.py:566 hoe.py:233
 msgid "Panegyric"
 msgstr "Panegyrikon"
 
-#: forms.py:414 forms.py:488 forms.py:554 hoe.py:234
+#: forms.py:418 forms.py:497 forms.py:567 hoe.py:234
 msgid "Parenesis"
 msgstr "Paränese"
 
-#: forms.py:415 forms.py:489 forms.py:555 hoe.py:235
+#: forms.py:419 forms.py:498 forms.py:568 hoe.py:235
 msgid "Poem"
 msgstr "Gedicht"
 
-#: forms.py:416 forms.py:490 forms.py:556 hoe.py:236
+#: forms.py:420 forms.py:499 forms.py:569 hoe.py:236
 msgid "Polemic"
 msgstr "Polemik"
 
-#: forms.py:417 forms.py:491 forms.py:557 hoe.py:237
+#: forms.py:421 forms.py:500 forms.py:570 hoe.py:237
 msgid "Prophesy"
 msgstr "Prophezeiung"
 
-#: forms.py:418 forms.py:492 forms.py:558 hoe.py:238
+#: forms.py:422 forms.py:501 forms.py:571 hoe.py:238
 msgid "Proskynetarion"
 msgstr "Proskynetarion"
 
-#: forms.py:419 forms.py:493 forms.py:559 hoe.py:239
+#: forms.py:423 forms.py:502 forms.py:572 hoe.py:239
 msgid "Psalter"
 msgstr "Psalter"
 
-#: forms.py:420 forms.py:494 forms.py:560 hoe.py:240
+#: forms.py:424 forms.py:503 forms.py:573 hoe.py:240
 msgid "Threnody"
 msgstr "Threnos"
 
-#: forms.py:421 forms.py:495 forms.py:561 hoe.py:241
+#: forms.py:425 forms.py:504 forms.py:574 hoe.py:241
 msgid "Verse Chronicle"
 msgstr "Verschronik"
 
-#: forms.py:422 forms.py:496 forms.py:562 hoe.py:242
+#: forms.py:426 forms.py:505 forms.py:575 hoe.py:242
 msgid "Vita"
 msgstr "Vita"
 
-#: forms.py:426 templates/record.html:253
+#: forms.py:430 templates/record.html:253
 msgid "Frontispiece"
 msgstr "Frontispiz"
 
-#: forms.py:426
+#: forms.py:430
 msgid "The text contained in the frontispiece of the book"
 msgstr "Der Text der Frontispizseite"
 
-#: forms.py:429 forms.py:500 forms.py:566 templates/record.html:237
+#: forms.py:433 forms.py:509 forms.py:579 templates/record.html:237
 msgid "Incipit"
 msgstr "Incipit"
 
-#: forms.py:429
+#: forms.py:433
 msgid "The first words of the book"
 msgstr "Die Anfangsworte des Buchs"
 
-#: forms.py:430 forms.py:501 forms.py:567 templates/record.html:245
+#: forms.py:434 forms.py:510 forms.py:580 templates/record.html:245
 msgid "Explicit"
 msgstr "Explicit"
 
-#: forms.py:431
+#: forms.py:435
 msgid "The last words of the book"
 msgstr "Die letzten Worte des Buchs"
 
-#: forms.py:432 forms.py:507 templates/record.html:289
+#: forms.py:436 forms.py:516 templates/record.html:289
 msgid "Place of Origin"
 msgstr "Ursprungsort"
 
-#: forms.py:432
+#: forms.py:436
 msgid "The place the work originated in"
 msgstr "Der Ursprungsort des Werks"
 
-#: forms.py:433 forms.py:593 templates/record.html:261
+#: forms.py:437 forms.py:606 templates/record.html:261
 msgid "Vignette"
 msgstr "Vignette"
 
-#: forms.py:433
+#: forms.py:437
 msgid "Please describe the book's vignette here"
 msgstr "Bitte beschreiben Sie hier die Vignette des Buchs"
 
-#: forms.py:436 templates/record.html:269
+#: forms.py:440 templates/record.html:269
 msgid "Printer's Mark"
 msgstr "Druckermarke"
 
-#: forms.py:436
+#: forms.py:440
 msgid "Please put the text contained in the printer's mark here"
 msgstr "Bitte tragen Sie hier den Text der Druckermarke ein"
 
-#: forms.py:439 templates/record.html:277
+#: forms.py:443 templates/record.html:277
 msgid "Printing Patent"
 msgstr "Druckprivileg"
 
-#: forms.py:439
+#: forms.py:443
 msgid "Information on the right to print the work"
 msgstr "Informationen zum Druckrecht des Werks"
 
-#: forms.py:440
+#: forms.py:444
 msgid "Who printed the work?"
 msgstr "Wer hat das Werk gedruckt?"
 
-#: forms.py:441 forms.py:508 templates/record.html:483
+#: forms.py:445 forms.py:517 templates/record.html:483
 msgid "Provenance"
 msgstr "Provenienz"
 
-#: forms.py:441
+#: forms.py:445
 msgid "Who owned the work before?"
 msgstr "Wem gehörte das Werk zuvor?"
 
-#: forms.py:442 forms.py:509 templates/record.html:284
+#: forms.py:446 forms.py:518 templates/record.html:284
 msgid "Autograph"
 msgstr "Autograph"
 
-#: forms.py:442 forms.py:509
+#: forms.py:446 forms.py:518
 msgid "Please put the text of the autograph here"
 msgstr "Bitte tragen Sie hier den Text des Autographen ein"
 
-#: forms.py:443 forms.py:510 forms.py:569 hoe.py:254 hoe.py:255 hoe.py:256
+#: forms.py:447 forms.py:519 forms.py:582 hoe.py:254 hoe.py:255 hoe.py:256
 #: hoe.py:257 hoe.py:258 hoe.py:259 hoe.py:260 hoe.py:261 hoe.py:262
 #: hoe.py:263 templates/resultlist_record.html:42
 msgid "Secondary Literature"
 msgstr "Sekundärliteratur"
 
-#: forms.py:443 forms.py:510 forms.py:569
-msgid "The UUID of the related secondary literature"
-msgstr "Die UUID der zugehörigen Sekundärliteratur"
+#: forms.py:447 forms.py:519 forms.py:582
+msgid "The ID of the related secondary literature"
+msgstr "Die ID der zugehörigen Sekundärliteratur"
 
-#: forms.py:500
+#: forms.py:448
+msgid "Date Range"
+msgstr "Erscheinungszeitraum"
+
+#: forms.py:448
+msgid "YYYY-YYYY"
+msgstr "JJJJ-JJJJ"
+
+#: forms.py:509
 msgid "The first words of the codex"
 msgstr "Die ersten Worte des Codex"
 
-#: forms.py:501
+#: forms.py:510
 msgid "The last words of the codex"
 msgstr "Die letzten Worte des Codex"
 
-#: forms.py:505 templates/record.html:475
+#: forms.py:514 templates/record.html:475
 msgid "Number of Lines"
 msgstr "Anzahl der Zeilen"
 
-#: forms.py:505
+#: forms.py:514
 msgid "The number of lines the codex consists of"
 msgstr "Die Zeilenzahl, aus der der Codex besteht"
 
-#: forms.py:507
+#: forms.py:516
 msgid "The place the codex originated in"
 msgstr "Der Ursprungsort des Codex"
 
-#: forms.py:508
+#: forms.py:517
 msgid "Who owned the codex before?"
 msgstr "Wem gehörte der Codex zuvor?"
 
-#: forms.py:566
+#: forms.py:579
 msgid "The first words of the chapter"
 msgstr "Die ersten Worte des Kapitels"
 
-#: forms.py:567
+#: forms.py:580
 msgid "The last words of the chapter"
 msgstr "Die letzten Worte des Kapitels"
 
-#: forms.py:593
+#: forms.py:606
 msgid "Please describe the chapter's vignette here"
 msgstr "Bitte beschreiben Sie hier die Vignette des Kapitels"
 
-#: forms.py:615
+#: forms.py:628
 msgid "First Page"
 msgstr "Erste Seite"
 
-#: forms.py:615
+#: forms.py:628
 msgid "Please put the first page of the text here"
 msgstr "Bitte tragen Sie hier die erste Seite des Textes ein"
 
-#: forms.py:616
+#: forms.py:629
 msgid "Last Page"
 msgstr "Letzte Seite"
 
-#: forms.py:616
+#: forms.py:629
 msgid "Please put the last page of the text here"
 msgstr "Bitte tragen Sie hier die letzte Seite des Textes ein"
 
-#: forms.py:620
+#: forms.py:633
 msgid "The number of the volume this article is part of"
 msgstr "Die Nummer des Bandes, von dem dieser Artikel ein Teil ist"
 
-#: forms.py:621 templates/record.html:223
+#: forms.py:634 templates/record.html:223
 msgid "Issue"
 msgstr "Heft"
 
-#: forms.py:621
+#: forms.py:634
 msgid "The number of the issue this article is part of"
 msgstr "Die Nummer des Hefts, von dem dieser Artikel ein Teil ist"
 
-#: forms.py:628 hoe.py:206
+#: forms.py:641 hoe.py:206
 msgid "Afterword"
 msgstr "Nachwort"
 
-#: forms.py:631 hoe.py:207
+#: forms.py:644 hoe.py:207
 msgid "Introduction"
 msgstr "Einleitung"
 
-#: forms.py:632 forms.py:740 forms.py:797 hoe.py:208
+#: forms.py:645 forms.py:753 forms.py:810 hoe.py:208
 msgid "Article in Lexicon"
 msgstr "Lexikonartikel"
 
-#: forms.py:633 forms.py:741 forms.py:799 hoe.py:209
+#: forms.py:646 forms.py:754 forms.py:812 hoe.py:209
 msgid "Review"
 msgstr "Rezension"
 
-#: forms.py:685
+#: forms.py:698
 msgid "ISSN"
 msgstr "ISSN"
 
-#: forms.py:685
+#: forms.py:698
 msgid "e.g. 1932-6203"
 msgstr "z.B. 1932-6203"
 
-#: forms.py:686
+#: forms.py:699
 msgid "ZDB-ID"
 msgstr "ZDB-ID"
 
-#: forms.py:686
+#: forms.py:699
 msgid "e.g. 2267670-3"
 msgstr "z.B. 2267670-3"
 
-#: forms.py:689
+#: forms.py:702
 msgid "Please put the number of volumes of the series here"
 msgstr "Bitte tragen Sie hier die Bandzahl der Reihe ein"
 
-#: forms.py:711
+#: forms.py:724
 msgid "Journal Abbreviation"
 msgstr "Zeitschriftenabkürzung"
 
-#: forms.py:711
+#: forms.py:724
 msgid "Please put the abbreviated title of the journal here"
 msgstr "Bitte tragen Sie hier den abgekürzten Zeitschriftentitel ein"
 
-#: forms.py:744
+#: forms.py:757
 msgid "Last update"
 msgstr "Zuletzt aktualisiert"
 
-#: forms.py:745
+#: forms.py:758
 msgid "Where was the document published?"
 msgstr "Wo wurde das Dokument veröffentlicht?"
 
-#: forms.py:746
+#: forms.py:759
 msgid "Number"
 msgstr "Nummer"
 
-#: forms.py:746 forms.py:803
+#: forms.py:759 forms.py:816
 msgid "Does the document have a number?"
 msgstr "Besitzt das Dokument eine Nummer?"
 
-#: forms.py:768
+#: forms.py:781
 msgid "Lecture Series"
 msgstr "Vortragsreihe"
 
-#: forms.py:768
+#: forms.py:781
 msgid "The title of the lecture series"
 msgstr "Der Titel der Vortragsreihe"
 
-#: forms.py:827
+#: forms.py:840
 msgid "Solr Dump"
 msgstr "Solr-Export"
 
-#: forms.py:828
+#: forms.py:841
 msgid "Send File"
 msgstr "Datei hochladen"
 
-#: forms.py:833 hoe.py:896
+#: forms.py:846 hoe.py:895
 msgid "Password"
 msgstr "Passwort"
 
-#: forms.py:834
+#: forms.py:847
 msgid "First Name Last Name"
 msgstr "Vorname Nachname"
 
-#: forms.py:835
+#: forms.py:848
 msgid "Email"
 msgstr "Email"
 
-#: forms.py:837
+#: forms.py:850
 msgid "Select a Role"
 msgstr "Wählen Sie eine Rolle aus"
 
-#: forms.py:838
+#: forms.py:851
 msgid "User"
 msgstr "Benutzer"
 
-#: forms.py:839
+#: forms.py:852
 msgid "Admin"
 msgstr "Administrator"
 
 #: hoe.py:169
 msgid "You haven't registered any records with us yet. Please do so now..."
-msgstr "Sie haben bisher keine Datensätze registriert. Gern können Sie das jetzt tun..."
+msgstr "Sie haben bisher keine Datensätze registriert. Bitte tun Sie das jetzt..."
 
 #: hoe.py:171 templates/navbar.html:4
 msgid "Home"
@@ -1194,11 +1209,11 @@ msgstr "Es gibt noch keine Datensätze!"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: hoe.py:702 hoe.py:1051
+#: hoe.py:702 hoe.py:1077
 msgid "titles"
 msgstr "Titeln"
 
-#: hoe.py:703 hoe.py:1052 hoe.py:1094
+#: hoe.py:703 hoe.py:1078 hoe.py:1120
 msgid "Showing {start} to {end} of {found} {record_name}"
 msgstr "Zeige {start} bis {end} von {found} {record_name}"
 
@@ -1226,29 +1241,38 @@ msgstr "%s zum Administrator gemacht!"
 msgid "You did not supply an ID!"
 msgstr "Sie haben keine ID angegeben!"
 
-#: hoe.py:895
+#: hoe.py:894
 msgid "Username"
 msgstr "Benutzername"
 
-#: hoe.py:897
+#: hoe.py:896
 msgid "Where Are You From?"
 msgstr "Woher kommen Sie?"
 
-#: hoe.py:961 templates/401.html:18 templates/header.html:17
+#: hoe.py:954
+msgid "Username and Password Don't Match"
+msgstr "Benutzername und Passwort stimmen nicht überein"
+
+#: hoe.py:986 templates/401.html:18 templates/header.html:17
 msgid "Sign In"
 msgstr "Anmelden"
 
-#: hoe.py:1047
+#: hoe.py:1073
 msgid "Your Search Found no Results"
 msgstr "Ihre Suche ergab kein Ergebnis"
 
-#: hoe.py:1093
+#: hoe.py:1119
 msgid "dumps"
 msgstr "Exporten"
 
-#: hoe.py:1098 templates/solr_dumps.html:18
+#: hoe.py:1124 templates/solr_dumps.html:18
 msgid "Import Dump"
 msgstr "Datendump importieren"
+
+#: hoe.py:1151
+#, python-format
+msgid "%(records)s records imported!"
+msgstr "%(records)s Datensätze importiert!"
 
 #: templates/401.html:16
 msgid "Unauthorized"
@@ -1363,6 +1387,10 @@ msgid "Contact"
 msgstr "Kontakt"
 
 #: templates/header.html:20
+msgid "hoe logo"
+msgstr "hoe logo"
+
+#: templates/header.html:20
 msgid "Historiography of Ottoman Europe"
 msgstr "Historiographie des Osmanischen Europa"
 
@@ -1465,7 +1493,7 @@ msgstr "Zeitschriftenartikel"
 msgid "Book"
 msgstr "Buch"
 
-#: templates/navbar.html:50
+#: templates/navbar.html:46
 msgid "Go"
 msgstr "Los"
 
@@ -1681,17 +1709,17 @@ msgid_plural ""
 msgstr[0] "\n                        Bibliothek\n                        "
 msgstr[1] "\n                        Bibliotheken\n                        "
 
-#: templates/record.html:504
+#: templates/record.html:505
+msgid "Similar Records"
+msgstr "Ähnliche Titel"
+
+#: templates/record.html:514
 msgid "Permalink"
 msgstr "Permalink"
 
-#: templates/record.html:505
+#: templates/record.html:515
 msgid "Copy to Clipboard"
 msgstr "In die Zwischenablage kopieren"
-
-#: templates/record.html:507
-msgid "Similar Records"
-msgstr "Ähnliche Titel"
 
 #: templates/record.html:517
 msgid "Record Information"

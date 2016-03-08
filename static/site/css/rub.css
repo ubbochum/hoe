@@ -67,7 +67,7 @@ a:focus {background-color: transparent;}
 .multi_enclosure .form-group {margin-bottom: 0;}
 .rel_item, .no_rel_item {color: #999999;}
 .col-sm-10 h3 {margin-top: 12px;}
-
+.pagination-page-info {font-size: 18px; font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; margin-top: 9px;}
 
 span.twitter-typeahead .tt-menu,
 span.twitter-typeahead .tt-dropdown-menu {
