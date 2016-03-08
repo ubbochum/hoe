@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hoe\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-08 15:42+0100\n"
-"PO-Revision-Date: 2016-03-08 14:48+0000\n"
+"POT-Creation-Date: 2016-03-08 21:49+0100\n"
+"PO-Revision-Date: 2016-03-08 20:51+0000\n"
 "Last-Translator: André Hagenbruch\n"
 "Language-Team: German (Germany) (http://www.transifex.com/ubbochum/hoe/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -1727,8 +1727,8 @@ msgstr "Information zum Datensatz"
 
 #: templates/record.html:518
 #, python-format
-msgid "Created %(created)s by %(owner)s."
-msgstr "%(created)s von %(owner)s angelegt."
+msgid "Created %(created)s by"
+msgstr "%(created)s angelegt von"
 
 #: templates/record.html:518
 #, python-format

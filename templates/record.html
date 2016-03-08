@@ -515,7 +515,7 @@
             <dd>{{ request.url }} <button title="{{ _('Copy to Clipboard') }}" class="btn btn-default btn-xs permalink" data-clipboard-text="{{ request.url }}" data-clipboard-action="copy"><i class="octicon octicon-clippy"></i></button></dd>
             {% if current_user.role == 'admin' %}
                 <dt>{{ _('Record Information') }}</dt>
-                <dd>{{ _('Created %(created)s by %(owner)s.', created=record.data.created|mk_time|humanize(), owner=record.data.owner) }}{% if record.data.created != record.data.changed %} {{ _('Last changed %(changed)s.', changed=record.data.changed|mk_time|humanize()) }}{% endif %}</dd>
+                <dd>{{ _('Created %(created)s by', created=record.data.created|mk_time|humanize()) }} <a href="https://orcid.org/{{ record.data.owner }}">{{ record.data.owner }}</a>{% if record.data.created != record.data.changed %} {{ _('Last changed %(changed)s.', changed=record.data.changed|mk_time|humanize()) }}{% endif %}</dd>
             {% endif %}
         </dl>
         {% if config.DEBUG and current_user.role == 'admin' %}
