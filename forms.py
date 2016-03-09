@@ -449,8 +449,9 @@ class PrintForm(BasicPrintForm):
 
     def groups(self):
         yield [
-            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.transliterated_title, self.issued, self.circa, self.language, self.accessed, self.number_of_pages, self.origin, self.provenance, self.additions,
+            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement,
+                       self.title_translated, self.transliterated_title, self.issued, self.circa, self.date_range,
+                       self.language, self.accessed, self.number_of_pages, self.origin, self.provenance, self.additions,
                        self.note, self.license
                        ],
              'label': lazy_gettext('Basic')},
@@ -517,12 +518,14 @@ class CodexForm(WorkForm):
     provenance = TextAreaField(lazy_gettext('Provenance'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('Who owned the codex before?')))
     autograph_text = TextAreaField(lazy_gettext('Autograph'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext('Please put the text of the autograph here')))
     relation = FieldList(StringField(lazy_gettext('Secondary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the related secondary literature'))), min_entries=1)
+    date_range = StringField(lazy_gettext('Date Range'), widget=CustomTextInput(placeholder=lazy_gettext('YYYY-YYYY')))
 
     def groups(self):
         yield [
-            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.transliterated_title, self.issued, self.circa, self.language, self.accessed, self.number_of_pages, self.number_of_lines, self.origin, self.provenance, self.additions,
-                       self.note, self.license
+            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement,
+                       self.title_translated, self.transliterated_title, self.issued, self.circa, self.date_range,
+                       self.language, self.accessed, self.number_of_pages, self.number_of_lines, self.origin,
+                       self.provenance, self.additions, self.note, self.license
                        ],
              'label': lazy_gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': lazy_gettext('ID')},
@@ -581,11 +584,13 @@ class CodexChapterForm(WorkForm):
     is_part_of = FieldList(FormField(CodexChapterRelationForm), min_entries=1)
     relation = FieldList(StringField(lazy_gettext('Secondary Literature'), widget=CustomTextInput(placeholder=lazy_gettext('The ID of the related secondary literature'))), min_entries=1)
     library = FieldList(FormField(LibraryForm), min_entries=1)
+    date_range = StringField(lazy_gettext('Date Range'), widget=CustomTextInput(placeholder=lazy_gettext('YYYY-YYYY')))
 
     def groups(self):
         yield [
-            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.transliterated_title, self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement,
+                       self.title_translated, self.transliterated_title, self.issued, self.date_range, self.language,
+                       self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': lazy_gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': lazy_gettext('ID')},
@@ -605,11 +610,13 @@ class PrintChapterForm(CodexChapterForm):
     person = FieldList(FormField(PrintPersonForm), min_entries=1)
     vignette = TextAreaField(lazy_gettext('Vignette'), validators=[Optional()], widget=CustomTextInput(placeholder=lazy_gettext("Please describe the chapter's vignette here")))
     is_part_of = FieldList(FormField(PrintChapterRelationForm), min_entries=1)
+    date_range = StringField(lazy_gettext('Date Range'), widget=CustomTextInput(placeholder=lazy_gettext('YYYY-YYYY')))
 
     def groups(self):
         yield [
-            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement, self.title_translated,
-                       self.transliterated_title, self.issued, self.language, self.number_of_pages, self.accessed, self.additions, self.note, self.license
+            {'group': [self.pubtype, self.subtype, self.genre, self.title, self.subtitle, self.title_supplement,
+                       self.title_translated, self.transliterated_title, self.issued, self.date_range, self.language,
+                       self.number_of_pages, self.accessed, self.additions, self.note, self.license
                        ],
              'label': lazy_gettext('Basic')},
             {'group': [self.uri, self.DOI], 'label': lazy_gettext('ID')},
