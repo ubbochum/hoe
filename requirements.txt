@@ -17,7 +17,7 @@ greenlet==0.4.9
 humanize==0.5.1
 Humanize-Flask==0.2.0
 itsdangerous==0.24
-Jinja2==2.8
+Jinja2==2.11.3
 lxml==3.5.0
 MarkupSafe==0.23
 orcid==0.5.1
