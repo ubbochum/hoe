@@ -18,7 +18,7 @@ humanize==0.5.1
 Humanize-Flask==0.2.0
 itsdangerous==0.24
 Jinja2==2.8
-lxml==3.5.0
+lxml==4.6.5
 MarkupSafe==0.23
 orcid==0.5.1
 pyisbn==1.0.1
